@@ -1,0 +1,129 @@
+.notification-user-img img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.page-wrapper {
+    background: #eff3f6;
+    position: relative;
+}
+
+.faq-accordian-main-area .accordion-item {
+    box-shadow: 0px 1px 2px 1px rgb(154 154 204 / 22%);
+    color: #4A4A4A;
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 10px 20px 10px 20px;
+    margin: 20px 0px 0px 0px;
+}
+
+.accordion-header {
+    margin-bottom: 0;
+}
+
+.accordion-flush .accordion-item:first-of-type .accordion-button {
+    border-top-width: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.accordion-item:first-of-type .accordion-button {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.faq-accordian-main-area .accordion-button {
+    border: none;
+    padding: 0px !important;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.accordion-flush .accordion-button {
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+}
+
+.accordion-button.collapsed {
+    border-bottom-width: 0;
+}
+
+.notification-detail-main-area {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.notification-user-img {
+    margin: 0px 20px 0px 0px;
+}
+
+.notification-heading-main-area {
+    width: 90%;
+    padding: 10px 0px 0px 0px;
+}
+
+.notification-heading-main-area {
+    width: 90%;
+}
+
+.faq-accordian-main-area .accordion-button {
+    border: none;
+    padding: 6px 0px 0px 0px;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.accordion-button::after {
+    display: none;
+}
+
+.notification-heading-main-area h2 {
+    color: #000;
+    font-size: 20px;
+}
+
+.notification-heading-main-area .accordion-button:not(.collapsed) {
+    background: transparent;
+    box-shadow: none;
+}
+
+.notification-heading-main-area .accordion-button:focus {
+    box-shadow: inherit;
+}
+
+.faq-accordian-main-area .accordion-item {
+    border: 2px solid #8fc1e2;
+}
+
+button:focus:not(:focus-visible) {
+    box-shadow: none;
+}
+
+.notification-heading-main-area p {
+    color: #188dc7;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.notification-dlt-main-area {
+    border: 2px solid #8fc1e2;
+    border-radius: 4px;
+    padding: 44px 15px;
+    box-shadow: 0px 1px 2px 1px rgb(154 154 204 / 22%);
+    margin-top: 20px;
+}
+
+.notification-dlt-main-area .MuiSvgIcon-root {
+    font-size: 25px;
+    color: #188dc7 !important;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.notification-main-text-area {
+    line-height: 25px;
+}

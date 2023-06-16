@@ -1,0 +1,222 @@
+.main-search-bar .MuiInput-underline:after {
+  border-bottom: none !important;
+}
+
+/* Browser Css */
+.my-task-tab-panel .MuiBox-root {
+  padding: 10px 0;
+}
+
+.make-an-offer-btn {
+  background: #188dc7;
+  border: 2px solid #188dc7;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 16px;
+  padding: 4px 20px;
+  transition: .5s;
+}
+
+/* Browser Css */
+
+/* Number Input field In SignUp Page */
+.react-tel-input {
+  font-size: 0.9rem !important;
+  border-radius: 5px !important;
+}
+
+.react-tel-input .form-control {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  height: 3.5rem !important;
+  position: relative;
+  letter-spacing: .01rem;
+  border-radius: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  width: 101% !important;
+  font-size: 0.9rem !important;
+  border-radius: 5px !important;
+}
+
+/* Number Input field In SignUp Page */
+
+/* RaiseTicket css */
+.raise-ticket-dailogue .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation24.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.css-1t1j96h-MuiPaper-root-MuiDialog-paper,
+.raise-ticket-dailogue .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation24.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.css-uhb5lp {
+  height: 523px;
+}
+
+/* RaiseTicket css */
+
+/* Category */
+.swiper-pointer-events {
+  width: 100%;
+}
+
+.popular-category-list .swiper-free-mode>.swiper-wrapper {
+  justify-content: center;
+}
+
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+
+/*chatcss*/
+.messages-wrapper {
+  padding: 30px;
+  margin-bottom: 20px;
+}
+
+.chat-bubble {
+  border-radius: 20px 20px 20px 0;
+  padding: 15px;
+  background-color: whitesmoke;
+  color: #1c2c4c;
+  width: max-content;
+  max-width: calc(100% - 50px);
+  box-shadow: -2px 2px 1px 1px #4c768d;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  border: 2px solid #4c768d;
+}
+
+.chat-bubble.right {
+  margin-left: auto;
+  border-radius: 20px 20px 0 20px;
+  background-color: #fff;
+  box-shadow: -2px 2px 1px 1px #88dded;
+  border: 2px solid gray;
+  color: blue;
+}
+
+.chat-bubble__left {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-right: 10px;
+  border: 2px solid yellowgreen;
+  color: #1c2c4c;
+}
+
+.user-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+  color: #1c2c4c;
+}
+
+.user-message {
+  word-break: break-all;
+}
+
+.message-time {
+  display: block;
+  text-align: right;
+}
+
+/* send message */
+.send-message {
+  position: relative;
+  bottom: 0px;
+  width: 100%;
+  padding: 12px;
+  background-color: #69a4dbfd;
+  display: flex;
+  border-radius: 7px;
+}
+
+.send-message>input {
+  height: 40px;
+  padding: 10px 10px;
+  border-radius: 5px 0 0 5px;
+  border: none;
+  flex-grow: 1;
+  background-color: white;
+  color: #1c2c4c;
+  font-size: 1rem;
+}
+
+.send-message>input:placeholder {
+  color: #ddd;
+}
+
+.send-message> :is(input, button):focus {
+  outline: none;
+  border-bottom: 1px solid #7cc5d9;
+}
+
+.send-message>button {
+  width: 70px;
+  height: 40px;
+  padding: 5px 10px;
+  border-radius: 0 5px 5px 0;
+  color: #242443;
+  border: 1px solid #7cc5d9;
+  background-color: #7cc5d9;
+
+  font-weight: 600;
+}
+
+/* Works on Chrome, Edge, and Safari */
+.messages-wrapper::-webkit-scrollbar {
+  width: 12px;
+}
+
+.messages-wrapper::-webkit-scrollbar-track {
+  border: 2px solid gainsboro;
+  border-radius: 20px;
+}
+
+.messages-wrapper::-webkit-scrollbar-thumb {
+  background-color: #69a4dbfd;
+  border-radius: 20px;
+  border: 2px solid #e0e0e0;
+}
+
+
+.imageClear{
+  position: relative;
+  right: 22px;
+  bottom: 32px;
+  font-size: 16px;
+  color: red;
+}
+
+.imageClear:hover{
+  color: black;
+}
+
+.notificationAll{
+  min-height: 100px;
+  max-height: 250px;
+  overflow: auto;
+}
+
+
+.notificationAll::-webkit-scrollbar {
+  width: 12px;
+}
+
+.notificationAll::-webkit-scrollbar-track {
+  border: 2px solid gainsboro;
+  border-radius: 20px;
+}
+
+.notificationAll::-webkit-scrollbar-thumb {
+  background-color: #69a4dbfd;
+  border-radius: 20px;
+  border: 2px solid #e0e0e0;
+}

@@ -1,0 +1,58 @@
+.inner-banner-detail-area {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0% 50%;
+    height: 300px;
+}
+
+.inner-banner-detail-area:before {
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    background-color: rgb(24, 141, 199);
+}
+
+.breadcrum-info-title {
+    text-align: center;
+    margin: 150px 0px 0px 0px;
+}
+
+.breadcrum-info-title h2 {
+    font-size: 42px;
+    color: #fff;
+    font-weight: bold;
+    margin: 0px 0px 10px 0px;
+    position: relative;
+}
+
+.font-awesome-icon-area:after {
+    content: "\f105";
+    color: #fff;
+    font-size: 16px;
+    margin: 0px 5px 0px 10px;
+    font-family: FontAwesome;
+    font-weight: 600;
+}
+
+.breadcrum-info-title ul {
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+.breadcrum-info-title ul li {
+    display: inline-block;
+    position: relative;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.breadcrum-info-title ul li a {
+    color: #fff;
+    text-decoration: none;
+}
