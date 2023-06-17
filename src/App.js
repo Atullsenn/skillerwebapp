@@ -22,6 +22,7 @@ import NewsLayout from './Components/Common Components/News/NewsLayout';
 import TermsAndConditions from "./Components/Common Components/Terms & Conditions/TermsAndConditions"
 import PrivacyPolicy from "./Components/Common Components/PrivacyPolicy/PrivacyPolicy";
 import MyOrderLayout from "./Components/Common Components/MyOrders/MyOrdersLayout"
+import ForgotPasswordNew from './Components/Common Components/ForgetPassword/ForgotPasswordNew';
 import PrivateRoute from './PrivateRoute';
 import { IsLoginAuthenticateContext } from "./Contexts/LoginContext";
 import { ToastContainer } from 'react-toastify';
@@ -42,6 +43,7 @@ const App = () => {
           </>
         }
         <Route path="/" element={<LandingPage />} />
+        <Route path='/forgot-password-new' element={<ForgotPasswordNew/>}/>
         <Route path="/how-it-works" element={<Howitwork />} />
         <Route path="/contact-us" element={<Contactus />} />
         <Route path="/post-a-task" element={<PostATasker />} />
