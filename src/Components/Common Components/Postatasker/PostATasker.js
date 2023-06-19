@@ -612,7 +612,7 @@ const PostATasker = () => {
                             value={state.selectedTab}
                             onChange={handleTabChange}
                             aria-label="Vertical tabs example"
-                            sx={{ borderRight: 1, borderColor: 'divider' }}
+                            sx={{width: 250, borderRight: 1, borderColor: 'divider' }}
                         >
                             <Tab className='fix-side-remove-padding' label="Title & Description" {...a11yProps(0)} />
                             <Tab className='fix-side-remove-padding' label="Category & Location" {...a11yProps(1)} />
@@ -625,10 +625,10 @@ const PostATasker = () => {
                         </Tabs>
                         <TabPanel value={state.selectedTab} index={0} style={{ overflow: 'auto', width: '85%' }}>
                             <div style={{ width: '100%' }}>
-                                <h5 className='py-2'>Please enter the task title and its description <span style={{ color: 'red' }}>*</span></h5>
+                                <h5 className='py-2'>Please enter the task title and its description</h5>
                                 <TextField
                                     className='mt-2'
-                                    label='Post Title'
+                                    label={<> Post Title <span style={{ color: 'red' }}>*</span></>}
                                     fullWidth
                                     value={state.postTitle}
                                     autoComplete="shipping address-line1"
@@ -642,7 +642,7 @@ const PostATasker = () => {
                                     aria-label="minimum height"
                                     value={state.description}
                                     minRows={4}
-                                    placeholder='Description'
+                                    placeholder={"Description"}
                                     style={{ width: '100%' }}
                                     onChange={(e) => { setState((prevState) => ({ ...prevState, description: e.target.value })); }}
                                 />
@@ -650,14 +650,14 @@ const PostATasker = () => {
                         </TabPanel>
                         <TabPanel value={state.selectedTab} index={1} style={{ overflow: 'auto', width: '85%' }}>
                             <div style={{ width: '100%' }}>
-                                <h5 className='py-2'>Location & Category <span style={{ color: 'red' }}>*</span> </h5>
+                                <h5 className='py-2'>Location & Category</h5>
                                 <FormControl fullWidth>
-                                    <InputLabel id="demo-simple-select-label">Select Your Category </InputLabel>
+                                    <InputLabel id="demo-simple-select-label">Select Your Category <span style={{ color: 'red' }}>*</span></InputLabel>
                                     <Select
                                         labelId="demo-simple-select-label"
+                                        label={<> Select Your Category </>}
                                         id="demo-simple-select"
                                         value={state.category}
-                                        label='Select Your Category'
                                         onChange={selectCategory}
                                     >
                                         {state.categoryList.map((Item) => {
@@ -668,12 +668,12 @@ const PostATasker = () => {
                             </div>
                             <div style={{ width: '100%' }} className="mt-4">
                                 <FormControl fullWidth>
-                                    <InputLabel id="demo-simple-select-label">Select Your Country</InputLabel>
+                                    <InputLabel id="demo-simple-select-label">Select Your Country <span style={{color: "red"}}>*</span></InputLabel>
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
                                         value={state.country}
-                                        label='Select Your Country'
+                                        label='Select Your Country *'
                                         onChange={selectCountry}
                                     >
                                         {state.countryList.map((Item) => {
@@ -684,12 +684,12 @@ const PostATasker = () => {
                             </div>
                             <div style={{ width: '100%' }} className="mt-4">
                                 <FormControl fullWidth>
-                                    <InputLabel id="demo-simple-select-label">Select Your State</InputLabel>
+                                    <InputLabel id="demo-simple-select-label">Select Your State <span style={{color: "red"}}>*</span></InputLabel>
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
                                         value={state.state}
-                                        label='Select Your State'
+                                        label='Select Your State *'
                                         onChange={selectState}
                                     >
                                         {state.stateList.map((Item) => {
@@ -700,7 +700,7 @@ const PostATasker = () => {
                             </div>
                             <div style={{ width: '100%' }} className="mt-4">
                                 <FormControl fullWidth>
-                                    <InputLabel id="demo-simple-select-label">Select Your City</InputLabel>
+                                    <InputLabel id="demo-simple-select-label">Select Your City <span style={{color: "red"}}>*</span></InputLabel>
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
@@ -717,7 +717,7 @@ const PostATasker = () => {
                         </TabPanel>
                         <TabPanel value={state.selectedTab} index={2} style={{ overflow: 'auto', width: '85%' }}>
                             <div style={{ width: '100%' }}>
-                                <h5>Date & Time <span style={{ color: 'red' }}>*</span></h5>
+                                <h5>Date & Time</h5>
                                 <h5>From <span style={{ color: 'red' }}>*</span></h5>
                                 <div style={{display:"flex", flexDirection:"row", gap: "100px"}} className='mt-3'>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -781,12 +781,12 @@ const PostATasker = () => {
                         </TabPanel>
                         <TabPanel value={state.selectedTab} index={3} style={{ overflow: 'auto', width: '85%' }}>
                             <div style={{ width: '100%' }}>
-                                <h5>Budget and Skills <span style={{ color: 'red' }}>*</span> </h5>
+                                <h5>Budget and Skills</h5>
                                 <div className='mt-3'>
                                     <CurrencyTextField
                                         fullWidth
                                         textAlign="left"
-                                        label='Budget'
+                                        label={<> Budget <span style={{ color: 'red' }}>*</span></>}
                                         variant="standard"
                                         value={state.budget}
                                         currencySymbol="$"
@@ -798,16 +798,16 @@ const PostATasker = () => {
                             <div style={{ width: '100%' }} className="mt-4">
                                 <div>
                                     <div>
-                                        <ChipInput className='w-100' defaultValue={state.skills} label='Skills' onChange={handleSkillsSelection} />
+                                        <ChipInput className='w-100' defaultValue={state.skills} label={<> Skills <span style={{ color: 'red' }}>*</span></>} onChange={handleSkillsSelection} />
                                     </div>
                                 </div>
                             </div>
                         </TabPanel>
                         <TabPanel value={state.selectedTab} index={4} style={{ overflow: 'auto', width: '85%' }}>
                             <div>
-                                <h5 className='py-2'>Add Languages <span style={{ color: 'red' }}>*</span></h5>
+                                <h5 className='py-2'>Add Languages</h5>
                                 <FormControl sx={{ width: '100%' }}>
-                                    <InputLabel id="demo-multiple-chip-label">Select your Language</InputLabel>
+                                    <InputLabel id="demo-multiple-chip-label">Select your Language <span style={{color: "red"}}>*</span></InputLabel>
                                     <Select
                                         labelId="demo-multiple-chip-label"
                                         id="demo-multiple-chip"
@@ -838,9 +838,9 @@ const PostATasker = () => {
                             </div>
                         </TabPanel>
                         <TabPanel value={state.selectedTab} index={5} style={{ overflow: 'auto', width: '85%' }}>
-                            <h5 className='py-2'>Learning Method <span style={{ color: 'red' }}>*</span> </h5>
+                            <h5 className='py-2'>Learning Method </h5>
                             <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Select Your Learning Method</InputLabel>
+                                <InputLabel id="demo-simple-select-label">Select Your Learning Method <span style={{color: "red"}}>*</span></InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
@@ -986,9 +986,9 @@ const PostATasker = () => {
 
 
                         <TabPanel className="image-tab-panel" value={state.selectedTab} index={7} style={{ overflow: 'auto', width: '100%' }}>
-                            <h4 style={{marginBottom: "15px"}}>Current Experience</h4>
+                            <h4 style={{marginBottom: "15px"}}>Current Experience </h4>
                             <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Select Your Current Experience</InputLabel>
+                                <InputLabel id="demo-simple-select-label">Select Your Current Experience <span style={{color: "red"}}>*</span></InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"

@@ -39,7 +39,7 @@ import ErrorIcon from '@mui/icons-material/Error';
 import Pagination from '../../Pagination';
 import ReactPaginate from "react-paginate";
 
-let PageSize = 18;
+// let PageSize = 18;
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -54,15 +54,15 @@ const MenuProps = {
 
 const BrowseRequest = ({ state, setState, heading }) => {
     const theme = useTheme();
-    const [currentPage, setCurrentPage] = useState(1);
+    // const [currentPage, setCurrentPage] = useState(1);
     const [isToastMessage] = useContext(IsToastContext)
     const [search, setSearch] = useState("")
 
-    const currentTableData = useMemo(() => {
-        const firstPageIndex = (currentPage - 1) * PageSize;
-        const lastPageIndex = firstPageIndex + PageSize;
-        return state.allTaskList.slice(firstPageIndex, lastPageIndex);
-    }, [currentPage, state.allTaskList]);
+    // const currentTableData = useMemo(() => {
+    //     const firstPageIndex = (currentPage - 1) * PageSize;
+    //     const lastPageIndex = firstPageIndex + PageSize;
+    //     return state.allTaskList.slice(firstPageIndex, lastPageIndex);
+    // }, [currentPage, state.allTaskList]);
 
     const [toggleShow, setToggleShow] = useState({
         left: false,
