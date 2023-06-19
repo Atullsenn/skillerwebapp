@@ -183,7 +183,7 @@ const ForgetPassword = () => {
                             <img src={Images.forgetAnnimation} className="img-fluid" alt="Phone image" />
                         </div>
                         <div className="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-                            {state.emailScreen &&
+                            {/* {state.emailScreen &&
                                 <div>
                                     <h3>Enter your mobile number or email</h3>
                                     <p>We will send you a OTP message</p>
@@ -295,7 +295,36 @@ const ForgetPassword = () => {
                                         <button disabled={!isEnabled} className={`btn btn-primary btn-lg btn-block ${classes.NextBtn}`} onClick={() => { resetPassword() }}>Update <ArrowRightAltIcon /></button>
                                     </div>
                                 </div>
-                            }
+                            } */}
+                            <div>
+                                    <h3>Enter your email</h3>
+                                    <p>We will send you a message for email verification</p>
+                                    <div className="form-outline">
+                                        <label htmlFor="" className="font-bold text-xl text-black text-center" style={{ fontWeight: '600' }}>
+                                            Verify your email
+                                        </label>
+                                        <div id="sign-in-button"></div>
+                                        {/* <PhoneInput
+                                            country={"in"}
+                                            value={state.emailorphone}
+                                            onChange={(event) => { setState((prevState) => ({ ...prevState, emailorphone: event })); }}
+                                        /> */}
+                                        <div>
+                                            <TextField
+                                                name="email"
+                                                fullWidth
+                                                variant='outlined'
+                                                type="email"
+                                                size='large'
+                                                label={'Enter your email'}
+                                               
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="mt-3 d-flex justify-content-center">
+                                        <button className={`btn btn-primary btn-lg btn-block ${classes.NextBtn}`}>Submit</button>
+                                    </div>
+                                </div>
                         </div>
                     </div>
                 </div>

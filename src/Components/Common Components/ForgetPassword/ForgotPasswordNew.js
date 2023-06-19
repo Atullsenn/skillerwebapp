@@ -18,10 +18,8 @@ import { toast } from "react-toastify";
 
 const ForgotPasswordNew = () => {
 
-    
   return (
     <>
-     {/* <Menu /> */}
             <section className="vh-80">
                 <div id="sign-in-button"></div>
                 <Banner imgSource={Images.forgetPass} text="Forget Password" />
@@ -77,7 +75,6 @@ const ForgotPasswordNew = () => {
                     </div>
                 </div>
             </section>
-            {/* <Footer /> */}
             <footer className="site-footer footer-light">
             <div className="footer-bottom">
                 <div className="container">

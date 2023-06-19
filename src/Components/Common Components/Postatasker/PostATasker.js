@@ -44,6 +44,9 @@ import Slide from '@mui/material/Slide';
 import { DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
 import dayjs from 'dayjs';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -328,7 +331,9 @@ const PostATasker = () => {
 
     const selectLearningMethod = (event) => {
         setState((prevState) => ({ ...prevState, learningMethod: event.target.value, learningMethodTab: event.target.value - 1 }));
+        console.log(event, "eventttttt")
     };
+   
 
     const handleNextTab = (value) => {
         if (6 > value) {
@@ -616,6 +621,7 @@ const PostATasker = () => {
                             <Tab className='fix-side-remove-padding' label="Language" {...a11yProps(4)} />
                             <Tab className='fix-side-remove-padding' label="Learning Method" {...a11yProps(5)} />
                             <Tab className='fix-side-remove-padding' label="Photos" {...a11yProps(6)} />
+                            <Tab className='fix-side-remove-padding' label="Current Experience" {...a11yProps(7)} />
                         </Tabs>
                         <TabPanel value={state.selectedTab} index={0} style={{ overflow: 'auto', width: '85%' }}>
                             <div style={{ width: '100%' }}>
@@ -712,8 +718,12 @@ const PostATasker = () => {
                         <TabPanel value={state.selectedTab} index={2} style={{ overflow: 'auto', width: '85%' }}>
                             <div style={{ width: '100%' }}>
                                 <h5>Date & Time <span style={{ color: 'red' }}>*</span></h5>
-                                <div className='mt-3'>
-                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <h5>From <span style={{ color: 'red' }}>*</span></h5>
+                                <div style={{display:"flex", flexDirection:"row", gap: "100px"}} className='mt-3'>
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                      <DatePicker />
+                                </LocalizationProvider>
+                                    {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                                         <DemoItem>
                                             <MobileDateTimePicker
                                                 disablePast
@@ -729,7 +739,43 @@ const PostATasker = () => {
                                             />
                                             {state.dateError && <p className='p-0 pt-1 m-0' style={{ fontSize: '12px', color: '#d32f2f' }}>Please Enter a Valid Date and Time</p>}
                                         </DemoItem>
-                                    </LocalizationProvider>
+                                    </LocalizationProvider> */}
+
+<LocalizationProvider dateAdapter={AdapterDayjs}>
+      {/* <DemoContainer components={['TimePicker']}> */}
+        <TimePicker label="time" />
+      {/* </DemoContainer> */}
+    </LocalizationProvider>
+                                </div>
+                                <h5 style={{marginTop: "15px"}}>To<span style={{ color: 'red'}}>*</span></h5>
+                                <div style={{display:"flex", flexDirection:"row", gap: "100px"}} className='mt-3'>
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                      <DatePicker />
+                                </LocalizationProvider>
+                                    {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                        <DemoItem>
+                                            <MobileDateTimePicker
+                                                disablePast
+                                                onError={() => {
+                                                    setState((prevState) => ({ ...prevState, dateError: true }))
+                                                }}
+                                                onAccept={() => {
+                                                    setState((prevState) => ({ ...prevState, dateError: false }))
+                                                }}
+                                                label='Order Due Date'
+                                                value={state.originalDate}
+                                                onChange={handleDateChange}
+                                            />
+                                            {state.dateError && <p className='p-0 pt-1 m-0' style={{ fontSize: '12px', color: '#d32f2f' }}>Please Enter a Valid Date and Time</p>}
+                                        </DemoItem>
+                                    </LocalizationProvider> */}
+<div>
+<LocalizationProvider dateAdapter={AdapterDayjs}>
+      {/* <DemoContainer components={['TimePicker']}> */}
+        <TimePicker label="time" />
+      {/* </DemoContainer> */}
+    </LocalizationProvider>
+    </div>
                                 </div>
                             </div>
                         </TabPanel>
@@ -804,6 +850,7 @@ const PostATasker = () => {
                                 >
                                     <MenuItem value={1}>{"Text"}</MenuItem>
                                     <MenuItem value={2}>{"Phone call"}</MenuItem>
+                                    <MenuItem value={3}>{"Both"}</MenuItem>
                                 </Select>
                             </FormControl>
                             {state.learningMethod != 0 ?
@@ -816,7 +863,7 @@ const PostATasker = () => {
                                             <p>o Expected result</p>
                                             <p>o Verification of expected result</p>
                                         </div>
-                                        <div className='post-a-tasker-upload-file-section-area'>
+                                        {/* <div className='post-a-tasker-upload-file-section-area'>
                                             <label style={{ width: "100%", height: "150px", border: "2px solid #188dc7", padding: "20px", borderRadius: '10px' }}>
                                                 <input type="file" multiple accept='application/pdf' onChange={handlePdfEvent} style={{ display: "none" }} />
                                                 <p className="ant-upload-drag-icon p-0 m-0 d-flex justify-content-center"> <DriveFolderUploadIcon style={{ fontSize: '45px' }} /> </p>
@@ -834,9 +881,55 @@ const PostATasker = () => {
                                                     }
                                                 </div>
                                             </label>
-                                        </div>
+                                        </div> */}
                                     </TabPanel>
                                     <TabPanel value={state.learningMethodTab} index={1} style={{ overflow: 'auto', width: '100%' }}>
+                                        <h5>Google hangout, zoom, teams, phone call, up to 1 hour or 3 calls</h5>
+                                        <div className='mt-4'>
+                                            <FormControl sx={{ width: '100%' }}>
+                                                <InputLabel id="demo-multiple-chip-label">Select your options</InputLabel>
+                                                <Select
+                                                    labelId="demo-multiple-chip-label"
+                                                    id="demo-multiple-chip"
+                                                    multiple
+                                                    value={state.phoneCall}
+                                                    onChange={handlePhoneSelection}
+                                                    input={<OutlinedInput id="select-multiple-chip" label="Select your options" />}
+                                                    renderValue={(selected) => (
+                                                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                                                            {selected.map((value) => (
+                                                                <Chip key={value} label={value} />
+                                                            ))}
+                                                        </Box>
+                                                    )}
+                                                    MenuProps={MenuProps}
+                                                >
+                                                    {state.phoneCallList.map((Item) => (
+                                                        <MenuItem
+                                                            key={Item.id}
+                                                            value={Item.name}
+                                                            style={getPhoneSelection(Item.name, state.phoneCall, theme)}
+                                                        >
+                                                            {Item.name}
+                                                        </MenuItem>
+                                                    ))}
+                                                </Select>
+                                            </FormControl>
+                                        </div>
+                                    </TabPanel>
+
+                                    <TabPanel value={state.learningMethodTab} index={2} style={{ overflow: 'auto', width: '100%' }}>
+                                        <h5>Get text message (email) of how to solve your problem</h5>
+                                        <div className='d-flex justify-content-around'>
+                                            <p>o Tools needed</p>
+                                            <p>o Steps</p>
+                                            <p>o Expected result</p>
+                                            <p>o Verification of expected result</p>
+                                        </div>
+                                       
+                                    </TabPanel>
+
+                                    <TabPanel value={state.learningMethodTab} index={2} style={{ overflow: 'auto', width: '100%' }}>
                                         <h5>Google hangout, zoom, teams, phone call, up to 1 hour or 3 calls</h5>
                                         <div className='mt-4'>
                                             <FormControl sx={{ width: '100%' }}>
@@ -885,10 +978,29 @@ const PostATasker = () => {
                                     ))}
                                     <label>
                                         <input onChange={handleFileEvent} type='file' multiple accept="image/*" style={{ display: "none" }} />
-                                        {filess.length < MAX_COUNT ? <PhotoIcon style={{ width: "91px", height: "86px", color: "darkgray", cursor:"pointer" }} /> : ' '}
+                                        {filess.length < MAX_COUNT ? <PhotoIcon className='photoIconnn' style={{ width: "91px", height: "86px", color: "darkgray", cursor:"pointer" }} /> : ' '}
                                     </label>
                                 </div>
                             </div>
+                        </TabPanel>
+
+
+                        <TabPanel className="image-tab-panel" value={state.selectedTab} index={7} style={{ overflow: 'auto', width: '100%' }}>
+                            <h4 style={{marginBottom: "15px"}}>Current Experience</h4>
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">Select Your Current Experience</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={state.learningMethod}
+                                    label={<>Select Your Current Experience <span style={{ color: 'red' }}>*</span> </>}
+                                    onChange={selectLearningMethod}
+                                >
+                                    <MenuItem value={1}>{"Beginner"}</MenuItem>
+                                    <MenuItem value={2}>{"Intermediate"}</MenuItem>
+                                    <MenuItem value={3}>{"Expert "}</MenuItem>
+                                </Select>
+                            </FormControl>
                         </TabPanel>
                     </Box>
                 </div>

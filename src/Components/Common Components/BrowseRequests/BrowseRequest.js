@@ -37,6 +37,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import ErrorIcon from '@mui/icons-material/Error';
 import Pagination from '../../Pagination';
+import ReactPaginate from "react-paginate";
 
 let PageSize = 18;
 
@@ -371,6 +372,19 @@ const BrowseRequest = ({ state, setState, heading }) => {
         </Box>
     );
 
+//pagination 
+
+const [pageNumber, setPageNumber] = useState(0);
+const usersPerPage = 18;
+const pagesVisited = pageNumber * usersPerPage;
+const pageCount = Math.ceil(state.allTaskList.length / usersPerPage);
+
+const changePage = ({ selected }) => {
+  setPageNumber(selected);
+};
+
+//pagination
+
     return (
         <>
             <Menu color={'#8fc1e2'} />
@@ -426,14 +440,14 @@ const BrowseRequest = ({ state, setState, heading }) => {
                     <div className='container'>
                         <div className='row'>
                             <div className={`${state.cardDetail ? 'col-lg-4 left-main-Div ps-0' : 'row left-main-Div p-0'}`}>
-                                {currentTableData.filter(
+                                {state.allTaskList.filter(
                                     (row) =>
                                         !search.length ||
                                         [row.postTitle, row.budget]
                                             .toString()
                                             .toLowerCase()
                                             .includes(search.toString().toLowerCase()),
-                                ).map((item, index) => {
+                                ).slice(pagesVisited, pagesVisited + usersPerPage).map((item, index) => {
                                     return (
                                         <div className={`${state.cardDetail ? '' : 'col-lg-4'}`}>
                                             <div key={index} id={`browse-card-${item.id}`} className={`${state.cardDetail ? 'm-2 rounded card-main-div' : 'm-2 rounded card-main-div'}`} onClick={() => { getPostDetail(item.id); setActiveClass(item.id); setState((prevState) => ({ ...prevState, cardDetail: true })) }}>
@@ -473,13 +487,24 @@ const BrowseRequest = ({ state, setState, heading }) => {
                                     )
                                 })}
                                 <h3 id="no-post-available" className='w-25 no-post-available' style={{ display: 'none', textAlign: 'center' }}>No Post Available</h3>
-                                <Pagination
+                                {/* <Pagination
                                     className="pagination-bar mb-3"
                                     currentPage={currentPage}
                                     totalCount={state.allTaskList.length}
                                     pageSize={PageSize}
                                     onPageChange={page => setCurrentPage(page)}
-                                />
+                                /> */}
+                                 <ReactPaginate
+                      previousLabel={"Previous"}
+                      nextLabel={"Next"}
+                      pageCount={pageCount}
+                      onPageChange={changePage}
+                      containerClassName={"paginationBttns"}
+                      previousLinkClassName={"previousBttn"}
+                      nextLinkClassName={"nextBttn"}
+                      disabledClassName={"paginationDisabled"}
+                      activeClassName={"paginationActive"}
+                    />
                             </div>
                             {state.cardDetail &&
                                 <div className='col-lg-8 right-main-div pe-0' id='Detailed-main-div'>

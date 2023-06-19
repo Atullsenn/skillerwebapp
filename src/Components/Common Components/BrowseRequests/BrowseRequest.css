@@ -253,3 +253,42 @@
 .skills-input .jss7.jss10 {
     padding-top: 4px !important;
 }
+
+
+.paginationBttns {
+    width: 95%;
+    /* height: 40px; */
+    list-style: none;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+  }
+  
+  .paginationBttns a {
+    padding: 0px;
+    margin: 10px;
+    border-radius: 20px;
+    /* border: 1px solid #2b2eff; */
+    color: #188dc7;
+    cursor: pointer;
+  }
+  
+  /* .paginationBttns a:hover {
+    color: white;
+    background-color: var(--bs-pink);
+  } */
+  
+  .paginationActive a {
+    color: #fff !important;
+    background-color: transparent;
+  }
+  
+  .paginationActive {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #188dc7;
+    line-height: 30px;
+    text-align: center;
+  }
+  
