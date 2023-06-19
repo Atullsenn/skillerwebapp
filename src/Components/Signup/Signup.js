@@ -213,7 +213,7 @@ const Signup = ({ state, setState }) => {
   const [inputError, setInputError] = useState(defaultTextFieldError)
   const emailRegex = /^([_\-\.0-9a-zA-Z]+)@([_\-\.0-9a-zA-Z]+)\.([a-zA-Z]){2,7}$/
   const textRegex = /^[a-zA-Z0-9/-]{1,20}$/
-  const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=^.{8,16}$)");
+  const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*\.])(?=^.{8,16}$)");
   const phoneRegex = /^\d{10,14}$/
   const addressRegex = /^[a-zA-Z0-9," "/-]{1,50}$/
 
@@ -361,7 +361,7 @@ const Signup = ({ state, setState }) => {
                       />
                       {!!inputError.passwordError && (
                         <FormHelperText error>
-                          {inputError.passwordError ? "Uppercase Lowercase special character and number must be required (maximum character length is 16)" : " "}
+                          {inputError.passwordError ? "Uppercase Lowercase special character(@,#,$,&,*) and number must be required (maximum character length is 16)" : " "}
                         </FormHelperText>
                       )}
                     </FormControl>

@@ -45,6 +45,8 @@ import {
   onSnapshot,
   orderBy
 } from "firebase/firestore";
+import { alpha, styled } from '@mui/material/styles';
+import { pink } from '@mui/material/colors';
 
 const defaultState = {
   categories: '',
@@ -457,6 +459,20 @@ const redirectNotification = (notification_type)=>{
 
 
 
+const PinkSwitch = styled(Switch)(({ theme }) => ({
+  '& .MuiSwitch-switchBase.Mui-checked': {
+    color: pink[600],
+    '&:hover': {
+      backgroundColor: alpha(pink[600], theme.palette.action.hoverOpacity),
+    },
+  },
+  '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+    backgroundColor: pink[600],
+  },
+}));
+
+
+
   
   return (
     <>
@@ -502,6 +518,7 @@ const redirectNotification = (notification_type)=>{
                 <div className="d-flex">
                   <FormControlLabel className="skillSekkerProvider-text-size" sx={{ color: "#fff" }} control={<></>} label="SkillSeeker" onClick={handleSkillSeekerClick} />
                   <FormControlLabel sx={{ color: "#fff" }} control={<Switch color="default" checked={isToggle === 2 ? true : isToggle === 1 && false} onChange={handleSkillSeekerProviderStatus} />} />
+                  {/* <PinkSwitch defaultChecked /> */}
                   <FormControlLabel className="skillSekkerProvider-text-size" sx={{ color: "#fff" }} control={<></>} label="SkillProvider" onClick={handleSkillProviderClick} />
                   <div className="ms-2 d-flex justify-content-center align-items-center Notification-dropdown" >
                     <div className="d-flex user-detail-main-area" >
