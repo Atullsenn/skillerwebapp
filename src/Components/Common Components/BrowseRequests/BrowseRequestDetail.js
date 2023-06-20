@@ -57,7 +57,7 @@ import { useNavigate } from 'react-router-dom';
 import ChatBox from '../chat/ChatBox';
 import Modal from "react-bootstrap/Modal";
 import DuoIcon from '@mui/icons-material/Duo';
-
+import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -220,6 +220,8 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
         setState((prevState) => ({ ...prevState, phoneCall: typeof value === 'string' ? value.split(',') : value, phoneCallId: phoneCallIdArray, }));
     };
 
+    
+
     function getPhoneSelection(name, phoneCall, theme) {
         return {
             fontWeight:
@@ -269,6 +271,7 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
     const handleSkillsSelection = (event) => {
         setState((prevState) => ({ ...prevState, skills: event }));
     }
+
 
     const checkPostTime = (createdDate) => {
         var today = new Date();
@@ -566,8 +569,9 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
                                 </div>
                             </div>
                         </div>
-                        {state.cardData[0].learningMethod_type === 'Phone Call' &&
+                        
                             <div className='d-flex'>
+                            {state.cardData[0].learningMethod_type === 'Phone Call' &&
                                 <div className='d-flex align-items-center post-location-data w-50'>
                                     <DuoIcon className='icon-size' />
                                     <div className='px-1 posted-area'>
@@ -575,8 +579,20 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
                                         <a className='p-0 m-0'> {state.cardData[0].learning[0].call_name.split(',').join(', ')}</a>
                                     </div>
                                 </div>
+}
+                                <div className='d-flex align-items-center post-location-data w-50'>
+                                    <WorkHistoryIcon className='icon-size' />
+                                    <div className='px-1 posted-area'>
+                                        <p className='p-0 m-0'>CURRENT EXPERIENCE</p>
+                                        <a className='p-0 m-0'> {state.cardData[0].currentExp == 1 ? 'Begginer' : state.cardData[0].currentExp == 2 ? 'Intermediate' : state.cardData[0].currentExp == 3 ? 'Expert' : 'Intermediate'}</a>
+                                    </div>
+                                </div>
                             </div>
-                        }
+                        
+
+                        
+                                
+                            
                     </div>
                     <div className='col-lg-4 py-2'>
                         <div className='py-3' style={{ border: '1px solid black', borderRadius: '4px' }}>

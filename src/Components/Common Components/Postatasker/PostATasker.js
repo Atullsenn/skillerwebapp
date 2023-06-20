@@ -48,6 +48,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 
+
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -162,8 +163,16 @@ const defaultState = {
     city: '',
     cityId: null,
     cityList: [],
-    orderDueDate: '',
-    originalDate: dayjs(new Date()),
+    orderDueDate: moment(new Date()),
+    orderDueTime:'',
+    toDate:moment(new Date()),
+    toTime:'',
+    // originalDate: dayjs(new Date()),moment()
+    currentExp:'',
+    originalDueDate:'',
+    originalDueTime:'',
+    originalToDate:'',
+    originalToTime:'',
     dateError: false,
     budget: '',
     skills: [],
@@ -192,6 +201,18 @@ const MenuProps = {
         },
     },
 };
+
+
+// const dd = 'Thu, 29 Jun 2023 06:31:25 GMT'
+// console.log(moment(dd).format('DD-MM-YYYY'))
+
+
+function addZero(i) {
+    if (i < 10) {i = "0" + i}
+    return i;
+  }
+  
+  
 
 function getStyles(name, language, theme) {
     return {
@@ -331,7 +352,6 @@ const PostATasker = () => {
 
     const selectLearningMethod = (event) => {
         setState((prevState) => ({ ...prevState, learningMethod: event.target.value, learningMethodTab: event.target.value - 1 }));
-        console.log(event, "eventttttt")
     };
    
 
@@ -347,10 +367,31 @@ const PostATasker = () => {
         }
     }
 
+    const handleTimeChange = (newValue)=>{
+        let convertedTime = newValue
+        let d = `${convertedTime.$H}:${convertedTime.$m}:${convertedTime.$s}`
+        //let convertedTime = `${newValue.$y}-${newValue.$M + 1 > 9 ? newValue.$M + 1 : `0${newValue.$M + 1}`}-${newValue.$D > 9 ? newValue.$D : `0${newValue.$D}`} ${newValue.$H === 0 ? new Date().getHours().toString() : newValue.$H > 9 ? newValue.$H : `0${newValue.$H}`}:${newValue.$m === 0 ? new Date().getMinutes().toString() : newValue.$m > 9 ? newValue.$m : `0${newValue.$m}`}:${newValue.$s === 0 ? new Date().getSeconds().toString() : newValue.$s > 9 ? newValue.$s : `0${newValue.$s}`}`
+        setState((prevState)=>({...prevState, orderDueTime:d, originalDueTime: newValue}))
+    }
+
     const handleDateChange = (newValue) => {
-        const convertedDate = `${newValue.$y}-${newValue.$M + 1 > 9 ? newValue.$M + 1 : `0${newValue.$M + 1}`}-${newValue.$D > 9 ? newValue.$D : `0${newValue.$D}`} ${newValue.$H === 0 ? new Date().getHours().toString() : newValue.$H > 9 ? newValue.$H : `0${newValue.$H}`}:${newValue.$m === 0 ? new Date().getMinutes().toString() : newValue.$m > 9 ? newValue.$m : `0${newValue.$m}`}:${newValue.$s === 0 ? new Date().getSeconds().toString() : newValue.$s > 9 ? newValue.$s : `0${newValue.$s}`}`
-        setState((prevState) => ({ ...prevState, orderDueDate: convertedDate, originalDate: newValue }))
+        //const convertedDate = `${newValue.$y}-${newValue.$M + 1 > 9 ? newValue.$M + 1 : `0${newValue.$M + 1}`}-${newValue.$D > 9 ? newValue.$D : `0${newValue.$D}`} ${newValue.$H === 0 ? new Date().getHours().toString() : newValue.$H > 9 ? newValue.$H : `0${newValue.$H}`}:${newValue.$m === 0 ? new Date().getMinutes().toString() : newValue.$m > 9 ? newValue.$m : `0${newValue.$m}`}:${newValue.$s === 0 ? new Date().getSeconds().toString() : newValue.$s > 9 ? newValue.$s : `0${newValue.$s}`}`
+        let convertedDate = moment(newValue).format('YYYY-MM-DD')
+        setState((prevState) => ({ ...prevState, orderDueDate: convertedDate, originalDueDate: newValue }))
     };
+
+    const handleToTimeChange = (newValue)=>{
+         //let convertTime = `${newValue.$y}-${newValue.$M + 1 > 9 ? newValue.$M + 1 : `0${newValue.$M + 1}`}-${newValue.$D > 9 ? newValue.$D : `0${newValue.$D}`} ${newValue.$H === 0 ? new Date().getHours().toString() : newValue.$H > 9 ? newValue.$H : `0${newValue.$H}`}:${newValue.$m === 0 ? new Date().getMinutes().toString() : newValue.$m > 9 ? newValue.$m : `0${newValue.$m}`}:${newValue.$s === 0 ? new Date().getSeconds().toString() : newValue.$s > 9 ? newValue.$s : `0${newValue.$s}`}`
+        const convertedTime = newValue
+        let d = `${convertedTime.$H}:${convertedTime.$m}:${convertedTime.$s}`
+        setState((prevState)=>({...prevState, toTime:d, originalToTime: newValue}))
+    }
+
+    const handleToDateChange = (newValue)=>{
+        let convertedDate = moment(newValue).format('YYYY-MM-DD')
+             setState((prevState)=>({...prevState, toDate: convertedDate, originalToDate:newValue}))
+    }
+
 
     const handleTabChange = (event, newValue) => {
         setState((prevState) => ({ ...prevState, selectedTab: newValue }));
@@ -390,6 +431,10 @@ const PostATasker = () => {
         setState((prevState) => ({ ...prevState, phoneCall: typeof value === 'string' ? value.split(',') : value, phoneCallId: phoneCallIdArray, }));
     };
 
+    const currentExperience = (event)=>{
+        setState((prevState) => ({ ...prevState, currentExp: event.target.value, currentExpTab: event.target.value - 1 }));
+    }
+
     const askToggleTypeOpen = () => {
         setState((prevState) => ({ ...prevState, open: true }));
     };
@@ -423,10 +468,16 @@ const PostATasker = () => {
         formData.append('country_id', state.countryId)
         formData.append('state_id', state.stateId)
         formData.append('city_id', state.cityId)
-        formData.append('dueDate', state.orderDueDate)
+        formData.append('dueDate', state.orderDueDate + ' ' + state.orderDueTime)
+        formData.append('todate', state.toDate + ' ' + state.toTime)
+        formData.append('currentExp', state.currentExp)
         formData.append('budget', parseInt(state.budget))
         formData.append('call_option[]', state.phoneCallId)
         formData.append('learningMethod_type', state.learningMethod)
+
+        // for(var pair of formData.entries()) {
+        //     console.log(pair[0]+ ', '+ pair[1]);
+        //  }
 
         if (state.userDetail.isAutehnticate) {
             if (isToggle === 2) {
@@ -721,7 +772,7 @@ const PostATasker = () => {
                                 <h5>From <span style={{ color: 'red' }}>*</span></h5>
                                 <div style={{display:"flex", flexDirection:"row", gap: "100px"}} className='mt-3'>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                      <DatePicker />
+                                      <DatePicker onChange={handleDateChange}  value={state.originalDueDate}/>
                                 </LocalizationProvider>
                                     {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                                         <DemoItem>
@@ -743,14 +794,14 @@ const PostATasker = () => {
 
 <LocalizationProvider dateAdapter={AdapterDayjs}>
       {/* <DemoContainer components={['TimePicker']}> */}
-        <TimePicker label="time" />
+        <TimePicker onChange={handleTimeChange} value={state.originalDueTime} label="time" />
       {/* </DemoContainer> */}
     </LocalizationProvider>
                                 </div>
                                 <h5 style={{marginTop: "15px"}}>To<span style={{ color: 'red'}}>*</span></h5>
                                 <div style={{display:"flex", flexDirection:"row", gap: "100px"}} className='mt-3'>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                      <DatePicker />
+                                      <DatePicker onChange={handleToDateChange} value={state.originalToDate}/>
                                 </LocalizationProvider>
                                     {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                                         <DemoItem>
@@ -772,7 +823,7 @@ const PostATasker = () => {
 <div>
 <LocalizationProvider dateAdapter={AdapterDayjs}>
       {/* <DemoContainer components={['TimePicker']}> */}
-        <TimePicker label="time" />
+        <TimePicker onChange={handleToTimeChange} value={state.originalToTime} label="time" />
       {/* </DemoContainer> */}
     </LocalizationProvider>
     </div>
@@ -992,9 +1043,9 @@ const PostATasker = () => {
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    value={state.learningMethod}
+                                    value={state.currentExp}
                                     label={<>Select Your Current Experience <span style={{ color: 'red' }}>*</span> </>}
-                                    onChange={selectLearningMethod}
+                                    onChange={currentExperience}
                                 >
                                     <MenuItem value={1}>{"Beginner"}</MenuItem>
                                     <MenuItem value={2}>{"Intermediate"}</MenuItem>
