@@ -171,6 +171,31 @@ const ForgetPassword = () => {
         }
     }
 
+    const [userEmail, setUserEmail] = useState([])
+
+    const verifyUserEmail = ()=>{
+          let request = {
+            email: userEmail
+          }
+          axios.post(`${baseUrl}/forgotpassword`,request).then((response)=>{
+            //console.log(response.data.success, "sjdlkfjsklj")
+            if(response.data.success === true){       
+                toast.success(response.data.message,{
+                    autoClose:1000,
+                    theme:'colored'
+                })
+            }
+            else{
+            toast.error(response.data.message,{
+                 autoClose: 1000,
+                 theme: 'colored'
+            })
+                }
+          }).catch((error)=>{
+            console.log(error)
+          })
+    }
+
     return (
         <>
             <Menu />
@@ -317,12 +342,12 @@ const ForgetPassword = () => {
                                                 type="email"
                                                 size='large'
                                                 label={'Enter your email'}
-                                               
+                                                onChange={(e)=>{setUserEmail(e.target.value)}}
                                             />
                                         </div>
                                     </div>
                                     <div className="mt-3 d-flex justify-content-center">
-                                        <button className={`btn btn-primary btn-lg btn-block ${classes.NextBtn}`}>Submit</button>
+                                        <button className={`btn btn-primary btn-lg btn-block ${classes.NextBtn}`} onClick={verifyUserEmail}>Submit</button>
                                     </div>
                                 </div>
                         </div>
