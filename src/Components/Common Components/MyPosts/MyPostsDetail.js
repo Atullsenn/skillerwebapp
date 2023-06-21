@@ -63,6 +63,8 @@ import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import { makeStyles } from "@material-ui/core/styles";
+import DuoIcon from '@mui/icons-material/Duo';
+import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 
 const useStyles = makeStyles(() => ({
   disableBtn: {
@@ -1365,6 +1367,32 @@ const MyPostsDetail = ({
                 </div>
               </div>
             </div>
+
+
+            <div className="d-flex">
+              {state.cardData[0].learningMethod_type === 'Phone Call' || state.cardData[0].learningMethod_type === 'Text and Phone Call' &&
+              <div className="d-flex align-items-center post-location-data w-50">
+                <DuoIcon className="icon-size" />
+                <div className="px-1 posted-area">
+                  <p className="p-0 m-0">CALL OPTIONS</p>
+                  <a className="p-0 m-0">
+                    {state.cardData[0].learning[0].call_name.split(',').join(', ')}
+                  </a>
+                </div>
+              </div>
+}
+              <div className="d-flex px-2 align-items-center post-location-data w-50">
+                <WorkHistoryIcon className="icon-size" />
+                <div className="px-1 posted-area">
+                  <p className="p-0 m-0">CURRENT EXPERIENCE</p>
+                  <a className="p-0 m-0">
+                    {state.cardData[0].currentExp == 1 ? 'Begginer' : state.cardData[0].currentExp == 2 ? 'Intermediate' : state.cardData[0].currentExp == 3 ? 'Expert' : 'Intermediate'}
+                  </a>
+                </div>
+              </div>
+            </div>
+
+
           </div>
           <div className="col-lg-4 py-2">
             <div

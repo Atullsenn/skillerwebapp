@@ -361,7 +361,7 @@ const Signup = ({ state, setState }) => {
                       />
                       {!!inputError.passwordError && (
                         <FormHelperText error>
-                          {inputError.passwordError ? "Uppercase Lowercase special character(@,#,$,&,*) and number must be required (maximum character length is 16)" : " "}
+                          {inputError.passwordError ? "Uppercase Lowercase special character(!,@,#,$,&,*) and number must be required (maximum character length is 16)" : " "}
                         </FormHelperText>
                       )}
                     </FormControl>

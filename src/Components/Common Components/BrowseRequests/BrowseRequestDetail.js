@@ -571,7 +571,7 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
                         </div>
                         
                             <div className='d-flex'>
-                            {state.cardData[0].learningMethod_type === 'Phone Call' &&
+                            {state.cardData[0].learningMethod_type === 'Phone Call' || state.cardData[0].learningMethod_type === 'Text and Phone Call' &&
                                 <div className='d-flex align-items-center post-location-data w-50'>
                                     <DuoIcon className='icon-size' />
                                     <div className='px-1 posted-area'>
