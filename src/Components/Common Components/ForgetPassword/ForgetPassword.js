@@ -177,6 +177,13 @@ const ForgetPassword = () => {
           let request = {
             email: userEmail
           }
+          if(userEmail == ''){
+            toast.error('Please Enter Your Email',{
+                autoClose: 1000,
+                theme: 'colored'
+            })
+          }
+          else{
           axios.post(`${baseUrl}/forgotpassword`,request).then((response)=>{
             //console.log(response.data.success, "sjdlkfjsklj")
             if(response.data.success === true){       
@@ -194,6 +201,7 @@ const ForgetPassword = () => {
           }).catch((error)=>{
             console.log(error)
           })
+        }
     }
 
     return (
