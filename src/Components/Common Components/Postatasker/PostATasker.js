@@ -163,7 +163,7 @@ const defaultState = {
     city: '',
     cityId: null,
     cityList: [],
-    orderDueDate: moment(new Date()),
+    orderDueDate: '',
     orderDueTime:'',
     toDate:moment(new Date()),
     toTime:'',
@@ -356,7 +356,7 @@ const PostATasker = () => {
    
 
     const handleNextTab = (value) => {
-        if (6 > value) {
+        if (7 > value) {
             setState((prevState) => ({ ...prevState, selectedTab: value + 1 }));
         }
     }
@@ -376,7 +376,7 @@ const PostATasker = () => {
 
     const handleDateChange = (newValue) => {
         //const convertedDate = `${newValue.$y}-${newValue.$M + 1 > 9 ? newValue.$M + 1 : `0${newValue.$M + 1}`}-${newValue.$D > 9 ? newValue.$D : `0${newValue.$D}`} ${newValue.$H === 0 ? new Date().getHours().toString() : newValue.$H > 9 ? newValue.$H : `0${newValue.$H}`}:${newValue.$m === 0 ? new Date().getMinutes().toString() : newValue.$m > 9 ? newValue.$m : `0${newValue.$m}`}:${newValue.$s === 0 ? new Date().getSeconds().toString() : newValue.$s > 9 ? newValue.$s : `0${newValue.$s}`}`
-        let convertedDate = moment(newValue).format('YYYY-MM-DD')
+        let convertedDate = moment(newValue.$d).format('YYYY-MM-DD')
         setState((prevState) => ({ ...prevState, orderDueDate: convertedDate, originalDueDate: newValue }))
     };
 
@@ -388,7 +388,7 @@ const PostATasker = () => {
     }
 
     const handleToDateChange = (newValue)=>{
-        let convertedDate = moment(newValue).format('YYYY-MM-DD')
+        let convertedDate = moment(newValue.$d).format('YYYY-MM-DD')
              setState((prevState)=>({...prevState, toDate: convertedDate, originalToDate:newValue}))
     }
 
@@ -671,8 +671,8 @@ const PostATasker = () => {
                             <Tab className='fix-side-remove-padding' label="Budget & Skills" {...a11yProps(3)} />
                             <Tab className='fix-side-remove-padding' label="Language" {...a11yProps(4)} />
                             <Tab className='fix-side-remove-padding' label="Learning Method" {...a11yProps(5)} />
-                            <Tab className='fix-side-remove-padding' label="Photos" {...a11yProps(6)} />
-                            <Tab className='fix-side-remove-padding' label="Current Experience" {...a11yProps(7)} />
+                            <Tab className='fix-side-remove-padding' label="Current Experience" {...a11yProps(6)} />
+                            <Tab className='fix-side-remove-padding' label="Photos" {...a11yProps(7)} />
                         </Tabs>
                         <TabPanel value={state.selectedTab} index={0} style={{ overflow: 'auto', width: '85%' }}>
                             <div style={{ width: '100%' }}>
@@ -1014,29 +1014,12 @@ const PostATasker = () => {
                                             </FormControl>
                                         </div>
                                     </TabPanel>
+                                    
                                 </Box>
                                 : ''
                             }
                         </TabPanel>
                         <TabPanel className="image-tab-panel" value={state.selectedTab} index={6} style={{ overflow: 'auto', width: '100%' }}>
-                            <h4>Add Image</h4>
-                            <div style={{ border: "2px solid #188dc7", height: "230px", borderRadius: '10px' }}>
-                                <div className="uploaded-files-list" style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: "58px" }}>
-                                    {imagesPreview.map(file => (
-                                        <div style={{ marginRight: "20px" }} >
-                                            <img src={file} style={{ width: '100px', height: "100px", borderRadius: '5px' }} />
-                                        </div>
-                                    ))}
-                                    <label>
-                                        <input onChange={handleFileEvent} type='file' multiple accept="image/*" style={{ display: "none" }} />
-                                        {filess.length < MAX_COUNT ? <PhotoIcon className='photoIconnn' style={{ width: "91px", height: "86px", color: "darkgray", cursor:"pointer" }} /> : ' '}
-                                    </label>
-                                </div>
-                            </div>
-                        </TabPanel>
-
-
-                        <TabPanel className="image-tab-panel" value={state.selectedTab} index={7} style={{ overflow: 'auto', width: '100%' }}>
                             <h4 style={{marginBottom: "15px"}}>Current Experience </h4>
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">Select Your Current Experience <span style={{color: "red"}}>*</span></InputLabel>
@@ -1053,6 +1036,22 @@ const PostATasker = () => {
                                 </Select>
                             </FormControl>
                         </TabPanel>
+                        <TabPanel className="image-tab-panel" value={state.selectedTab} index={7} style={{ overflow: 'auto', width: '100%' }}>
+                            <h4>Add Image</h4>
+                            <div style={{ border: "2px solid #188dc7", height: "230px", borderRadius: '10px' }}>
+                                <div className="uploaded-files-list" style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: "58px" }}>
+                                    {imagesPreview.map(file => (
+                                        <div style={{ marginRight: "20px" }} >
+                                            <img src={file} style={{ width: '100px', height: "100px", borderRadius: '5px' }} />
+                                        </div>
+                                    ))}
+                                    <label>
+                                        <input onChange={handleFileEvent} type='file' multiple accept="image/*" style={{ display: "none" }} />
+                                        {filess.length < MAX_COUNT ? <PhotoIcon className='photoIconnn' style={{ width: "91px", height: "86px", color: "darkgray", cursor:"pointer" }} /> : ' '}
+                                    </label>
+                                </div>
+                            </div>
+                        </TabPanel>
                     </Box>
                 </div>
                 <div className='d-flex justify-content-center align-items-center mt-4'>
@@ -1060,7 +1059,7 @@ const PostATasker = () => {
                         {state.selectedTab > 0 &&
                             <button onClick={() => { handleBackTab(state.selectedTab) }} className={classes.PostATaskerNext}>Back</button>
                         }
-                        {state.selectedTab < 6 ?
+                        {state.selectedTab < 7 ?
                             <button onClick={() => { handleNextTab(state.selectedTab) }} className={classes.PostATaskerNext}>Next</button>
                             :
                             <button onClick={() => { handlePostTask() }} className={classes.PostATaskerNext}>Submit</button>
