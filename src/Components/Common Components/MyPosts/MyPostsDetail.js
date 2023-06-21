@@ -1272,6 +1272,15 @@ const MyPostsDetail = ({
                   <a className="p-0 m-0">{`${state.cardData[0].firstName} ${state.cardData[0].lastName}`}</a>
                 </div>
               </div>
+              <div className="d-flex px-2 align-items-center post-location-data w-50">
+                <TranslateIcon className="icon-size" />
+                <div className="px-1 posted-area">
+                  <p className="p-0 m-0">LANGUAGE</p>
+                  <a className="p-0 m-0">
+                    {state.cardData[0].language_name.split(",").join(", ")}
+                  </a>
+                </div>
+              </div>
               {state.cardData[0].status === 3 && (
                 <div className="d-flex align-items-center post-location-data w-50">
                   <NavLink to="user-profile">
@@ -1329,7 +1338,7 @@ const MyPostsDetail = ({
               <div className="d-flex align-items-center post-location-data w-50">
                 <EventIcon className="icon-size" />
                 <div className="px-1 posted-area">
-                  <p className="p-0 m-0">ORDER DUE DATE</p>
+                  <p className="p-0 m-0">ORDER(FROM DATE)</p>
                   <a className="p-0 m-0">
                     {moment(state.cardData[0].dueDate)
                       .utcOffset(330)
@@ -1337,12 +1346,14 @@ const MyPostsDetail = ({
                   </a>
                 </div>
               </div>
-              <div className="d-flex px-2 align-items-center post-location-data w-50">
-                <TranslateIcon className="icon-size" />
+               <div className="d-flex align-items-center post-location-data w-50">
+                <EventIcon className="icon-size" />
                 <div className="px-1 posted-area">
-                  <p className="p-0 m-0">LANGUAGE</p>
+                  <p className="p-0 m-0">ORDER(TO DATE)</p>
                   <a className="p-0 m-0">
-                    {state.cardData[0].language_name.split(",").join(", ")}
+                    {moment(state.cardData[0].todate)
+                      .utcOffset(330)
+                      .format("lll")}
                   </a>
                 </div>
               </div>
@@ -1370,7 +1381,7 @@ const MyPostsDetail = ({
 
 
             <div className="d-flex">
-              {state.cardData[0].learningMethod_type === 'Phone Call' || state.cardData[0].learningMethod_type === 'Text and Phone Call' &&
+              {state.cardData[0].learningMethod_type === 'Phone Call' || state.cardData[0].learningMethod_type === 'Text and Phone Call' ?
               <div className="d-flex align-items-center post-location-data w-50">
                 <DuoIcon className="icon-size" />
                 <div className="px-1 posted-area">
@@ -1379,7 +1390,7 @@ const MyPostsDetail = ({
                     {state.cardData[0].learning[0].call_name.split(',').join(', ')}
                   </a>
                 </div>
-              </div>
+              </div> :''
 }
               <div className="d-flex px-2 align-items-center post-location-data w-50">
                 <WorkHistoryIcon className="icon-size" />

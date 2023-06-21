@@ -34,6 +34,8 @@ import axios from 'axios';
 import {toast} from 'react-toastify';
 import {Button} from "react-bootstrap";
 import { TextareaAutosize } from "@mui/material";
+import DuoIcon from '@mui/icons-material/Duo';
+import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 
 const MyOrdersDetail = ({ state, setState, getMyOrderList, abc }) => {
     const [open, setOpen] = useState(false);
@@ -250,6 +252,7 @@ else{
   };
 
 
+
     return (
         <>
             <div className='main-top-container container'>
@@ -440,10 +443,10 @@ else{
                                 </div>
                             </div>
                             <div className='d-flex align-items-center post-location-data w-50'>
-                                <EventIcon className='icon-size' />
+                                <WorkHistoryIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
-                                    <p className='p-0 m-0'>ORDER DUE DATE</p>
-                                    <a className='p-0 m-0'>{moment(state.cardData[0].dueDate).utcOffset(330).format('lll')}</a>
+                                    <p className='p-0 m-0'>CURRENT EXPERIENCE</p>
+                                    <a className='p-0 m-0'>{state.cardData[0].currentExp == 1 ? 'Begginer' : state.cardData[0].currentExp == 2 ? 'Intermediate' : state.cardData[0].currentExp == 3 ? 'Expert' : 'Intermediate'}</a>
                                 </div>
                             </div>
                         </div>
@@ -484,14 +487,14 @@ else{
                                 <LocalAtmIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
                                     <p className='p-0 m-0'>PAYMENT</p>
-                                    <a className='p-0 m-0'>By Credit card XX4732</a>
+                                    <a className='p-0 m-0'>{state.cardData[0].payment}</a>
                                 </div>
                             </div>
                             <div className='d-flex align-items-center post-location-data w-50'>
                                 <LocalAtmIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
                                     <p className='p-0 m-0'>PAYMENT STATUS</p>
-                                    <a className='p-0 m-0'>Paid</a>
+                                    <a className='p-0 m-0'>{state.cardData[0].payment_status}</a>
                                 </div>
                             </div>
                         </div>
@@ -500,7 +503,32 @@ else{
                                 <HourglassEmptyIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
                                     <p className='p-0 m-0'>URGENCY</p>
-                                    <a className='p-0 m-0'>Lorem32</a>
+                                    <a className='p-0 m-0'>{state.cardData[0].urgency}</a>
+                                </div>
+                            </div>
+                           {state.cardData[0].learningMethod_type === 'Phone Call' || state.cardData[0].learningMethod_type === 'Text and Phone Call' ?
+                            <div className='d-flex align-items-center post-location-data w-50'>
+                                <DuoIcon className='icon-size' />
+                                <div className='px-1 posted-area'>
+                                    <p className='p-0 m-0'>CALL OPTIONS</p>
+                                    <a className='p-0 m-0'>{state.cardData[0].learning[0].call_name}</a>
+                                </div>
+                            </div> :''
+}
+                        </div>
+                        <div className='d-flex'>
+                             <div className='d-flex align-items-center post-location-data w-50'>
+                                <EventIcon className='icon-size' />
+                                <div className='px-1 posted-area'>
+                                    <p className='p-0 m-0'>ORDER(FROM DATE)</p>
+                                    <a className='p-0 m-0'>{moment(state.cardData[0].dueDate).utcOffset(330).format('lll')}</a>
+                                </div>
+                            </div>
+                            <div className='d-flex align-items-center post-location-data w-50'>
+                                <EventIcon className='icon-size' />
+                                <div className='px-1 posted-area'>
+                                    <p className='p-0 m-0'>ORDER(TO DATE)</p>
+                                    <a className='p-0 m-0'>{moment(state.cardData[0].todate).utcOffset(330).format('lll')}</a>
                                 </div>
                             </div>
                         </div>
