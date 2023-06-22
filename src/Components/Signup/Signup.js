@@ -101,34 +101,34 @@ const MenuProps = {
 //   };
 // }
 
-const Signup = ({ state, setState }) => {
+const Signup = ({ state, setState, sendOtp }) => {
   const theme = useTheme();
   const classes = useStyles();
   const [phone, setPhone] = useState(false)
   const [isToastMessage] = useContext(IsToastContext)
   let navigate = useNavigate();
 
-  const onCaptchVerify = () => {
-    window.recaptchaVerifier = new RecaptchaVerifier('sign-in-button', {
-      'size': 'invisible',
-      'callback': (response) => {
-        sendOtp();
-      },
-      defaultCountry: "IN"
-    }, auth)
-  }
+  // const onCaptchVerify = () => {
+  //   window.recaptchaVerifier = new RecaptchaVerifier('sign-in-button', {
+  //     'size': 'invisible',
+  //     'callback': (response) => {
+  //       sendOtp();
+  //     },
+  //     defaultCountry: "IN"
+  //   }, auth)
+  // }
 
-  const sendOtp = () => {
-    onCaptchVerify()
-    const formatPh = "+" + state.phoneNumber;
-    const appVerifier = window.recaptchaVerifier;
-    signInWithPhoneNumber(auth, formatPh, appVerifier).then((confirmationResult) => {
-      window.confirmationResult = confirmationResult;
-      navigate(`otp-verification`)
-    }).catch((error) => {
-      console.log(error)
-    })
-  }
+  // const sendOtp = () => {
+  //   onCaptchVerify()
+  //   const formatPh = "+" + state.phoneNumber;
+  //   const appVerifier = window.recaptchaVerifier;
+  //   signInWithPhoneNumber(auth, formatPh, appVerifier).then((confirmationResult) => {
+  //     window.confirmationResult = confirmationResult;
+  //     navigate(`otp-verification`)
+  //   }).catch((error) => {
+  //     console.log(error)
+  //   })
+  // }
 
   useEffect(() => {
     const googleLoginButton = document.querySelector('.google-login-button');

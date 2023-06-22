@@ -5,6 +5,10 @@ import RegisterType from "../Common Components/RegisterType/RegisterType";
 import Signup from './Signup';
 import { baseUrl } from '../../Url/url';
 import axios from 'axios';
+import { auth } from "../firebase.config";
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
+import {toast} from 'react-toastify';
 
 const defaultState = {
     firstName: '',
@@ -46,6 +50,7 @@ const defaultState = {
 
 const SignupLayout = () => {
     const [state, setState] = useState(defaultState)
+    let navigate = useNavigate();
 
     const getCategoryList = () => {
         axios.get(`${baseUrl}/get-category`, {
@@ -119,12 +124,43 @@ const SignupLayout = () => {
         getCityList()
     }, [state.stateId])
 
+    const onCaptchVerify = () => {
+        window.recaptchaVerifier = new RecaptchaVerifier('sign-in-button', {
+          'size': 'invisible',
+          'callback': (response) => {
+            sendOtp();
+          },
+          'expired-callback': () => {
+            // Response expired. Ask user to solve reCAPTCHA again.
+            // ...
+            sendOtp()
+            toast.success('Otp send successfully',{
+             autoClose: 1000,
+             theme: 'colored'
+            })
+          },
+          defaultCountry: "IN"
+        }, auth)
+      }
+    
+      const sendOtp = () => {
+        onCaptchVerify()
+        const formatPh = "+" + state.phoneNumber;
+        const appVerifier = window.recaptchaVerifier;
+        signInWithPhoneNumber(auth, formatPh, appVerifier).then((confirmationResult) => {
+          window.confirmationResult = confirmationResult;
+          navigate(`otp-verification`)
+        }).catch((error) => {
+          console.log(error)
+        })
+      }
+
     return (
         <>
             <Outlet />
             <Routes>
-                <Route path="/" element={<Signup state={state} setState={setState} />} />
-                <Route path="otp-verification" element={<OTPVerification state={state} setState={setState} />} />
+                <Route path="/" element={<Signup state={state} setState={setState} sendOtp={sendOtp} />} />
+                <Route path="otp-verification" element={<OTPVerification state={state} setState={setState} sendOtp={sendOtp} />} />
                 <Route path="register-type" element={<RegisterType state={state} setState={setState} />} />
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>

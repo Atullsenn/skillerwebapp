@@ -8,6 +8,9 @@ import Images from '../../../Images/Image';
 import Footer from "../Footer/Footer";
 import { NavLink, useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { auth } from "../../firebase.config";
+import {toast} from 'react-toastify';
+import { RecaptchaVerifier, signInWithPhoneNumber} from "firebase/auth";
 
 const useStyles = makeStyles(() => ({
     otpButtons: {
@@ -35,16 +38,12 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-const OTPVerification = ({ state, setState }) => {
+const OTPVerification = ({ state, setState, sendOtp }) => {
     const verifyRef = useRef(null);
     const classes = useStyles();
     const { pathname } = useLocation();
     const pathArray = pathname.split("/");
     let navigate = useNavigate();
-
-    const resendOtpRequest = () => {
-        alert('Please wait your recent otp request is submitted')
-    }
 
     const onSubmitOTP = () => {
         window.confirmationResult.confirm(state.otp).then((res) => {
@@ -120,7 +119,8 @@ const OTPVerification = ({ state, setState }) => {
                                     </div>
                                 </div>
                                 <div className="d-flex justify-content-around align-items-center mb-2">
-                                    <a className={`${classes.recentOtp}`} onClick={resendOtpRequest} style={{ cursor: 'pointer' }}>Resend OTP</a>
+                                <div id="sign-in-button"></div>
+                                    <a className={`${classes.recentOtp}`} onClick={sendOtp} style={{ cursor: 'pointer' }}>Resend OTP</a>
                                 </div>
                                 <div className="d-flex justify-content-center">
                                     <div className="w-50 d-flex justify-content-evenly">

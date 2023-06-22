@@ -15,8 +15,34 @@ import axios from 'axios';
 import "react-phone-input-2/lib/style.css";
 import { baseUrl } from '../../../Url/url';
 import { toast } from "react-toastify";
+import {useParams } from 'react-router-dom';
 
 const ForgotPasswordNew = () => {
+const [userPassword, setUserPassword] = useState('')
+const params = useParams()
+console.log(params, "Keyyyyyyyyyyyy")
+
+    const resetPassword = ()=>{
+        let request = {
+            email: '',
+            password: userPassword
+        }
+        console.log(request, "request")
+
+        axios.post(`${baseUrl}/resetPassword`, request).then((response)=>{
+            console.log(response, "checking response")
+            toast.success('Your password updated successfully',{
+                autoClose:1000,
+                theme: 'colored'
+            })
+        }).catch((error)=>{
+            console.log(error)
+            toast.success('Network error',{
+                autoClose: 1000,
+                theme: 'colored'
+            })
+        })
+    }
 
   return (
     <>
