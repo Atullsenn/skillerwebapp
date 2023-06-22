@@ -130,14 +130,8 @@ const SignupLayout = () => {
           'callback': (response) => {
             sendOtp();
           },
-          'expired-callback': () => {
-            // Response expired. Ask user to solve reCAPTCHA again.
-            // ...
+          'expired-callback': (res) => {
             sendOtp()
-            toast.success('Otp send successfully',{
-             autoClose: 1000,
-             theme: 'colored'
-            })
           },
           defaultCountry: "IN"
         }, auth)
@@ -149,7 +143,11 @@ const SignupLayout = () => {
         const appVerifier = window.recaptchaVerifier;
         signInWithPhoneNumber(auth, formatPh, appVerifier).then((confirmationResult) => {
           window.confirmationResult = confirmationResult;
-          navigate(`otp-verification`)
+            navigate(`otp-verification`)
+           
+          
+
+          
         }).catch((error) => {
           console.log(error)
         })

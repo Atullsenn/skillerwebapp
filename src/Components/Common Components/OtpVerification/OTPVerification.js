@@ -61,6 +61,16 @@ const OTPVerification = ({ state, setState, sendOtp }) => {
         }
     }, [state.otp])
 
+    const resendOtp = (res)=>{
+        sendOtp()
+        if(res){
+            toast.success('Otp send successfully',{
+                autoClose: 1000,
+                theme: 'colored'
+               })
+        }
+    }
+
     return (
         <>
             <Menu />
@@ -120,7 +130,7 @@ const OTPVerification = ({ state, setState, sendOtp }) => {
                                 </div>
                                 <div className="d-flex justify-content-around align-items-center mb-2">
                                 <div id="sign-in-button"></div>
-                                    <a className={`${classes.recentOtp}`} onClick={sendOtp} style={{ cursor: 'pointer' }}>Resend OTP</a>
+                                    <a className={`${classes.recentOtp}`} onClick={resendOtp} style={{ cursor: 'pointer' }}>Resend OTP</a>
                                 </div>
                                 <div className="d-flex justify-content-center">
                                     <div className="w-50 d-flex justify-content-evenly">
