@@ -28,6 +28,7 @@
     "material-ui-chip-input": "^1.0.0",
     "moment": "^2.29.4",
     "otp-input-react": "^0.3.0",
+    "query-string": "^8.1.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.1.2",
     "react-bootstrap-v5": "^1.4.0",

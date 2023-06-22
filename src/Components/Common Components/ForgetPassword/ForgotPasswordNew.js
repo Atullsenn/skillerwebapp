@@ -15,22 +15,44 @@ import axios from 'axios';
 import "react-phone-input-2/lib/style.css";
 import { baseUrl } from '../../../Url/url';
 import { toast } from "react-toastify";
-import {useParams } from 'react-router-dom';
+import {useParams,useLocation } from 'react-router-dom';
+import queryString from 'query-string';
 
 const ForgotPasswordNew = () => {
-const [userPassword, setUserPassword] = useState('')
+const [newPassword, setNewPassword] = useState('')
+const [confirmPassword, setConfirmPassword] = useState('')
+const [passwordError, setPasswordError] = useState('')
+const [confirmPasswordError, setConfirmPasswordError] = useState('')
+const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*\.])(?=^.{8,16}$)");
+
 const params = useParams()
-console.log(params, "Keyyyyyyyyyyyy")
+const location = useLocation()
+
+
+const parsed = queryString.parse(location.search);
+
 
     const resetPassword = ()=>{
         let request = {
-            email: '',
-            password: userPassword
+            email: parsed.key,
+            password: newPassword
         }
         console.log(request, "request")
+        if(newPassword == ''){
+            toast.warn('Please enter new password',{
+                autoClose: 1000,
+                theme: 'colored'
+            })
+        }
+        else if(confirmPassword == ''){
+            toast.warn('Please enter confirm password',{
+                autoClose: 1000,
+                theme: 'colored'
+            })
+        }
+        else{
 
         axios.post(`${baseUrl}/resetPassword`, request).then((response)=>{
-            console.log(response, "checking response")
             toast.success('Your password updated successfully',{
                 autoClose:1000,
                 theme: 'colored'
@@ -42,6 +64,7 @@ console.log(params, "Keyyyyyyyyyyyy")
                 theme: 'colored'
             })
         })
+    }
     }
 
   return (
@@ -61,18 +84,18 @@ console.log(params, "Keyyyyyyyyyyyy")
                                         <div className='mt-3'>
                                             <TextField
                                                 name="password"
-                                                // error={passwordError}
+                                                error={passwordError}
                                                 fullWidth
                                                 variant='outlined'
                                                 type="password"
                                                 size='large'
                                                 label={'New Password'}
-                                                // helperText={passwordError ? 'Uppercase Lowercase special character and number must be required (maximum character length is 16)' : ''}
-                                                // onChange={(event) => {
-                                                //     setState((prevState) => ({ ...prevState, password: event.target.value }))
-                                                //     const isValidPassword = passwordRegex.test(event.target.value)
-                                                //     setPasswordError(event.target.value !== "" && !isValidPassword)
-                                                // }}
+                                                helperText={passwordError ? 'Uppercase Lowercase special character(!,@,#,$,&,*) and number must be required (maximum character length is 16)' : ''}
+                                                onChange={(event) => {
+                                                    setNewPassword(event.target.value)
+                                                    const isValidPassword = passwordRegex.test(event.target.value)
+                                                    setPasswordError(event.target.value !== "" && !isValidPassword)
+                                                }}
                                             />
                                         </div>
                                         <div className='mt-3'>
@@ -81,19 +104,19 @@ console.log(params, "Keyyyyyyyyyyyy")
                                                 fullWidth
                                                 variant='outlined'
                                                 type="password"
-                                                // error={confirmPasswordError}
+                                                error={confirmPasswordError}
                                                 size='large'
                                                 label={'Confirm Password'}
-                                                // helperText={confirmPasswordError && state.password !== state.newpassword ? 'Confirm password did not match' : ' '}
-                                                // onChange={(event) => {
-                                                //     setState((prevState) => ({ ...prevState, newpassword: event.target.value }))
-                                                //     setConfirmPasswordError(event.target.value !== "" && state.password != event.target.value)
-                                                // }}
+                                                helperText={confirmPasswordError && newPassword !== confirmPassword  ? 'Confirm password did not match' : ' '}
+                                                onChange={(event) => {
+                                                    setConfirmPassword(event.target.value)
+                                                    setConfirmPasswordError(event.target.value !== "" && newPassword != event.target.value)
+                                                }}
                                             />
                                         </div>
                                     </div>
                                     <div className="mt-3 d-flex justify-content-center">
-                                        <button className={`btn btn-primary btn-lg btn-block `}>Reset</button>
+                                        <button className={`btn btn-primary btn-lg btn-block `} onClick={resetPassword}>Reset</button>
                                     </div>
                                 </div>
                             
