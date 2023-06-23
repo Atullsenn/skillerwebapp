@@ -120,9 +120,15 @@ const LandingPage = () => {
     const budget = sessionStorage.getItem('budget')
     const learningMethodType = sessionStorage.getItem('learningMethod_type')
 
+    const checkingLength = sessionStorage.getItem('post_image')
+
     const handlePostTask = async () => {    
         const formData = new FormData();
-        formData.append(`post_image`, sessionStorage.getItem('post_image'))
+        for (let i = 0; i < checkingLength.length; i++) {
+            formData.append(`post_image`, sessionStorage.getItem('post_image'))
+            console.log(sessionStorage.getItem(`post_image[${i}]`), "sjfdlksjjlkf")
+            }
+       
         formData.append(`learning_image`, sessionStorage.getItem('learning_image'))
         formData.append('language_id[]', language)
         formData.append('skill[]', skills)
@@ -221,19 +227,13 @@ const LandingPage = () => {
     };
 
     var checkSession = sessionStorage.getItem('postTitle')
+    var guestUserId = localStorage.getItem('id')
     useEffect(()=>{
-        if(checkSession){
+        if(checkSession && guestUserId){
             handleClickOpen()
         }
        
-    },[checkSession])
-
-
-
-
-    
-    
-
+    },[checkSession,guestUserId])
     
 
     const handleClose = () => {
@@ -243,8 +243,6 @@ const LandingPage = () => {
     useEffect(()=>{
         if(!checkSession){
             handleClose()
-        }else{
-            console.log('No session Data Found')
         }
     },[checkSession])
 
@@ -252,8 +250,8 @@ const LandingPage = () => {
 
 
     const removeGuestPostTask = ()=>{
-        sessionStorage.removeItem("post_image");
-        sessionStorage.removeItem("learning_image")
+        sessionStorage.removeItem("post_image[]");
+        sessionStorage.removeItem("learning_image[]")
         sessionStorage.removeItem('language_id[]')
         sessionStorage.removeItem('skill[]')
         sessionStorage.removeItem('postTitle')
@@ -326,7 +324,7 @@ const LandingPage = () => {
           </DialogActions>
         </Dialog>
         </div>
-        <Menu />
+        <Menu/>
         <Banner />
         <Categories state={state} setState={setState} />
         <HowItsWork />

@@ -471,8 +471,6 @@ const PinkSwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-
-
   
   return (
     <>
@@ -492,7 +490,7 @@ const PinkSwitch = styled(Switch)(({ theme }) => ({
                     <NavLink className="nav-link postATaskbtn" aria-current="page" to="/post-a-task"> Post a task </NavLink>
                   </li>
                   <li className="nav-item">
-                    <NavLink className="nav-link" to="/how-it-works"> How it works </NavLink>
+                    <NavLink  className="nav-link" to="/how-it-works"> How it works </NavLink>
                   </li>
                   <li className="nav-item dropdown">
                     <a className={`nav-link dropdown ${state.categories}`} data-bs-toggle="dropdown"
@@ -512,8 +510,8 @@ const PinkSwitch = styled(Switch)(({ theme }) => ({
                       </div>
                     </div>
                   </li>
-                  <li className="nav-item"><NavLink className="nav-link" to="/browse-requests"> Browse requests </NavLink> </li>
-                  <li className="nav-item"> <NavLink className="nav-link" to="/contact-us">  Contact Us </NavLink> </li>
+                  <li className="nav-item"><NavLink  className="nav-link" to="/browse-requests"> Browse requests </NavLink> </li>
+                  <li className="nav-item"> <NavLink  className="nav-link" to="/contact-us">  Contact Us </NavLink> </li>
                 </ul>
                 <div className="d-flex">
                   <FormControlLabel className="skillSekkerProvider-text-size" sx={{ color: "#fff" }} control={<></>} label="SkillSeeker" onClick={handleSkillSeekerClick} />

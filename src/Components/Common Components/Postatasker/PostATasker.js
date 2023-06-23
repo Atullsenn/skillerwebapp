@@ -649,8 +649,8 @@ const PostATasker = () => {
 
      const guestPostTask = ()=>{
         for (let i = 0; i < filess.length; i++) {
-        sessionStorage.setItem("post_image",  JSON.stringify(filess[i]));
-        sessionStorage.setItem("learning_image",  JSON.stringify(images))
+        sessionStorage.setItem(`post_image[${i}]`,filess[i].name);
+        sessionStorage.setItem("learning_image[]",  JSON.stringify(images))
         }
         sessionStorage.setItem('language_id[]',  JSON.stringify(state.languageId))
         sessionStorage.setItem('skill[]',  JSON.stringify(skil))
@@ -672,6 +672,12 @@ const PostATasker = () => {
         guestPostTask()
      }
      
+     for (let i = 0; i < filess.length; i++) {
+        // sessionStorage.setItem(`post_image[${i}]`,filess[i].name);
+        // sessionStorage.setItem("learning_image[]",  JSON.stringify(images))
+        console.log(sessionStorage.getItem(`post_image[${i}]`), "sjfdlksjjlkf")
+        }
+    
     
 
 
