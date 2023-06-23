@@ -2,7 +2,9 @@ import React, { useState, createContext } from "react";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 export const IsToastContext = createContext();
+
 
 const toastLogout = () => {
     toast.warn('Logout Successfully', {
@@ -96,6 +98,7 @@ const updateProfileSuccessfully = () => {
 };
 
 const pleaseLoginFirst = () => {
+    
     toast.warn('Please Login First', {
         position: "top-center",
         autoClose: 1500,
@@ -106,6 +109,7 @@ const pleaseLoginFirst = () => {
         progress: undefined,
         theme: "colored",
     })
+    
 };
 
 const toastShowLoadingToast = (isSuccess, message) => {

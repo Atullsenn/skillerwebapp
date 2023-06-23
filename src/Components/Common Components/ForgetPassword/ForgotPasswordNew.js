@@ -10,12 +10,11 @@ import EmailIcon from '@mui/icons-material/Email';
 import { NavLink } from 'react-router-dom';
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import "react-phone-input-2/lib/style.css";
 import { baseUrl } from '../../../Url/url';
 import { toast } from "react-toastify";
-import {useParams,useLocation } from 'react-router-dom';
+import {useParams,useLocation, useNavigate } from 'react-router-dom';
 import queryString from 'query-string';
 
 const ForgotPasswordNew = () => {
@@ -27,6 +26,7 @@ const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%
 
 const params = useParams()
 const location = useLocation()
+let navigate = useNavigate()
 
 
 const parsed = queryString.parse(location.search);
@@ -53,10 +53,14 @@ const parsed = queryString.parse(location.search);
         else{
 
         axios.post(`${baseUrl}/resetPassword`, request).then((response)=>{
-            toast.success('Your password updated successfully',{
-                autoClose:1000,
-                theme: 'colored'
-            })
+            if(response){
+                toast.success('Your password updated successfully',{
+                    autoClose:1000,
+                    theme: 'colored'
+                })
+                navigate("/login")
+            }
+            
         }).catch((error)=>{
             console.log(error)
             toast.success('Network error',{

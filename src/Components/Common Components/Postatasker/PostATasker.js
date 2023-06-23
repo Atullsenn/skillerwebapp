@@ -451,9 +451,11 @@ const PostATasker = () => {
         setIsToggle(parseInt(event.target.value))
     }
 
+    const skil = state.skills.toString()
+
     const handlePostTask = async () => {
         handleLoadingToggle()
-        const skil = state.skills.toString()
+      
         const formData = new FormData();
         for (let i = 0; i < filess.length; i++) {
             formData.append(`post_image[${i}]`, filess[i])
@@ -563,6 +565,10 @@ const PostATasker = () => {
         } else {
             handleLoadingClose()
             isToastMessage.pleaseLoginFirst()
+            setTimeout(()=>{
+                navigate('/login')
+            },1000)
+           
         }
     }
 
@@ -638,6 +644,42 @@ const PostATasker = () => {
     }
     //upload multiple images 
 
+
+    //Function Post task for guest user
+
+     const guestPostTask = ()=>{
+        for (let i = 0; i < filess.length; i++) {
+        sessionStorage.setItem("post_image",  JSON.stringify(filess[i]));
+        sessionStorage.setItem("learning_image",  JSON.stringify(images))
+        }
+        sessionStorage.setItem('language_id[]',  JSON.stringify(state.languageId))
+        sessionStorage.setItem('skill[]',  JSON.stringify(skil))
+        sessionStorage.setItem('postTitle', state.postTitle)
+        sessionStorage.setItem('postDescription', state.description)
+        sessionStorage.setItem('category_id', state.categoryId)
+        sessionStorage.setItem('country_id', state.countryId)
+        sessionStorage.setItem('state_id', state.stateId)
+        sessionStorage.setItem('city_id', state.cityId)
+        sessionStorage.setItem('dueDate', state.orderDueDate + ' ' + state.orderDueTime)
+        sessionStorage.setItem('todate', state.toDate + ' ' + state.toTime)
+        sessionStorage.setItem('currentExp', state.currentExp)
+        sessionStorage.setItem('budget', parseInt(state.budget))
+        sessionStorage.setItem('call_option[]',  JSON.stringify(state.phoneCallId))
+        sessionStorage.setItem('learningMethod_type', state.learningMethod)
+     }
+   
+     if(!localStorage.getItem('id')){
+        guestPostTask()
+     }
+     
+    
+
+
+
+    //Function post task for guest user
+
+
+    
     return (
         <>
             <div>
