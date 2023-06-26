@@ -47,6 +47,7 @@ import {
 } from "firebase/firestore";
 import { alpha, styled } from '@mui/material/styles';
 import { pink } from '@mui/material/colors';
+import Toggle from 'react-bootstrap-toggle';
 
 const defaultState = {
   categories: '',
@@ -193,7 +194,8 @@ const Menu = (props) => {
 
   const getUserNotification = () => {
     let request = {
-      user: localStorage.getItem("id")
+      user: localStorage.getItem("id"),
+      user_type: localStorage.getItem("userType")
     }
     axios.post(`${baseUrl}/get-new-notification`, request).then((response) => {
       setNotificationData(response.data.Data)
@@ -202,16 +204,20 @@ const Menu = (props) => {
     })
   }
 
+  
+  const userTypee = localStorage.getItem('userType')
+
 
   useEffect(() => {
     getUserNotification()
-  }, [])
+  }, [userTypee])
 
   //notification count api
   const [notiCount, setNotiCount] = useState([])
   const notificationCount = () => {
     let request = {
-      user: localStorage.getItem("id")
+      user: localStorage.getItem("id"),
+      user_type: localStorage.getItem('userType')
     }
     axios.post(`${baseUrl}/count-user-notifications`, request).then((response) => {
       setNotiCount(response.data.Data)
@@ -222,7 +228,7 @@ const Menu = (props) => {
 
   useEffect(() => {
     notificationCount()
-  }, [])
+  }, [userTypee])
   //notification count api
 
   //notification read api
@@ -459,17 +465,18 @@ const redirectNotification = (notification_type)=>{
 
 
 
-const PinkSwitch = styled(Switch)(({ theme }) => ({
-  '& .MuiSwitch-switchBase.Mui-checked': {
-    color: pink[600],
-    '&:hover': {
-      backgroundColor: alpha(pink[600], theme.palette.action.hoverOpacity),
-    },
-  },
-  '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-    backgroundColor: pink[600],
-  },
-}));
+// const PinkSwitch = styled(Switch)(({ theme }) => ({
+//   '& .MuiSwitch-switchBase.Mui-checked': {
+//     color: pink[600],
+//     '&:hover': {
+//       backgroundColor: alpha(pink[600], theme.palette.action.hoverOpacity),
+//     },
+//   },
+//   '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+//     backgroundColor: pink[600],
+//   },
+// }));
+
 
   
   return (
@@ -514,9 +521,10 @@ const PinkSwitch = styled(Switch)(({ theme }) => ({
                   <li className="nav-item"> <NavLink  className="nav-link" to="/contact-us">  Contact Us </NavLink> </li>
                 </ul>
                 <div className="d-flex">
+                   
                   <FormControlLabel className="skillSekkerProvider-text-size" sx={{ color: "#fff" }} control={<></>} label="SkillSeeker" onClick={handleSkillSeekerClick} />
                   <FormControlLabel sx={{ color: "#fff" }} control={<Switch color="default" checked={isToggle === 2 ? true : isToggle === 1 && false} onChange={handleSkillSeekerProviderStatus} />} />
-                  {/* <PinkSwitch defaultChecked /> */}
+        
                   <FormControlLabel className="skillSekkerProvider-text-size" sx={{ color: "#fff" }} control={<></>} label="SkillProvider" onClick={handleSkillProviderClick} />
                   <div className="ms-2 d-flex justify-content-center align-items-center Notification-dropdown" >
                     <div className="d-flex user-detail-main-area" >

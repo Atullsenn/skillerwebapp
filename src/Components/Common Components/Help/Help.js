@@ -127,7 +127,7 @@ const Help = () => {
             <div>
                 <Backdrop
                     sx={{ color: '#188dc7', zIndex: (theme) => theme.zIndex.drawer + 1000 }}
-                    open={isLoadingOpen}
+                    // open={isLoadingOpen}
                 >
                     <CircularProgress color="inherit" style={{ height: '65px', width: '65px' }} />
                 </Backdrop>

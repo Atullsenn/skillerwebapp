@@ -453,6 +453,7 @@ const PostATasker = () => {
 
     const skil = state.skills.toString()
 
+
     const handlePostTask = async () => {
         handleLoadingToggle()
       
@@ -478,7 +479,7 @@ const PostATasker = () => {
         formData.append('learningMethod_type', state.learningMethod)
 
         // for(var pair of formData.entries()) {
-        //     console.log(pair[0]+ ', '+ pair[1]);
+        //     console.log(pair[0]+ ', '+ pair[1], "rrrrrr");
         //  }
 
         if (state.userDetail.isAutehnticate) {
@@ -649,8 +650,8 @@ const PostATasker = () => {
 
      const guestPostTask = ()=>{
         for (let i = 0; i < filess.length; i++) {
-        sessionStorage.setItem(`post_image[${i}]`,filess[i].name);
-        sessionStorage.setItem("learning_image[]",  JSON.stringify(images))
+        sessionStorage.setItem(`post_image[${i}]`, filess[i]);
+        sessionStorage.setItem("learning_image[]", images)
         }
         sessionStorage.setItem('language_id[]',  JSON.stringify(state.languageId))
         sessionStorage.setItem('skill[]',  JSON.stringify(skil))
@@ -671,16 +672,23 @@ const PostATasker = () => {
      if(!localStorage.getItem('id')){
         guestPostTask()
      }
+
+
+
+     console.log(sessionStorage.getItem('post_image[0]', "Post imageeeee"))
+
      
-     for (let i = 0; i < filess.length; i++) {
-        // sessionStorage.setItem(`post_image[${i}]`,filess[i].name);
-        // sessionStorage.setItem("learning_image[]",  JSON.stringify(images))
-        console.log(sessionStorage.getItem(`post_image[${i}]`), "sjfdlksjjlkf")
-        }
-    
-    
 
+     
 
+      
+
+    
+    //   for (let i = 0; i < filess.length; i++) {
+       
+    //     console.log(JSON.stringify(sessionStorage.getItem(`post_image[${i}]`)), "Cheking Imagee ")
+    //     }
+       
 
     //Function post task for guest user
 

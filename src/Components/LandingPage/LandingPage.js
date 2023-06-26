@@ -120,14 +120,17 @@ const LandingPage = () => {
     const budget = sessionStorage.getItem('budget')
     const learningMethodType = sessionStorage.getItem('learningMethod_type')
 
-    const checkingLength = sessionStorage.getItem('post_image')
+    for (let i = 0; i < 6; i++) {
+        console.log(sessionStorage.getItem(`post_image[${i}]`), "Cheking phots issue")
+      }
+    
 
     const handlePostTask = async () => {    
         const formData = new FormData();
-        for (let i = 0; i < checkingLength.length; i++) {
-            formData.append(`post_image`, sessionStorage.getItem('post_image'))
-            console.log(sessionStorage.getItem(`post_image[${i}]`), "sjfdlksjjlkf")
-            }
+        for (let i = 0; i < 6; i++) {
+            formData.append(`post_image[${i}]`,sessionStorage.getItem(`post_image[${i}]`));
+            console.log(sessionStorage.getItem(`post_image[${i}]`), "Cheking phots issue")
+          }
        
         formData.append(`learning_image`, sessionStorage.getItem('learning_image'))
         formData.append('language_id[]', language)
@@ -146,9 +149,9 @@ const LandingPage = () => {
         formData.append('call_option[]', callOptions )
         formData.append('learningMethod_type', learningMethodType )
 
-        for(var pair of formData.entries()) {
-            console.log(pair[0]+ ', '+ pair[1]);
-         }
+        // for(var pair of formData.entries()) {
+        //     console.log(pair[0]+ ', '+ pair[1], "requesttttt");
+        //  }
                 await axios.post(`${baseUrl}/add-post`, formData, {
                     Accept: "Application",
                     "Content-Type": "application/json"
@@ -228,6 +231,7 @@ const LandingPage = () => {
 
     var checkSession = sessionStorage.getItem('postTitle')
     var guestUserId = localStorage.getItem('id')
+
     useEffect(()=>{
         if(checkSession && guestUserId){
             handleClickOpen()
@@ -300,7 +304,7 @@ const LandingPage = () => {
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle id="alert-dialog-title" className="text-center">
-            {"Are you sure you want to submit your post ?"}
+            {"Are you sure want to submit your post ?"}
           </DialogTitle>
           <DialogContent className="text-center p-0 m-0">
             <DialogContentText id="alert-dialog-description">

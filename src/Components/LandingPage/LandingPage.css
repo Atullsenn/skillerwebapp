@@ -8,7 +8,7 @@
 
 /*===GENERAL===*/
 body {
-    color: #626262;
+    color: #626262 !important;
     font-family: 'Mulish', sans-serif;
     line-height: 1.7;
     font-weight: normal;

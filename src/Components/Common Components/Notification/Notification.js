@@ -24,7 +24,8 @@ const Notification = () => {
 
   const getUserNotification = () => {
     let request = {
-      user: localStorage.getItem("id")
+      user: localStorage.getItem("id"),
+      user_type: localStorage.getItem("userType")
     }
     axios.post(`${baseUrl}/get-notification`, request).then((response) => {
       setNotification(response.data.Data)
