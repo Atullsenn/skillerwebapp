@@ -839,8 +839,10 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
                                 onChange={selectLearningMethod}
                             >
                                 {state.cardData[0].learningMethod_type === "Phone Call" ?
-                                    <MenuItem value={2}>{"Phone call"}</MenuItem> : <MenuItem value={1}>{"Text"}</MenuItem>
+                                    <MenuItem value={2}>{"Phone call"}</MenuItem> : state.cardData[0].learningMethod_type === "Text" ? <MenuItem value={1}>{"Text"}</MenuItem> : state.cardData[0].learningMethod_type === "Text and Phone Call" ? <MenuItem value={3}>{"Text and Phone Call"}</MenuItem>:""
+                        
                                 }
+                               
                             </Select>
                         </FormControl>
                         {state.learningMethod != 0 ?
@@ -872,6 +874,66 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
                                     </div>
                                 </TabPanel>
                                 <TabPanel value={state.learningMethodTab} index={1} style={{ overflow: 'auto', width: '100%' }}>
+                                    <h5>Google hangout, zoom, teams, phone call, up to 1 hour or 3 calls</h5>
+                                    <div className='mt-4'>
+                                        <FormControl sx={{ width: '100%' }}>
+                                            <InputLabel id="demo-multiple-chip-label">Select your options <span style={{ color: 'red' }}>*</span></InputLabel>
+                                            <Select
+                                                labelId="demo-multiple-chip-label"
+                                                id="demo-multiple-chip"
+                                                multiple
+                                                value={state.phoneCall}
+                                                onChange={handlePhoneSelection}
+                                                input={<OutlinedInput id="select-multiple-chip" label={<>Select your options <span style={{ color: 'red' }}>*</span></>} />}
+                                                renderValue={(selected) => (
+                                                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                                                        {selected.map((value) => (
+                                                            <Chip key={value} label={value} />
+                                                        ))}
+                                                    </Box>
+                                                )}
+                                                MenuProps={MenuProps}
+                                            >
+                                                {state.phoneCallList.map((Item) => (
+                                                    state.cardData[0].learning[0].call_option && state.cardData[0].learning[0].call_option.split(',').map((item) => {
+                                                        if (parseInt(item) === Item.id) {
+                                                            return <MenuItem key={Item.id} value={Item.name} style={getPhoneSelection(Item.name, state.phoneCall, theme)}>{Item.name}</MenuItem>
+                                                        }
+                                                    })
+                                                ))}
+                                            </Select>
+                                        </FormControl>
+                                    </div>
+                                </TabPanel>
+
+
+                                <TabPanel value={state.learningMethodTab} index={2} style={{ overflow: 'auto', width: '100%' }}>
+                                    <h5>Get text message (email) of how to solve your problem</h5>
+                                    <div className='d-flex justify-content-around'>
+                                        <p>o Tools needed</p>
+                                        <p>o Steps</p>
+                                        <p>o Expected result</p>
+                                        <p>o Verification of expected result</p>
+                                    </div>
+                                    <div className='post-a-tasker-upload-file-section-area'>
+                                        <label style={{ width: "100%", height: "150px", border: "2px solid #188dc7", padding: "20px", borderRadius: '5px' }}>
+                                            <input type="file" multiple accept='application/pdf' onChange={handlePdfEvent} style={{ display: "none" }} />
+                                            <p className="ant-upload-drag-icon p-0 m-0 d-flex justify-content-center"> <DriveFolderUploadIcon style={{ fontSize: '45px' }} /> </p>
+                                            {pdfName.selectedFiles == "" ?
+                                                <><p className="ant-upload-text p-0 m-0 d-flex justify-content-center">Click file to this area to upload  </p><p className="ant-upload-hint p-0 m-0 d-flex justify-content-center">Support for a single or bulk upload. Strictly prohibit from uploading
+                                                    company data or other band files
+                                                </p></> :
+                                                <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
+                                                    {pdfName.selectedFiles.map((file) =>
+                                                        <p key={file.name} style={{ marginTop: "10px" }}>
+                                                            {file.name}</p>
+                                                    )}
+                                                </div>
+                                            }
+                                        </label>
+                                    </div>
+                                </TabPanel>
+                                <TabPanel value={state.learningMethodTab} index={2} style={{ overflow: 'auto', width: '100%' }}>
                                     <h5>Google hangout, zoom, teams, phone call, up to 1 hour or 3 calls</h5>
                                     <div className='mt-4'>
                                         <FormControl sx={{ width: '100%' }}>
