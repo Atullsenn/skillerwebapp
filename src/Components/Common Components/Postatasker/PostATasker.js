@@ -626,6 +626,8 @@ const PostATasker = () => {
         if (!limitExceeded) setFiless(uploaded)
     }
 
+    const base64img = []
+
     const uploadMultipleImage = (e) => {
         const files = Array.from(e.target.files)
         setPImage([e.target.files[0]])
@@ -634,6 +636,10 @@ const PostATasker = () => {
             const reader = new FileReader();
             reader.onload = () => {
                 setImagesPreview([...imagesPreview, reader.result])
+            //     const base64String = reader.result
+            // .replace('data:', '')
+            // .replace(/^.+,/, '');
+            // base64img.push(...imagesPreview, base64String)
             }
             reader.readAsDataURL(file);
         })
@@ -644,7 +650,6 @@ const PostATasker = () => {
         handleUploadFiles(chosenFiles, uploadMultipleImage(e));
     }
     //upload multiple images 
-
 
     //Function Post task for guest user
 
@@ -672,23 +677,6 @@ const PostATasker = () => {
      if(!localStorage.getItem('id')){
         guestPostTask()
      }
-
-
-
-     console.log(sessionStorage.getItem('post_image[0]', "Post imageeeee"))
-
-     
-
-     
-
-      
-
-    
-    //   for (let i = 0; i < filess.length; i++) {
-       
-    //     console.log(JSON.stringify(sessionStorage.getItem(`post_image[${i}]`)), "Cheking Imagee ")
-    //     }
-       
 
     //Function post task for guest user
 

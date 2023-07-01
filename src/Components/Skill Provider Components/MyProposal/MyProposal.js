@@ -39,6 +39,7 @@ const MyProposal = ({ state, setState, getProposalList }) => {
             post: id,
             user: parseInt(getUserDetail().id)
         }).then((response) => {
+            console.log(response, "Responseeeeeeeeee eeeekljsklfjskljfklsjflksj")
             if (response.data.success) {
                 setState((prevState) => ({ ...prevState, cardData: response.data.Data, showDetailedLoading: false }));
             }

@@ -35,6 +35,7 @@ import axios from "axios";
 import { baseUrl, imageBaseUrl } from "../../../Url/url";
 import { toast } from "react-toastify";
 import ClearIcon from '@mui/icons-material/Clear';
+import DuoIcon from '@mui/icons-material/Duo';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -398,7 +399,6 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
 
 
 
-
     //update bid api
 
     return (
@@ -471,9 +471,33 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                                 <LocalLibraryIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
                                     <p className='p-0 m-0'>LEARNING METHOD</p>
-                                    <a className='p-0 m-0'>{state.cardData[0].post_learningMethod_type === 1 ? 'Text' : state.cardData[0].post_learningMethod_type === 2 && 'Phone Call'}</a>
+                                    <a className='p-0 m-0'>{state.cardData[0].bid_learning_method_type}</a>
                                 </div>
                             </div>
+                        </div>
+
+                        {/* <div className='d-flex'>
+                        {state.cardData[0].bid_learning_method_type === 'Phone Call' || state.cardData[0].bid_learning_method_type === 'Text and Phone Call' ?
+                            <div className='d-flex px-2 align-items-center post-location-data w-50'>
+                            <DuoIcon className="icon-size"/>
+                                <div className='px-1 posted-area'>
+                                    <p className='p-0 m-0'>CALL OPTIONS</p>
+                                    <a className='p-0 m-0'>{state.cardData[0].learning[0].call_name}</a>
+                                </div>
+                            </div> :""
+}
+
+                        </div> */}
+                        <div className='d-flex'>
+                        {state.cardData[0].bid_learning_method_type === 'Phone Call' || state.cardData[0].bid_learning_method_type === 'Text and Phone Call' ?
+                            <div className='d-flex align-items-center post-location-data w-50'>
+                                <DuoIcon className='icon-size' />
+                                <div className='px-1 posted-area'>
+                                    <p className='p-0 m-0'>CALL OPTIONS</p>
+                                    <a className='p-0 m-0'>{state.cardData[0].learning[0].call_name}</a>
+                                </div>
+                            </div> :""
+}
                         </div>
                     </div>
                     <div className='col-lg-4 py-2'>

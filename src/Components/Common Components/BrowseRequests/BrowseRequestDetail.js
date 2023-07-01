@@ -445,6 +445,7 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
     };
 
 
+
     return (
         <>
             <div className='main-top-container container'>
@@ -895,7 +896,7 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
                                                 MenuProps={MenuProps}
                                             >
                                                 {state.phoneCallList.map((Item) => (
-                                                    state.cardData[0].learning[0].call_option && state.cardData[0].learning[0].call_option.split(',').map((item) => {
+                                                    state.cardData[0]?.learning[0]?.call_option && state.cardData[0].learning[0].call_option.split(',').map((item) => {
                                                         if (parseInt(item) === Item.id) {
                                                             return <MenuItem key={Item.id} value={Item.name} style={getPhoneSelection(Item.name, state.phoneCall, theme)}>{Item.name}</MenuItem>
                                                         }

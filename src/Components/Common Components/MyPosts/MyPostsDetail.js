@@ -65,6 +65,16 @@ import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import { makeStyles } from "@material-ui/core/styles";
 import DuoIcon from '@mui/icons-material/Duo';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "./CheckoutForm";
+
+//import "./checkout.css";
+
+// Make sure to call loadStripe outside of a component’s render to avoid
+// recreating the Stripe object on every render.
+// This is your test publishable API key.
+const stripePromise = loadStripe('pk_test_51M91kVSHQvfYHLAWyAahZV2KZT8GsSA7CRDM7cB1UazY0LC7autWLpqc7JBitHbqTUykJyr8Rm5Zt27Gj8VOGI2h00AgaKrSzJ');
 
 const useStyles = makeStyles(() => ({
   disableBtn: {
@@ -206,6 +216,14 @@ const MyPostsDetail = ({
     selectedMonth: null,
     selectedYear: null,
   };
+  
+
+  const CLIENT_SECRET = "sk_test_51M91kVSHQvfYHLAWtC9g5Qj15lBIcaY8TTA1xpd30Lg853d05zVOooEDb84dzodKtJMy2cSE5tzTjc5vPi9cmHz300VSzWjPGE"
+  
+  const options = {
+    // passing the client secret obtained from the server
+    clientSecret: CLIENT_SECRET
+  };
 
   const [editPost, setEditPost] = useState(editDefaultState);
   const isEnabled =
@@ -322,6 +340,7 @@ const MyPostsDetail = ({
     );
   }
 
+
   //on_bid_accept api
   const on_bid_accept = (BidDetail) => {
     const request = {
@@ -336,10 +355,10 @@ const MyPostsDetail = ({
         "Content-Type": "application/json",
       })
       .then((response) => {
-        toast.success("Offer accepted successfully", {
-          theme: "colored",
-          autoClose: 1000,
-        });
+        // toast.success("Offer accepted successfully", {
+        //   theme: "colored",
+        //   autoClose: 1000,
+        // });
         getAllPosts();
         // setState((prevState) => ({
         //   ...prevState,
@@ -767,6 +786,8 @@ const MyPostsDetail = ({
     openEditPost,
   ]);
 
+
+
   const closeModal = () => {
     setIsOpen(false);
   };
@@ -1044,6 +1065,249 @@ const MyPostsDetail = ({
       inProgressBidDetailImages: dynamicBidPhotosArray,
     }));
   }, [state.inProgressBidDetailData]);
+
+
+  const [paymentModalOpen, setPaymentModalOpen] = useState(false)
+
+  const handleOpenPaymetModal = ()=>{
+    setPaymentModalOpen(true)
+    handleClickCloseAccept()
+  }
+
+  const handleCloseOpenPaymentModal = ()=>{
+    setPaymentModalOpen(false)
+  }
+
+
+  
+
+  
+
+
+
+  //payment api
+  const defaultPaymentState = [{
+    fullName:"",
+    cardNumber:"",
+    month:"",
+    year:"",
+    cvv:"",
+    amount:""
+
+  }]
+  const[paymentState, setPaymentState] = useState(defaultPaymentState)
+  const convertMonth = ()=>{
+    if(paymentState.month == "January"){
+      return "01"
+    }
+    if(paymentState.month === "February"){
+      return "02"
+    }
+    if(paymentState.month === "March"){
+      return "03"
+    }
+    if(paymentState.month === "April"){
+      return "04"
+    }
+    if(paymentState.month == "May"){
+      return "05"
+    }
+    if(paymentState.month === "June"){
+      return "06"
+    }
+    if(paymentState.month === "July"){
+      return "07"
+    }
+    if(paymentState.month === "August"){
+      return "08"
+    }
+    if(paymentState.month === "September"){
+      return "09"
+    }
+    if(paymentState.month === "October"){
+      return "10"
+    }
+    if(paymentState.month === "November"){
+      return "11"
+    }
+    if(paymentState.month === "December"){
+      return "12"
+    }
+    else {
+      return " "
+    }
+  }
+
+  const [successPopup, setSuccessPopup] = useState(false)
+
+  const handleCloseSuccessPopup = ()=>{
+    setSuccessPopup(false)
+  }
+
+  const handleOpenSuccessPopUp = ()=>{
+    setSuccessPopup(true)
+  }
+
+
+  const userPay = ()=>{
+    let request={
+      fullName:paymentState.fullName,
+      cardNumber:paymentState.cardNumber,
+      month:convertMonth(paymentState.month),
+      year:paymentState.year,
+      cvv:paymentState.cvv,
+      amount:paymentState.amount, 
+      user_id:state.cardData[0].bids[0].user_id, 
+      post_id:state.cardData[0].id
+    }
+
+    if(paymentState.fullName == ""){
+      toast.warn('Please Enter Your FullName',{
+        autoClose: 1000,
+        theme: 'colored'
+      })
+    }
+    if(paymentState.cardNumber == ""){
+      toast.warn('Please Enter Your Card Number',{
+        autoClose: 1000,
+        theme: 'colored'
+      })
+    }
+    if(paymentState.amount == ""){
+      toast.warn('Please Enter Amount',{
+        autoClose: 1000,
+        theme: 'colored'
+      })
+    }
+    if(convertMonth(paymentState.month) == " " ){
+      toast.warn('Please Enter Expiry Month',{
+        autoClose: 1000,
+        theme: 'colored'
+      })
+    }
+    if(paymentState.year == ""){
+      toast.warn('Please Enter Expiry Year',{
+        autoClose: 1000,
+        theme: 'colored'
+      })
+    }
+    if(paymentState.cvv == ""){
+      toast.warn('Please Enter Cvv',{
+        autoClose: 1000,
+        theme: 'colored'
+      })
+    }
+    
+    else{
+
+    axios.post(`${baseUrl}/payment`,request).then((response)=>{
+      if(response.data.success === true){
+        // toast.success('Payment successfull',{
+        //   autoClose:1000,
+        //   theme:'colored'
+        // })
+        handleCloseOpenPaymentModal()
+        handleOpenSuccessPopUp()
+        on_bid_accept(state.bidDetailData)
+        setTimeout(()=>{
+          handleCloseSuccessPopup()
+        },3000)
+      }
+      if(response.data.success === false){
+        toast.error(response.data.message,{
+          autoClose: 1000,
+          theme: 'colored'
+        })
+      }
+      
+    }).catch((error)=>{
+      console.log(error)
+    })
+
+  }
+
+  }
+
+  //payment validation
+  function creditCardType(cc) {
+    let amex = new RegExp('^3[47][0-9]{13}$');
+    let visa = new RegExp('^4[0-9]{12}(?:[0-9]{3})?$');
+    let cup1 = new RegExp('^62[0-9]{14}[0-9]*$');
+    let cup2 = new RegExp('^81[0-9]{14}[0-9]*$');
+  
+    let mastercard = new RegExp('^5[1-5][0-9]{14}$');
+    let mastercard2 = new RegExp('^2[2-7][0-9]{14}$');
+  
+    let disco1 = new RegExp('^6011[0-9]{12}[0-9]*$');
+    let disco2 = new RegExp('^62[24568][0-9]{13}[0-9]*$');
+    let disco3 = new RegExp('^6[45][0-9]{14}[0-9]*$');
+    
+    let diners = new RegExp('^3[0689][0-9]{12}[0-9]*$');
+    let jcb =  new RegExp('^35[0-9]{14}[0-9]*$');
+  
+  
+    if (visa.test(cc)) {
+      return 'VISA';
+    }
+    if (amex.test(cc)) {
+      return 'AMEX';
+    }
+    if (mastercard.test(cc) || mastercard2.test(cc)) {
+      return 'MASTERCARD';
+    }
+    if (disco1.test(cc) || disco2.test(cc) || disco3.test(cc)) {
+      return 'DISCOVER';
+    }
+    if (diners.test(cc)) {
+      return 'DINERS';
+    }
+    if (jcb.test(cc)) {
+      return 'JCB';
+    }
+    if (cup1.test(cc) || cup2.test(cc)) {
+      return 'CHINA_UNION_PAY';
+    }
+    return undefined;
+  }
+
+
+  const handleCvv = (event)=>{
+    const limit = 3;
+    setPaymentState((prevState)=>({...prevState, cvv:event.target.value.slice(0, limit)}))
+    //console.log(paymentState.cvv, "cvvvvv")
+  }
+
+
+
+  const handleCardNumber = (event)=>{
+    const limit = 16;
+    setPaymentState((prevState)=>({...prevState, cardNumber:event.target.value.slice(0, limit)}))
+    // console.log(paymentState.cardNumber)
+  }
+
+
+  const handleAmount = (event)=>{
+    const limit = 10
+    setPaymentState((prevState)=>({...prevState, amount:event.target.value.slice(0,limit)}))
+  }
+
+  const handleYear = (event)=>{
+    const limit = 4
+    setPaymentState((prevState)=>({...prevState, year: event.target.value.slice(0,limit)}))
+  }
+
+  
+
+  const handleMonth = (event)=>{
+    setPaymentState((prevState)=>({...prevState, month:event.target.value}))
+  }
+
+  //payment validation
+
+  //payment api
+
+  
+
 
   return (
     <>
@@ -1485,7 +1749,7 @@ const MyPostsDetail = ({
                                 borderRadius: "10px",
                               }}
                             >
-                              AfterPay awailable
+                              AfterPay available
                             </p>
                           </div>
                         </div>
@@ -1551,13 +1815,14 @@ const MyPostsDetail = ({
                               <DialogActions className="text-center d-flex align-items-center justify-content-center">
                                 <button
                                   className="btn btn-primary btn-lg btn-block make-an-offer-btn"
-                                  onClick={() => {
-                                    setState((prevState) => ({
-                                      ...prevState,
-                                      bidDetailData: item,
-                                    }));
-                                    on_bid_accept(item);
-                                  }}
+                                  // onClick={() => {
+                                  //   setState((prevState) => ({
+                                  //     ...prevState,
+                                  //     bidDetailData: item,
+                                  //   }));
+                                  //   on_bid_accept(item);
+                                  // }}
+                                  onClick={handleOpenPaymetModal}
                                 >
                                   {" "}
                                   Yes{" "}
@@ -1568,6 +1833,152 @@ const MyPostsDetail = ({
                                 >
                                   {" "}
                                   No{" "}
+                                </button>
+                              </DialogActions>
+                            </Dialog>
+
+                            <Dialog
+                              fullWidth
+                              open={successPopup}
+                              onClose={handleCloseSuccessPopup}
+                              aria-labelledby="alert-dialog-title"
+                              aria-describedby="alert-dialog-description"
+                            >
+                              <DialogTitle
+                                id="alert-dialog-title"
+                                className="text-center"
+                              >
+                                {"Congratulations your payment has been successfull"}
+                              </DialogTitle>
+                              <DialogContent className="text-center p-0 m-0">
+                                <DialogContentText id="alert-dialog-description">
+                                  <DoneOutlineIcon
+                                    style={{
+                                      color: "#B2D435",
+                                      fontSize: "100px",
+                                    }}
+                                  />
+                                </DialogContentText>
+                              </DialogContent>
+                              {/* <DialogActions className="text-center d-flex align-items-center justify-content-center">
+                                <button
+                                  className="btn btn-primary btn-lg btn-block make-an-offer-btn"
+                                  // onClick={() => {
+                                  //   setState((prevState) => ({
+                                  //     ...prevState,
+                                  //     bidDetailData: item,
+                                  //   }));
+                                  //   on_bid_accept(item);
+                                  // }}
+                                  onClick={handleOpenPaymetModal}
+                                >
+                                  {" "}
+                                  Yes{" "}
+                                </button>
+                                <button
+                                  className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1"
+                                  onClick={handleClickCloseAccept}
+                                >
+                                  {" "}
+                                  No{" "}
+                                </button>
+                              </DialogActions> */}
+                            </Dialog>
+
+
+
+                            <Dialog
+                              fullWidth
+                              open={paymentModalOpen}
+                              //onClose={handleCloseOpenPaymentModal}
+                              aria-labelledby="alert-dialog-title"
+                              aria-describedby="alert-dialog-description"
+                              // style={{
+                              //   marginTop: "14%",
+                              //   width: "600px",
+                              //   height: "500px",
+                              //   position: "absolute",
+                              //   left: "480px",
+                              // }}
+                            >
+                              <DialogTitle
+                                id="alert-dialog-title"
+                                className="text-center"
+                              >
+                                <h1 style={{fontSize:'18px', color: '#3498db'}}>Pay using Credit or Debit card</h1>
+                              </DialogTitle>
+                              <DialogContent className="text-center p-0 m-0">
+                                <DialogContentText id="alert-dialog-description">
+                                  
+  <div class="card-details" style={{width: '600px', overflow:"hidden"}}>
+            <div className="paymentinput">
+            <label class="col-sm-4 col-form-label" style={{paddingRight: '8px', fontWeight:'bold'}} for="cname">Name On Card</label>
+            <input className="border-primaryy" style={{border: '2px solid #3498db'}} onChange={(event)=>{setPaymentState((prevState)=>({...prevState, fullName:event.target.value}))}} type="text" maxLength={50} id="cname" name="cardname" placeholder="Enter your full name"/>
+            </div>   
+
+            <div className="paymentinput">
+            <label class="col-sm-4 col-form-label" style={{paddingRight: '8px',fontWeight:'bold'}} for="cname">Amount</label>
+            <input className="border-primaryy col-sm-6 p-2 mb-2" style={{border: '2px solid #3498db'}} onChange={(event)=>{handleAmount(event)}} value={paymentState.amount} type="number" id="cname" name="cardname" placeholder="Amount"/>
+            </div>
+           
+            <div className="paymentinput">
+            <label class="col-sm-4 col-form-label"  style={{paddingRight: '8px',fontWeight:'bold'}}  for="ccnum" >Card Number</label>
+            <input className="border-primaryy col-sm-6 p-2 mb-3" style={{border: '2px solid #3498db'}} onChange={(event)=>{handleCardNumber(event)}} value={paymentState.cardNumber} type="number" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444"/>
+            {creditCardType(paymentState.cardNumber) === "VISA" || creditCardType(paymentState.cardNumber) === 'MASTERCARD' ?
+            <div style={{display:"flex", flexDirection:"column",marginLeft:'41%', marginTop:"-26px"}}>
+            {creditCardType(paymentState.cardNumber) === 'VISA' ? 
+            <img alt="img" src={Images.visa} style={{ width: "60px", height:'60px'}} /> : creditCardType(paymentState.cardNumber) === 'MASTERCARD'? <img alt="img" src={Images.masterCard} style={{ width: "50px", height:'50px', paddingTop:'10px', paddingBottom:'10px'}} /> :""
+            }
+              </div> :""
+              }
+            
+            </div>
+            
+            <div className="paymentinput">
+            <label class="col-sm-4 col-form-label"  style={{paddingRight: '8px',fontWeight:'bold'}}  for="expmonth">Exp Month</label>
+            <input className="border-primaryy" style={{border: '2px solid #3498db'}} onChange={(event)=>{handleMonth(event)}} maxLength={10} type="text" id="expmonth" name="expmonth" placeholder="September"/>
+            </div>
+           
+            <div class="row">
+              <div class="subinput">
+                <label class="col-sm-4 col-form-label"  style={{paddingRight: '8px',fontWeight:'bold'}}  for="expyear">Exp Year</label>
+                <input className="border-primaryy col-sm-6 p-2 mb-2" style={{border: '2px solid #3498db'}} onChange={(event)=>{handleYear(event)}} value={paymentState.year} type="number" id="expyear" name="expyear" placeholder="2025"/>
+              </div>
+              <div class="subinput">
+                <label class="col-sm-4 col-form-label" style={{paddingRight: '8px', fontWeight:'bold'}}  for="cvv">CVV</label>
+                <input class="col-sm-6 p-2 border-primaryy" style={{border: '2px solid #3498db'}} onChange={(event)=>{handleCvv(event)}} value={paymentState.cvv} type="number" id="cvv" name="cvv" placeholder="352"/>
+              </div>
+            </div>
+          </div>
+          
+           {/* <Elements stripe={stripePromise} options={options}>
+      <CheckoutForm />
+    </Elements> */}
+   
+  
+                                </DialogContentText>
+                              </DialogContent>
+                              <DialogActions className="text-center d-flex align-items-center justify-content-center mt-2 mb-2">
+                                <button
+                                  className="btn btn-primary btn-lg btn-block make-an-offer-btn"
+                                  // onClick={() => {
+                                  //   setState((prevState) => ({
+                                  //     ...prevState,
+                                  //     bidDetailData: item,
+                                  //   }));
+                                  //   on_bid_accept(item);
+                                  // }}
+                                  onClick={userPay}
+                                >
+                                  
+                                  Pay Now
+                                </button>
+                                <button
+                                  className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1"
+                                  onClick={handleCloseOpenPaymentModal}
+                                >
+                                  {" "}
+                                  Cancel{" "}
                                 </button>
                               </DialogActions>
                             </Dialog>
@@ -2605,5 +3016,5 @@ const MyPostsDetail = ({
     </>
   );
 };
-
 export default MyPostsDetail;
+//7503359688

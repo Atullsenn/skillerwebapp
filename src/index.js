@@ -8,6 +8,7 @@ import { IsLoginAuthenticateProvider } from "./Contexts/LoginContext";
 import { IsToastProvider } from './Contexts/ToastContext';
 import { IsToggleTypeProvider } from "./Contexts/IsToggleContext";
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <IsLoginAuthenticateProvider>

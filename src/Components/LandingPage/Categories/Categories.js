@@ -14,6 +14,7 @@ import { IsLoginAuthenticateContext } from "../../../Contexts/LoginContext";
 const Categories = ({ state }) => {
     const [isToggle, setIsToggle] = useContext(IsToggleTypeContext)
     const [isAuthenticate, setIsAuthenticate] = useContext(IsLoginAuthenticateContext);
+    //console.log(state, "stateeeeee dataa")
 
     return (
         <>
@@ -23,7 +24,7 @@ const Categories = ({ state }) => {
                         <div className="row">
                             <div className="col-lg-6 col-md-12">
                                 <span className="aon-sub-title">categories</span>
-                                <h2 className="aon-title">Popular Categories</h2>
+                                <h2 className="aon-title">Popular Categoriessss</h2>
                             </div>
                             <div className="col-lg-6 col-md-12">
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do usmod tempor incididunt ut labore et dolore magna aliqua.sed do usmod tempor incididunt ut labore et dolore magna aliqua.</p>

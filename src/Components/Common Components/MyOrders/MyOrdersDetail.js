@@ -98,13 +98,14 @@ const MyOrdersDetail = ({ state, setState, getMyOrderList, abc }) => {
         setOpenCompleteModal(true);
       };
 
-      
+     
       
   //task completed api
   const taskCompleted = () => {
     let request = {
       post: state.cardData[0].post_id,
       user: state.cardData[0].user_id,
+      transaction_id: state.cardData[0].transaction_id
     };
     axios.post(`${baseUrl}/task-completed-seeker`, request)
       .then((response) => {

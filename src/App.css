@@ -220,3 +220,22 @@ input[type=number] {
   border-radius: 20px;
   border: 2px solid #e0e0e0;
 }
+
+
+.paymentinput [type=text]{
+  width: 50%;
+  margin-bottom: 20px;
+  padding: 8px;
+  /* border: 1px solid #ccc; */
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+.subinput [type=text]{
+  width: 50%;
+  margin-bottom: 20px;
+  padding: 8px;
+  /* border: 1px solid #ccc; */
+  border-radius: 3px;
+  box-sizing: border-box;
+}

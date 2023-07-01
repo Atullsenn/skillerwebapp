@@ -66,6 +66,8 @@ import paypal from "./paypal.webp";
 import defaultImage from "./defaultImage.png";
 import contactByCall from "./contact-by-call.avif"
 import contactByEmail from "./contact-by-email.png";
+import visa from "./visa.png";
+import masterCard from "./master_card_logo.png";
 
 const Images = {
     Logo,
@@ -136,6 +138,8 @@ const Images = {
     defaultImage,
     contactByCall,
     contactByEmail,
+    visa,
+    masterCard
 };
 
 export default Images;

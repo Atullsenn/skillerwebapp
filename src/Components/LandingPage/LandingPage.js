@@ -120,9 +120,9 @@ const LandingPage = () => {
     const budget = sessionStorage.getItem('budget')
     const learningMethodType = sessionStorage.getItem('learningMethod_type')
 
-    for (let i = 0; i < 6; i++) {
-        console.log(sessionStorage.getItem(`post_image[${i}]`), "Cheking phots issue")
-      }
+    // for (let i = 0; i < 6; i++) {
+    //     console.log(sessionStorage.getItem(`post_image[${i}]`), "Cheking phots issue")
+    //   }
     
 
     const handlePostTask = async () => {    

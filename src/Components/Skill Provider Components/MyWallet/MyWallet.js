@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Banner from '../../Common Components/Banner/Banner';
 import Menu from '../../Common Components/Menu/Menu';
 import Footer from '../../Common Components/Footer/Footer';
@@ -16,6 +16,9 @@ import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
 import { NavLink } from 'react-router-dom';
 import "./MyWallet.css";
+import axios from 'axios';
+import { baseUrl } from '../../../Url/url';
+import moment from 'moment';
 
 const transactionData = [
     { dateTime: '13 Dec,2022 00:38 AM', transactionId: '2272022121305256', postTitle: 'Need to correct rating popup message when you click on complete', amount: '$19.95', walletMode: 'CREDIT' },
@@ -46,10 +49,59 @@ const transactionData = [
 
 const MyWallet = () => {
     const [moreOption, setMoreOption] = useState('');
+    const [state, setState] = useState([])
+    const [totalWallet, setTotalWallet] = useState([])
 
     const handleChangeMoreOption = (event) => {
         setMoreOption(event.target.value);
     };
+
+
+    const getTransactionData = ()=>{
+        let request = {
+            user:localStorage.getItem('id')
+        }
+        axios.post(`${baseUrl}/get-user-wallet`,request).then((response)=>{
+            setState(response.data.Data.record)
+            setTotalWallet(response.data.Data.total_wallet)
+        }).catch((error)=>{
+            console.log(error)
+        })
+    }
+
+    useEffect(()=>{
+        getTransactionData()
+
+    },[])
+
+   
+
+
+
+   
+
+
+    //Withdraw Amount
+    const [amount, setAmount] = useState([])
+    const [paymentType, setPaymentType] = useState([])
+
+    const withDrawAmount = ()=>{
+        let request = {
+            user: localStorage.getItem('userType'),
+            amount: amount,
+            payment_type:paymentType
+        }
+
+        axios.post(`${baseUrl}/withdraw-wallet-amount`, request).then((response)=>{
+            //console.log(response)
+        }).catch((error)=>{
+            console.log(error)
+        })
+    }
+
+
+
+    //Withdraw Amount
 
     return (
         <>
@@ -58,75 +110,19 @@ const MyWallet = () => {
                 <Banner text="My wallet" />
                 <div className="container p-2 mt-4">
                     <div className="row m-0">
-                        <div className='col-lg-6'>
-                            <div className='main-transaction-div-area'>
-                                <div className='d-flex my-wallet-section justify-content-between align-items-center'>
-                                    <div className='d-flex align-items-center py-2'>
-                                        <span className='ps-2'> <CurrencyExchangeIcon /> </span>
-                                        <h4 className='my-wallet-heading m-0 p-2'>My Transactions</h4>
-                                    </div>
-                                    <div className='pe-2'>
-                                        <FormControl sx={{ width: 250 }} size="small">
-                                            <InputLabel id="demo-select-small">Transaction Type</InputLabel>
-                                            <Select
-                                                labelId="demo-select-small"
-                                                id="demo-select-small"
-                                                value={moreOption}
-                                                label="Transaction Type"
-                                                onChange={handleChangeMoreOption}
-                                            >
-                                                <MenuItem value={10}>All Transactions</MenuItem>
-                                                <MenuItem value={20}>Earning Transactions</MenuItem>
-                                                <MenuItem value={30}>Withdrawal Transactions</MenuItem>
-                                                <MenuItem value={40}>Pending Transactions</MenuItem>
-                                            </Select>
-                                        </FormControl>
-                                    </div>
-                                </div>
-                                <div className='main-transaction-history-div'>
-                                    {transactionData.map((Item) => {
-                                        return (
-                                            <>
-                                                <div>
-                                                    <div className='px-5 d-flex align-items-center py-2'>
-                                                        <h5 className='p-0 m-0' style={{ width: '80px' }}>Post Title : </h5>
-                                                        <p className='p-0 m-0 ps-2 post-title-in-cardsection w-75' style={{ fontSize: '16px', fontWeight: '600' }}>{Item.postTitle}</p>
-                                                    </div>
-                                                    <div className='inner-transaction-history-div d-flex justify-content-evenly align-items-center'>
-                                                        <div className='text-left'>
-                                                            <AccountBalanceWalletIcon style={{ color: '#188dc7' }} />
-                                                            <p className='transaction-para mt-1'>{Item.dateTime}</p>
-                                                        </div>
-                                                        <div className='text-center'>
-                                                            <p className='transaction-para p-0 m-0 blue'>Transaction-ID</p>
-                                                            <p className='transaction-para mt-1'>{Item.transactionId}</p>
-                                                        </div>
-                                                        <div className='text-right'>
-                                                            <p className='transaction-para p-0 m-0 blue'>{Item.amount}</p>
-                                                            <p className='transaction-para mt-1'>Wallet Mode : <span className={`${Item.walletMode === 'CREDIT' ? 'green' : Item.walletMode === 'DEBIT' ? 'red' : ''}`}> {Item.walletMode === 'CREDIT' ? <AddIcon style={{ fontSize: '12px' }} /> : Item.walletMode === 'DEBIT' ? <RemoveIcon style={{ fontSize: '12px' }} /> : ''}{Item.walletMode}</span></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <Divider className='mt-1 mb-1' style={{ backgroundColor: '#a9a4a4' }} />
-                                            </>
-                                        )
-                                    })}
-                                </div>
-                            </div>
-                        </div>
-                        <div className='col-lg-6'>
+                        <div className='col-lg-12 mb-4'>
                             <div className='main-wallet-div-area'>
                                 <div className='d-flex align-items-center my-wallet-section py-2'>
                                     <span className='ps-2'> <LibraryAddCheckIcon /> </span>
                                     <h4 className='my-wallet-heading m-0 p-2'>My Wallet</h4>
                                 </div>
-                                <div className='mt-5 px-4 d-flex align-items-center'>
+                                <div className='mt-5 px-4 d-flex align-items-center' style={{margin: "auto", width:"50%", paddingBottom:"50px"}}>
                                     <FormControl sx={{ width: 502 }}>
                                         <InputLabel htmlFor="outlined-adornment-amount">Your Balance</InputLabel>
                                         <OutlinedInput
                                             type='number'
                                             size='small'
-                                            value="192.70"
+                                            value={totalWallet}
                                             id="outlined-adornment-amount"
                                             startAdornment={<InputAdornment position="start">$</InputAdornment>}
                                             label="Your Balance"
@@ -134,7 +130,7 @@ const MyWallet = () => {
                                     </FormControl>
                                     <button className="withdrawal-btn">Withdrawal</button>
                                 </div>
-                                <div className='mt-5 mb-5 px-4 d-flex align-items-center justify-content-between'>
+                                {/* <div className='mt-5 mb-5 px-4 d-flex align-items-center justify-content-between'>
                                     <FormControl sx={{ width: '40%' }}>
                                         <InputLabel htmlFor="outlined-adornment-amount">Add Wallet Balance</InputLabel>
                                         <OutlinedInput
@@ -149,9 +145,9 @@ const MyWallet = () => {
                                     <NavLink to="payment-method">
                                         <button className="withdrawal-btn">Proceed To Add Money</button>
                                     </NavLink>
-                                </div>
+                                </div> */}
                             </div>
-                            <div className='main-transaction-div-area mt-4'>
+                            {/* <div className='main-transaction-div-area mt-4'>
                                 <div className='d-flex my-wallet-section justify-content-between align-items-center'>
                                     <div className='d-flex align-items-center py-2'>
                                         <span className='ps-2'> <CurrencyExchangeIcon /> </span>
@@ -187,6 +183,64 @@ const MyWallet = () => {
                                         )
                                     })}
                                 </div >
+                            </div> */}
+                        </div>
+
+                        <div className='col-lg-12'>
+                            <div className='main-transaction-div-area'>
+                                <div className='d-flex my-wallet-section justify-content-between align-items-center'>
+                                    <div className='d-flex align-items-center py-2'>
+                                        <span className='ps-2'> <CurrencyExchangeIcon /> </span>
+                                        <h4 className='my-wallet-heading m-0 p-2'>My Transactions</h4>
+                                    </div>
+                                    <div className='pe-2'>
+                                        <FormControl sx={{ width: 250 }} size="small">
+                                            <InputLabel id="demo-select-small">Transaction Type</InputLabel>
+                                            <Select
+                                                labelId="demo-select-small"
+                                                id="demo-select-small"
+                                                value={moreOption}
+                                                label="Transaction Type"
+                                                onChange={handleChangeMoreOption}
+                                            >
+                                                <MenuItem value={10}>All Transactions</MenuItem>
+                                                <MenuItem value={20}>Earning Transactions</MenuItem>
+                                                <MenuItem value={30}>Withdrawal Transactions</MenuItem>
+                                                <MenuItem value={40}>Pending Transactions</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                    </div>
+                                </div>
+                                <div className='main-transaction-history-div'>
+                                    {state.map((Item) => {
+                                        return (
+                                            <>
+                                                <div>
+                                                    <div className='px-5 d-flex align-items-center py-2'>
+                                                        <h5 className='p-0 m-0' style={{ width: '80px' }}>Post Title : </h5>
+                                                        <p className='p-0 m-0 ps-2 post-title-in-cardsection w-75' style={{ fontSize: '16px', fontWeight: '600' }}>{Item.post_title}</p>
+                                                    </div>
+                                                    <div className='inner-transaction-history-div d-flex justify-content-evenly align-items-center'>
+                                                        <div className='text-left'>
+                                                            <AccountBalanceWalletIcon style={{ color: '#188dc7' }} />
+                                                            <p className='transaction-para mt-1'>{Item.created_at}</p>
+                                                        </div>
+                                                        <div className='text-center'>
+                                                            <p className='transaction-para p-0 m-0 blue'>Transaction-ID</p>
+                                                            <p className='transaction-para mt-1'>{Item.transaction_id}</p>
+                                                        </div>
+                                                        <div className='text-right'>
+                                                            <p className='transaction-para p-0 m-0 blue'>$ {Item.amount}</p>
+                                                            {/* <p className='transaction-para mt-1'>Wallet Mode : <span className={`${Item.walletMode === 'CREDIT' ? 'green' : Item.walletMode === 'DEBIT' ? 'red' : ''}`}> {Item.walletMode === 'CREDIT' ? <AddIcon style={{ fontSize: '12px' }} /> : Item.walletMode === 'DEBIT' ? <RemoveIcon style={{ fontSize: '12px' }} /> : ''}{Item.walletMode}</span></p> */}
+                                                            <p className='transaction-para mt-1'>Wallet Mode : <span className={`${Item.status === 'Credit' ? 'green' : Item.status === 'Debit' ? 'red' : Item.status === 'Pending' ? 'yellow' :""}`}> {Item.status === 'Credit' ? <AddIcon style={{ fontSize: '12px' }} /> : Item.status === 'Debit' ? <RemoveIcon style={{ fontSize: '12px' }} /> : ''}{Item.status}</span></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <Divider className='mt-1 mb-1' style={{ backgroundColor: '#a9a4a4' }} />
+                                            </>
+                                        )
+                                    })}
+                                </div>
                             </div>
                         </div>
                     </div>
