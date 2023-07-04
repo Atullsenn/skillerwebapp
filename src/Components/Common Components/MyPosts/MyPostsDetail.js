@@ -1092,7 +1092,7 @@ const MyPostsDetail = ({
     month:"",
     year:"",
     cvv:"",
-    amount:state.cardData[0].budget
+    amount:state.bidDetailData.budget
 
   }]
   const[paymentState, setPaymentState] = useState(defaultPaymentState)
@@ -1146,7 +1146,10 @@ const MyPostsDetail = ({
 
   const handleOpenSuccessPopUp = ()=>{
     setSuccessPopup(true)
+
   }
+
+  console.log(state.bidDetailData, "dataddjflkdsjfkldjskl ")
 
 
   const userPay = ()=>{
@@ -1156,7 +1159,7 @@ const MyPostsDetail = ({
       month:convertMonth(paymentState.month),
       year:paymentState.year,
       cvv:paymentState.cvv,
-      amount:state.cardData[0].budget, 
+      amount:state.bidDetailData.budget, 
       provider_id:state.cardData[0].bids[0].user_id, 
       seeker_id:localStorage.getItem('id'),
       post_id:state.cardData[0].id
@@ -1914,7 +1917,7 @@ const MyPostsDetail = ({
 
             <div className="paymentinput">
             <label class="col-sm-4 col-form-label" style={{paddingRight: '8px',fontWeight:'bold'}} for="cname">Amount</label>
-            <input className="border-primaryy col-sm-6 p-2 mb-2" style={{border: '2px solid #3498db'}} onChange={(event)=>{handleAmount(event)}} value={state.cardData[0].budget} type="number" id="cname" name="cardname" placeholder="Amount"/>
+            <input className="border-primaryy col-sm-6 p-2 mb-2" style={{border: '2px solid #3498db'}} onChange={(event)=>{handleAmount(event)}} value={state.bidDetailData.budget} type="number" id="cname" name="cardname" placeholder="Amount"/>
             </div>
            
             <div className="paymentinput">

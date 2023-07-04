@@ -90,14 +90,14 @@ const MyWallet = () => {
 
             else{
 
-        axios.post(`${baseUrl}/withdraw-wallet-amountt`, request).then((response)=>{
+        axios.post(`${baseUrl}/withdraw-wallet-amount`, request).then((response)=>{
             if(response.data.success){
                 toast.success('Success',{
                    autoClose:1000,
                    theme:'colored'
                 })
             }
-            //console.log(response,"Checking withdraw history ")
+            
         }).catch((error)=>{
             console.log(error)
         })
@@ -138,14 +138,8 @@ const MyWallet = () => {
     },[])
 
 
-    console.log(withdrawHistory, "sajfjkjalkfjlksdj")
-
-
-
 
     //get withdraw history
-
-   
 
 
 
@@ -415,23 +409,20 @@ const MyWallet = () => {
             
                                 </div>
                                 <div className='main-transaction-history-div'>
-                                    {state.map((Item) => {
+                                    {withdrawHistory.map((Item) => {
                                         return (
                                             <>
                                                 <div>
                                                     <div className='px-5 d-flex align-items-center py-2'>
-                                                        <h5 className='p-0 m-0' style={{ width: '80px' }}>withdraw: </h5>
-                                                        <p className='p-0 m-0 ps-2 post-title-in-cardsection w-75' style={{ fontSize: '16px', fontWeight: '600' }}>{withdrawHistory.amount}</p>
+                                                        <h5 className='p-0 m-0' style={{ width: '80px' }}>withdraw:</h5>
+                                                        <p className='p-0 m-0 ps-2 post-title-in-cardsection w-75' style={{ fontSize: '16px', fontWeight: '600' }}>$ {Item.amount}</p>
                                                     </div>
                                                     <div className='inner-transaction-history-div d-flex justify-content-evenly align-items-center'>
                                                         <div className='text-left'>
                                                             <AccountBalanceWalletIcon style={{ color: '#188dc7' }} />
                                                             <p className='transaction-para mt-1'>{moment(Item.created_at).format('LLL')}</p>
                                                         </div>
-                                                        {/* <div className='text-center'>
-                                                            <p className='transaction-para p-0 m-0 blue'>Transaction-ID</p>
-                                                            <p className='transaction-para mt-1'>{Item.transaction_id}</p>
-                                                        </div> */}
+                                                       
                                                         <div className='text-right'>
                                                             <p className='transaction-para p-0 m-0 blue'>$ {Item.amount}</p>
                                                             {/* <p className='transaction-para mt-1'>Wallet Mode : <span className={`${Item.walletMode === 'CREDIT' ? 'green' : Item.walletMode === 'DEBIT' ? 'red' : ''}`}> {Item.walletMode === 'CREDIT' ? <AddIcon style={{ fontSize: '12px' }} /> : Item.walletMode === 'DEBIT' ? <RemoveIcon style={{ fontSize: '12px' }} /> : ''}{Item.walletMode}</span></p> */}
