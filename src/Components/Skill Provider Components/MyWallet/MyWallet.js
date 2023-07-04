@@ -421,7 +421,7 @@ const MyWallet = () => {
                                                 <div>
                                                     <div className='px-5 d-flex align-items-center py-2'>
                                                         <h5 className='p-0 m-0' style={{ width: '80px' }}>withdraw: </h5>
-                                                        <p className='p-0 m-0 ps-2 post-title-in-cardsection w-75' style={{ fontSize: '16px', fontWeight: '600' }}>{withdrawHistory.}</p>
+                                                        <p className='p-0 m-0 ps-2 post-title-in-cardsection w-75' style={{ fontSize: '16px', fontWeight: '600' }}>{withdrawHistory.amount}</p>
                                                     </div>
                                                     <div className='inner-transaction-history-div d-flex justify-content-evenly align-items-center'>
                                                         <div className='text-left'>
