@@ -1092,7 +1092,7 @@ const MyPostsDetail = ({
     month:"",
     year:"",
     cvv:"",
-    amount:""
+    amount:state.cardData[0].budget
 
   }]
   const[paymentState, setPaymentState] = useState(defaultPaymentState)
@@ -1156,10 +1156,12 @@ const MyPostsDetail = ({
       month:convertMonth(paymentState.month),
       year:paymentState.year,
       cvv:paymentState.cvv,
-      amount:paymentState.amount, 
-      user_id:state.cardData[0].bids[0].user_id, 
+      amount:state.cardData[0].budget, 
+      provider_id:state.cardData[0].bids[0].user_id, 
+      seeker_id:localStorage.getItem('id'),
       post_id:state.cardData[0].id
     }
+    // console.log(request, "resuessss")
 
     if(paymentState.fullName == ""){
       toast.warn('Please Enter Your FullName',{
@@ -1169,12 +1171,6 @@ const MyPostsDetail = ({
     }
     if(paymentState.cardNumber == ""){
       toast.warn('Please Enter Your Card Number',{
-        autoClose: 1000,
-        theme: 'colored'
-      })
-    }
-    if(paymentState.amount == ""){
-      toast.warn('Please Enter Amount',{
         autoClose: 1000,
         theme: 'colored'
       })
@@ -1918,7 +1914,7 @@ const MyPostsDetail = ({
 
             <div className="paymentinput">
             <label class="col-sm-4 col-form-label" style={{paddingRight: '8px',fontWeight:'bold'}} for="cname">Amount</label>
-            <input className="border-primaryy col-sm-6 p-2 mb-2" style={{border: '2px solid #3498db'}} onChange={(event)=>{handleAmount(event)}} value={paymentState.amount} type="number" id="cname" name="cardname" placeholder="Amount"/>
+            <input className="border-primaryy col-sm-6 p-2 mb-2" style={{border: '2px solid #3498db'}} onChange={(event)=>{handleAmount(event)}} value={state.cardData[0].budget} type="number" id="cname" name="cardname" placeholder="Amount"/>
             </div>
            
             <div className="paymentinput">

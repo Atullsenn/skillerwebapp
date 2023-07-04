@@ -285,12 +285,14 @@ const Contactus = () => {
                             <div className='d-flex align-items-center justify-content-evenly'>
                                 <img style={{ width: '250px' }} src={Images.contactByCall} />
                                 <div>
-                                    <div className='text-center py-2'>
-                                        <h4 className='p-0 m-0'><CallIcon style={{ marginRight: '15px' }} /> +91 1234567890</h4>
-                                    </div>
-                                    <div className='text-center py-2'>
-                                        <h4 className='p-0 m-0'><CallIcon style={{ marginRight: '15px' }} /> +91 1234567890</h4>
-                                    </div>
+                                {state.contactInfo.map((item) => {
+                                    if (item.type === 1) {
+                                        return (
+                                            <a className="w-100 d-flex justify-content-center m-0 card-main-text">{item.title}</a>
+                                        )
+                                    }
+                                })}
+                                    
                                 </div>
                             </div>
                         </DialogContentText>
@@ -314,12 +316,13 @@ const Contactus = () => {
                             <div className='d-flex align-items-center justify-content-evenly'>
                                 <img style={{ width: '250px' }} src={Images.contactByEmail} />
                                 <div>
-                                    <div className='text-center py-2'>
-                                        <h4 className='p-0 m-0'><AttachEmailIcon style={{ marginRight: '15px' }} /><a href='https://mail.google.com/mail/u/0/#inbox?compose=CllgCKCGCfmzJJbVpfkmDlgMvgmxxGvJwsTvPsbflMRWwmFkTDpWKCXrsXTmkzgctHwvrcXvgrL' target='_blank' className='p-0 m-0'>Himanshu84688@gmail.com</a></h4>
-                                    </div>
-                                    <div className='text-center py-2'>
-                                        <h4 className='p-0 m-0'><AttachEmailIcon style={{ marginRight: '15px' }} /><a href='https://mail.google.com/mail/u/0/#inbox?compose=CllgCKCGCfmzJJbVpfkmDlgMvgmxxGvJwsTvPsbflMRWwmFkTDpWKCXrsXTmkzgctHwvrcXvgrL' target='_blank' className='p-0 m-0'>Himanshu84688@gmail.com</a></h4>
-                                    </div>
+                                     {state.contactInfo.map((item) => {
+                                    if (item.type === 3) {
+                                        return (
+                                            <a className="w-100 d-flex justify-content-center m-0 card-main-text">{item.title}</a>
+                                        )
+                                    }
+                                })}
                                 </div>
                             </div>
                         </DialogContentText>
