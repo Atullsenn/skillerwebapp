@@ -196,6 +196,14 @@ const MyPostsDetail = ({
     budget: state.cardData[0].budget,
     skills: state.cardData[0].skill.split(","),
     currentExp:state.cardData[0].currentExp,
+    dueDateee: state.cardData[0].dueDate_date,
+    dueTimmee: state.cardData[0].dueDate_time,
+    toDateee: state.cardData[0].todate_date,
+    totimee: state.cardData[0].todate_time,
+    originalDueTime:"",
+    originalDueDate:"",
+    originalToTime:"",
+    originalToDate:"",
     open: false,
     language: state.cardData[0].language_name
       ? state.cardData[0].language_name.split(",")
@@ -219,8 +227,11 @@ const MyPostsDetail = ({
     selectedDate: null,
     selectedMonth: null,
     selectedYear: null,
+    learning: state.cardData[0].learning[0].id
   };
-  
+
+
+ 
 
   const CLIENT_SECRET = "sk_test_51M91kVSHQvfYHLAWtC9g5Qj15lBIcaY8TTA1xpd30Lg853d05zVOooEDb84dzodKtJMy2cSE5tzTjc5vPi9cmHz300VSzWjPGE"
   
@@ -230,6 +241,8 @@ const MyPostsDetail = ({
   };
 
   const [editPost, setEditPost] = useState(editDefaultState);
+  console.log(editPost.dueDateee, "Edit posttt")
+  
   const isEnabled =
     editPost.postTitle != "" &&
     editPost.description != "" &&
@@ -581,6 +594,10 @@ const MyPostsDetail = ({
     }));
   };
 
+  const currentExperiencee = (event)=>{
+    setEditPost((prevState) => ({ ...prevState, currentExp: event.target.value}));
+}
+
   const selectCountry = (event) => {
     setEditPost((prevState) => ({ ...prevState, country: event.target.value }));
   };
@@ -884,10 +901,14 @@ const MyPostsDetail = ({
       formData.append("country_id", editPost.countryId);
       formData.append("state_id", editPost.stateId);
       formData.append("city_id", editPost.cityId);
-      formData.append("dueDate", editPost.orderDueDate);
+      formData.append("dueDate", editPost.dueDateee + ' ' + editPost.dueTimmee);
+      formData.append('todate', editPost.toDateee + ' ' + editPost.totimee)
       formData.append("budget", parseInt(editPost.budget));
       formData.append("call_option[]", editPost.phoneCallId);
+      formData.append('currentExp', editPost.currentExp);
       formData.append("learningMethod_type", editPost.learningMethod);
+      formData.append('learning_id', editPost.learning);
+
       axios
         .post(`${baseUrl}/edit-post-data`, formData)
         .then((res) => {
@@ -1171,7 +1192,6 @@ const MyPostsDetail = ({
   }
 
 
-
   const userPay = ()=>{
     let request={
       fullName:paymentState.fullName,
@@ -1324,6 +1344,27 @@ const MyPostsDetail = ({
   //payment validation
 
   //payment api
+  const handleTimeChange = (newValue)=>{
+    let convertedTime = newValue
+    let d = `${convertedTime.$H}:${convertedTime.$m}:${convertedTime.$s}`
+    setEditPost((prevState)=>({...prevState, dueTimmee:d, originalDueTime: newValue}))
+}
+
+const handleDueDateChange = (newValue) => {
+    let convertedDate = moment(newValue.$d).format('YYYY-MM-DD')
+    setEditPost((prevState) => ({ ...prevState, dueDateee: convertedDate, originalDueDate: newValue }))
+};
+
+const handleToTimeChange = (newValue)=>{
+    const convertedTime = newValue
+    let d = `${convertedTime.$H}:${convertedTime.$m}:${convertedTime.$s}`
+    setEditPost((prevState)=>({...prevState, toTimeee:d, originalToTime: newValue}))
+}
+
+const handleToDateChange = (newValue)=>{
+    let convertedDate = moment(newValue.$d).format('YYYY-MM-DD')
+         setEditPost((prevState)=>({...prevState, toDateee: convertedDate, originalToDate:newValue}))
+}
 
   
 
@@ -2714,26 +2755,28 @@ const MyPostsDetail = ({
               </FormControl>
             </div>
             <div style={{ width: "100%", marginTop:'10px' }}>
-              <TextField
-                label="Current Experience * "
-                fullWidth
-                value={currentExperience(editPost.currentExp)}
-                autoComplete="shipping address-line1"
-                variant="outlined"
-                onChange={(e) => {
-                  setEditPost((prevState) => ({
-                    ...prevState,
-                    postTitle: e.target.value,
-                  }));
-                }}
-              />
+              
+<FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">Select Your Current Experience <span style={{color: "red"}}>*</span></InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={editPost.currentExp}
+                                    label={<>Select Your Current Experience <span style={{ color: 'red' }}>*</span> </>}
+                                    onChange={currentExperiencee}
+                                >
+                                    <MenuItem value={1}>{"Beginner"}</MenuItem>
+                                    <MenuItem value={2}>{"Intermediate"}</MenuItem>
+                                    <MenuItem value={3}>{"Expert "}</MenuItem>
+                                </Select>
+                            </FormControl>
             </div>
             <div style={{ width: '100%' }}>
                                 <h5>Date & Time</h5>
                                 <h5>From <span style={{ color: 'red' }}>*</span></h5>
                                 <div style={{display:"flex", flexDirection:"row", gap: "100px"}} className='mt-3'>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                      <DatePicker onChange={handleDateChange}  value={state.originalDueDate}/>
+                                      <DatePicker onChange={handleDueDateChange} />
                                 </LocalizationProvider>
                                     {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                                         <DemoItem>
@@ -2755,14 +2798,14 @@ const MyPostsDetail = ({
 
 <LocalizationProvider dateAdapter={AdapterDayjs}>
       {/* <DemoContainer components={['TimePicker']}> */}
-        <TimePicker onChange={"handleTimeChange"} value={state.originalDueTime} label="time" />
+        <TimePicker onChange={handleTimeChange}  label="time" />
       {/* </DemoContainer> */}
     </LocalizationProvider>
                                 </div>
                                 <h5 style={{marginTop: "15px"}}>To<span style={{ color: 'red'}}>*</span></h5>
                                 <div style={{display:"flex", flexDirection:"row", gap: "100px"}} className='mt-3'>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                      <DatePicker onChange={"handleToDateChange"} value={state.originalToDate}/>
+                                      <DatePicker onChange={handleToDateChange} />
                                 </LocalizationProvider>
                                     {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                                         <DemoItem>
@@ -2784,7 +2827,7 @@ const MyPostsDetail = ({
 <div>
 <LocalizationProvider dateAdapter={AdapterDayjs}>
       {/* <DemoContainer components={['TimePicker']}> */}
-        <TimePicker onChange={"handleToTimeChange"} value={state.originalToTime} label="time" />
+        <TimePicker onChange={handleToTimeChange} label="time" />
       {/* </DemoContainer> */}
     </LocalizationProvider>
     </div>

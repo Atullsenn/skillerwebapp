@@ -167,7 +167,6 @@ const MyPosts = ({ state, setState, getAllPosts }) => {
         axios.post(`${baseUrl}/show-post`, {
             post: id
         }).then((response) => {
-            //console.log(response, "Checking Responseeee 22")
             if (response.data.success) {
                 setState((prevState) => ({ ...prevState, cardData: response.data.Data, showDetailedLoading: false }));
                 if (response.data.Data[0].status === 1) {

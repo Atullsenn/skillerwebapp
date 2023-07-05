@@ -249,6 +249,9 @@ const PostATasker = () => {
     const [filess, setFiless] = useState([])
     const [fileLimit, setFileLimit] = useState(false);
 
+
+    console.log(state, "Stateeeer")
+
     const getPhoneCallList = () => {
         axios.get(`${baseUrl}/get-phone-call`, {
         }).then((response) => {
@@ -370,18 +373,15 @@ const PostATasker = () => {
     const handleTimeChange = (newValue)=>{
         let convertedTime = newValue
         let d = `${convertedTime.$H}:${convertedTime.$m}:${convertedTime.$s}`
-        //let convertedTime = `${newValue.$y}-${newValue.$M + 1 > 9 ? newValue.$M + 1 : `0${newValue.$M + 1}`}-${newValue.$D > 9 ? newValue.$D : `0${newValue.$D}`} ${newValue.$H === 0 ? new Date().getHours().toString() : newValue.$H > 9 ? newValue.$H : `0${newValue.$H}`}:${newValue.$m === 0 ? new Date().getMinutes().toString() : newValue.$m > 9 ? newValue.$m : `0${newValue.$m}`}:${newValue.$s === 0 ? new Date().getSeconds().toString() : newValue.$s > 9 ? newValue.$s : `0${newValue.$s}`}`
         setState((prevState)=>({...prevState, orderDueTime:d, originalDueTime: newValue}))
     }
 
     const handleDateChange = (newValue) => {
-        //const convertedDate = `${newValue.$y}-${newValue.$M + 1 > 9 ? newValue.$M + 1 : `0${newValue.$M + 1}`}-${newValue.$D > 9 ? newValue.$D : `0${newValue.$D}`} ${newValue.$H === 0 ? new Date().getHours().toString() : newValue.$H > 9 ? newValue.$H : `0${newValue.$H}`}:${newValue.$m === 0 ? new Date().getMinutes().toString() : newValue.$m > 9 ? newValue.$m : `0${newValue.$m}`}:${newValue.$s === 0 ? new Date().getSeconds().toString() : newValue.$s > 9 ? newValue.$s : `0${newValue.$s}`}`
         let convertedDate = moment(newValue.$d).format('YYYY-MM-DD')
         setState((prevState) => ({ ...prevState, orderDueDate: convertedDate, originalDueDate: newValue }))
     };
 
     const handleToTimeChange = (newValue)=>{
-         //let convertTime = `${newValue.$y}-${newValue.$M + 1 > 9 ? newValue.$M + 1 : `0${newValue.$M + 1}`}-${newValue.$D > 9 ? newValue.$D : `0${newValue.$D}`} ${newValue.$H === 0 ? new Date().getHours().toString() : newValue.$H > 9 ? newValue.$H : `0${newValue.$H}`}:${newValue.$m === 0 ? new Date().getMinutes().toString() : newValue.$m > 9 ? newValue.$m : `0${newValue.$m}`}:${newValue.$s === 0 ? new Date().getSeconds().toString() : newValue.$s > 9 ? newValue.$s : `0${newValue.$s}`}`
         const convertedTime = newValue
         let d = `${convertedTime.$H}:${convertedTime.$m}:${convertedTime.$s}`
         setState((prevState)=>({...prevState, toTime:d, originalToTime: newValue}))
