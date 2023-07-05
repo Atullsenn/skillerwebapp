@@ -64,6 +64,9 @@ const NewsDetail = () => {
         getNewsList()
     }, [])
 
+
+    
+
     return (
         <>
             <Menu />
@@ -107,7 +110,7 @@ const NewsDetail = () => {
                                                         <h4 className='p-0 m-0'>{item.title}</h4>
                                                     </Tooltip>
                                                     <p className="p-0 m-0"><SupervisorAccountIcon style={{ color: '#188dc7' }} /> By : <span>Admin</span></p>
-                                                    <p className="p-0 m-0"> <DateRangeIcon style={{ color: '#188dc7' }} />{moment(item.createdAt).utcOffset(330).format('lll')}</p>
+                                                    <p className="p-0 m-0"> <DateRangeIcon style={{ color: '#188dc7' }} />{moment(item.created_at).format('DD/MM/YYYY HH:mm')}</p>
                                                 </div>
                                             </div>
                                         </>

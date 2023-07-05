@@ -139,11 +139,21 @@ const Footer = () => {
                         </div>
                         <div className="sf-f-social">
                             <ul className="socila-box">
-                                <li><a href="javascript:void(0);"><i> <TwitterIcon /> </i></a></li>
-                                <li><a href="javascript:void(0);"><i> <FacebookIcon /></i></a></li>
-                                <li><a href="javascript:void(0);"><i> <EmailIcon /></i></a></li>
-                                <li><a href="javascript:void(0);"><i> <InstagramIcon /></i></a></li>
+                                {contactInfo && contactInfo[5]?.type === 4 ? 
+                                <li><a href={`${contactInfo[5].title}`}><i> <TwitterIcon /> </i></a></li>:""
+                                }   
+                                 {contactInfo && contactInfo[6]?.type === 5 ?  
+                                <li><a href={`${contactInfo[6].title}`}><i> <FacebookIcon /></i></a></li> :""
+                                 }
+
+                                {contactInfo && contactInfo[4]?.type === 3 ?  
+                                <li><a href={`mailto:${contactInfo[4].title}`}><i> <EmailIcon /></i></a></li>:""
+                                }
+                                {contactInfo && contactInfo[7]?.type === 6 ?  
+                                <li><a href={`${contactInfo[7].title}`}><i> <InstagramIcon /></i></a></li> :""
+}
                             </ul>
+                            
                         </div>
                     </div>
                 </div>

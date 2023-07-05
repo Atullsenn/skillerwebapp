@@ -68,6 +68,8 @@ import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
 //import "./checkout.css";
 
@@ -174,6 +176,7 @@ const MyPostsDetail = ({
   const [review, setReview] = useState("");
   const [userRating, setUserRating] = useState(0);
   const navigate = useNavigate();
+
   const editDefaultState = {
     postTitle: state.cardData[0] && state.cardData[0].postTitle,
     description: state.cardData[0].postDescription,
@@ -192,6 +195,7 @@ const MyPostsDetail = ({
     orderDueDate: state.cardData[0].dueDate,
     budget: state.cardData[0].budget,
     skills: state.cardData[0].skill.split(","),
+    currentExp:state.cardData[0].currentExp,
     open: false,
     language: state.cardData[0].language_name
       ? state.cardData[0].language_name.split(",")
@@ -338,6 +342,23 @@ const MyPostsDetail = ({
         </div>
       </Dialog>
     );
+  }
+
+
+  const currentExperience = (currentExp)=>{
+     if(currentExp == 1){
+      return "Begginer"
+     }
+     if(currentExp == 2){
+      return "Intermediate"
+     }
+
+     if(currentExp == 3){
+      return "Expert"
+     }
+     else{
+      return " "
+     }
   }
 
 
@@ -1081,7 +1102,7 @@ const MyPostsDetail = ({
 
   
 
-  
+  //console.log(editPost, "Checking Edit Post")
 
 
 
@@ -1149,7 +1170,6 @@ const MyPostsDetail = ({
 
   }
 
-  console.log(state.bidDetailData, "dataddjflkdsjfkldjskl ")
 
 
   const userPay = ()=>{
@@ -2693,15 +2713,92 @@ const MyPostsDetail = ({
                 </Select>
               </FormControl>
             </div>
-            <div style={{ width: "100%" }}>
+            <div style={{ width: "100%", marginTop:'10px' }}>
+              <TextField
+                label="Current Experience * "
+                fullWidth
+                value={currentExperience(editPost.currentExp)}
+                autoComplete="shipping address-line1"
+                variant="outlined"
+                onChange={(e) => {
+                  setEditPost((prevState) => ({
+                    ...prevState,
+                    postTitle: e.target.value,
+                  }));
+                }}
+              />
+            </div>
+            <div style={{ width: '100%' }}>
+                                <h5>Date & Time</h5>
+                                <h5>From <span style={{ color: 'red' }}>*</span></h5>
+                                <div style={{display:"flex", flexDirection:"row", gap: "100px"}} className='mt-3'>
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                      <DatePicker onChange={handleDateChange}  value={state.originalDueDate}/>
+                                </LocalizationProvider>
+                                    {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                        <DemoItem>
+                                            <MobileDateTimePicker
+                                                disablePast
+                                                onError={() => {
+                                                    setState((prevState) => ({ ...prevState, dateError: true }))
+                                                }}
+                                                onAccept={() => {
+                                                    setState((prevState) => ({ ...prevState, dateError: false }))
+                                                }}
+                                                label='Order Due Date'
+                                                value={state.originalDate}
+                                                onChange={handleDateChange}
+                                            />
+                                            {state.dateError && <p className='p-0 pt-1 m-0' style={{ fontSize: '12px', color: '#d32f2f' }}>Please Enter a Valid Date and Time</p>}
+                                        </DemoItem>
+                                    </LocalizationProvider> */}
+
+<LocalizationProvider dateAdapter={AdapterDayjs}>
+      {/* <DemoContainer components={['TimePicker']}> */}
+        <TimePicker onChange={"handleTimeChange"} value={state.originalDueTime} label="time" />
+      {/* </DemoContainer> */}
+    </LocalizationProvider>
+                                </div>
+                                <h5 style={{marginTop: "15px"}}>To<span style={{ color: 'red'}}>*</span></h5>
+                                <div style={{display:"flex", flexDirection:"row", gap: "100px"}} className='mt-3'>
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                      <DatePicker onChange={"handleToDateChange"} value={state.originalToDate}/>
+                                </LocalizationProvider>
+                                    {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                        <DemoItem>
+                                            <MobileDateTimePicker
+                                                disablePast
+                                                onError={() => {
+                                                    setState((prevState) => ({ ...prevState, dateError: true }))
+                                                }}
+                                                onAccept={() => {
+                                                    setState((prevState) => ({ ...prevState, dateError: false }))
+                                                }}
+                                                label='Order Due Date'
+                                                value={state.originalDate}
+                                                onChange={handleDateChange}
+                                            />
+                                            {state.dateError && <p className='p-0 pt-1 m-0' style={{ fontSize: '12px', color: '#d32f2f' }}>Please Enter a Valid Date and Time</p>}
+                                        </DemoItem>
+                                    </LocalizationProvider> */}
+<div>
+<LocalizationProvider dateAdapter={AdapterDayjs}>
+      {/* <DemoContainer components={['TimePicker']}> */}
+        <TimePicker onChange={"handleToTimeChange"} value={state.originalToTime} label="time" />
+      {/* </DemoContainer> */}
+    </LocalizationProvider>
+    </div>
+                                </div>
+                            </div>
+            {/* <div style={{ width: "100%" }}>
               <div className="mt-2">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Stack spacing={3}>
                     <DateTimePicker
                       label="Order Due Date"
-                      disablePast
-                      ampm={false}
-                      minTime={selectedMinTime()}
+                      // disablePast
+                      // ampm={false}
+                      // minTime={selectedMinTime()}
                       value={editPost.orderDueDate}
                       onChange={handleDateChange}
                       renderInput={(params) => <TextField {...params} />}
@@ -2709,7 +2806,7 @@ const MyPostsDetail = ({
                   </Stack>
                 </LocalizationProvider>
               </div>
-            </div>
+            </div> */}
             <div style={{ width: "100%" }}>
               <div className="mt-2">
                 <CurrencyTextField
@@ -2811,7 +2908,7 @@ const MyPostsDetail = ({
                       <p>o Expected result</p>
                       <p>o Verification of expected result</p>
                     </div>
-                    <div className="post-a-tasker-upload-file-section-area">
+                    {/* <div className="post-a-tasker-upload-file-section-area">
                       <label
                         style={{
                           width: "100%",
@@ -2861,7 +2958,7 @@ const MyPostsDetail = ({
                           </div>
                         )}
                       </label>
-                    </div>
+                    </div> */}
                   </TabPanel>
                   <TabPanel
                     value={editPost.learningMethod - 1}

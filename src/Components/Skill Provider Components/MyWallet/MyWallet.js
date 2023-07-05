@@ -377,7 +377,6 @@ const MyWallet = () => {
                                                         </div>
                                                         <div className='text-right'>
                                                             <p className='transaction-para p-0 m-0 blue'>$ {Item.amount}</p>
-                                                            {/* <p className='transaction-para mt-1'>Wallet Mode : <span className={`${Item.walletMode === 'CREDIT' ? 'green' : Item.walletMode === 'DEBIT' ? 'red' : ''}`}> {Item.walletMode === 'CREDIT' ? <AddIcon style={{ fontSize: '12px' }} /> : Item.walletMode === 'DEBIT' ? <RemoveIcon style={{ fontSize: '12px' }} /> : ''}{Item.walletMode}</span></p> */}
                                                             <p className='transaction-para mt-1'>Wallet Mode : <span className={`${Item.status === 'Credit' ? 'green' : Item.status === 'Debit' ? 'red' : Item.status === 'Pending' ? 'yellow' :""}`}> {Item.status === 'Credit' ? <AddIcon style={{ fontSize: '12px' }} /> : Item.status === 'Debit' ? <RemoveIcon style={{ fontSize: '12px' }} /> : ''}{Item.status}</span></p>
                                                         </div>
                                                     </div>
@@ -395,10 +394,6 @@ const MyWallet = () => {
                                     </Tab>
                                     <Tab eventKey="Completed" title="Withdraw History ">
                                         <div className='row'>
-                                            {/* <div className='row left-main-Div'>
-                                            
-                                               <h3 className='text-center w-25 no-post-available'>No Withdraw History Available</h3>
-                                            </div> */}
                                             <div className='col-lg-12'>
                             <div className='main-transaction-div-area'>
                                 <div className='d-flex my-wallet-section justify-content-between align-items-center'>
@@ -412,21 +407,20 @@ const MyWallet = () => {
                                     {withdrawHistory.map((Item) => {
                                         return (
                                             <>
-                                                <div>
-                                                    <div className='px-5 d-flex align-items-center py-2'>
+                                                <div style={{margin:'auto', width:'100%'}}>
+                                                    <div className='px-5 d-flex align-items-center justify-content-center py-2'>
                                                         <h5 className='p-0 m-0' style={{ width: '80px' }}>withdraw:</h5>
                                                         <p className='p-0 m-0 ps-2 post-title-in-cardsection w-75' style={{ fontSize: '16px', fontWeight: '600' }}>$ {Item.amount}</p>
                                                     </div>
-                                                    <div className='inner-transaction-history-div d-flex justify-content-evenly align-items-center'>
-                                                        <div className='text-left'>
+                                                    <div className='inner-transaction-history-div d-flex  justify-content-evenly  align-items-center'>
+                                                        <div className='text-left' style={{marginLeft:'20%'}}>
                                                             <AccountBalanceWalletIcon style={{ color: '#188dc7' }} />
                                                             <p className='transaction-para mt-1'>{moment(Item.created_at).format('LLL')}</p>
                                                         </div>
                                                        
                                                         <div className='text-right'>
                                                             <p className='transaction-para p-0 m-0 blue'>$ {Item.amount}</p>
-                                                            {/* <p className='transaction-para mt-1'>Wallet Mode : <span className={`${Item.walletMode === 'CREDIT' ? 'green' : Item.walletMode === 'DEBIT' ? 'red' : ''}`}> {Item.walletMode === 'CREDIT' ? <AddIcon style={{ fontSize: '12px' }} /> : Item.walletMode === 'DEBIT' ? <RemoveIcon style={{ fontSize: '12px' }} /> : ''}{Item.walletMode}</span></p> */}
-                                                            <p className='transaction-para mt-1'>Wallet Mode : <span className={`${Item.status === 'Credit' ? 'green' : Item.status === 'Debit' ? 'red' : Item.status === 'Pending' ? 'yellow' :""}`}> {Item.status === 'Credit' ? <AddIcon style={{ fontSize: '12px' }} /> : Item.status === 'Debit' ? <RemoveIcon style={{ fontSize: '12px' }} /> : ''}{Item.status}</span></p>
+                                                            <p className='transaction-para mt-1'>Wallet Mode : <span className={`${Item.status === 'Credit' ? 'green' : Item.status === 'Debit' ? 'red' : Item.status === 'Requested' ? 'yellow' :""}`}> {Item.status === 'Credit' ? <AddIcon style={{ fontSize: '12px' }} /> : Item.status === 'Debit' ? <RemoveIcon style={{ fontSize: '12px' }} /> : ''}{Item.status}</span></p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -447,9 +441,6 @@ const MyWallet = () => {
                                 </Tabs>
                             </div>
                             </div>
-
-
-
 
 
                     </div>

@@ -70,6 +70,10 @@
     color: red;
 }
 
+.yellow{
+    color: goldenrod;
+}
+
 .main-card-payment-method {
     cursor: pointer;
 }
