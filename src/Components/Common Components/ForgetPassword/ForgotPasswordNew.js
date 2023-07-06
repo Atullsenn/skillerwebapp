@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import Banner from '../Banner/Banner';
 import Images from '../../../Images/Image';
 import { TextField } from '@mui/material';
@@ -30,6 +30,8 @@ let navigate = useNavigate()
 
 
 const parsed = queryString.parse(location.search);
+const isEnabled = !passwordError && !confirmPasswordError
+const [getContactData, setContactData] = useState([])
 
 
     const resetPassword = ()=>{
@@ -37,7 +39,7 @@ const parsed = queryString.parse(location.search);
             email: parsed.key,
             password: newPassword
         }
-        console.log(request, "request")
+        // console.log(request, "request")
         if(newPassword == ''){
             toast.warn('Please enter new password',{
                 autoClose: 1000,
@@ -63,7 +65,7 @@ const parsed = queryString.parse(location.search);
             
         }).catch((error)=>{
             console.log(error)
-            toast.success('Network error',{
+            toast.error('Network error',{
                 autoClose: 1000,
                 theme: 'colored'
             })
@@ -71,6 +73,21 @@ const parsed = queryString.parse(location.search);
     }
     }
 
+
+    const getContacts = ()=>{
+        axios.get(`${baseUrl}/get-contacts`).then((response)=>{
+            setContactData(response.data.Data)
+        }).catch((error)=>{
+            console.log(error)
+        })
+    }
+
+
+    useEffect(()=>{
+        getContacts()
+    },[])
+
+   
   return (
     <>
             <section className="vh-80">
@@ -120,7 +137,7 @@ const parsed = queryString.parse(location.search);
                                         </div>
                                     </div>
                                     <div className="mt-3 d-flex justify-content-center">
-                                        <button className={`btn btn-primary btn-lg btn-block `} onClick={resetPassword}>Reset</button>
+                                        <button disabled={!isEnabled} className={`btn btn-primary btn-lg btn-block `} onClick={resetPassword}>Reset</button>
                                     </div>
                                 </div>
                             
@@ -139,10 +156,21 @@ const parsed = queryString.parse(location.search);
                         </div>
                         <div className="sf-f-social">
                             <ul className="socila-box">
-                                <li><a href="javascript:void(0);"><i> <TwitterIcon /> </i></a></li>
-                                <li><a href="javascript:void(0);"><i> <FacebookIcon /></i></a></li>
-                                <li><a href="javascript:void(0);"><i> <EmailIcon /></i></a></li>
-                                <li><a href="javascript:void(0);"><i> <InstagramIcon /></i></a></li>
+                            {getContactData && getContactData[5]?.type === 4 ? 
+                                <li><a href={`${getContactData[5].title}`}><i> <TwitterIcon /> </i></a></li> :""
+                            }
+
+                            {getContactData && getContactData[6]?.type === 5 ? 
+                                <li><a href={getContactData[6].title}><i> <FacebookIcon /></i></a></li> :""
+                            }
+
+                            {getContactData && getContactData[4]?.type === 3 ? 
+                                <li><a href={`mailto:${getContactData[4].title}`}><i> <EmailIcon /></i></a></li>:""
+                            }
+
+                            {getContactData && getContactData[7].type === 6 ?
+                                <li><a href={getContactData[7].title}><i> <InstagramIcon /></i></a></li>:""
+                            }
                             </ul>
                         </div>
                     </div>

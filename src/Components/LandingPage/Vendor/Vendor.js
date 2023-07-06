@@ -72,11 +72,6 @@ const Vendor = ({ state }) => {
                                                             <p>{item.about ? item.about : 'No Provider About... '}</p>
                                                             <div className="aon-ow-pro-rating">
                                                                 <Rating name="half-rating-read" value={item.total_rating} precision={0.5}  readOnly />
-                                                                {/* <span><StarBorderIcon /></span>
-                                                                <span><StarBorderIcon /></span>
-                                                                <span><StarBorderIcon /></span>
-                                                                <span><StarBorderIcon /></span>
-                                                                <span><StarBorderIcon /></span> */}
                                                             </div>
                                                         </div>
                                                     </div>
