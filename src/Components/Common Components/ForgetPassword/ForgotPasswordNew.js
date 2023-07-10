@@ -74,18 +74,24 @@ const [getContactData, setContactData] = useState([])
     }
 
 
-    const getContacts = ()=>{
-        axios.get(`${baseUrl}/get-contacts`).then((response)=>{
-            setContactData(response.data.Data)
-        }).catch((error)=>{
+    const getContactInformation = () => {
+        axios.get(`${baseUrl}/get-contacts`, {
+        }).then((response) => {
+            if (response.data.success) {
+                setContactData(response.data.Data)
+                // setState((prevState) => ({ ...prevState, contactInfo: response.data.Data }))
+            }
+        }).catch((error) => {
             console.log(error)
         })
     }
 
 
-    useEffect(()=>{
-        getContacts()
-    },[])
+    useEffect(() => {
+        getContactInformation()
+    }, [])
+
+   
 
    
   return (
@@ -164,11 +170,11 @@ const [getContactData, setContactData] = useState([])
                                 <li><a href={getContactData[6].title}><i> <FacebookIcon /></i></a></li> :""
                             }
 
-                            {getContactData && getContactData[4]?.type === 3 ? 
-                                <li><a href={`mailto:${getContactData[4].title}`}><i> <EmailIcon /></i></a></li>:""
+                             {getContactData && getContactData[3]?.type === 3 ?  
+                                <li><a href={`mailto:${getContactData[3].title}`}><i> <EmailIcon /></i></a></li>:""
                             }
 
-                            {getContactData && getContactData[7].type === 6 ?
+                            {getContactData && getContactData[7]?.type === 6 ?
                                 <li><a href={getContactData[7].title}><i> <InstagramIcon /></i></a></li>:""
                             }
                             </ul>

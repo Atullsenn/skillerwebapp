@@ -31,7 +31,7 @@ import './Responsive.css';
 
 
 const App = () => {
-  console.log('Build 05/07/2023 6:05 PM')
+  console.log('Build 07/10/2023 12:07 PM')
   const [isAuthenticate] = useContext(IsLoginAuthenticateContext)
 
   return (
@@ -45,6 +45,8 @@ const App = () => {
         }
         <Route path="/" element={<LandingPage />} />
         <Route path='/forgot-password-new' element={<ForgotPasswordNew/>}/>
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-conditions" element={<TermsAndConditions />} />
         <Route path="/how-it-works" element={<Howitwork />} />
         <Route path="/contact-us" element={<Contactus />} />
         <Route path="/post-a-task" element={<PostATasker />} />
@@ -54,8 +56,6 @@ const App = () => {
         <Route path="/news/*" element={<NewsLayout />} />
         <Route path="/news-detail/:id" element={<NewsDetail />} />
         <Route element={<PrivateRoute isAuthenticate={isAuthenticate} />}>
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-conditions" element={<TermsAndConditions />} />
           <Route path="/profile" element={<MyProfile />} />
           <Route path='/my-order' element={<MyOrderLayout />} />
           <Route path="/wallet/*" element={<WalletLayout />} />

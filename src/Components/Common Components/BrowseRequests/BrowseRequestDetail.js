@@ -305,6 +305,50 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
         formData.append('skill', state.skills)
         formData.append('learningMethod_type', state.learningMethod)
         formData.append('call_options[]', state.phoneCallId)
+
+        if(state.budget == ""){
+            toast.warn('Please Enter Budget',{
+                autoClose: 1000,
+                theme: 'colored'
+            })
+        }
+
+        if(state.expeceted_days == ""){
+            toast.warn('Please Enter Expected Days',{
+                autoClose: 1000,
+                theme: 'colored'
+            })
+        }
+
+        if(state.learningMethod == ""){
+            toast.warn('Please Choose Learning Method',{
+                autoClose: 1000,
+                theme: 'colored'
+            })
+        }
+
+        if(state.makeAnOfferLanguageId == ""){
+            toast.warn('Please Choose Language',{
+                autoClose:1000,
+                theme:'colored'
+            })
+        }
+
+        if(state.skills == ""){
+            toast.warn('Please Enter Skills',{
+                autoClose: 1000,
+                theme: 'colored'
+            })
+        }
+
+        if(state.postDescription == ""){
+            toast.warn('Please Enter Description',{
+                autoClose: 1000,
+                theme: 'colored'
+            })
+        }
+
+        else{
         await axios.post(`${baseUrl}/make-an-offer`, formData, {
             Accept: "Application",
             "Content-Type": "application/json"
@@ -317,57 +361,13 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
                 setTimeout(() => {
                     navigate('/my-proposals')
                 }, 500);
-            } else if (parseInt(getUserDetail().id) === null) {
-                toast.error(response.data.error.user_id[0], {
-                    theme: 'colored',
-                    autoClose: 1000
-                })
-            } else if (state.postId === null) {
-                toast.error(response.data.error.post_id[0], {
-                    theme: 'colored',
-                    autoClose: 1000
-                })
-            } else if (state.budget == "") {
-                toast.error(response.data.error.budget[0], {
-                    theme: 'colored',
-                    autoClose: 1000
-                })
-            } else if (state.expeceted_days == "") {
-                toast.error(response.data.error.expected_days[0], {
-                    theme: 'colored',
-                    autoClose: 1000
-                })
-            }
-            else if (state.learningMethod == "") {
-                toast.error(response.data.error.learningMethod_type[0], {
-                    theme: 'colored',
-                    autoClose: 1000
-                })
-            } else if (state.makeAnOfferLanguageId.length === 0) {
-                toast.error(response.data.error.language_id[0], {
-                    theme: 'colored',
-                    autoClose: 1000
-                })
-            } else if (state.skills.length === 0) {
-                toast.error(response.data.error.skill[0], {
-                    theme: 'colored',
-                    autoClose: 1000
-                })
-            } else if (state.postDescription == "") {
-                toast.error(response.data.error.description[0], {
-                    theme: 'colored',
-                    autoClose: 1000
-                })
-            } else {
-                toast.error("Offer is not submitted", {
-                    theme: 'colored',
-                    autoClose: 1000
-                })
-            }
-            handleCloseOpenMakeanofferModal()
+            }  
+             
+           // handleCloseOpenMakeanofferModal()
         }).catch((error) => {
             console.log(error)
         })
+    }
     }
     //make an offer api
 
@@ -1030,7 +1030,10 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
                 </DialogContent>
                 <Divider style={{ backgroundColor: '#a9a4a4' }} />
                 <DialogActions>
-                    <button className={`me-3 ${parseInt(getUserDetail().id) === null || state.postId === null || state.budget == "" || state.expeceted_days == "" || state.learningMethod == "" || state.makeAnOfferLanguageId.length === 0 || state.skills.length === 0 || state.postDescription == "" || filess.length === 0 ? 'disableMakeAnOfferBrowseRequestBtn' : 'make-an-offer-btn'}`} onClick={makeAnOffer} disabled={parseInt(getUserDetail().id) === null || state.postId === null || state.budget == "" || state.expeceted_days == "" || state.learningMethod == "" || state.makeAnOfferLanguageId.length === 0 || state.skills.length === 0 || state.postDescription == "" || filess.length === 0 ? true : false} autoFocus>
+                    {/* <button className={`me-3 ${parseInt(getUserDetail().id) === null || state.postId === null || state.budget == "" || state.expeceted_days == "" || state.learningMethod == "" || state.makeAnOfferLanguageId.length === 0 || state.skills.length === 0 || state.postDescription == "" || filess.length === 0 ? 'disableMakeAnOfferBrowseRequestBtn' : 'make-an-offer-btn'}`} onClick={makeAnOffer} disabled={parseInt(getUserDetail().id) === null || state.postId === null || state.budget == "" || state.expeceted_days == "" || state.learningMethod == "" || state.makeAnOfferLanguageId.length === 0 || state.skills.length === 0 || state.postDescription == "" || filess.length === 0 ? true : false} autoFocus>
+                        Submit
+                    </button> */}
+                    <button className={`me-3 make-an-offer-btn`} onClick={makeAnOffer}  autoFocus>
                         Submit
                     </button>
                 </DialogActions>

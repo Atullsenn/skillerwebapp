@@ -23,7 +23,7 @@ const Banner = () => {
                                 <div className="col-lg-8">
                                     <div className="bannerBtn">
                                         <NavLink to="/post-a-task" className="PostyourtaskforfreeBtn">Post your task for free</NavLink>
-                                        <NavLink to="/post-a-task">Earn money as a Tasker</NavLink>
+                                        <NavLink to="/browse-requests">Earn money as a Tasker</NavLink>
                                     </div>
                                 </div>
                             </div>

@@ -16,11 +16,17 @@ import { Dialog } from '@mui/material';
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
+
 
 const Notification = () => {
   const location = useLocation();
   const { state } = location;
   const [notification, setNotification] = useState([])
+  const [allDeleteModel, setAllDeleteModel] = useState(false)
+  const [notificationDeleteModel, setNotificatoinDeleteModel] = useState(false)
 
   const getUserNotification = () => {
     let request = {
@@ -43,26 +49,84 @@ const Notification = () => {
       .post(`${baseUrl}/delete-notification`, { notification_id: th })
       .then((res) => {
         getUserNotification()
+        handleCloseNotificationModel()
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const handleremove = (e, th) => {
-    const text = "Are you sure want to delete"
-    if (window.confirm(text) == true) {
-      toast.success("Notification deleted successfully", {
-        autoClose: 1000,
-        theme: "colored"
-      });
-      NotificationDelete(th);
-      getUserNotification()
-      return true
-    } else {
-      return false
+  
+
+
+  //Delete All Notification
+
+  const deleteAllNotification = ()=>{
+
+    let request = {
+      user: localStorage.getItem('id')
     }
-  };
+
+    axios.post(`${baseUrl}/delete-all-notification`, request).then((response)=>{
+      //console.log(response, "Checking Delete all notification response")
+      if(response){
+        toast.success('Notification Deleted Successfully',{
+          autoClose: 1000,
+          theme: 'colored'
+        })
+        getUserNotification()
+        handleCloseAllDeleteModel()
+      }
+    }).catch((error)=>{
+      console.log(error)
+    })
+  }
+
+  
+  
+
+  const handleOpenAllDeleteModel = ()=>{
+    setAllDeleteModel(true)
+  }
+
+
+  const handleCloseAllDeleteModel = ()=>{
+    setAllDeleteModel(false)
+
+  }
+
+
+  const handleNotifiacationOpenModel = ()=>{
+    setNotificatoinDeleteModel(true)
+  }
+
+  const handleCloseNotificationModel = ()=>{
+    setNotificatoinDeleteModel(false)
+  }
+
+//   const handleremove = (e, th) => { 
+//     NotificationDelete(th);
+//     getUserNotification()
+    
+// };
+
+
+const handleremove = (e, th) => {
+  const text = "Are you sure want to delete"
+  if (window.confirm(text) == true) {
+    toast.success("Notification deleted successfully", {
+      autoClose: 1000,
+      theme: "colored"
+    });
+    NotificationDelete(th);
+    getUserNotification()
+    return true
+  } else {
+    return false
+  }
+};
+
+  //Delete All Notification
 
   return (
     <>
@@ -71,13 +135,51 @@ const Notification = () => {
         <Banner imgSource={Images.notification} text="Notification" />
         <div className='p-4'>
           <div className='container p-0'>
+          <Dialog
+                      fullWidth
+                      open={allDeleteModel}
+                      onClose={handleCloseAllDeleteModel}
+                      aria-labelledby="alert-dialog-title"
+                      aria-describedby="alert-dialog-description"
+                    >
+                      <DialogTitle
+                        id="alert-dialog-title"
+                        className="text-center"
+                      >
+                        {"Are you sure want to delete all notification ?"}
+                      </DialogTitle>
+                      <DialogContent className="text-center p-0 m-0">
+                        <DialogContentText id="alert-dialog-description">
+                          <DeleteSweepIcon
+                            style={{ color: "#ef513a", fontSize: "100px" }}
+                          />
+                        </DialogContentText>
+                      </DialogContent>
+                      <DialogActions className="text-center d-flex align-items-center justify-content-center">
+                        <button
+                          className="btn btn-primary btn-lg btn-block make-an-offer-btn"
+                          onClick={deleteAllNotification}
+                        >
+                          Yes
+                        </button>
+                        <button
+                          className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1"
+                          onClick={handleCloseAllDeleteModel}
+                        >
+                          No
+                        </button>
+                      </DialogActions>
+                    </Dialog>
+
+
+                    
             <div className="page-wrapper" style={{ minHeight: '250px', borderRadius: '4px' }}>
               <div className="container-fluid">
                 <div className="row">
                   <div className="col-lg-12">
                     <div className="faq-accordian-main-area notification-arrow-hide-parents">
                       <div className='text-right'>
-                        <button className='mt-3 btn btn-primary btn-lg btn-block make-an-offer-btn'> Delete All Notifications </button>
+                        <button onClick={handleOpenAllDeleteModel} className='mt-3 btn btn-primary btn-lg btn-block make-an-offer-btn'> Delete All Notifications </button>
                       </div>
                       {notification?.length ?
                         <div className="accordion accordion-" id="accordionFlushExample">
@@ -114,8 +216,44 @@ const Notification = () => {
                               </Accordion>
                               <div className="notification-dlt-main-area ms-2">
                                 <DeleteForever datalist={item.id} onClick={(e) => handleremove(e, item.id)} style={{ color: '#FF5C93' }} />
+                                {/* <DeleteForever onClick={handleNotifiacationOpenModel} style={{ color: '#FF5C93' }} /> */}
                               
                               </div>
+                              <Dialog
+                      fullWidth
+                      open={notificationDeleteModel}
+                      onClose={handleCloseNotificationModel}
+                      aria-labelledby="alert-dialog-title"
+                      aria-describedby="alert-dialog-description"
+                    >
+                      <DialogTitle
+                        id="alert-dialog-title"
+                        className="text-center"
+                      >
+                        {"Are you sure want to delete this notification ?"}
+                      </DialogTitle>
+                      <DialogContent className="text-center p-0 m-0">
+                        <DialogContentText id="alert-dialog-description">
+                          <DeleteSweepIcon
+                            style={{ color: "#ef513a", fontSize: "100px" }}
+                          />
+                        </DialogContentText>
+                      </DialogContent>
+                      <DialogActions className="text-center d-flex align-items-center justify-content-center">
+                        <button
+                          className="btn btn-primary btn-lg btn-block make-an-offer-btn"
+                          onClick={(e) => handleremove(e, item.id)}
+                        >
+                          Yes
+                        </button>
+                        <button
+                          className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1"
+                          onClick={handleCloseNotificationModel}
+                        >
+                          No
+                        </button>
+                      </DialogActions>
+                    </Dialog>
                             </div>
                           ))}
                         </div> : <div style={{ textAlign: "center", marginTop: "100px", fontSize: "18px", fontWeight: "700" }}><p>No Notification Found</p></div>

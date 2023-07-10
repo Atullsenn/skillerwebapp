@@ -548,6 +548,7 @@ const CategoriesPost = ({ state, setState }) => {
                         <div>
                             <div className='one-box-card-area'>
                                 {state.allProviderList.map((item) => {
+                                    //console.log(item, "Item check for providersss")
                                     return (
                                         <>
                                             <div className='p-4 main-category-profile-card'>

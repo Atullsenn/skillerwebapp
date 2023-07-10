@@ -865,7 +865,7 @@ const redirectNotification = (notification_type)=>{
                                   <MenuList autoFocusItem={state.isOpen} id="composition-menu" aria-labelledby="composition-button" onKeyDown={handleListKeyDown} >
                                     <NavLink to="/profile"> <MenuItem onClick={handleClose}> My Profile </MenuItem> </NavLink>
                                     <NavLink to="/wallet"> <MenuItem onClick={handleClose}> My Wallet </MenuItem> </NavLink>
-                                    <NavLink to="/my-requests"> <MenuItem onClick={handleClose}> My Requests </MenuItem> </NavLink>
+                                    {/* <NavLink to="/my-requests"> <MenuItem onClick={handleClose}> My Requests </MenuItem> </NavLink> */}
                                     <NavLink to="/my-proposals"> <MenuItem onClick={handleClose}> My Proposals </MenuItem> </NavLink>
                                     <NavLink to="/my-order"> <MenuItem onClick={handleClose}> My Order </MenuItem> </NavLink>
                                     <NavLink to="/search-posts"> <MenuItem onClick={handleClose}> Search posts </MenuItem> </NavLink>

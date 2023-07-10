@@ -39,7 +39,7 @@ const MyProposal = ({ state, setState, getProposalList }) => {
             post: id,
             user: parseInt(getUserDetail().id)
         }).then((response) => {
-            console.log(response, "Responseeeeeeeeee eeeekljsklfjskljfklsjflksj")
+            //console.log(response.data.Data, "Checking Response ")
             if (response.data.success) {
                 setState((prevState) => ({ ...prevState, cardData: response.data.Data, showDetailedLoading: false }));
             }
@@ -96,6 +96,7 @@ const MyProposal = ({ state, setState, getProposalList }) => {
                                             .toLowerCase()
                                             .includes(search.toString().toLowerCase()),
                                 ).map((item, index) => {
+                                    //console.log(item, "checkkkkkkkk dataaaaaaa")
                                     return (
                                         <div className={`${state.showMap || state.cardDetail ? '' : 'col-lg-4'}`}>
                                             <div key={index} id={`browse-card-${item.post_id}`} className={`${state.showMap || state.cardDetail ? 'm-2 rounded card-main-div' : 'm-2 rounded card-main-div'}`} onClick={() => { getShowMyProposalPost(item.post_id); setActiveClass(item.post_id); setState((prevState) => ({ ...prevState, cardDetail: true, showMap: false })) }}>

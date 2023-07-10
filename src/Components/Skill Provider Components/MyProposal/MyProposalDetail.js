@@ -78,20 +78,23 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
     const [openWithdrawModal, setOpenWithdrawModal] = useState(false);
     const [openEditBid, setOpenEditBid] = useState(false);
     const editDefaultState = {
-        expectedBudget: state.cardData[0].budget_of_bid,
-        expectedDays: state.cardData[0].expected_days,
-        language: state.cardData[0].language_name.split(','),
+        expectedBudget: state.cardData && state.cardData[0]?.budget_of_bid,
+        expectedDays: state.cardData && state.cardData[0].expected_days,
+        language: state.cardData && state.cardData[0].language_name.split(','),
         languageId: [],
         languageList: [],
-        learningMethod: `${state.cardData[0].bid_learning_method_type === 1 ? 1 : 2}`,
-        learningMethodTab: parseInt(`${state.cardData[0].bid_learning_method_type === 1 ? 0 : 1}`),
+        learningMethod: `${state.cardData && state.cardData[0].bid_learning_method_type === 1 ? 1 : 2}`,
+        learningMethodTab: parseInt(`${state.cardData && state.cardData[0].bid_learning_method_type === 1 ? 0 : 1}`),
         phoneCall: [],
         phoneCallId: [],
         phoneCallList: [],
-        skills: state.cardData[0].skill.split(','),
-        BidDescription: `${state.cardData[0].bid_description}`,
+        skills: state.cardData && state.cardData[0].skill.split(','),
+        BidDescription: `${state.cardData && state.cardData[0].bid_description}`,
 
     }
+
+    //console.log(state.cardData && state.cardData[0], "Checking Proposal detail")
+    
     const [editBid, setEditBid] = useState(editDefaultState);
     const MAX_COUNT = 5;
     const [imagesPreview, setImagesPreview] = useState([])
@@ -99,7 +102,7 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
     const [filess, setFiless] = useState([])
     const [fileLimit, setFileLimit] = useState(false);
     const [images, setImages] = useState([])
-
+    // console.log(editBid.language, "sflkj")
     const handleCloseOpenWithdrawModal = (bidId) => {
         setOpenWithdrawModal(false);
         setState((prevState) => ({ ...prevState, isLoadingOpen: true }));
@@ -179,12 +182,12 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
     useEffect(() => {
         let dynamicPostPhotosArray = []
         let dynamicBidPhotosArray = []
-        state.cardData[0].post_image.map((Item, index) => {
+        state.cardData && state.cardData[0].post_image.map((Item, index) => {
             dynamicPostPhotosArray.push({
                 src: `${imageBaseUrl}/public/post/${Item.image}`,
             })
         })
-        state.cardData[0].bid_post_image.map((Item, index) => {
+        state.cardData && state.cardData[0].bid_post_image.map((Item, index) => {
             dynamicBidPhotosArray.push({
                 src: `${imageBaseUrl}/public/offers/${Item.image}`,
             })
@@ -215,7 +218,7 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
 
     useEffect(() => {
         let lanuageIdArray = [];
-        for (let i = 0; i < editBid.language.length; i++) {
+        for (let i = 0; i < editBid.language && editBid.language.length; i++) {
             for (let j = 0; j < editBid.languageList.length; j++) {
                 if (editBid.language[i] === `${editBid.languageList[j].name}`) {
                     lanuageIdArray.push(editBid.languageList[j].id)
@@ -309,7 +312,8 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
     }
 
 
-    console.log(state, "checking state")
+    //console.log(state.allProposalList, "checking allProposal list")
+    //console.log(state.cardData, "Checking Card Data For bug")
 
 
     //update bid api
@@ -331,9 +335,9 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
         formData.append('learningMethod_type', editBid.learningMethod)
         formData.append('call_options[]', editBid.phoneCallId)
 
-        for (const pair of formData.entries()) {
-            console.log(`${pair[0]}, ${pair[1]}`)
-        }
+        // for (const pair of formData.entries()) {
+        //     console.log(`${pair[0]}, ${pair[1]}`)
+        // }
         await axios.post(`${baseUrl}/edit-make-an-offer-data`, formData, {
             Accept: "Application",
             "Content-Type": "application/json"
@@ -408,22 +412,22 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                     <div className='col-lg-8'>
                         <div className='d-flex align-items-center justify-content-between task-status-main-area p-2'>
                             <div className='d-flex align-items-center task-status-area'>
-                                {state.cardData[0].status === 0 && <p className='task-status d-flex align-items-center'>{'Pending'}</p>}
+                                {state.cardData && state.cardData[0].status === 0 && <p className='task-status d-flex align-items-center'>{'Pending'}</p>}
                             </div>
                         </div>
                         <div className='p-2'>
-                            <h4 className='task-status-heading text-uppercase heading-color'>{state.cardData[0].postTitle}</h4>
+                            <h4 className='task-status-heading text-uppercase heading-color'>{state.cardData && state.cardData[0].postTitle}</h4>
                         </div>
                         <div className='d-flex'>
                             <div className='d-flex align-items-center post-location-data w-50'>
-                                <NavLink to={`user-profile/${state.cardData[0].seeker_id}`}>
+                                <NavLink to={`user-profile/${state.cardData && state.cardData[0].seeker_id}`}>
                                     {
-                                        state.cardData[0].profile === '' || state.cardData[0].profile == null || state.cardData[0].profile === "no file upload" ? <Avatar src="/broken-image.jpg" /> : <Avatar src={`${imageBaseUrl}/public/profile/${state.cardData[0].profile}`} alt="user-img" className="img-circle" />
+                                        state.cardData && state.cardData[0].profile === '' || state.cardData && state.cardData[0].profile == null || state.cardData && state.cardData[0].profile === "no file upload" ? <Avatar src="/broken-image.jpg" /> : <Avatar src={`${imageBaseUrl}/public/profile/${state.cardData && state.cardData[0].profile}`} alt="user-img" className="img-circle" />
                                     }
                                 </NavLink>
                                 <div className='px-1 posted-area'>
                                     <p className='p-0 m-0'>POSTED BY</p>
-                                    <a className='p-0 m-0'>{`${state.cardData[0].firstName} ${state.cardData[0].lastName}`}</a>
+                                    <a className='p-0 m-0'>{`${state.cardData && state.cardData[0].firstName} ${state.cardData && state.cardData[0].lastName}`}</a>
                                 </div>
                             </div>
                         </div>
@@ -432,14 +436,14 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                                 <CategoryIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
                                     <p className='p-0 m-0'>CATEGORY</p>
-                                    <a className='p-0 m-0'>{state.cardData[0].category_name}</a>
+                                    <a className='p-0 m-0'>{state.cardData && state.cardData[0].category_name}</a>
                                 </div>
                             </div>
                             <div className='px-2 d-flex align-items-center post-location-data w-50'>
                                 <LocationOnIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
                                     <p className='p-0 m-0'>LOCATION</p>
-                                    <a className='p-0 m-0'>{`${state.cardData[0].country_name}, ${state.cardData[0].city_name}`}</a>
+                                    <a className='p-0 m-0'>{`${state.cardData && state.cardData[0].country_name}, ${state.cardData && state.cardData[0].city_name}`}</a>
                                 </div>
                             </div>
                         </div>
@@ -448,14 +452,14 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                                 <EventIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
                                     <p className='p-0 m-0'>ORDER DUE DATE</p>
-                                    <a className='p-0 m-0'>{moment(state.cardData[0].dueDate).utcOffset(330).format('lll')}</a>
+                                    <a className='p-0 m-0'>{moment(state.cardData && state.cardData[0].dueDate).utcOffset(330).format('lll')}</a>
                                 </div>
                             </div>
                             <div className='d-flex px-2 align-items-center post-location-data w-50'>
                                 <TranslateIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
                                     <p className='p-0 m-0'>LANGUAGE</p>
-                                    <a className='p-0 m-0'>{state.cardData[0].language_name.split(',').join(', ')}</a>
+                                    <a className='p-0 m-0'>{state.cardData && state.cardData[0].language_name.split(',').join(', ')}</a>
                                 </div>
                             </div>
                         </div>
@@ -464,14 +468,14 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                                 <SchoolIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
                                     <p className='p-0 m-0'>SKILLS</p>
-                                    <a className='p-0 m-0'>{state.cardData[0].skill.split(',').join(', ')}</a>
+                                    <a className='p-0 m-0'>{state.cardData && state.cardData[0].skill.split(',').join(', ')}</a>
                                 </div>
                             </div>
                             <div className='d-flex px-2 align-items-center post-location-data w-50'>
                                 <LocalLibraryIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
                                     <p className='p-0 m-0'>LEARNING METHOD</p>
-                                    <a className='p-0 m-0'>{state.cardData[0].bid_learning_method_type}</a>
+                                    <a className='p-0 m-0'>{state.cardData && state.cardData[0].bid_learning_method_type}</a>
                                 </div>
                             </div>
                         </div>
@@ -489,12 +493,12 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
 
                         </div> */}
                         <div className='d-flex'>
-                        {state.cardData[0].bid_learning_method_type === 'Phone Call' || state.cardData[0].bid_learning_method_type === 'Text and Phone Call' ?
+                        {state.cardData && state.cardData[0].bid_learning_method_type === 'Phone Call' || state.cardData && state.cardData[0].bid_learning_method_type === 'Text and Phone Call' ?
                             <div className='d-flex align-items-center post-location-data w-50'>
                                 <DuoIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
                                     <p className='p-0 m-0'>CALL OPTIONS</p>
-                                    <a className='p-0 m-0'>{state.cardData[0].learning[0].call_name}</a>
+                                    <a className='p-0 m-0'>{state.cardData && state.cardData[0].learning[0].call_name}</a>
                                 </div>
                             </div> :""
 }
@@ -503,17 +507,17 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                     <div className='col-lg-4 py-2'>
                         <div className='py-3' style={{ border: '1px solid black', borderRadius: '4px' }}>
                             <h3 className='p-0 m-0 py-3 d-flex align-item-center justify-content-center heading-color'>Your Offer</h3>
-                            <p className='p-0 m-0 py-1 d-flex align-item-center justify-content-center' style={{ color: '#000', fontWeight: '600', fontSize: '36px' }}>$ {state.cardData[0].post_budget}</p>
+                            <p className='p-0 m-0 py-1 d-flex align-item-center justify-content-center' style={{ color: '#000', fontWeight: '600', fontSize: '36px' }}>$ {state.cardData && state.cardData[0].post_budget}</p>
                         </div>
                         <div className='d-flex justify-content-end py-2'>
-                            <p className='p-0 m-0 px-1' style={{ fontWeight: '700' }}>{checkPostTime(state.cardData[0].created_at)}</p>
+                            <p className='p-0 m-0 px-1' style={{ fontWeight: '700' }}>{checkPostTime(state.cardData && state.cardData[0].created_at)}</p>
                         </div>
                     </div>
                 </div>
                 <div>
                     <div className='p-2'>
                         <h5 className='p-0 m-0 heading-color'>Description</h5>
-                        <p className='p-0 m-0'>{state.cardData[0].postDescription}</p>
+                        <p className='p-0 m-0'>{state.cardData && state.cardData[0].postDescription}</p>
                     </div>
                     <div className='p-2'>
                         <h4 className='p-0 m-0 py-2 heading-color'>PHOTOS</h4>
@@ -526,27 +530,27 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                     </div>
                     <div className='p-2 d-flex align-items-center justify-content-between'>
                         <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>Expected days to complete the order</h5>
-                        <p className='p-0 m-0' style={{ color: '#188dc7' }}>{state.cardData[0].expected_days} Days</p>
+                        <p className='p-0 m-0' style={{ color: '#188dc7' }}>{state.cardData && state.cardData[0].expected_days} Days</p>
                     </div>
                     <Divider className='my-1' style={{ backgroundColor: '#a9a4a4' }} />
                     <div className='p-2 d-flex align-items-center justify-content-between'>
                         <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>Expected budget</h5>
-                        <p className='p-0 m-0' style={{ color: '#188dc7' }}>$ {state.cardData[0].budget_of_bid}</p>
+                        <p className='p-0 m-0' style={{ color: '#188dc7' }}>$ {state.cardData && state.cardData[0].budget_of_bid}</p>
                     </div>
                     <Divider className='my-1' style={{ backgroundColor: '#a9a4a4' }} />
                     <div className='p-2 d-flex align-items-center justify-content-between'>
                         <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>Learning method</h5>
-                        <p className='p-0 m-0' style={{ color: '#188dc7' }}>{state.cardData[0].bid_learning_method_type === 1 ? 'Text' : 'Phone Call'}</p>
+                        <p className='p-0 m-0' style={{ color: '#188dc7' }}>{state.cardData && state.cardData[0].bid_learning_method_type === 1 ? 'Text' : 'Phone Call'}</p>
                     </div>
                     <Divider className='my-1' style={{ backgroundColor: '#a9a4a4' }} />
                     <div className='p-2 d-flex align-items-center justify-content-between'>
                         <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>Skills</h5>
-                        <p className='p-0 m-0' style={{ color: '#188dc7' }}>{state.cardData[0].bid_skills.split(',').join(', ')}</p>
+                        <p className='p-0 m-0' style={{ color: '#188dc7' }}>{state.cardData && state.cardData[0].bid_skills.split(',').join(', ')}</p>
                     </div>
                     <Divider className='my-1' style={{ backgroundColor: '#a9a4a4' }} />
                     <div className='p-2 d-flex align-items-center justify-content-between'>
                         <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>Languages</h5>
-                        <p className='p-0 m-0' style={{ color: '#188dc7' }}>{state.cardData[0].bid_language_name.split(',').join(', ')}</p>
+                        <p className='p-0 m-0' style={{ color: '#188dc7' }}>{state.cardData && state.cardData[0].bid_language_name.split(',').join(', ')}</p>
                     </div>
                     <Divider className='my-1' style={{ backgroundColor: '#a9a4a4' }} />
                     <div className='p-2'>
@@ -556,7 +560,7 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                     </div>
                     <div className='p-2'>
                         <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>Description</h5>
-                        <p className='p-0 m-0' style={{ color: '#188dc7' }}>{state.cardData[0].bid_description}</p>
+                        <p className='p-0 m-0' style={{ color: '#188dc7' }}>{state.cardData && state.cardData[0].bid_description}</p>
                     </div>
                     <Divider className='my-1' style={{ backgroundColor: '#a9a4a4' }} />
                     <div className="d-flex align-items-center justify-content-center my-3">
@@ -601,7 +605,7 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                 <DialogContent>
                     <div>
                         <div className='mb-4'>
-                            <h5>{state.cardData[0].postTitle}</h5>
+                            <h5>{state.cardData && state.cardData[0].postTitle}</h5>
                         </div>
                         <FormControl fullWidth>
                             <InputLabel htmlFor="outlined-adornment-amount">Enter Expected Budget</InputLabel>
@@ -715,7 +719,9 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                                 )}
                                 MenuProps={MenuProps}
                             >
-                                {editBid.languageList.map((Item) => (
+                                {editBid && editBid.languageList.map((Item) => (
+                                    //console.log(Item, "Itemmm")
+                                    
                                     <MenuItem key={Item.id} value={Item.name} style={getStyles(Item.name, editBid.language, theme)}>{Item.name}</MenuItem>
                                 ))}
                             </Select>
@@ -733,7 +739,7 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                                     </div>
                                 ))}
                                 {
-                                    state.cardData[0].bid_post_image.map((Item, index) => {
+                                    state.cardData && state.cardData[0].bid_post_image.map((Item, index) => {
                                         return (
 
                                             <><img src={`${imageBaseUrl}/public/offers/${Item.image}`} alt='postImage' style={{ width: '90px', height: "85px", borderRadius: '5px', objectFit: 'cover', marginLeft: '4px', border: "2px solid gray" }} /><ClearIcon className="imageClear" /></>
