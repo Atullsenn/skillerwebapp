@@ -250,7 +250,7 @@ const PostATasker = () => {
     const [fileLimit, setFileLimit] = useState(false);
 
 
-    console.log(state, "Stateeeer")
+   
 
     const getPhoneCallList = () => {
         axios.get(`${baseUrl}/get-phone-call`, {
@@ -453,6 +453,8 @@ const PostATasker = () => {
 
     const skil = state.skills.toString()
 
+    console.log(state.skills.length, "checkkjksdfjfklsdjfk")
+
 
     const handlePostTask = async () => {
         handleLoadingToggle()
@@ -478,9 +480,10 @@ const PostATasker = () => {
         formData.append('call_option[]', state.phoneCallId)
         formData.append('learningMethod_type', state.learningMethod)
 
-        // for(var pair of formData.entries()) {
-        //     console.log(pair[0]+ ', '+ pair[1], "rrrrrr");
-        //  }
+        for(var pair of formData.entries()) {
+            console.log(pair[0]+ ', '+ pair[1], "rrrrrr");
+         }
+         
 
         if (state.userDetail.isAutehnticate) {
             if (isToggle === 2) {
@@ -499,6 +502,7 @@ const PostATasker = () => {
                         }, 1500);
                     }
                     else {
+                       
                         if (state.postTitle === '') {
                             toast.error(response.data.error.postTitle[0], {
                                 theme: 'colored',
@@ -535,12 +539,12 @@ const PostATasker = () => {
                                 autoClose: 1000
                             })
                         } else if (state.skills.length === 0) {
-                            toast.error(response.data.error.skill[0], {
+                            toast.error('Please Enter skills', {
                                 theme: 'colored',
                                 autoClose: 1000
                             })
                         } else if (state.language.length === 0) {
-                            toast.error(response.data.error.language_id[0], {
+                            toast.error('Please Enter Language', {
                                 theme: 'colored',
                                 autoClose: 1000
                             })
@@ -549,7 +553,9 @@ const PostATasker = () => {
                                 theme: 'colored',
                                 autoClose: 1000
                             })
-                        } else (
+                        } 
+                       
+                        else (
                             toast.error(response.data.message, {
                                 theme: 'colored',
                                 autoClose: 1000

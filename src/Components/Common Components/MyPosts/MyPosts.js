@@ -181,7 +181,7 @@ const MyPosts = ({ state, setState, getAllPosts }) => {
 
     }
 
-    //console.log(state.cardData, "Checking show post dataa")
+    
 
     const setActiveClass = (id) => {
         let selectedCard = document.getElementById(`browse-card-${id}`)

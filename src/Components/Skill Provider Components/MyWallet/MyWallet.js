@@ -351,7 +351,7 @@ const MyWallet = () => {
                                             >
                                                 <MenuItem value={10}>All Transactions</MenuItem>
                                                 <MenuItem value={20}>Earning Transactions</MenuItem>
-                                                <MenuItem value={30}>Withdrawal Transactions</MenuItem>
+                                                {/* <MenuItem value={30}>Withdrawal Transactions</MenuItem> */}
                                                 <MenuItem value={40}>Pending Transactions</MenuItem>
                                             </Select>
                                         </FormControl>
@@ -434,7 +434,7 @@ const MyWallet = () => {
 
                         <div className='row left-main-Div'>
                                             
-                                            {state && state.length === 0 && <h3 className='text-center w-25 no-post-available'>No Withdraw History Available</h3>}
+                                            {withdrawHistory && withdrawHistory.length === 0 && <h3 className='text-center w-25 no-post-available'>No Withdraw History Available</h3>}
                                          </div> 
                                         </div>
                                     </Tab>
