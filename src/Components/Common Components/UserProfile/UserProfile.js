@@ -137,6 +137,8 @@ const UserProfile = () => {
         })
     }
 
+    console.log(state, "Check State")
+
     useEffect(() => {
         getUserProfileData()
     }, [])

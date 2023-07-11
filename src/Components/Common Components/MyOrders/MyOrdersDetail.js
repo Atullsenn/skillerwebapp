@@ -252,6 +252,9 @@ else{
     
   };
 
+  const adminUserId = localStorage.getItem('id')
+
+
 
 
     return (
@@ -394,7 +397,7 @@ else{
                         </div>
                         <div className='d-flex'>
                             <div className='d-flex align-items-center post-location-data w-50'>
-                                <NavLink to="/user-profile">
+                                <NavLink to={`/user-profile/${state.cardData[0].user_id}`}>
                                     {
                                         state.cardData[0].profile === '' || state.cardData[0].profile == null || state.cardData[0].profile === "no file upload" ? <Avatar src="/broken-image.jpg" /> : <Avatar src={`${imageBaseUrl}/public/profile/${state.cardData[0].profile}`} alt="user-img" className="img-circle" />
                                     }
@@ -405,7 +408,7 @@ else{
                                 </div>
                             </div>
                             <div className='d-flex align-items-center post-location-data w-50'>
-                                <NavLink to="/user-profile">
+                                <NavLink to={`/user-profile/${adminUserId}`}>
                                     {
                                         state.cardData[0].bids[0]?.profile === '' || state.cardData[0].bids[0]?.profile == null || state.cardData[0].bids[0]?.profile === "no file upload" ? <Avatar src="/broken-image.jpg" /> : <Avatar src={`${imageBaseUrl}/public/profile/${state.cardData[0].bids[0]?.profile}`} alt="user-img" className="img-circle" />
                                     }
