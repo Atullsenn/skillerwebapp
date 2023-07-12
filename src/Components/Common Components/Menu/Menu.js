@@ -378,7 +378,6 @@ useEffect(() => {
   );
 
  
-
 const providerChat = onSnapshot(qe, (QuerySnapshot) => {
   let messages = [];
   QuerySnapshot.forEach((doc) => {

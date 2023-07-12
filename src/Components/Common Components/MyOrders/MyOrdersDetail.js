@@ -36,6 +36,8 @@ import {Button} from "react-bootstrap";
 import { TextareaAutosize } from "@mui/material";
 import DuoIcon from '@mui/icons-material/Duo';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
+import CancelIcon from '@mui/icons-material/Cancel';
+
 
 const MyOrdersDetail = ({ state, setState, getMyOrderList, abc }) => {
     const [open, setOpen] = useState(false);
@@ -255,6 +257,46 @@ else{
   const adminUserId = localStorage.getItem('id')
 
 
+  const [cancelPost, setCancelPost] = useState(false)
+  const [cancelReson, setCancelReson] = useState(false)
+
+  const handleOpenCancelPost = ()=>{
+    setCancelPost(true)
+  }
+
+  const handleCloseCancelPost = ()=>{
+    setCancelPost(false)
+  }
+
+  const handleOpenCancelReson = ()=>{
+    setCancelReson(true)
+    handleCloseCancelPost()
+  }
+
+  const handleCloseCancelReson = ()=>{
+    setCancelReson(false)
+  }
+
+
+  const userCancelPost = ()=>{
+
+    let request = {
+     user: ''
+    }
+
+    axios.post('',request).then((response)=>{
+       console.log(response, 'Check response')
+       toast.success('This post has been disputed successfully',{
+        autoClose: 1000,
+        theme: 'colored'
+       })
+    }).catch((error)=>{
+      console.log(error)
+    })
+  }
+
+ 
+
 
 
     return (
@@ -408,11 +450,18 @@ else{
                                 </div>
                             </div>
                             <div className='d-flex align-items-center post-location-data w-50'>
+                              {localStorage.getItem('userType') == '2'?
                                 <NavLink to={`/user-profile/${adminUserId}`}>
                                     {
                                         state.cardData[0].bids[0]?.profile === '' || state.cardData[0].bids[0]?.profile == null || state.cardData[0].bids[0]?.profile === "no file upload" ? <Avatar src="/broken-image.jpg" /> : <Avatar src={`${imageBaseUrl}/public/profile/${state.cardData[0].bids[0]?.profile}`} alt="user-img" className="img-circle" />
                                     }
-                                </NavLink>
+                                </NavLink>:
+                                <NavLink to={`/user-profile/${state.cardData[0].bids[0].user_id}`}>
+                                {
+                                    state.cardData[0].bids[0]?.profile === '' || state.cardData[0].bids[0]?.profile == null || state.cardData[0].bids[0]?.profile === "no file upload" ? <Avatar src="/broken-image.jpg" /> : <Avatar src={`${imageBaseUrl}/public/profile/${state.cardData[0].bids[0]?.profile}`} alt="user-img" className="img-circle" />
+                                }
+                            </NavLink>
+}
                                 <div className='px-1 posted-area'>
                                     {state.cardData[0].status === 1?
                                     <p className='p-0 m-0'>ASSIGNED TO</p>:
@@ -487,11 +536,18 @@ else{
                             </div>
                         </div>
                         <div className='d-flex'>
-                            <div className='d-flex align-items-center post-location-data w-50'>
+                            {/* <div className='d-flex align-items-center post-location-data w-50'>
                                 <LocalAtmIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
                                     <p className='p-0 m-0'>PAYMENT</p>
                                     <a className='p-0 m-0'>{state.cardData[0].payment}</a>
+                                </div>
+                            </div> */}
+                            <div className='d-flex align-items-center post-location-data w-50'>
+                                <HourglassEmptyIcon className='icon-size' />
+                                <div className='px-1 posted-area'>
+                                    <p className='p-0 m-0'>URGENCY</p>
+                                    <a className='p-0 m-0'>{state.cardData[0].urgency}</a>
                                 </div>
                             </div>
                             <div className='d-flex align-items-center post-location-data w-50'>
@@ -503,13 +559,13 @@ else{
                             </div>
                         </div>
                         <div className='d-flex'>
-                            <div className='d-flex align-items-center post-location-data w-50'>
+                            {/* <div className='d-flex align-items-center post-location-data w-50'>
                                 <HourglassEmptyIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
                                     <p className='p-0 m-0'>URGENCY</p>
                                     <a className='p-0 m-0'>{state.cardData[0].urgency}</a>
                                 </div>
-                            </div>
+                            </div> */}
                            {state.cardData[0].learningMethod_type === 'Phone Call' || state.cardData[0].learningMethod_type === 'Text and Phone Call' ?
                             <div className='d-flex align-items-center post-location-data w-50'>
                                 <DuoIcon className='icon-size' />
@@ -603,16 +659,65 @@ else{
                         </div>
                     </div>
                     <div className="py-3 pt-0 d-flex justify-content-evenly align-items-center">
+                    <Dialog
+                                            fullWidth
+                                            open={cancelPost}
+                                            onClose={handleCloseCancelPost}
+                                            aria-labelledby="alert-dialog-title"
+                                            aria-describedby="alert-dialog-description"
+                                        >
+                                            <DialogTitle id="alert-dialog-title" className="text-center">
+                                                {"Are you sure want to cancel this post ?"}
+                                            </DialogTitle>
+                                            <DialogContent className='text-center p-0 m-0'>
+                                                <DialogContentText id="alert-dialog-description">
+                                                    <CancelIcon style={{ color: '#ff1919', fontSize: '100px' }} />
+                                                </DialogContentText>
+                                            </DialogContent>
+                                            <DialogActions className="text-center d-flex align-items-center justify-content-center">
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={handleOpenCancelReson}> Yes </button>
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleCloseCancelPost}> No </button>
+                                            </DialogActions>
+                                        </Dialog>
+
+
+                                        <Dialog
+                                            fullWidth
+                                            open={cancelReson}
+                                            // onClose={handleCloseCancelReson}
+                                            aria-labelledby="alert-dialog-title"
+                                            aria-describedby="alert-dialog-description"
+                                        >
+                                            <DialogTitle id="alert-dialog-title" className="text-center">
+                                                {"Why are you cancel this post give reason?"}
+                                            </DialogTitle>
+                                            <DialogContent className='text-center p-0 m-0'>
+                                                <DialogContentText id="alert-dialog-description">
+                                                    <div>
+                                                    <TextareaAutosize
+                                                     className="p-2 mt-4"
+                                                     aria-label="minimum height"
+                                                     minRows={3}
+                                                     style={{ width: "80%" }}
+                                                     placeholder="Enter reason for cancel post"
+                                                   />
+           
+                                                    </div>
+                                                </DialogContentText>
+                                            </DialogContent>
+                                            <DialogActions className="text-center d-flex align-items-center justify-content-center">
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={handleCloseCancelReson} > Submit</button>
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleCloseCancelReson}>Cancel</button>
+                                            </DialogActions>
+                                        </Dialog>
                         {state.cardData[0].status === 1 ?
                         <><Tooltip title="Cancel" placement="top-start">
                          
                           <div>
-                          {localStorage.getItem('userType') != 2 ?
-                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-3 d-flex justify-centent-center align-items-center">
+                                <button onClick={handleOpenCancelPost} className="btn btn-primary btn-lg btn-block make-an-offer-btn me-3 d-flex justify-centent-center align-items-center">
                                     Cancel <CancelPresentationIcon className="ms-2" />
                                 </button>
-                                :""
-                        }
+                               
                                 </div>
 
                             </Tooltip><Tooltip title="Complete" placement="top-start">
@@ -629,7 +734,7 @@ else{
                                             aria-describedby="alert-dialog-description"
                                         >
                                             <DialogTitle id="alert-dialog-title" className="text-center">
-                                                {"Are you sure you want to complete this post ?"}
+                                                {"Are you sure want to complete this post ?"}
                                             </DialogTitle>
                                             <DialogContent className='text-center p-0 m-0'>
                                                 <DialogContentText id="alert-dialog-description">

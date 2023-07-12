@@ -483,6 +483,7 @@ const CategoriesPost = ({ state, setState }) => {
                         <div>
                             <div className='one-box-card-area'>
                                 {state.allProviderList.map((item) => {
+                                    // console.log(item, "Checking Provider list")
                                     return (
                                         <>
                                             <div className='p-4 main-category-profile-card'>
@@ -498,7 +499,7 @@ const CategoriesPost = ({ state, setState }) => {
                                                         <h5 className='p-0 m-0'>{item.firstName}</h5>
                                                         <p className='p- m-0'>{item.lastName}</p>
                                                         <div className='d-flex align-items-center justify-content-end'>
-                                                            <Rating className='p-0 m-0 ratingFont' name="read-only" value={4} readOnly />
+                                                            <Rating className='p-0 m-0 ratingFont' name="read-only" value={item.rating} readOnly />
                                                         </div>
                                                     </div>
                                                 </div>

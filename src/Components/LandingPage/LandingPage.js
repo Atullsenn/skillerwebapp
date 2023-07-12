@@ -121,15 +121,16 @@ const LandingPage = () => {
     const learningMethodType = sessionStorage.getItem('learningMethod_type')
 
     // for (let i = 0; i < 6; i++) {
-    //     console.log(sessionStorage.getItem(`post_image[${i}]`), "Cheking phots issue")
+    //     console.log(sessionStorage.getItem(`img${i}`), "Cheking phots issue")
     //   }
+
     
 
     const handlePostTask = async () => {    
         const formData = new FormData();
         for (let i = 0; i < 6; i++) {
-            formData.append(`post_image[${i}]`,sessionStorage.getItem(`post_image[${i}]`));
-            console.log(sessionStorage.getItem(`post_image[${i}]`), "Cheking phots issue")
+            formData.append(`post_image[${i}]`,sessionStorage.getItem(`img${i}`));
+            console.log(sessionStorage.getItem(`img${i}`), "Cheking phots issue")
           }
        
         formData.append(`learning_image`, sessionStorage.getItem('learning_image'))

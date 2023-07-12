@@ -137,8 +137,7 @@ const UserProfile = () => {
         })
     }
 
-    console.log(state, "Check State")
-
+   
     useEffect(() => {
         getUserProfileData()
     }, [])
@@ -158,6 +157,8 @@ const UserProfile = () => {
             return diffDays + " Days Ago ";
         }
     }
+
+
 
     return (
         <>
