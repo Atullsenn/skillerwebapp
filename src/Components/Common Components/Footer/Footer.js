@@ -11,10 +11,12 @@ import AttachEmailIcon from '@mui/icons-material/AttachEmail';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import axios from 'axios';
 import { baseUrl } from '../../../Url/url';
+import moment from 'moment';
 
 const Footer = () => {
     const [popularCategoryList, setPopularCategoryList] = useState([])
     const [contactInfo, setContactInfo] = useState([])
+    const newYear = moment().format('YYYY')
 
     const ScrollTop = () => {
         document.documentElement.scrollTo({
@@ -59,6 +61,10 @@ const Footer = () => {
     useEffect(() => {
         getContactInformation()
     }, [])
+
+
+  
+    
 
     return (
         <footer className="site-footer footer-light">
@@ -135,7 +141,7 @@ const Footer = () => {
                         <div className="sf-f-logo"><a href="javascript:void(0);"><img src={Images.logodark} alt="" /></a>
                         </div>
                         <div className="sf-f-copyright">
-                            <span>Copyright 2022 | Skiller. All Rights Reserved</span>
+                            <span>Copyright 2022 - {newYear} | Skiller. All Rights Reserved</span>
                         </div>
                         <div className="sf-f-social">
                             <ul className="socila-box">
