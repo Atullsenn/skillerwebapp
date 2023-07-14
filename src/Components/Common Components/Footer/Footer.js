@@ -12,10 +12,13 @@ import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArro
 import axios from 'axios';
 import { baseUrl } from '../../../Url/url';
 import moment from 'moment';
+import CopyrightIcon from '@mui/icons-material/Copyright';
+import {toast} from 'react-toastify'
 
 const Footer = () => {
     const [popularCategoryList, setPopularCategoryList] = useState([])
     const [contactInfo, setContactInfo] = useState([])
+    const [email, setEmail] = useState('')
     const newYear = moment().format('YYYY')
 
     const ScrollTop = () => {
@@ -62,9 +65,50 @@ const Footer = () => {
         getContactInformation()
     }, [])
 
-
-  
     
+   
+    // Subscribe news letter api
+    const subscribeNewsLetter = (e)=>{
+        e.preventDefault()
+        let request = {
+            email: email
+        }
+
+        if(email == ""){
+            toast.error('Please Enter email',{
+                autoClose:1000,
+                theme: 'colored'
+            })
+        }
+
+        else{
+        
+        axios.post(`${baseUrl}/subscribe-newsletter`,request).then((response)=>{
+            if(response.data.message === 'Email already exist !!'){
+                toast.success('Thankyou for subscribe',{
+                    autoClose: 1000,
+                    theme: 'colored'
+                })
+            }
+            if(response.data.error){
+                toast.error(response.data.error.email[0],{
+                    autoClose: 1000,
+                    theme: 'colored'
+                })
+            }
+            if(response.data.success === true){
+                toast.success('Thankyou for subscribe',{
+                    autoClose: 1000,
+                    theme: 'colored'
+                })
+            }
+        }).catch((error)=>{
+            console.log(error)
+        })
+    }
+    
+    }
+
 
     return (
         <footer className="site-footer footer-light">
@@ -74,8 +118,8 @@ const Footer = () => {
                         <span>Subscribe Our Newsletter</span>
                         <form>
                             <div className="form-group sf-news-l-form">
-                                <input type="text" className="form-control" placeholder="Enter Your Email" />
-                                <button type="submit" className="sf-sb-btn">Submit</button>
+                                <input onChange={(event)=>{setEmail(event.target.value)}} type="text" className="form-control" placeholder="Enter Your Email" />
+                                <button onClick={subscribeNewsLetter} type="submit" className="sf-sb-btn">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -141,7 +185,7 @@ const Footer = () => {
                         <div className="sf-f-logo"><a href="javascript:void(0);"><img src={Images.logodark} alt="" /></a>
                         </div>
                         <div className="sf-f-copyright">
-                            <span>Copyright 2022 - {newYear} | Skiller. All Rights Reserved</span>
+                            <span>Copyright 2022 - {newYear} <CopyrightIcon/> | Skiller. All Rights Reserved</span>
                         </div>
                         <div className="sf-f-social">
                             <ul className="socila-box">

@@ -12,6 +12,7 @@ const defaultState = {
     myOrderList: [],
     inProgress: [],
     completed: [],
+    disputed:[],
     postImages:[],
     offerImages:[],
     chatPostId: null,
@@ -72,8 +73,16 @@ const MyOrdersLayout = () => {
             return completedElement.order_status === 1
         })
 
-        setState((prevState) => ({ ...prevState, inProgress: inProgress, completed: completedArray }))
+        let disputedArray = state.myOrderList.filter(function(disputedElement){
+            return disputedElement.order_status === 2
+        })
+
+        setState((prevState) => ({ ...prevState, inProgress: inProgress, completed: completedArray, disputed: disputedArray }))
     }, [state.myOrderList])
+
+
+    //console.log(state.disputed, "Check myorder list")
+
 
     return (
         <>

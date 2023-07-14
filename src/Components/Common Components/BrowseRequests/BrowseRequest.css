@@ -193,6 +193,7 @@
 #fill-tab-example-tab-Pending.active,
 #fill-tab-example-tab-In-Progress.active,
 #fill-tab-example-tab-Cancelled.active,
+#fill-tab-example-tab-Disputed.active,
 #fill-tab-example-tab-Completed.active {
     border: 1px solid #188dc7;
     border-bottom: 3px solid #188dc7;
@@ -203,6 +204,7 @@
 #fill-tab-example-tab-Pending,
 #fill-tab-example-tab-In-Progress,
 #fill-tab-example-tab-Cancelled,
+#fill-tab-example-tab-Disputed,
 #fill-tab-example-tab-Completed {
     color: gray;
 }

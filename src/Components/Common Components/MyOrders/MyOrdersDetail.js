@@ -45,21 +45,8 @@ const MyOrdersDetail = ({ state, setState, getMyOrderList, abc }) => {
     const [review, setReview] = useState("")
     const [userRating, setUserRating] = useState(0)
     const [openCompleteModal, setOpenCompleteModal] = useState(false);
-    // const checkPostTime = (createdDate) => {
-    //     var today = new Date();
-    //     var postCreatedDate = new Date(createdDate);
-    //     var diffMs = (today - postCreatedDate);
-    //     var diffDays = Math.floor(diffMs / 86400000);
-    //     var diffHrs = Math.floor((diffMs % 86400000) / 3600000);
-    //     var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
-    //     if (diffDays === 0 && diffHrs === 0) {
-    //         return diffMins + " Minutes Ago";
-    //     } else if (diffDays === 0 && diffHrs != 0) {
-    //         return diffHrs + " Hours Ago";
-    //     } else if (diffDays != 0 && diffHrs != 0) {
-    //         return diffDays + " Days Ago ";
-    //     }
-    // }
+    const [reason, setReason] = useState('')
+   
 
 
     const checkPostTime = (createdDate) => {
@@ -277,23 +264,47 @@ else{
     setCancelReson(false)
   }
 
+  
+   
 
   const userCancelPost = ()=>{
-
     let request = {
-     user: ''
+      seeker_id: state.cardData[0].user_id,
+      post_id:state.cardData[0].post_id,
+      provider_id:state.cardData[0].bids[0].user_id,
+      description:reason,
+      amount:state.cardData[0].bids[0].budget,
+      userType:localStorage.getItem('userType')
     }
 
-    axios.post('',request).then((response)=>{
-       console.log(response, 'Check response')
+    if(reason == ""){
+      toast.warn('Please enter reason',{
+        autoClose: 1000,
+        theme: 'colored'
+      })
+    }
+
+    else{
+
+    axios.post(`${baseUrl}/post-in-dispute`,request).then((response)=>{
+      getMyOrderList()
        toast.success('This post has been disputed successfully',{
         autoClose: 1000,
         theme: 'colored'
        })
+       handleCloseCancelReson()
+       if(state.cardData[0].status === 4){
+        setState((prevState) => ({ ...prevState, cardDetail: false, defaultActiveKey: 'Disputed' }));
+      } 
+    
     }).catch((error)=>{
       console.log(error)
     })
   }
+  }
+
+  //console.log(state.cardData[0], "Check dataaaaaaaa")
+  
 
 
     return (
@@ -425,7 +436,7 @@ else{
                     <div className='col-lg-8'>
                         <div className='d-flex align-items-center justify-content-between task-status-main-area p-2'>
                             <div className='d-flex align-items-center task-status-area'>
-                                <p className='task-status d-flex align-items-center'>{state.cardData[0].status === 1 ? 'In Progress' : state.cardData[0].status === 3 && 'Completed'}</p>
+                                <p className='task-status d-flex align-items-center'>{state.cardData[0].status === 1 ? 'In Progress' : state.cardData[0].status === 3 ? 'Completed': state.cardData[0].dispute_status === 'Pending' && 'Pending'}</p>
                             </div> 
                             {state.cardData[0].status === 3 && state.cardData[0].check_rating === 0?
                                  <button onClick={handleClickOpenRatingModal} className='btn btn-primary btn-lg btn-block make-an-offer-btn' >Rating and Review</button>
@@ -697,13 +708,14 @@ else{
                                                      minRows={3}
                                                      style={{ width: "80%" }}
                                                      placeholder="Enter reason for cancel post"
+                                                     onChange={(e)=>{setReason(e.target.value)}}
                                                    />
            
                                                     </div>
                                                 </DialogContentText>
                                             </DialogContent>
                                             <DialogActions className="text-center d-flex align-items-center justify-content-center">
-                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={handleCloseCancelReson} > Submit</button>
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={userCancelPost} > Submit</button>
                                                 <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleCloseCancelReson}>Cancel</button>
                                             </DialogActions>
                                         </Dialog>
@@ -717,7 +729,7 @@ else{
                                
                                 </div>
 
-                            </Tooltip><Tooltip title="Complete" placement="top-start">
+                            </Tooltip><Tooltip title="Completeee" placement="top-start">
                                 {localStorage.getItem('userType') == 1 ? 
                                     <div>
                                         <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-3 d-flex justify-centent-center align-items-center" onClick={handleClickOpenn}>
@@ -748,7 +760,7 @@ else{
 
                                     <div>
                                         <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-3 d-flex justify-centent-center align-items-center" onClick={handleClickOpenn}>
-                                            Complete <LibraryAddCheckIcon className="ms-2" />
+                                            Complete<LibraryAddCheckIcon className="ms-2" />
                                         </button>
                                         <Dialog
                                             fullWidth

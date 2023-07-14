@@ -2,6 +2,8 @@ import React from "react";
 import Images from "../../../Images/Image";
 import "../LandingPage.css";
 import { NavLink } from "react-router-dom";
+import { landingPageData } from "../../../data";
+
 
 const Banner = () => {
     return (
@@ -16,14 +18,14 @@ const Banner = () => {
                     <div className="aon-banner-text">
                         <div className="container">
                             <div className="aon-bnr-write">
-                                <h2 className="text-top-line">Skiller <span className="text-secondry">Services</span> & </h2>
-                                <h2 className="text-bot-line">Get starting a work done..</h2>
+                                <h2 className="text-top-line">{landingPageData.landingPageTitleOne} <span className="text-secondry">{landingPageData.landingPageTitleTwo}</span> {landingPageData.landingPageTitleThree} </h2>
+                                <h2 className="text-bot-line">{landingPageData.landingPageTitleFour}</h2>
                             </div>
                             <div className="row justify-content-center">
                                 <div className="col-lg-8">
                                     <div className="bannerBtn">
-                                        <NavLink to="/post-a-task" className="PostyourtaskforfreeBtn">Post your task for free</NavLink>
-                                        <NavLink to="/browse-requests">Earn money as a Tasker</NavLink>
+                                        <NavLink to="/post-a-task" className="PostyourtaskforfreeBtn">{landingPageData.navlinkTitleOne}</NavLink>
+                                        <NavLink to="/browse-requests">{landingPageData.navlinkTitleTwo}</NavLink>
                                     </div>
                                 </div>
                             </div>

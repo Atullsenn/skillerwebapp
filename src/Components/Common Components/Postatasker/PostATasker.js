@@ -989,8 +989,8 @@ const PostATasker = () => {
                                             <p>o Verification of expected result</p>
                                         </div>
 <div>
-                                        <input onChange={(e)=>{localImagee(e)}} type="file" id="filetag" multiple accept=".jpg,.jpeg,.png,.gif"/>
-                                         <img id="preview"/>
+                                        {/* <input onChange={(e)=>{localImagee(e)}} type="file" id="filetag" multiple accept=".jpg,.jpeg,.png,.gif"/>
+                                         <img id="preview"/> */}
                                          </div>
                                         {/* <div className='post-a-tasker-upload-file-section-area'>
                                             <label style={{ width: "100%", height: "150px", border: "2px solid #188dc7", padding: "20px", borderRadius: '10px' }}>
