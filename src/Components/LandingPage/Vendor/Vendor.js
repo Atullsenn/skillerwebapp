@@ -13,6 +13,8 @@ import "../LandingPage.css";
 import { NavLink } from 'react-router-dom';
 import { imageBaseUrl } from "../../../Url/url";
 import { Rating } from '@mui/material';
+import { landingPageData } from '../../../data';
+
 
 const Vendor = ({ state }) => {
 
@@ -22,11 +24,11 @@ const Vendor = ({ state }) => {
                 <div className="section-head">
                     <div className="row">
                         <div className="col-lg-6 col-md-12">
-                            <span className="aon-sub-title">VENDOR</span>
-                            <h2 className="aon-title">Featured Providers</h2>
+                            <span className="aon-sub-title">{landingPageData.vendor}</span>
+                            <h2 className="aon-title">{landingPageData.featuredProviders}</h2>
                         </div>
                         <div className="col-lg-6 col-md-12">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do usmod tempor incididunt ut labore et dolore magna aliqua.sed do usmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>{landingPageData.vendorDescription}</p>
                         </div>
                     </div>
                 </div>
@@ -76,7 +78,7 @@ const Vendor = ({ state }) => {
                                                         </div>
                                                     </div>
                                                     <div className="aon-ow-bottom">
-                                                        <a>Request A Quote</a>
+                                                        <a>{landingPageData.vendorLink}</a>
                                                     </div>
                                                 </div>
                                             </div>

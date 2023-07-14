@@ -10,6 +10,7 @@ import { NavLink } from "react-router-dom";
 import { IsToggleTypeContext } from "../../../Contexts/IsToggleContext";
 import { imageBaseUrl } from "../../../Url/url";
 import { IsLoginAuthenticateContext } from "../../../Contexts/LoginContext";
+import { landingPageData } from "../../../data";
 
 const Categories = ({ state }) => {
     const [isToggle, setIsToggle] = useContext(IsToggleTypeContext)
@@ -23,11 +24,11 @@ const Categories = ({ state }) => {
                     <div className="section-head">
                         <div className="row">
                             <div className="col-lg-6 col-md-12">
-                                <span className="aon-sub-title">categories</span>
-                                <h2 className="aon-title">Popular Categories</h2>
+                                <span className="aon-sub-title">{landingPageData.categories}</span>
+                                <h2 className="aon-title">{landingPageData.PopularCategories}</h2>
                             </div>
                             <div className="col-lg-6 col-md-12">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do usmod tempor incididunt ut labore et dolore magna aliqua.sed do usmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>{landingPageData.categoriesTitle}</p>
                             </div>
                         </div>
                     </div>

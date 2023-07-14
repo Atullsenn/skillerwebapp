@@ -14,6 +14,7 @@ import { baseUrl } from '../../../Url/url';
 import moment from 'moment';
 import CopyrightIcon from '@mui/icons-material/Copyright';
 import {toast} from 'react-toastify'
+import { landingPageData } from '../../../data';
 
 const Footer = () => {
     const [popularCategoryList, setPopularCategoryList] = useState([])
@@ -115,7 +116,7 @@ const Footer = () => {
             <div className="footer-top-newsletter">
                 <div className="container">
                     <div className="sf-news-letter">
-                        <span>Subscribe Our Newsletter</span>
+                        <span>{landingPageData.FooterTitleOne}</span>
                         <form>
                             <div className="form-group sf-news-l-form">
                                 <input onChange={(event)=>{setEmail(event.target.value)}} type="text" className="form-control" placeholder="Enter Your Email" />
@@ -130,7 +131,7 @@ const Footer = () => {
                     <div className="row">
                         <div className="col-lg-4 col-md-6 col-sm-6  m-b30 d-flex justify-content-center">
                             <div className="sf-site-link sf-widget-link">
-                                <h4 className="sf-f-title">Site Links</h4>
+                                <h4 className="sf-f-title">{landingPageData.FooterTitleTwo}</h4>
                                 <ul>
                                     <li onClick={() => { ScrollTop() }}><NavLink to="/"><KeyboardDoubleArrowRightIcon /> Home</NavLink></li>
                                     <li><NavLink to="/contact-us"><KeyboardDoubleArrowRightIcon /> Contact Us</NavLink></li>

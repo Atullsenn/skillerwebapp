@@ -1,6 +1,7 @@
 import React from 'react'
 import Images from "../../../Images/Image";
 import "../LandingPage.css";
+import { landingPageData } from '../../../data';
 
 const HowItsWork = () => {
     return (
@@ -9,8 +10,8 @@ const HowItsWork = () => {
                 <div className="section-content">
                     <div className="row">
                         <div className="col-lg-4 col-md-12">
-                            <span className="aon-sub-title">Steps</span>
-                            <h2 className="sf-title">How Skiller Services Works</h2>
+                            <span className="aon-sub-title">{landingPageData.Steps}</span>
+                            <h2 className="sf-title">{landingPageData.StepsTitleOne}</h2>
                         </div>
                         <div className="col-lg-8 col-md-12">
                             <div className="aon-step-blocks">
@@ -23,8 +24,8 @@ const HowItsWork = () => {
                                                 </span>
                                             </div>
                                             <div className="aon-step-info">
-                                                <h4 className="aon-title">Describe Your Task</h4>
-                                                <p>This helps us determine which Taskers are abest job.</p>
+                                                <h4 className="aon-title">{landingPageData.DescribeTitle}</h4>
+                                                <p>{landingPageData.DescribeDescription}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -36,8 +37,8 @@ const HowItsWork = () => {
                                                 </span>
                                             </div>
                                             <div className="aon-step-info">
-                                                <h4 className="aon-title">Choose a Tasker</h4>
-                                                <p>This helps us determine which Taskers are abest job.</p>
+                                                <h4 className="aon-title">{landingPageData.chooseTaskTitle}</h4>
+                                                <p>{landingPageData.chooseTaskDescription}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -49,8 +50,8 @@ const HowItsWork = () => {
                                                 </span>
                                             </div>
                                             <div className="aon-step-info">
-                                                <h4 className="aon-title">Live Smarter</h4>
-                                                <p>This helps us determine which Taskers are abest job.</p>
+                                                <h4 className="aon-title">{landingPageData.liveSmarterTitle}</h4>
+                                                <p>{landingPageData.liveSmarterDescription}</p>
                                             </div>
                                         </div>
                                     </div>

@@ -1,6 +1,7 @@
 import React from 'react'
 import Images from "../../../Images/Image";
 import "../LandingPage.css";
+import { landingPageData } from '../../../data';
 
 const ChooseUs = () => {
     return (
@@ -13,9 +14,9 @@ const ChooseUs = () => {
                                 <div className="section-head">
                                     <div className="row">
                                         <div className="col-md-12  margin-b-50">
-                                            <span className="aon-sub-title">Choose</span>
-                                            <h2 className="sf-title">Why Choose us</h2>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                            <span className="aon-sub-title">{landingPageData.chooseTitleOne}</span>
+                                            <h2 className="sf-title">{landingPageData.chooseTitleTwo}</h2>
+                                            <p>{landingPageData.chooseTitleThree}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -26,8 +27,8 @@ const ChooseUs = () => {
                                         </span>
                                     </div>
                                     <div className="sf-w-choose-info">
-                                        <h4 className="sf-title">Meet new customers</h4>
-                                        <p>Suspendisse tincidunt rutrum ante. Vestibulum elementum ipsum sit amet turpis elementum lobortis.</p>
+                                        <h4 className="sf-title">{landingPageData.chooseTitleFour}</h4>
+                                        <p>{landingPageData.chooseTitleFive}</p>
                                     </div>
                                 </div>
                                 <div className="sf-w-choose margin-b-20">
@@ -37,8 +38,8 @@ const ChooseUs = () => {
                                         </span>
                                     </div>
                                     <div className="sf-w-choose-info">
-                                        <h4 className="sf-title">Grow your revenue</h4>
-                                        <p>Suspendisse tincidunt rutrum ante. Vestibulum elementum ipsum sit amet turpis elementum lobortis.</p>
+                                        <h4 className="sf-title">{landingPageData.chooseTitleSix}</h4>
+                                        <p>{landingPageData.chooseTitleSeven}</p>
                                     </div>
                                 </div>
                                 <div className="sf-w-choose">
@@ -48,8 +49,8 @@ const ChooseUs = () => {
                                         </span>
                                     </div>
                                     <div className="sf-w-choose-info">
-                                        <h4 className="sf-title">Build your online reputation</h4>
-                                        <p>Suspendisse tincidunt rutrum ante. Vestibulum elementum ipsum sit amet turpis elementum lobortis.</p>
+                                        <h4 className="sf-title">{landingPageData.chooseTitleEight}</h4>
+                                        <p>{landingPageData.chooseTitleNine}</p>
                                     </div>
                                 </div>
                             </div>

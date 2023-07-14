@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom';
 import "../LandingPage.css";
 import { imageBaseUrl } from "../../../Url/url";
+import { landingPageData } from '../../../data';
 
 const News = ({ state }) => {
     return (
@@ -10,11 +11,11 @@ const News = ({ state }) => {
                 <div className="section-head">
                     <div className="row">
                         <div className="col-lg-6 col-md-12">
-                            <span className="aon-sub-title">News</span>
-                            <h2 className="sf-title">Recent News Articles</h2>
+                            <span className="aon-sub-title">{landingPageData.newsTitleOne}</span>
+                            <h2 className="sf-title">{landingPageData.newsTitleTwo}</h2>
                         </div>
                         <div className="col-lg-6 col-md-12">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do usmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>{landingPageData.newsTitleThree}</p>
                         </div>
                     </div>
                 </div>
@@ -30,8 +31,8 @@ const News = ({ state }) => {
                                             </div>
                                             <div className="aon-post-meta">
                                                 <ul>
-                                                    <li className="aon-post-category">Latest</li>
-                                                    <li className="aon-post-author">By |<span>Admin</span></li>
+                                                    <li className="aon-post-category">{landingPageData.newsTitleFour}</li>
+                                                    <li className="aon-post-author">{landingPageData.newsTitleFive}<span>{landingPageData.newsTitleSix}</span></li>
                                                 </ul>
                                             </div>
                                             <div className="aon-post-info">
@@ -40,7 +41,7 @@ const News = ({ state }) => {
                                                     <p className='post-title-in-cardsection'>{item.description}</p>
                                                 </div>
                                                 <div className='d-flex align-items-center justify-content-center'>
-                                                    <NavLink to={`/news-detail/${item.id}`} className='blog-read-more-btn'>Read more</NavLink>
+                                                    <NavLink to={`/news-detail/${item.id}`} className='blog-read-more-btn'>{landingPageData.newsTitleSeven}</NavLink>
                                                 </div>
                                             </div>
                                         </div>

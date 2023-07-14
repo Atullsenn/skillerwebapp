@@ -3,6 +3,7 @@ import "../LandingPage.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import { imageBaseUrl } from "../../../Url/url";
+import { landingPageData } from '../../../data';
 
 const Testimonial = ({ state }) => {
 
@@ -12,12 +13,11 @@ const Testimonial = ({ state }) => {
                 <div className="section-head">
                     <div className="row">
                         <div className="col-lg-6 col-md-12">
-                            <span className="sf-sub-title">Testimonial</span>
-                            <h2 className="sf-title">What People Say</h2>
+                            <span className="sf-sub-title">{landingPageData.testimonialTitleOne}</span>
+                            <h2 className="sf-title">{landingPageData.testimonialTitleTwo}</h2>
                         </div>
                         <div className="col-lg-6 col-md-12">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do usmod tempor incididunt
-                                ut labore et dolore magna aliqua.</p>
+                            <p>{landingPageData.testimonialTitleThree}</p>
                         </div>
                     </div>
                 </div>

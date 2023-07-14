@@ -1,6 +1,7 @@
 import React from 'react'
 import "../LandingPage.css";
 import CountUp from 'react-countup';
+import { landingPageData } from '../../../data';
 
 const StaticsCounter = ({ state }) => {
     return (
@@ -10,9 +11,9 @@ const StaticsCounter = ({ state }) => {
                     <div className="row">
                         <div className="col-md-5">
                             <div className="section-head">
-                                <span className="aon-sub-title">Statics</span>
-                                <h2 className="sf-title">Trusted by thousands of people all over the world</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. </p>
+                                <span className="aon-sub-title">{landingPageData.staticTitleOne}</span>
+                                <h2 className="sf-title">{landingPageData.staticTitleTwo}</h2>
+                                <p>{landingPageData.staticTitleThree} </p>
                             </div>
                         </div>
                         <div className="col-md-7">
@@ -27,7 +28,7 @@ const StaticsCounter = ({ state }) => {
                                             >
                                             </CountUp>
                                         </span>
-                                        <h6>Providers</h6>
+                                        <h6>{landingPageData.providers}</h6>
                                     </div>
                                     <div className="counter purple mt-3">
                                         <span className="counter-value">
@@ -38,7 +39,7 @@ const StaticsCounter = ({ state }) => {
                                             >
                                             </CountUp>
                                         </span>
-                                        <h6>Customer</h6>
+                                        <h6>{landingPageData.customers}</h6>
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-sm-6">
@@ -51,7 +52,7 @@ const StaticsCounter = ({ state }) => {
                                             >
                                             </CountUp>
                                         </span>
-                                        <h6>Jobs</h6>
+                                        <h6>{landingPageData.jobs}</h6>
                                     </div>
                                     <div className="counter purple mt-3">
                                         <span className="counter-value">
@@ -62,7 +63,7 @@ const StaticsCounter = ({ state }) => {
                                             >
                                             </CountUp>
                                         </span>
-                                        <h6>Categories</h6>
+                                        <h6>{landingPageData.category}</h6>
                                     </div>
                                 </div>
                             </div>
