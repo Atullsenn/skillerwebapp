@@ -241,7 +241,7 @@ const MyPostsDetail = ({
   };
 
   const [editPost, setEditPost] = useState(editDefaultState);
-  console.log(editPost.dueDateee, "Edit posttt")
+  //console.log(editPost.dueDateee, "Edit posttt")
   
   const isEnabled =
     editPost.postTitle != "" &&
@@ -285,6 +285,8 @@ const MyPostsDetail = ({
           amount: state.bidDetailData.budget,
           description: description,
         };
+
+        // console.log(request, "Check request")
         handleBidRejectClose();
         axios
           .post(baseUrl + "/on-bid-reject", request, {
@@ -292,14 +294,16 @@ const MyPostsDetail = ({
             "Content-Type": "application/json",
           })
           .then((response) => {
+            //console.log(response, "Check Response")
             toast.success("Offer rejected successfully", {
               theme: "colored",
               autoClose: 1000,
             });
-            getAllPosts();
+            getPostDetail();
+            
           })
           .catch((error) => {
-            toast.success("Some Error Occured", {
+            toast.error("Some Error Occured", {
               theme: "colored",
               autoClose: 1000,
             });

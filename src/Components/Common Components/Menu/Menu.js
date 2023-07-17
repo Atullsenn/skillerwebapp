@@ -48,6 +48,7 @@ import {
 import { alpha, styled } from '@mui/material/styles';
 import { pink } from '@mui/material/colors';
 import Toggle from 'react-bootstrap-toggle';
+import { menuData } from "../../../data";
 
 const defaultState = {
   categories: '',
@@ -377,6 +378,8 @@ useEffect(() => {
     orderBy('createdAt'),
   );
 
+  // console.log(bidAccept, "Checking Bid Accepttttt")
+
  
 const providerChat = onSnapshot(qe, (QuerySnapshot) => {
   let messages = [];
@@ -493,10 +496,10 @@ const redirectNotification = (notification_type)=>{
               <div className="collapse navbar-collapse navigation" id="navbarCollapse" >
                 <ul className="navbar-nav me-auto mb-2 mb-md-0 main-menu-ul">
                   <li className="nav-item">
-                    <NavLink className="nav-link postATaskbtn" aria-current="page" to="/post-a-task"> Post a task </NavLink>
+                    <NavLink className="nav-link postATaskbtn" aria-current="page" to="/post-a-task"> {menuData.menuTitleOne} </NavLink>
                   </li>
                   <li className="nav-item">
-                    <NavLink  className="nav-link" to="/how-it-works"> How it works </NavLink>
+                    <NavLink  className="nav-link" to="/how-it-works"> {menuData.menuTitleTwo} </NavLink>
                   </li>
                   <li className="nav-item dropdown">
                     <a className={`nav-link dropdown ${state.categories}`} data-bs-toggle="dropdown"
@@ -516,8 +519,8 @@ const redirectNotification = (notification_type)=>{
                       </div>
                     </div>
                   </li>
-                  <li className="nav-item"><NavLink  className="nav-link" to="/browse-requests"> Browse requests </NavLink> </li>
-                  <li className="nav-item"> <NavLink  className="nav-link" to="/contact-us">  Contact Us </NavLink> </li>
+                  <li className="nav-item"><NavLink  className="nav-link" to="/browse-requests"> {menuData.menuTitleThree} </NavLink> </li>
+                  <li className="nav-item"> <NavLink  className="nav-link" to="/contact-us">  {menuData.menuTitleFour} </NavLink> </li>
                 </ul>
                 <div className="d-flex">
                    
@@ -535,7 +538,7 @@ const redirectNotification = (notification_type)=>{
                         </div>
                         <div className="Notification-dropdown-content Notification-dropdown-massege-box-area" style={{ display: state.showHideNotificationArea }}>
                           <div className="px-2 d-flex align-items-center justify-content-between">
-                            <h5 className="p-0 m-0">Notifications</h5>
+                            <h5 className="p-0 m-0">{menuData.menuTitleFive}</h5>
                             {notificationData?.length ?
                               <button className="notification-clear-all-btn" onClick={removeNotification}> Clear all </button>
                               : ""}

@@ -20,6 +20,8 @@ import StarIcon from '@mui/icons-material/Star';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 import { styled } from '@mui/material/styles';
 import ReviewsIcon from '@mui/icons-material/Reviews';
+ import { howItWorkData, howItWorksData } from '../../../data';
+
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -85,32 +87,7 @@ const Howitwork = () => {
         setValue(newValue);
     };
 
-    const howItWorksData = [
-        {
-            head: 'What do you need done?',
-            icon: <CheckIcon className='icon-size' />,
-        },
-        {
-            head: 'Create An Account',
-            icon: <Person3Icon className='icon-size' />,
-        },
-        {
-            head: 'Create your profile (it’s free)',
-            icon: <GroupIcon className='icon-size' />,
-        },
-        {
-            head: 'Post your task',
-            icon: <TaskIcon className='icon-size' />,
-        },
-        {
-            head: 'Choose the best person for you',
-            icon: <PersonSearchIcon className='icon-size' />,
-        },
-        {
-            head: 'Task completed',
-            icon: <AssignmentTurnedInIcon className='icon-size' />,
-        },
-    ]
+    
 
     const postATaskerData = [
         {
@@ -149,7 +126,7 @@ const Howitwork = () => {
         <>
             <Menu />
             <section >
-                <Banner imgSource={Images.bannerBgWebp} text="How its work" />
+                <Banner imgSource={Images.bannerBgWebp} text={howItWorkData.workTitleOne} />
                 <div className='how-work-all-box-area'>
                     <div className='container'>
                         <div className='row'>
@@ -162,7 +139,8 @@ const Howitwork = () => {
                                             </div>
                                             <div className='how-work-box-content'>
                                                 <h2>{item.head}</h2>
-                                                <p>Post any task you need from cleaning to web design in only two minutes – for free! There's no obligation to hire.</p>
+                                                <p>{item.description}</p>
+                                                {/* <p>{howItWorkData.workTitleTwo}</p> */}
                                             </div>
                                         </div>
                                     </div>
@@ -185,11 +163,11 @@ const Howitwork = () => {
                                     allowScrollButtonsMobile
                                     aria-label="scrollable force tabs example"
                                 >
-                                    <Tab label="post your tasker" {...a11yProps(0)} />
-                                    <Tab label="customer support" {...a11yProps(1)} />
-                                    <Tab label="Rating & reviews" {...a11yProps(2)} />
-                                    <Tab label="Communication" {...a11yProps(3)} />
-                                    <Tab label="skiller pay" {...a11yProps(4)} />
+                                    <Tab label={howItWorkData.workTitleThree} {...a11yProps(0)} />
+                                    <Tab label={howItWorkData.workTitleFour} {...a11yProps(1)} />
+                                    <Tab label={howItWorkData.workTitleFive} {...a11yProps(2)} />
+                                    <Tab label={howItWorkData.workTitleSix} {...a11yProps(3)} />
+                                    <Tab label={howItWorkData.workTitleSeven} {...a11yProps(4)} />
                                 </Tabs>
                             </Box>
                             <TabPanel value={value} index={0}>
@@ -199,8 +177,8 @@ const Howitwork = () => {
                                             <div className="col-lg-5 d-flex align-items-center justify-content-center">
                                                 <div className='how-work-heading-area text-start'>
                                                     <div>
-                                                        <h2 className='post-task-heading'>Post your task</h2>
-                                                        <p className='post-task-heading-inner-text mb-3'>Want your home cleaned or furniture put together? Just tell us about the task you’d like done, suggest a fair budget for a job well done and you’ll start to receive offers from available Taskers.</p>
+                                                        <h2 className='post-task-heading'>{howItWorkData.workTitleEight}</h2>
+                                                        <p className='post-task-heading-inner-text mb-3'>{howItWorkData.workTitleNine}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -236,10 +214,10 @@ const Howitwork = () => {
                                                             <img className="customer-support-icon-image" src={Images.TopRatedIcon} />
                                                         </div>
                                                         <div className='d-flex justify-content-center'>
-                                                            <h2 className='customer-support-heading text-center'>Top rated insurance</h2>
+                                                            <h2 className='customer-support-heading text-center'>{howItWorkData.workTitleTen}</h2>
                                                         </div>
                                                         <div>
-                                                            <p className='px-2 customer-support-heading-inner-text'>Skiller Insurance is provided by Berkshire Hathaway Specialty Insurance. This means Taskers on skiller are covered for liability to third parties</p>
+                                                            <p className='px-2 customer-support-heading-inner-text'>{howItWorkData.workTitleEleven}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -256,20 +234,19 @@ const Howitwork = () => {
                                                             <img className="customer-support-icon-image" src={Images.customerSupport} />
                                                         </div>
                                                         <div className='d-flex justify-content-center'>
-                                                            <h2 className='customer-support-heading text-center'>Complete customer support</h2>
+                                                            <h2 className='customer-support-heading text-center'>{howItWorkData.workTitleTweleve}</h2>
                                                         </div>
                                                         <div>
-                                                            <p className='px-2 customer-support-heading-inner-text'>Got a question? Simply search our comprehensive for your answer <a className="help-center">Help Centre </a> . If you’re still stuck then feel free to reach</p>
+                                                            <p className='px-2 customer-support-heading-inner-text'>{howItWorkData.workTitleThirteen} <a className="help-center">{howItWorkData.workTitleFourteen} </a> {howItWorkData.workTitleFifteen}</p>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div>
                                                 <div className='d-flex justify-content-center mb-4'>
-                                                    <button className='how-it-works-learn-more-btn'>Learn more</button>
+                                                    <button className='how-it-works-learn-more-btn'>{howItWorkData.workTitleSixteen}</button>
                                                 </div>
-                                                <p className='terms-conditions'>*Terms and Conditions apply. Included Task activities only. Excesses apply for
-                                                    Taskers. <a className="help-center">Learn more about Skiller Insurance</a>
+                                                <p className='terms-conditions'>{howItWorkData.workTitleSeventeen}<a className="help-center">{howItWorkData.workTitleEighteen}</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -284,7 +261,7 @@ const Howitwork = () => {
                                                 <div className='col-md-6 first-box'>
                                                     <div className='first-main p-2'>
                                                         <div>
-                                                            <h4 className='d-flex justify-content-center h2-color'>Customer reviews</h4>
+                                                            <h4 className='d-flex justify-content-center h2-color'>{howItWorkData.workTitleNineteen}</h4>
                                                             <Box
                                                                 sx={{
                                                                     width: '100%',
@@ -316,46 +293,46 @@ const Howitwork = () => {
                                                             <Box>
                                                                 <div className='pb-2 d-flex justify-content-around align-items-center w-100'>
                                                                     <BorderLinearProgress style={{ width: '70%' }} variant="determinate" value={90} />
-                                                                    <p className='p-0 m-0 h2-color f-size-weight'>4.5 star</p>
+                                                                    <p className='p-0 m-0 h2-color f-size-weight'>{howItWorkData.workTitleTwenty}</p>
                                                                 </div>
                                                                 <div className='pt-2 pb-2 d-flex justify-content-around align-items-center w-100'>
                                                                     <BorderLinearProgress style={{ width: '70%' }} variant="determinate" value={20} />
-                                                                    <p className='p-0 m-0 h2-color f-size-weight'>1.0 star</p>
+                                                                    <p className='p-0 m-0 h2-color f-size-weight'>{howItWorkData.workTitleTwentyOne}</p>
                                                                 </div>
                                                                 <div className='pt-2 pb-2 d-flex justify-content-around align-items-center w-100'>
                                                                     <BorderLinearProgress style={{ width: '70%' }} variant="determinate" value={30} />
-                                                                    <p className='p-0 m-0 h2-color f-size-weight'>1.5 star</p>
+                                                                    <p className='p-0 m-0 h2-color f-size-weight'>{howItWorkData.workTitleTwentyTwo}</p>
                                                                 </div>
                                                                 <div className='pt-2 pb-2 d-flex justify-content-around align-items-center w-100'>
                                                                     <BorderLinearProgress style={{ width: '70%' }} variant="determinate" value={70} />
-                                                                    <p className='p-0 m-0 h2-color f-size-weight'>3.5 star</p>
+                                                                    <p className='p-0 m-0 h2-color f-size-weight'>{howItWorkData.workTitleTwentyThree}</p>
                                                                 </div>
                                                                 <div className='pt-2 pb-2 d-flex justify-content-around align-items-center w-100'>
                                                                     <BorderLinearProgress style={{ width: '70%' }} variant="determinate" value={90} />
-                                                                    <p className='p-0 m-0 h2-color f-size-weight'>4.5 star</p>
+                                                                    <p className='p-0 m-0 h2-color f-size-weight'>{howItWorkData.workTitleTwentyFour}</p>
                                                                 </div>
                                                             </Box>
-                                                            <h5 className='h2-color'>1772 total rating</h5>
+                                                            <h5 className='h2-color'>{howItWorkData.workTitleTwentyFive}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className='col-md-6 second-box'>
                                                     <div className='second-main  p-2'>
                                                         <div>
-                                                            <h4 className='d-flex justify-content-center h2-color'>By features</h4>
+                                                            <h4 className='d-flex justify-content-center h2-color'>{howItWorkData.workTitleTwentySix}</h4>
                                                             <Box>
                                                                 <div className='mb-3 px-2 d-flex justify-content-between align-items-center w-100'>
-                                                                    <p className='p-0 m-0 h2-color' style={{ fontSize: '13px' }}>Value for money</p>
+                                                                    <p className='p-0 m-0 h2-color' style={{ fontSize: '13px' }}>{howItWorkData.workTitleTwentySeven}</p>
                                                                     <div className='d-flex align-items-center'>
                                                                         <Rating name="half-rating-read" defaultValue={4.5} precision={0.5} readOnly style={{ paddingRight: '5px' }} />
-                                                                        <p className='p-0 m-0 h2-color f-size-weight'>4.5</p>
+                                                                        <p className='p-0 m-0 h2-color f-size-weight'>{howItWorkData.workTitleTwentyEight}</p>
                                                                     </div>
                                                                 </div>
                                                                 <div className='mb-3 px-2 d-flex justify-content-between align-items-center w-100'>
-                                                                    <p className='p-0 m-0 h2-color' style={{ fontSize: '13px' }}>Giftable</p>
+                                                                    <p className='p-0 m-0 h2-color' style={{ fontSize: '13px' }}>{howItWorkData.workTitleTwentyNine}</p>
                                                                     <div className='d-flex align-items-center'>
                                                                         <Rating name="half-rating-read" defaultValue={3.7} precision={0.5} readOnly style={{ paddingRight: '5px' }} />
-                                                                        <p className='p-0 m-0 h2-color f-size-weight'>3.7</p>
+                                                                        <p className='p-0 m-0 h2-color f-size-weight'>{howItWorkData.workTitleThirty}</p>
                                                                     </div>
                                                                 </div>
                                                                 <div className='d-flex justify-content-center'>
@@ -363,13 +340,13 @@ const Howitwork = () => {
                                                                         <div className='mt-4 mb-2 d-flex justify-content-center'>
                                                                             <ReviewsIcon style={{ fontSize: '50px', color: '#108dc7' }} />
                                                                         </div>
-                                                                        <h4 className='d-flex justify-content-center mb-2' >Review this product</h4>
-                                                                        <p className='text-center mt-2' style={{ fontSize: '14px' }}>Share your thoughts with other people.</p>
+                                                                        <h4 className='d-flex justify-content-center mb-2' >{howItWorkData.workTitleThirtyOne}</h4>
+                                                                        <p className='text-center mt-2' style={{ fontSize: '14px' }}>{howItWorkData.workTitleThirtyTwo}</p>
                                                                     </div>
                                                                 </div>
                                                             </Box>
                                                             <div className="mt-4 d-flex justify-content-center">
-                                                                <button className='btn btn-primary btn-lg btn-block write-review-btn'>Write a review</button>
+                                                                <button className='btn btn-primary btn-lg btn-block write-review-btn'>{howItWorkData.workTitleThirtyThree}</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -386,12 +363,12 @@ const Howitwork = () => {
                                             <div className='col-lg-6 py-3 d-flex align-items-center justify-content-center'>
                                                 <div className='communication'>
                                                     <div>
-                                                        <h3 className='p-0 m-0'>Communication</h3>
-                                                        <p className='communication-inner-text'>Use Skiller to stay in contact from the moment your task is posted until it’s completed.</p>
+                                                        <h3 className='p-0 m-0'>{howItWorkData.workTitleThirtyFour}</h3>
+                                                        <p className='communication-inner-text'>{howItWorkData.workTitleThirtyFive}</p>
                                                     </div>
                                                     <div>
-                                                        <h4 className='p-0 m-0'><EmailIcon /> Private Messaging</h4>
-                                                        <p className='communication-inner-text'>Once you’ve accepted an offer, you can instantly reach out to the Tasker via private messaging to discuss task details, and get your task completed.</p>
+                                                        <h4 className='p-0 m-0'><EmailIcon /> {howItWorkData.workTitleThirtySix}</h4>
+                                                        <p className='communication-inner-text'>{howItWorkData.workTitleThirtySeven}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -409,14 +386,14 @@ const Howitwork = () => {
                                             <div className="py-3 col-lg-6 d-flex align-items-center justify-content-center">
                                                 <div className='communication'>
                                                     <div>
-                                                        <h3 className='p-0 m-0'>Skiller Pay</h3>
-                                                        <p className='communication-inner-text'>Skiller Pay is the seamless and secure way to get your tasks completed. Once you accept an offer on a task, the agreed upon amount is held secure with Skiller Pay until the task is complete.</p>
+                                                        <h3 className='p-0 m-0'>{howItWorkData.workTitleThirtyEight}</h3>
+                                                        <p className='communication-inner-text'>{howItWorkData.workTitleThirtyNine}</p>
                                                     </div>
                                                     <div className='mt-2'>
-                                                        <p className='communication-inner-text'>Once complete, you’ll simply need to release the payment. We’ll then transfer the task payment to the Tasker’s verified bank account.</p>
+                                                        <p className='communication-inner-text'>{howItWorkData.workTitleFourty}</p>
                                                     </div>
                                                     <div className="mt-2">
-                                                        <button className='btn btn-primary btn-lg btn-block how-it-works-learn-more-btn'>Learn more</button>
+                                                        <button className='btn btn-primary btn-lg btn-block how-it-works-learn-more-btn'>{howItWorkData.workTitleFourtyOne}</button>
                                                     </div>
                                                 </div>
                                             </div>

@@ -47,10 +47,7 @@ import dayjs from 'dayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import {postTasktitle,titleAndDescription,categoryAndLocation,dateAndTime,budgetAndSkills,language,learningMethod,currentExperiencee,photos
-,titlePlaceHolder, descriptionPlaceHolder, categoryPlaceHolder, countryPlaceHolder,statePlaceHolder, cityPlaceHolder, budgetPlaceHolder, skillsPlaceHolder, languagePlaceHolder, learningMethodPlaceHolder, currentExperiencePlaceHolder,subTitleAndDescription,subCategoryAndLocation,
-subDateAndTime,subBudgetAndSkills,subLanguage,subLearningMethod,subCurrentExperience,subPhotos} from './postTaskTitle';
-
+import { postTaskData } from '../../../data';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -706,11 +703,6 @@ const PostATasker = () => {
      if(!localStorage.getItem('id')){
         guestPostTask()
      }
-
-    //Function post task for guest user
-
-
-    
     return (
         <>
             <div>
@@ -727,7 +719,7 @@ const PostATasker = () => {
             </div>
             <div className='mx-4'>
                 <div className='mt-3' style={{ backgroundColor: '#ececec', padding: '20px', borderRadius: '10px' }}>
-                    <h3 className='p-2'>{postTasktitle}</h3>
+                    <h3 className='p-2'>{postTaskData.postTasktitle}</h3>
                     <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 400 }} >
                         <Tabs
                             orientation="vertical"
@@ -738,21 +730,21 @@ const PostATasker = () => {
                             aria-label="Vertical tabs example"
                             sx={{width: 250, borderRight: 1, borderColor: 'divider' }}
                         >
-                            <Tab className='fix-side-remove-padding' label={titleAndDescription} {...a11yProps(0)} />
-                            <Tab className='fix-side-remove-padding' label={categoryAndLocation} {...a11yProps(1)} />
-                            <Tab className='fix-side-remove-padding' label={dateAndTime} {...a11yProps(2)} />
-                            <Tab className='fix-side-remove-padding' label={budgetAndSkills} {...a11yProps(3)} />
-                            <Tab className='fix-side-remove-padding' label={language} {...a11yProps(4)} />
-                            <Tab className='fix-side-remove-padding' label={learningMethod} {...a11yProps(5)} />
-                            <Tab className='fix-side-remove-padding' label={currentExperiencee} {...a11yProps(6)} />
-                            <Tab className='fix-side-remove-padding' label={photos} {...a11yProps(7)} />
+                            <Tab className='fix-side-remove-padding' label={postTaskData.titleAndDescription} {...a11yProps(0)} />
+                            <Tab className='fix-side-remove-padding' label={postTaskData.categoryAndLocation} {...a11yProps(1)} />
+                            <Tab className='fix-side-remove-padding' label={postTaskData.dateAndTime} {...a11yProps(2)} />
+                            <Tab className='fix-side-remove-padding' label={postTaskData.budgetAndSkills} {...a11yProps(3)} />
+                            <Tab className='fix-side-remove-padding' label={postTaskData.language} {...a11yProps(4)} />
+                            <Tab className='fix-side-remove-padding' label={postTaskData.learningMethod} {...a11yProps(5)} />
+                            <Tab className='fix-side-remove-padding' label={postTaskData.currentExperiencee} {...a11yProps(6)} />
+                            <Tab className='fix-side-remove-padding' label={postTaskData.photos} {...a11yProps(7)} />
                         </Tabs>
                         <TabPanel value={state.selectedTab} index={0} style={{ overflow: 'auto', width: '85%' }}>
                             <div style={{ width: '100%' }}>
-                                <h5 className='py-2'>{subTitleAndDescription}</h5>
+                                <h5 className='py-2'>{postTaskData.subTitleAndDescription}</h5>
                                 <TextField
                                     className='mt-2'
-                                    label={<>{titlePlaceHolder} <span style={{ color: 'red' }}>*</span></>}
+                                    label={<>{postTaskData.titlePlaceHolder} <span style={{ color: 'red' }}>*</span></>}
                                     fullWidth
                                     value={state.postTitle}
                                     autoComplete="shipping address-line1"
@@ -766,7 +758,7 @@ const PostATasker = () => {
                                     aria-label="minimum height"
                                     value={state.description}
                                     minRows={4}
-                                    placeholder={descriptionPlaceHolder}
+                                    placeholder={postTaskData.descriptionPlaceHolder}
                                     style={{ width: '100%' }}
                                     onChange={(e) => { setState((prevState) => ({ ...prevState, description: e.target.value })); }}
                                 />
@@ -774,12 +766,12 @@ const PostATasker = () => {
                         </TabPanel>
                         <TabPanel value={state.selectedTab} index={1} style={{ overflow: 'auto', width: '85%' }}>
                             <div style={{ width: '100%' }}>
-                                <h5 className='py-2'>{subCategoryAndLocation}</h5>
+                                <h5 className='py-2'>{postTaskData.subCategoryAndLocation}</h5>
                                 <FormControl fullWidth>
-                                    <InputLabel id="demo-simple-select-label">{categoryPlaceHolder} <span style={{ color: 'red' }}>*</span></InputLabel>
+                                    <InputLabel id="demo-simple-select-label">{postTaskData.categoryPlaceHolder} <span style={{ color: 'red' }}>*</span></InputLabel>
                                     <Select
                                         labelId="demo-simple-select-label"
-                                        label={<>{categoryPlaceHolder}</>}
+                                        label={<>{postTaskData.categoryPlaceHolder}</>}
                                         id="demo-simple-select"
                                         value={state.category}
                                         onChange={selectCategory}
@@ -792,12 +784,12 @@ const PostATasker = () => {
                             </div>
                             <div style={{ width: '100%' }} className="mt-4">
                                 <FormControl fullWidth>
-                                    <InputLabel id="demo-simple-select-label">{countryPlaceHolder} <span style={{color: "red"}}>*</span></InputLabel>
+                                    <InputLabel id="demo-simple-select-label">{postTaskData.countryPlaceHolder} <span style={{color: "red"}}>*</span></InputLabel>
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
                                         value={state.country}
-                                        label={countryPlaceHolder}
+                                        label={postTaskData.countryPlaceHolder}
                                         onChange={selectCountry}
                                     >
                                         {state.countryList.map((Item) => {
@@ -808,12 +800,12 @@ const PostATasker = () => {
                             </div>
                             <div style={{ width: '100%' }} className="mt-4">
                                 <FormControl fullWidth>
-                                    <InputLabel id="demo-simple-select-label">{statePlaceHolder} <span style={{color: "red"}}>*</span></InputLabel>
+                                    <InputLabel id="demo-simple-select-label">{postTaskData.statePlaceHolder} <span style={{color: "red"}}>*</span></InputLabel>
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
                                         value={state.state}
-                                        label={statePlaceHolder}
+                                        label={postTaskData.statePlaceHolder}
                                         onChange={selectState}
                                     >
                                         {state.stateList.map((Item) => {
@@ -824,12 +816,12 @@ const PostATasker = () => {
                             </div>
                             <div style={{ width: '100%' }} className="mt-4">
                                 <FormControl fullWidth>
-                                    <InputLabel id="demo-simple-select-label">{cityPlaceHolder} <span style={{color: "red"}}>*</span></InputLabel>
+                                    <InputLabel id="demo-simple-select-label">{postTaskData.cityPlaceHolder} <span style={{color: "red"}}>*</span></InputLabel>
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
                                         value={state.city}
-                                        label={cityPlaceHolder}
+                                        label={postTaskData.cityPlaceHolder}
                                         onChange={selectCity}
                                     >
                                         {state.cityList.map((Item) => {
@@ -841,7 +833,7 @@ const PostATasker = () => {
                         </TabPanel>
                         <TabPanel value={state.selectedTab} index={2} style={{ overflow: 'auto', width: '85%' }}>
                             <div style={{ width: '100%' }}>
-                                <h5>{subDateAndTime}</h5>
+                                <h5>{postTaskData.subDateAndTime}</h5>
                                 <h5>From <span style={{ color: 'red' }}>*</span></h5>
                                 <div style={{display:"flex", flexDirection:"row", gap: "100px"}} className='mt-3'>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -906,12 +898,12 @@ const PostATasker = () => {
                         </TabPanel>
                         <TabPanel value={state.selectedTab} index={3} style={{ overflow: 'auto', width: '85%' }}>
                             <div style={{ width: '100%' }}>
-                                <h5>{subBudgetAndSkills}</h5>
+                                <h5>{postTaskData.subBudgetAndSkills}</h5>
                                 <div className='mt-3'>
                                     <CurrencyTextField
                                         fullWidth
                                         textAlign="left"
-                                        label={<> {budgetPlaceHolder} <span style={{ color: 'red' }}>*</span></>}
+                                        label={<> {postTaskData.budgetPlaceHolder} <span style={{ color: 'red' }}>*</span></>}
                                         variant="standard"
                                         value={state.budget}
                                         currencySymbol="$"
@@ -923,16 +915,16 @@ const PostATasker = () => {
                             <div style={{ width: '100%' }} className="mt-4">
                                 <div>
                                     <div>
-                                        <ChipInput className='w-100' defaultValue={state.skills} label={<> {skillsPlaceHolder} <span style={{ color: 'red' }}>*</span></>} onChange={handleSkillsSelection} />
+                                        <ChipInput className='w-100' defaultValue={state.skills} label={<> {postTaskData.skillsPlaceHolder} <span style={{ color: 'red' }}>*</span></>} onChange={handleSkillsSelection} />
                                     </div>
                                 </div>
                             </div>
                         </TabPanel>
                         <TabPanel value={state.selectedTab} index={4} style={{ overflow: 'auto', width: '85%' }}>
                             <div>
-                                <h5 className='py-2'>{subLanguage}</h5>
+                                <h5 className='py-2'>{postTaskData.subLanguage}</h5>
                                 <FormControl sx={{ width: '100%' }}>
-                                    <InputLabel id="demo-multiple-chip-label">{languagePlaceHolder} <span style={{color: "red"}}>*</span></InputLabel>
+                                    <InputLabel id="demo-multiple-chip-label">{postTaskData.languagePlaceHolder} <span style={{color: "red"}}>*</span></InputLabel>
                                     <Select
                                         labelId="demo-multiple-chip-label"
                                         id="demo-multiple-chip"
@@ -963,14 +955,14 @@ const PostATasker = () => {
                             </div>
                         </TabPanel>
                         <TabPanel value={state.selectedTab} index={5} style={{ overflow: 'auto', width: '85%' }}>
-                            <h5 className='py-2'>{subLearningMethod}</h5>
+                            <h5 className='py-2'>{postTaskData.subLearningMethod}</h5>
                             <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">{learningMethodPlaceHolder} <span style={{color: "red"}}>*</span></InputLabel>
+                                <InputLabel id="demo-simple-select-label">{postTaskData.learningMethodPlaceHolder} <span style={{color: "red"}}>*</span></InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
                                     value={state.learningMethod}
-                                    label={<>{learningMethodPlaceHolder} <span style={{ color: 'red' }}>*</span> </>}
+                                    label={<>{postTaskData.learningMethodPlaceHolder} <span style={{ color: 'red' }}>*</span> </>}
                                     onChange={selectLearningMethod}
                                 >
                                     <MenuItem value={1}>{"Text"}</MenuItem>
@@ -991,6 +983,7 @@ const PostATasker = () => {
 <div>
                                         {/* <input onChange={(e)=>{localImagee(e)}} type="file" id="filetag" multiple accept=".jpg,.jpeg,.png,.gif"/>
                                          <img id="preview"/> */}
+                                          
                                          </div>
                                         {/* <div className='post-a-tasker-upload-file-section-area'>
                                             <label style={{ width: "100%", height: "150px", border: "2px solid #188dc7", padding: "20px", borderRadius: '10px' }}>
@@ -1098,9 +1091,9 @@ const PostATasker = () => {
                             }
                         </TabPanel>
                         <TabPanel className="image-tab-panel" value={state.selectedTab} index={6} style={{ overflow: 'auto', width: '100%' }}>
-                            <h4 style={{marginBottom: "15px"}}>{subCurrentExperience} </h4>
+                            <h4 style={{marginBottom: "15px"}}>{postTaskData.subCurrentExperience} </h4>
                             <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">{currentExperiencePlaceHolder} <span style={{color: "red"}}>*</span></InputLabel>
+                                <InputLabel id="demo-simple-select-label">{postTaskData.currentExperiencePlaceHolder} <span style={{color: "red"}}>*</span></InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
@@ -1115,7 +1108,7 @@ const PostATasker = () => {
                             </FormControl>
                         </TabPanel>
                         <TabPanel className="image-tab-panel" value={state.selectedTab} index={7} style={{ overflow: 'auto', width: '100%' }}>
-                            <h4>{subPhotos}</h4>
+                            <h4>{postTaskData.subPhotos}</h4>
                             <div style={{ border: "2px solid #188dc7", height: "230px", borderRadius: '10px' }}>
                                 <div className="uploaded-files-list" style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: "58px" }}>
                                     {imagesPreview.map(file => (

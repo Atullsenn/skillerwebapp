@@ -116,7 +116,7 @@ const Footer = () => {
             <div className="footer-top-newsletter">
                 <div className="container">
                     <div className="sf-news-letter">
-                        <span>{landingPageData.FooterTitleOne}</span>
+                        <span>{landingPageData.footerTitleOne}</span>
                         <form>
                             <div className="form-group sf-news-l-form">
                                 <input onChange={(event)=>{setEmail(event.target.value)}} type="text" className="form-control" placeholder="Enter Your Email" />
@@ -131,26 +131,26 @@ const Footer = () => {
                     <div className="row">
                         <div className="col-lg-4 col-md-6 col-sm-6  m-b30 d-flex justify-content-center">
                             <div className="sf-site-link sf-widget-link">
-                                <h4 className="sf-f-title">{landingPageData.FooterTitleTwo}</h4>
+                                <h4 className="sf-f-title">{landingPageData.footerTitleTwo}</h4>
                                 <ul>
-                                    <li onClick={() => { ScrollTop() }}><NavLink to="/"><KeyboardDoubleArrowRightIcon /> Home</NavLink></li>
-                                    <li><NavLink to="/contact-us"><KeyboardDoubleArrowRightIcon /> Contact Us</NavLink></li>
-                                    <li><NavLink to="/how-it-works"><KeyboardDoubleArrowRightIcon /> How it works</NavLink></li>
-                                    <li><NavLink to="/news"><KeyboardDoubleArrowRightIcon /> News</NavLink></li>
-                                    <li><NavLink to="/privacy-policy"><KeyboardDoubleArrowRightIcon /> Privacy Policy</NavLink></li>
-                                    <li><NavLink to="/terms-conditions"><KeyboardDoubleArrowRightIcon /> Terms & Conditions</NavLink></li>
+                                    <li onClick={() => { ScrollTop() }}><NavLink to="/"><KeyboardDoubleArrowRightIcon /> {landingPageData.footerTitleThree}</NavLink></li>
+                                    <li><NavLink to="/contact-us"><KeyboardDoubleArrowRightIcon /> {landingPageData.footerTitleFour}</NavLink></li>
+                                    <li><NavLink to="/how-it-works"><KeyboardDoubleArrowRightIcon /> {landingPageData.footerTitleFive}</NavLink></li>
+                                    <li><NavLink to="/news"><KeyboardDoubleArrowRightIcon /> {landingPageData.footerTitleSix}</NavLink></li>
+                                    <li><NavLink to="/privacy-policy"><KeyboardDoubleArrowRightIcon /> {landingPageData.footerTitleSeven}</NavLink></li>
+                                    <li><NavLink to="/terms-conditions"><KeyboardDoubleArrowRightIcon /> {landingPageData.footerTitleEight}</NavLink></li>
                                 </ul>
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-6 col-sm-6  m-b30 d-flex justify-content-center">
                             <div className="sf-site-link sf-widget-cities">
-                                <h4 className="sf-f-title">Popular Categories</h4>
+                                <h4 className="sf-f-title">{landingPageData.footerTitleNine}</h4>
                                 <ul>
                                     {popularCategoryList.length
                                         ? popularCategoryList.map((item) => {
                                             return <li><NavLink to={`/category/${item.id}`}><KeyboardDoubleArrowRightIcon /> {item.name} </NavLink></li>
                                         })
-                                        : <li> <KeyboardDoubleArrowRightIcon /> No Popular Category Available </li>
+                                        : <li> <KeyboardDoubleArrowRightIcon /> {landingPageData.footerTitleTen} </li>
                                     }
                                 </ul>
                             </div>
@@ -158,7 +158,7 @@ const Footer = () => {
                         <div className="col-lg-4 col-md-6 col-sm-6  m-b30 d-flex justify-content-center">
                      
                             <div className="sf-site-link sf-widget-contact">
-                                <h4 className="sf-f-title">Contact Info</h4>
+                                <h4 className="sf-f-title">{landingPageData.footerTitleEleven}</h4>
                                 {contactInfo.map((item,index)=>{return(
 
                                

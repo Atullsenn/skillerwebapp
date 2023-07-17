@@ -13,7 +13,7 @@ const Testimonial = ({ state }) => {
                 <div className="section-head">
                     <div className="row">
                         <div className="col-lg-6 col-md-12">
-                            <span className="sf-sub-title">{landingPageData.testimonialTitleOne}</span>
+                            <span className="sf-sub-title aon-sub-title">{landingPageData.testimonialTitleOne}</span>
                             <h2 className="sf-title">{landingPageData.testimonialTitleTwo}</h2>
                         </div>
                         <div className="col-lg-6 col-md-12">

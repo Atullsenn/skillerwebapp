@@ -1011,7 +1011,7 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
                                 ))}
                                 <label>
                                     <input onChange={handleFileEvent} type='file' multiple accept="image/*" style={{ display: "none" }} />
-                                    {filess.length < MAX_COUNT ? <PhotoIcon style={{ width: "91px", height: "86px", color: "darkgray" }} /> : ' '}
+                                    {filess.length < MAX_COUNT ? <PhotoIcon className='photoIconnn' style={{ width: "91px", height: "86px", color: "darkgray" }} /> : ' '}
                                 </label>
                             </div>
                         </div>

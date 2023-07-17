@@ -287,15 +287,21 @@ else{
     else{
 
     axios.post(`${baseUrl}/post-in-dispute`,request).then((response)=>{
-      getMyOrderList()
-       toast.success('This post has been disputed successfully',{
+      
+       handleCloseCancelReson()
+      //  if(state.cardData[0].status === 4){
+      //   setState((prevState) => ({ ...prevState, cardDetail: false, defaultActiveKey: 'Disputed' }));
+      // } 
+      setState((prevState) => ({
+        ...prevState,
+        cardDetail: false,
+        defaultActiveKey: "Disputed",
+      }));
+      toast.success('This post has been disputed successfully',{
         autoClose: 1000,
         theme: 'colored'
        })
-       handleCloseCancelReson()
-       if(state.cardData[0].status === 4){
-        setState((prevState) => ({ ...prevState, cardDetail: false, defaultActiveKey: 'Disputed' }));
-      } 
+      getMyOrderList()
     
     }).catch((error)=>{
       console.log(error)
@@ -303,7 +309,7 @@ else{
   }
   }
 
-  //console.log(state.cardData[0], "Check dataaaaaaaa")
+  // console.log(state.cardData[0], "Check dataaaaaaaa")
   
 
 
@@ -436,7 +442,7 @@ else{
                     <div className='col-lg-8'>
                         <div className='d-flex align-items-center justify-content-between task-status-main-area p-2'>
                             <div className='d-flex align-items-center task-status-area'>
-                                <p className='task-status d-flex align-items-center'>{state.cardData[0].status === 1 ? 'In Progress' : state.cardData[0].status === 3 ? 'Completed': state.cardData[0].dispute_status === 'Pending' && 'Pending'}</p>
+                                <p className='task-status d-flex align-items-center'>{state.cardData[0].status === 1 ? 'In Progress' : state.cardData[0].status === 3 ? 'Completed': state.cardData[0].dispute_status === 'Pending' ? 'Pending' : state.cardData[0].dispute_status === 'Cancel'? 'Cancelled' : state.cardData[0].dispute_status === "Resolved" && 'Resolved'}</p>
                             </div> 
                             {state.cardData[0].status === 3 && state.cardData[0].check_rating === 0?
                                  <button onClick={handleClickOpenRatingModal} className='btn btn-primary btn-lg btn-block make-an-offer-btn' >Rating and Review</button>
