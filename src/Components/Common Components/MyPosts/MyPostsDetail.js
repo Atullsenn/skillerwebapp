@@ -2936,6 +2936,7 @@ const handleToDateChange = (newValue)=>{
                 >
                   <MenuItem value={1}>{"Text"}</MenuItem>
                   <MenuItem value={2}>{"Phone call"}</MenuItem>
+                  <MenuItem value={3}>{"Both"}</MenuItem>
                 </Select>
               </FormControl>
               {editPost.learningMethod != 0 ? (
@@ -3064,6 +3065,83 @@ const handleToDateChange = (newValue)=>{
                       </FormControl>
                     </div>
                   </TabPanel>
+
+
+
+                  <TabPanel
+                    value={editPost.learningMethod - 1}
+                    index={2}
+                    style={{ overflow: "auto", width: "100%" }}
+                  >
+                    <h5>
+                      Get text message (email) of how to solve your problem
+                    </h5>
+                    <div className="d-flex justify-content-around">
+                      <p>o Tools needed</p>
+                      <p>o Steps</p>
+                      <p>o Expected result</p>
+                      <p>o Verification of expected result</p>
+                    </div>
+                  </TabPanel>
+
+                  <TabPanel
+                    value={editPost.learningMethod - 1}
+                    index={2}
+                    style={{ overflow: "auto", width: "100%" }}
+                  >
+                    <h5 className="p-0 m-0">
+                      Google hangout, zoom, teams, phone call, up to 1 hour or 3
+                      calls
+                    </h5>
+                    <div className="mt-2">
+                      <FormControl sx={{ width: "100%" }}>
+                        <InputLabel id="demo-multiple-chip-label">
+                          Select your options
+                        </InputLabel>
+                        <Select
+                          labelId="demo-multiple-chip-label"
+                          id="demo-multiple-chip"
+                          multiple
+                          value={editPost.phoneCall}
+                          onChange={handlePhoneSelection}
+                          input={
+                            <OutlinedInput
+                              id="select-multiple-chip"
+                              label="Select your options"
+                            />
+                          }
+                          renderValue={(selected) => (
+                            <Box
+                              sx={{
+                                display: "flex",
+                                flexWrap: "wrap",
+                                gap: 0.5,
+                              }}
+                            >
+                              {selected.map((value) => (
+                                <Chip key={value} label={value} />
+                              ))}
+                            </Box>
+                          )}
+                          MenuProps={MenuProps}
+                        >
+                          {editPost.phoneCallList.map((Item) => (
+                            <MenuItem
+                              key={Item.id}
+                              value={Item.name}
+                              style={getPhoneSelection(
+                                Item.name,
+                                editPost.phoneCall,
+                                theme
+                              )}
+                            >
+                              {Item.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </TabPanel>
                 </Box>
               ) : (
                 ""
@@ -3120,6 +3198,7 @@ const handleToDateChange = (newValue)=>{
                   />
                   {filess.length < MAX_COUNT ? (
                     <PhotoIcon
+                    className='photoIconnn'
                       style={{
                         width: "91px",
                         height: "86px",

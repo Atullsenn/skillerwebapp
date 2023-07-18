@@ -55,6 +55,7 @@ import {
     onSnapshot,
     orderBy
 } from "firebase/firestore";
+import ReactPaginate from 'react-paginate';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -448,6 +449,20 @@ const MyPosts = ({ state, setState, getAllPosts }) => {
         return () => unsubscribe;
     }, [state.inProgress]);
 
+    //pagination 
+
+const [pageNumber, setPageNumber] = useState(0);
+const usersPerPage = 9;
+const pagesVisited = pageNumber * usersPerPage;
+const pageCount = Math.ceil(state.pending.length / usersPerPage);
+const pageCountCancelled = Math.ceil(state.cancelled.length / usersPerPage)
+
+const changePage = ({ selected }) => {
+  setPageNumber(selected);
+};
+
+//pagination
+
     
     return (
         <>
@@ -519,7 +534,7 @@ const MyPosts = ({ state, setState, getAllPosts }) => {
                                                             .toString()
                                                             .toLowerCase()
                                                             .includes(search.toString().toLowerCase()),
-                                                ).map((item, index) => {
+                                                ).slice(pagesVisited, pagesVisited + usersPerPage).map((item, index) => {
                                                     
                                                     return (
                                                         <div className={`${state.cardDetail ? '' : 'col-lg-4'}`}>
@@ -560,6 +575,19 @@ const MyPosts = ({ state, setState, getAllPosts }) => {
                                                     )
                                                 })}
                                                 {state.pending.length === 0 && state.showHeading && <h3 className='text-center w-25 no-post-available'>No Pending Posts Available</h3>}
+{state.pending.length > 9 ?
+                                                <ReactPaginate
+                      previousLabel={"Previous"}
+                      nextLabel={"Next"}
+                      pageCount={pageCount}
+                      onPageChange={changePage}
+                      containerClassName={"paginationBttns"}
+                      previousLinkClassName={"previousBttn"}
+                      nextLinkClassName={"nextBttn"}
+                      disabledClassName={"paginationDisabled"}
+                      activeClassName={"paginationActive"}
+                    /> :""
+}
                                             </div>
                                         </div>
                                     </Tab>
@@ -637,7 +665,7 @@ const MyPosts = ({ state, setState, getAllPosts }) => {
                                                             .toString()
                                                             .toLowerCase()
                                                             .includes(search.toString().toLowerCase()),
-                                                ).map((item, index) => {
+                                                ).slice(pagesVisited, pagesVisited + usersPerPage).map((item, index) => {
                                                     return (
                                                         <div className={`${state.cardDetail ? '' : 'col-lg-4'}`}>
                                                             <div key={index} id={`browse-card-${item.id}`} className='rounded card-main-div' onClick={() => { getPostDetail(item.id); setActiveClass(item.id); setState((prevState) => ({ ...prevState, cardDetail: true, showMap: false })) }}>
@@ -677,6 +705,19 @@ const MyPosts = ({ state, setState, getAllPosts }) => {
                                                     )
                                                 })}
                                                 {state.cancelled.length === 0 && state.showHeading && <h3 className='text-center w-25 no-post-available'>No Cancelled Posts Available</h3>}
+                            {state.cancelled.length > 9 ?
+                                                <ReactPaginate
+                      previousLabel={"Previous"}
+                      nextLabel={"Next"}
+                      pageCount={pageCountCancelled}
+                      onPageChange={changePage}
+                      containerClassName={"paginationBttns"}
+                      previousLinkClassName={"previousBttn"}
+                      nextLinkClassName={"nextBttn"}
+                      disabledClassName={"paginationDisabled"}
+                      activeClassName={"paginationActive"}
+                    />:""
+                            }
                                             </div>
                                         </div>
                                     </Tab>
