@@ -220,11 +220,3 @@ languagePlaceHolder :'Select Your Language',
 learningMethodPlaceHolder :'Select Your Learning Method',
 currentExperiencePlaceHolder : 'Select Your Current Experience',
 }
-
-
-
-
-
-
-
-//https://www.pluralsight.com/guides/load-and-render-json-data-into-react-components

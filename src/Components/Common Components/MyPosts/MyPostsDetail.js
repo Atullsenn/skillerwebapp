@@ -344,17 +344,15 @@ const MyPostsDetail = ({
         <div className="d-flex align-items-center justify-content-end px-3 mb-3">
           <button
             className="btn btn-primary btn-lg btn-block make-an-offer-btn me-3"
-            onClick={handleBidRejectClose}
+            onClick={on_bid_reject}
           >
-            {" "}
-            Cancel{" "}
+            Submit
           </button>
           <button
             className="btn btn-primary btn-lg btn-block make-an-offer-btn"
-            onClick={on_bid_reject}
+             onClick={handleBidRejectClose}
           >
-            {" "}
-            Submit{" "}
+            Cancel
           </button>
         </div>
       </Dialog>
@@ -546,6 +544,7 @@ const MyPostsDetail = ({
 
   const handleClickOpen = () => {
     setOpenBidReject(true);
+    handleCloseBidModel()
   };
 
   const handleBidRejectClose = (value) => {
@@ -1371,6 +1370,21 @@ const handleToDateChange = (newValue)=>{
 }
 
 
+//bid reject modal
+const [openBid, setOpenBid] = useState(false)
+
+const handleOpenBidModal = ()=>{
+  setOpenBid(true)
+}
+
+const handleCloseBidModel = ()=>{
+  setOpenBid(false)
+}
+
+
+// bid reject modal
+
+
 
   return (
     <>
@@ -1846,11 +1860,60 @@ const handleToDateChange = (newValue)=>{
                                   ...prevState,
                                   bidDetailData: item,
                                 }));
-                                handleClickOpen();
+                                // handleClickOpen();
+                                handleOpenBidModal()
                               }}
                             >
                               Reject
                             </button>
+
+                            <Dialog
+                              fullWidth
+                              open={openBid}
+                              onClose={handleCloseBidModel}
+                              aria-labelledby="alert-dialog-title"
+                              aria-describedby="alert-dialog-description"
+                            >
+                              <DialogTitle
+                                id="alert-dialog-title"
+                                className="text-center"
+                              >
+                                {"Are you sure want to reject this bid ?"}
+                              </DialogTitle>
+                              <DialogContent className="text-center p-0 m-0">
+                                <DialogContentText id="alert-dialog-description">
+                                  <DoneOutlineIcon
+                                    style={{
+                                      color: "#B2D435",
+                                      fontSize: "100px",
+                                    }}
+                                  />
+                                </DialogContentText>
+                              </DialogContent>
+                              <DialogActions className="text-center d-flex align-items-center justify-content-center">
+                                <button
+                                  className="btn btn-primary btn-lg btn-block make-an-offer-btn"
+                                  // onClick={() => {
+                                  //   setState((prevState) => ({
+                                  //     ...prevState,
+                                  //     bidDetailData: item,
+                                  //   }));
+                                  //   on_bid_accept(item);
+                                  // }}
+                                  onClick={handleClickOpen}
+                                >
+                                  {" "}
+                                  Yes{" "}
+                                </button>
+                                <button
+                                  className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1"
+                                  onClick={handleCloseBidModel}
+                                >
+                                  {" "}
+                                  No{" "}
+                                </button>
+                              </DialogActions>
+                            </Dialog>
 
                             <Dialog
                               fullWidth

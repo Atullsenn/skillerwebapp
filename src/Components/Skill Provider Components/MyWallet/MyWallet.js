@@ -44,7 +44,7 @@ const MyWallet = () => {
             user:localStorage.getItem('id')
         }
         axios.post(`${baseUrl}/get-user-wallet`,request).then((response)=>{
-            //console.log(response, "responseeee")
+            // console.log(response, "responseeee")
             setState(response.data.Data.record)
             setTotalWallet(response.data.Data.total_wallet)
 
@@ -218,7 +218,7 @@ const MyWallet = () => {
                                 </div>
                                 <div className='mt-5 px-4 d-flex align-items-center justify-content-center' style={{margin: "auto", width:"50%", paddingBottom:"10px"}}>
                                     <FormControl  sx={{ width: '73%' }}>
-                                        <InputLabel htmlFor="outlined-adornment-amount">Your Balance</InputLabel>
+                                        <InputLabel htmlFor="outlined-adornment-amount">Wallet Balance</InputLabel>
                                         <OutlinedInput
                                             type='number'
                                             size='small'
@@ -247,7 +247,7 @@ const MyWallet = () => {
                         </div>
                                 <div className='mt-3 px-4 d-flex align-items-center justify-content-center' style={{margin: "auto", width:"50%", paddingBottom:"50px"}}>
                                     <FormControl sx={{ width: '73%' }}>
-                                        <InputLabel htmlFor="outlined-adornment-amount">Add Wallet Balance</InputLabel>
+                                        <InputLabel htmlFor="outlined-adornment-amount">Withdraw Amount</InputLabel>
                                         <OutlinedInput
                                             type='number'
                                             size='small'
@@ -264,47 +264,10 @@ const MyWallet = () => {
                                    
                                 </div>
                                 <div className='mb-1 d-flex align-items-center justify-content-center' style={{margin: "auto", width:"50%", paddingBottom:"50px"}}>
-                                <button className="withdrawal-btn" onClick={withDrawAmount}>Proceed To Add Money</button>
+                                <button className="withdrawal-btn" onClick={withDrawAmount}>Proceed To Withdraw</button>
                                     </div>
                                 {/* <button className="withdrawal-btn" style={{display:'flex',justifyContent: 'center'}} onClick={handleOpenWithdrawPopup}>Withdrawal</button> */}
                             </div>
-                            {/* <div className='main-transaction-div-area mt-4'>
-                                <div className='d-flex my-wallet-section justify-content-between align-items-center'>
-                                    <div className='d-flex align-items-center py-2'>
-                                        <span className='ps-2'> <CurrencyExchangeIcon /> </span>
-                                        <h4 className='my-wallet-heading m-0 p-2'>Wallet Transactions</h4>
-                                    </div>
-                                </div>
-                                <div className='main-transaction-history-div'>
-                                    {transactionData.map((Item) => {
-                                        return (
-                                            <>
-                                                <div>
-                                                    <div className='px-5 d-flex align-items-center py-2'>
-                                                        <h5 className='p-0 m-0' style={{ width: '80px' }}>Post Title : </h5>
-                                                        <p className='p-0 m-0 ps-2 post-title-in-cardsection w-75' style={{ fontSize: '16px', fontWeight: '600' }}>{Item.postTitle}</p>
-                                                    </div>
-                                                    <div className='inner-transaction-history-div d-flex justify-content-evenly align-items-center'>
-                                                        <div className='text-left'>
-                                                            <AccountBalanceWalletIcon style={{ color: '#188dc7' }} />
-                                                            <p className='transaction-para mt-1'>{Item.dateTime}</p>
-                                                        </div>
-                                                        <div className='text-center'>
-                                                            <p className='transaction-para p-0 m-0 blue'>Transaction-ID</p>
-                                                            <p className='transaction-para mt-1'>{Item.transactionId}</p>
-                                                        </div>
-                                                        <div className='text-right'>
-                                                            <p className='transaction-para p-0 m-0 blue'>{Item.amount}</p>
-                                                            <p className='transaction-para mt-1'>Wallet Mode : <span className={`${Item.walletMode === 'CREDIT' ? 'green' : Item.walletMode === 'DEBIT' ? 'red' : ''}`}> {Item.walletMode === 'CREDIT' ? <AddIcon style={{ fontSize: '12px' }} /> : Item.walletMode === 'DEBIT' ? <RemoveIcon style={{ fontSize: '12px' }} /> : ''}{Item.walletMode}</span></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <Divider className='mt-1 mb-1' style={{ backgroundColor: '#a9a4a4' }} />
-                                            </>
-                                        )
-                                    })}
-                                </div >
-                            </div> */}
                         </div>
 
                         <div className='d-flex align-items-center justify-content-center '>
@@ -377,7 +340,7 @@ const MyWallet = () => {
                                                         </div>
                                                         <div className='text-right'>
                                                             <p className='transaction-para p-0 m-0 blue'>$ {Item.amount}</p>
-                                                            <p className='transaction-para mt-1'>Wallet Mode : <span className={`${Item.status === 'Credit' ? 'green' : Item.status === 'Debit' ? 'red' : Item.status === 'Pending' ? 'yellow' :""}`}> {Item.status === 'Credit' ? <AddIcon style={{ fontSize: '12px' }} /> : Item.status === 'Debit' ? <RemoveIcon style={{ fontSize: '12px' }} /> : ''}{Item.status}</span></p>
+                                                            <p className='transaction-para mt-1'>Status : <span className={`${Item.status === 'Credit' ? 'green' : Item.status === 'Debit' ? 'red' : Item.status === 'Pending' ? 'yellow' :""}`}> {Item.status === 'Credit' ? <AddIcon style={{ fontSize: '12px' }} /> : Item.status === 'Debit' ? <RemoveIcon style={{ fontSize: '12px' }} /> : ''}{Item.status}</span></p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -420,7 +383,7 @@ const MyWallet = () => {
                                                        
                                                         <div className='text-right'>
                                                             <p className='transaction-para p-0 m-0 blue'>$ {Item.amount}</p>
-                                                            <p className='transaction-para mt-1'>Wallet Mode : <span className={`${Item.status === 'Credit' ? 'green' : Item.status === 'Debit' ? 'red' : Item.status === 'Requested' ? 'yellow' :""}`}> {Item.status === 'Credit' ? <AddIcon style={{ fontSize: '12px' }} /> : Item.status === 'Debit' ? <RemoveIcon style={{ fontSize: '12px' }} /> : ''}{Item.status}</span></p>
+                                                            <p className='transaction-para mt-1'>Status : <span className={`${Item.status === 'Credit' ? 'green' : Item.status === 'Debit' ? 'red' : Item.status === 'Requested' ? 'yellow' :""}`}> {Item.status === 'Credit' ? <AddIcon style={{ fontSize: '12px' }} /> : Item.status === 'Debit' ? <RemoveIcon style={{ fontSize: '12px' }} /> : ''}{Item.status}</span></p>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -477,7 +477,7 @@ else{
                             </NavLink>
 }
                                 <div className='px-1 posted-area'>
-                                    {state.cardData[0].status === 1?
+                                    {state.cardData[0].status === 1 || state.cardData[0].status === 4?
                                     <p className='p-0 m-0'>ASSIGNED TO</p>:
                                     <p className='p-0 m-0'>COMPLETED BY</p>
                                      }
@@ -735,7 +735,7 @@ else{
                                
                                 </div>
 
-                            </Tooltip><Tooltip title="Completeee" placement="top-start">
+                            </Tooltip><Tooltip title="Complete" placement="top-start">
                                 {localStorage.getItem('userType') == 1 ? 
                                     <div>
                                         <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-3 d-flex justify-centent-center align-items-center" onClick={handleClickOpenn}>
