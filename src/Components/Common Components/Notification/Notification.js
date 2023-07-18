@@ -19,6 +19,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
+import ReactPaginate from 'react-paginate';
 
 
 const Notification = () => {
@@ -128,6 +129,19 @@ const handleremove = (e, th) => {
 
   //Delete All Notification
 
+  //pagination 
+
+const [pageNumber, setPageNumber] = useState(0);
+const usersPerPage = 9;
+const pagesVisited = pageNumber * usersPerPage;
+const pageCount = Math.ceil(notification.length / usersPerPage);
+
+const changePage = ({ selected }) => {
+  setPageNumber(selected);
+};
+
+//pagination
+
   return (
     <>
       <Menu />
@@ -183,7 +197,7 @@ const handleremove = (e, th) => {
                       </div>
                       {notification?.length ?
                         <div className="accordion accordion-" id="accordionFlushExample">
-                          {notification?.map((item) => (
+                          {notification?.slice(pagesVisited, pagesVisited + usersPerPage).map((item) => (
                             <div className='d-flex align-items-center justify-content-between'>
                               <Accordion style={{ width: '98%' }}>
                                 <Accordion.Item eventKey="0">
@@ -258,6 +272,23 @@ const handleremove = (e, th) => {
                           ))}
                         </div> : <div style={{ textAlign: "center", marginTop: "100px", fontSize: "18px", fontWeight: "700" }}><p>No Notification Found</p></div>
                       }
+                       {notification.length > 9 ?
+                       <div style={{marginTop:"20px"}}>
+                                                
+                                                <ReactPaginate
+                      previousLabel={"Previous"}
+                      nextLabel={"Next"}
+                      pageCount={pageCount}
+                      onPageChange={changePage}
+                      containerClassName={"paginationBttns"}
+                      previousLinkClassName={"previousBttn"}
+                      nextLinkClassName={"nextBttn"}
+                      disabledClassName={"paginationDisabled"}
+                      activeClassName={"paginationActive"}
+                    />
+                    </div>
+                    :""
+                  }
                     </div>
                   </div>
                 </div>
