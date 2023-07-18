@@ -36,6 +36,7 @@ const MyWallet = () => {
     const [amount, setAmount] = useState([])
     const [paymentType, setPaymentType] = useState([])
     const [withdrawPopup, setWithdrawPoppup] = useState(false)
+    const [withdrawSearch, setWithdrawSearch] = useState(" ")
 
   
     const getTransactionData = ()=>{
@@ -138,7 +139,6 @@ const MyWallet = () => {
 
     //get withdraw history
     const result = state.filter((word) => {
-        // return word.status === searchData
         if(word.status === searchData){
             return word.status === searchData
         }
@@ -146,6 +146,16 @@ const MyWallet = () => {
             return word
         }
     });
+
+
+    const withDrawDataSearch = withdrawHistory.filter((data)=>{
+        if(data.status === withdrawSearch){
+            return data.status === withdrawSearch
+        }
+        if(withdrawSearch === " "){
+            return data
+        }
+    })
 
     //Withdraw Amount
 
@@ -367,10 +377,38 @@ const MyWallet = () => {
                                         <span className='ps-2'> <CurrencyExchangeIcon /> </span>
                                         <h4 className='my-wallet-heading m-0 p-2'>Withdraw History</h4>
                                     </div>
+
+                                    <div className='pe-2'>
+                                        <FormControl sx={{ width: 250 }} size="small">
+                                            <InputLabel id="demo-select-small">Transaction Type</InputLabel>
+                                            <Select
+                                                labelId="demo-select-small"
+                                                id="demo-select-small"
+                                                value={withdrawSearch}
+                                                label="Transaction Type"
+                                                onChange={(event)=>{setWithdrawSearch(event.target.value)}}
+                                            >
+                                                <MenuItem value={" "}>All Transactions</MenuItem>
+                                                <MenuItem value={'Debit'}>Debit Transactions</MenuItem>
+                                                <MenuItem value={'Requested'}>Pending Transactions</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                    </div>
             
                                 </div>
                                 <div className='main-transaction-history-div'>
-                                    {withdrawHistory.map((Item) => {
+                                    {withDrawDataSearch.map((Item) => {
+                                        const statusDta = ()=>{
+                                            if(Item.status === 'Debit'){
+                                                return 'Debit'
+                                            }
+                                            if(Item.status === "Requested"){
+                                                return 'Pending'
+                                            }
+                                            else{
+                                                return " "
+                                            }
+                                        }
                                         return (
                                             <>
                                                 <div style={{margin:'auto', width:'100%'}}>
@@ -386,7 +424,7 @@ const MyWallet = () => {
                                                        
                                                         <div className='text-right'>
                                                             <p className='transaction-para p-0 m-0 blue'>$ {Item.amount}</p>
-                                                            <p className='transaction-para mt-1'>Status : <span className={`${Item.status === 'Credit' ? 'green' : Item.status === 'Debit' ? 'red' : Item.status === 'Requested' ? 'yellow' :""}`}> {Item.status === 'Credit' ? <AddIcon style={{ fontSize: '12px' }} /> : Item.status === 'Debit' ? <RemoveIcon style={{ fontSize: '12px' }} /> : ''}{Item.status}</span></p>
+                                                            <p className='transaction-para mt-1'>Status : <span className={`${Item.status === 'Credit' ? 'green' : Item.status === 'Debit' ? 'red' : Item.status === 'Requested' ? 'yellow' :""}`}> {Item.status === 'Credit' ? <AddIcon style={{ fontSize: '12px' }} /> : Item.status === 'Debit' ? <RemoveIcon style={{ fontSize: '12px' }} /> : ''}{statusDta()}</span></p>
                                                         </div>
                                                     </div>
                                                 </div>
