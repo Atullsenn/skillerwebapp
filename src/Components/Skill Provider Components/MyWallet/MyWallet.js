@@ -29,16 +29,15 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
 const MyWallet = () => {
-    const [moreOption, setMoreOption] = useState('');
     const [state, setState] = useState([])
     const [totalWallet, setTotalWallet] = useState([])
     const [withdrawHistory, setWithdrawHistory] = useState([])
+    const [searchData, setSearchData] = useState(" ")
+    const [amount, setAmount] = useState([])
+    const [paymentType, setPaymentType] = useState([])
+    const [withdrawPopup, setWithdrawPoppup] = useState(false)
 
-    const handleChangeMoreOption = (event) => {
-        setMoreOption(event.target.value);
-    };
-
-
+  
     const getTransactionData = ()=>{
         let request = {
             user:localStorage.getItem('id')
@@ -60,8 +59,7 @@ const MyWallet = () => {
 
 
     //Withdraw Amount
-    const [amount, setAmount] = useState([])
-    const [paymentType, setPaymentType] = useState([])
+   
 
     const handleChange = (event) => {
         setPaymentType(event.target.value);
@@ -105,7 +103,6 @@ const MyWallet = () => {
     }
 
 
-    const [withdrawPopup, setWithdrawPoppup] = useState(false)
 
     const handleCloseWithdrawPopup = ()=>{
         setWithdrawPoppup(false)
@@ -140,8 +137,15 @@ const MyWallet = () => {
 
 
     //get withdraw history
-
-
+    const result = state.filter((word) => {
+        // return word.status === searchData
+        if(word.status === searchData){
+            return word.status === searchData
+        }
+        if(searchData === " "){
+            return word
+        }
+    });
 
     //Withdraw Amount
 
@@ -308,20 +312,19 @@ const MyWallet = () => {
                                             <Select
                                                 labelId="demo-select-small"
                                                 id="demo-select-small"
-                                                value={moreOption}
+                                                value={searchData}
                                                 label="Transaction Type"
-                                                onChange={handleChangeMoreOption}
+                                                onChange={(event)=>{setSearchData(event.target.value)}}
                                             >
-                                                <MenuItem value={10}>All Transactions</MenuItem>
-                                                <MenuItem value={20}>Earning Transactions</MenuItem>
-                                                {/* <MenuItem value={30}>Withdrawal Transactions</MenuItem> */}
-                                                <MenuItem value={40}>Pending Transactions</MenuItem>
+                                                <MenuItem value={" "}>All Transactions</MenuItem>
+                                                <MenuItem value={'Credit'}>Earning Transactions</MenuItem>
+                                                <MenuItem value={'Pending'}>Pending Transactions</MenuItem>
                                             </Select>
                                         </FormControl>
                                     </div>
                                 </div>
                                 <div className='main-transaction-history-div'>
-                                    {state.map((Item) => {
+                                    {result.map((Item) => {
                                         return (
                                             <>
                                                 <div>
