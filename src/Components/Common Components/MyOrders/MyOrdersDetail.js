@@ -67,6 +67,22 @@ const MyOrdersDetail = ({ state, setState, getMyOrderList, abc }) => {
 
 
 
+    const checkRatingTime = (createdDate) => {
+      var today = new Date();
+      var postCreatedDate = new Date(createdDate);
+      var diffMs = today - postCreatedDate;
+      var diffDays = Math.floor(diffMs / 86400000);
+      var diffHrs = Math.floor((diffMs % 86400000) / 3600000);
+      var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
+      if (diffDays === 0 && diffHrs === 0) {
+        return diffMins + " Minutes Ago";
+      } else if (diffDays === 0 && diffHrs != 0) {
+        return diffHrs + " Hours Ago";
+      } else if (diffDays != 0 && diffHrs != 0) {
+        return diffDays + " Days Ago ";
+      }
+    };
+
     const handleClickOpenn = () => {
         setOpen(true);
     };
@@ -145,7 +161,6 @@ const MyOrdersDetail = ({ state, setState, getMyOrderList, abc }) => {
         })
     })
   }
-
 
 
 
@@ -242,8 +257,6 @@ else{
   };
 
   const adminUserId = localStorage.getItem('id')
-
-
   const [cancelPost, setCancelPost] = useState(false)
   const [cancelReson, setCancelReson] = useState(false)
 
@@ -264,8 +277,6 @@ else{
     setCancelReson(false)
   }
 
-  
-   
 
   const userCancelPost = ()=>{
     let request = {
@@ -308,10 +319,6 @@ else{
     })
   }
   }
-
-  // console.log(state.cardData[0], "Check dataaaaaaaa")
-  
-
 
     return (
         <>
@@ -810,7 +817,7 @@ else{
                             <div className="py-2 w-100">
                                 <div className="d-flex justify-content-between align-items-between">
                                     <h5 className="p-0 m-0">{`${ state.cardData[0].review_Rating[0] && state.cardData[0].review_Rating[0].firstName} ${state.cardData[0].review_Rating[0] && state.cardData[0].review_Rating[0].lastName}`}</h5>
-                                    <p className="p-0 m-0 status-day-review"> <AccessAlarmIcon style={{ fontSize: "18px", marginRight: "3px" }} /> 2 days ago </p>
+                                    <p className="p-0 m-0 status-day-review"> <AccessAlarmIcon style={{ fontSize: "18px", marginRight: "3px" }} /> {checkRatingTime(state.cardData[0].review_Rating[0].created_at)} </p>
                                 </div>
                                 <p className="p-0 m-0 user-profile-flag-text-area"> <AssistantPhotoIcon style={{ fontSize: "18px" }} /> {state.cardData[0].review_Rating[0] && state.cardData[0].review_Rating[0].country_name} </p>
                                 <div className="d-flex align-items-center rating-icon-star">

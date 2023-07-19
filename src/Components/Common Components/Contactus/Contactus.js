@@ -57,6 +57,7 @@ const Contactus = () => {
             if (response.data.success) {
                 handleLoadingClose()
                 isToastMessage.toastShowLoadingToast(response.data.success, 'Contact Request is Submitted')
+               setState((prevState)=>({...prevState, name:"", email:"", phone:"", message:""}))
             } else {
                 handleLoadingClose()
                 isToastMessage.toastShowLoadingToast(response.data.success, 'Contact Request is not Submitted')

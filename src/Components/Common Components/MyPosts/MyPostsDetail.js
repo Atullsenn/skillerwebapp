@@ -287,7 +287,7 @@ const MyPostsDetail = ({
         };
 
         // console.log(request, "Check request")
-        handleBidRejectClose();
+        // handleBidRejectClose();
         axios
           .post(baseUrl + "/on-bid-reject", request, {
             Accept: "Application",
@@ -299,8 +299,12 @@ const MyPostsDetail = ({
               theme: "colored",
               autoClose: 1000,
             });
+             setState((prevState) => ({
+          ...prevState,
+          cardDetail: false,
+          defaultActiveKey: "Pending",
+        }));
             getPostDetail();
-            
           })
           .catch((error) => {
             toast.error("Some Error Occured", {
