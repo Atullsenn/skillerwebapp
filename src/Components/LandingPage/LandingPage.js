@@ -21,7 +21,6 @@ import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import {toast} from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { IsToastContext } from "../../Contexts/ToastContext";
-import {stockData} from '../../data';
 
 
 const defaultState = {
