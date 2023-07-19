@@ -22,6 +22,7 @@ import ErrorIcon from '@mui/icons-material/Error';
 import Dialog from '@mui/material/Dialog';
 import CallIcon from '@mui/icons-material/Call';
 import AttachEmailIcon from '@mui/icons-material/AttachEmail';
+import { contactData } from '../../../data';
 
 const defaultState = {
     name: '',
@@ -131,7 +132,7 @@ const Contactus = () => {
             </div>
             <Menu />
             <section className="vh-80">
-                <Banner imgSource={Images.contactus} text="Contact us" />
+                <Banner imgSource={Images.contactus} text={contactData.contactTitleOne} />
                 <div className="contact py-5">
                     <div className="container-fluid">
                         <div className="mb-2 d-flex justify-content-between w-100 align-items-center main-contact-us-card-div">
@@ -139,7 +140,7 @@ const Contactus = () => {
                                 <div className="card-icon-box">
                                     <PermPhoneMsgIcon className="card-main-icon" />
                                 </div>
-                                <p className="w-100 d-flex justify-content-center m-0 card-main-label"> Phone</p>
+                                <p className="w-100 d-flex justify-content-center m-0 card-main-label"> {contactData.contactTitleTwo}</p>
                                 {state.contactInfo.map((item) => {
                                     if (item.type === 1) {
                                         return (
@@ -149,7 +150,7 @@ const Contactus = () => {
                                 })}
                                 <div className="d-flex justify-content-center">
                                     <div className="d-flex justify-content-center mt-2 align-items-center">
-                                        <button className='btn btn-primary btn-lg btn-block contact-us-btn' onClick={handleContactPopUpOpen}>Call </button>
+                                        <button className='btn btn-primary btn-lg btn-block contact-us-btn' onClick={handleContactPopUpOpen}>{contactData.contactTitleThree} </button>
                                     </div>
                                 </div>
                             </div>
@@ -157,7 +158,7 @@ const Contactus = () => {
                                 <div className="card-icon-box">
                                     <AddLocationAltIcon className="card-main-icon" />
                                 </div>
-                                <p className="w-100 d-flex justify-content-center m-0 card-main-label"> Address</p>
+                                <p className="w-100 d-flex justify-content-center m-0 card-main-label"> {contactData.contactTitleFour}</p>
                                 {state.contactInfo.map((item) => {
                                     if (item.type === 2) {
                                         return (
@@ -167,7 +168,7 @@ const Contactus = () => {
                                 })}
                                 <div className="d-flex justify-content-center">
                                     <div className="d-flex justify-content-center mt-2 align-items-center">
-                                        <a href='https://www.google.com/maps/dir/28.6031121,77.3668853/Sector+59,+Noida,+Uttar+Pradesh/@28.605294,77.3658,17z/data=!4m9!4m8!1m1!4e1!1m5!1m1!1s0x390ce565fcf639e7:0x677c4d7bd48136!2m2!1d77.3683319!2d28.6075627' target="_blank" className='btn btn-primary btn-lg btn-block contact-us-btn'>Go to Google map </a>
+                                        <a href='https://www.google.com/maps/dir/28.6031121,77.3668853/Sector+59,+Noida,+Uttar+Pradesh/@28.605294,77.3658,17z/data=!4m9!4m8!1m1!4e1!1m5!1m1!1s0x390ce565fcf639e7:0x677c4d7bd48136!2m2!1d77.3683319!2d28.6075627' target="_blank" className='btn btn-primary btn-lg btn-block contact-us-btn'>{contactData.contactTitleFive} </a>
                                     </div>
                                 </div>
                             </div>
@@ -175,7 +176,7 @@ const Contactus = () => {
                                 <div className="card-icon-box">
                                     <AttachEmailIcon className="card-main-icon" />
                                 </div>
-                                <p className="w-100 d-flex justify-content-center m-0 card-main-label">Email</p>
+                                <p className="w-100 d-flex justify-content-center m-0 card-main-label">{contactData.contactTitleSix}</p>
                                 {state.contactInfo.map((item) => {
                                     if (item.type === 3) {
                                         return (
@@ -185,14 +186,14 @@ const Contactus = () => {
                                 })}
                                 <div className="d-flex justify-content-center">
                                     <div className="d-flex justify-content-center mt-2 align-items-center">
-                                        <button className='btn btn-primary btn-lg btn-block contact-us-btn' onClick={handleContactEmailPopUpOpen}>Contact by a email </button>
+                                        <button className='btn btn-primary btn-lg btn-block contact-us-btn' onClick={handleContactEmailPopUpOpen}>{contactData.contactTitleSeven} </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className="row">
                             <div className='col-lg-12 text-center'>
-                                <h2 className="font-weight-light mt-3 mb-4">Quick Contact</h2>
+                                <h2 className="font-weight-light mt-3 mb-4">{contactData.contactTitleEight}</h2>
                             </div>
                             <div className="col-lg-6">
                                 <div className='card-shadow d-flex justify-content-center align-items-center contact-us-img'>
@@ -260,7 +261,7 @@ const Contactus = () => {
                                             />
                                         </div>
                                         <div className="d-flex justify-content-center">
-                                            <button className={`${!isEnabled ? 'disableBtn' : 'contact-us-submit-btn'}`} onClick={sendContactDetails} disabled={!isEnabled}>Submit <ArrowRightAltIcon /></button>
+                                            <button className={`${!isEnabled ? 'disableBtn' : 'contact-us-submit-btn'}`} onClick={sendContactDetails} disabled={!isEnabled}>{contactData.contactTitleNine} <ArrowRightAltIcon /></button>
                                         </div>
                                     </div>
                                 </div>

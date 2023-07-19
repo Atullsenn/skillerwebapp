@@ -220,3 +220,18 @@ languagePlaceHolder :'Select Your Language',
 learningMethodPlaceHolder :'Select Your Learning Method',
 currentExperiencePlaceHolder : 'Select Your Current Experience',
 }
+
+
+// Contact Us Page
+
+export const contactData = {
+  contactTitleOne:"Contact us",
+  contactTitleTwo:"Phone",
+  contactTitleThree:"Call",
+  contactTitleFour:"Address",
+  contactTitleFive:"Go to Google map",
+  contactTitleSix:"Email",
+  contactTitleSeven:"Contact by a email",
+  contactTitleEight:"Quick Contact",
+  contactTitleNine:"Submit",
+}

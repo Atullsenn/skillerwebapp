@@ -27,7 +27,7 @@ const News = ({ state }) => {
                                     <div className="media-bg-animate">
                                         <div className="aon-blog-section-1 shine-hover">
                                             <div className="aon-post-media shine-box">
-                                                <img style={{ borderRadius: '30px' }} src={`${imageBaseUrl}/public/news/${item.image}`} alt="No Image Found" />
+                                                <img style={{ borderRadius: '30px', width:"100%", height: '200px' }} src={`${imageBaseUrl}/public/news/${item.image}`} alt="No Image Found" />
                                             </div>
                                             <div className="aon-post-meta">
                                                 <ul>
