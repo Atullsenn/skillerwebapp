@@ -1153,6 +1153,8 @@ span.input-group-append button:hover {
 
 .teamImg img {
     border-radius: 30px;
+    width: 100%;
+    height: 200px;
     border-bottom: 8px solid #8fc1e2;
 }
 

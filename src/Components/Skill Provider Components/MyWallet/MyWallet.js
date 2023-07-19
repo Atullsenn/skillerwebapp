@@ -159,6 +159,8 @@ const MyWallet = () => {
 
     //Withdraw Amount
 
+
+
     return (
         <>
             <Menu />
@@ -352,7 +354,8 @@ const MyWallet = () => {
                                                             <p className='transaction-para mt-1'>{Item.transaction_id}</p>
                                                         </div>
                                                         <div className='text-right'>
-                                                            <p className='transaction-para p-0 m-0 blue'>$ {Item.amount}</p>
+                                                        {/* <p className='transaction-para p-0 m-0 blue'>Bid amount 6477</p> */}
+                                                            <p className='transaction-para p-0 m-0 blue'>BidAmount ($ {Item.bid_amount}) - admincharges ($ {Item.commission_amount}) = $ {Item.amount}</p>
                                                             <p className='transaction-para mt-1'>Status : <span className={`${Item.status === 'Credit' ? 'green' : Item.status === 'Debit' ? 'red' : Item.status === 'Pending' ? 'yellow' :""}`}> {Item.status === 'Credit' ? <AddIcon style={{ fontSize: '12px' }} /> : Item.status === 'Debit' ? <RemoveIcon style={{ fontSize: '12px' }} /> : ''}{Item.status}</span></p>
                                                         </div>
                                                     </div>

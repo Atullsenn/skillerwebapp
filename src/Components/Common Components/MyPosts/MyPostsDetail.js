@@ -120,6 +120,7 @@ function getPhoneSelection(name, phoneCall, theme) {
   };
 }
 
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -379,7 +380,6 @@ const MyPostsDetail = ({
       return " "
      }
   }
-
 
   //on_bid_accept api
   const on_bid_accept = (BidDetail) => {
@@ -1146,40 +1146,40 @@ const MyPostsDetail = ({
   }]
   const[paymentState, setPaymentState] = useState(defaultPaymentState)
   const convertMonth = ()=>{
-    if(paymentState.month == "January"){
+    if(paymentState.month == "Jan"){
       return "01"
     }
-    if(paymentState.month === "February"){
+    if(paymentState.month === "Feb"){
       return "02"
     }
-    if(paymentState.month === "March"){
+    if(paymentState.month === "Mar"){
       return "03"
     }
-    if(paymentState.month === "April"){
+    if(paymentState.month === "Apr"){
       return "04"
     }
     if(paymentState.month == "May"){
       return "05"
     }
-    if(paymentState.month === "June"){
+    if(paymentState.month === "Jun"){
       return "06"
     }
-    if(paymentState.month === "July"){
+    if(paymentState.month === "Jul"){
       return "07"
     }
-    if(paymentState.month === "August"){
+    if(paymentState.month === "Aug"){
       return "08"
     }
-    if(paymentState.month === "September"){
+    if(paymentState.month === "Sep"){
       return "09"
     }
-    if(paymentState.month === "October"){
+    if(paymentState.month === "Oct"){
       return "10"
     }
-    if(paymentState.month === "November"){
+    if(paymentState.month === "Nov"){
       return "11"
     }
-    if(paymentState.month === "December"){
+    if(paymentState.month === "Dec"){
       return "12"
     }
     else {
@@ -2066,8 +2066,10 @@ const handleCloseBidModel = ()=>{
             
             <div className="paymentinput">
             <label class="col-sm-4 col-form-label"  style={{paddingRight: '8px',fontWeight:'bold'}}  for="expmonth">Exp Month</label>
-            <input className="border-primaryy" style={{border: '2px solid #3498db'}} onChange={(event)=>{handleMonth(event)}} maxLength={10} type="text" id="expmonth" name="expmonth" placeholder="September"/>
+            <input className="border-primaryy" style={{border: '2px solid #3498db'}} onChange={(event)=>{handleMonth(event)}} maxLength={3} type="text" id="expmonth" name="expmonth" placeholder="Jan"/>
             </div>
+
+           
            
             <div class="row">
               <div class="subinput">
@@ -2591,10 +2593,7 @@ const handleCloseBidModel = ()=>{
             <div className="d-flex align-items-center justify-content-between">
               <p className="p-0 m-0 view-more-detail-head">Learning method</p>
               <p className="p-0 m-0 view-more-detail-head-detail w-50 text-right">
-                {state.bidDetailData.learning_method_type === 1
-                  ? "Text"
-                  : state.bidDetailData.learning_method_type === 2 &&
-                    "Phone Call"}
+                {state.bidDetailData.learning_method_type}
               </p>
             </div>
             <Divider className="my-2" style={{ backgroundColor: "#a9a4a4" }} />
