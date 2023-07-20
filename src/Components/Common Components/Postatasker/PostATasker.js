@@ -704,6 +704,10 @@ const PostATasker = () => {
         guestPostTask()
      }
 
+
+     const blockInvalidChar = e => ['e', 'E', '+', '-'].includes(e.key) && e.preventDefault();
+
+
     return (
         <>
             <div>
@@ -907,6 +911,7 @@ const PostATasker = () => {
                                         label={<> {postTaskData.budgetPlaceHolder} <span style={{ color: 'red' }}>*</span></>}
                                         variant="standard"
                                         value={state.budget}
+                                        onKeyDown={blockInvalidChar}
                                         currencySymbol="$"
                                         outputFormat="string"
                                         onChange={(event, value) => { setState((prevState) => ({ ...prevState, budget: value })); }}
