@@ -71,6 +71,7 @@ import CheckoutForm from "./CheckoutForm";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import ClearIcon from '@mui/icons-material/Clear';
+import dayjs from 'dayjs';
 
 //import "./checkout.css";
 
@@ -198,10 +199,10 @@ const MyPostsDetail = ({
     budget: state.cardData[0].budget,
     skills: state.cardData[0].skill.split(","),
     currentExp:state.cardData[0].currentExp,
-    dueDateee: state.cardData[0].dueDate_date,
-    dueTimmee: state.cardData[0].dueDate_time,
-    toDateee: state.cardData[0].todate_date,
-    totimee: state.cardData[0].todate_time,
+    dueDateee: dayjs(state.cardData[0].dueDate_date),
+    dueTimmee: dayjs(state.cardData[0].dueDate_time),
+    toDateee: dayjs(state.cardData[0].todate_date),
+    totimee: dayjs(state.cardData[0].todate_time),
     originalDueTime:"",
     originalDueDate:"",
     originalToTime:"",
@@ -232,7 +233,6 @@ const MyPostsDetail = ({
     learning: state.cardData[0].learning[0].id
   };
 
-
  
 
   const CLIENT_SECRET = "sk_test_51M91kVSHQvfYHLAWtC9g5Qj15lBIcaY8TTA1xpd30Lg853d05zVOooEDb84dzodKtJMy2cSE5tzTjc5vPi9cmHz300VSzWjPGE"
@@ -246,7 +246,6 @@ const MyPostsDetail = ({
   
   const isEnabled =
     editPost.postTitle != "" &&
-    editPost.description != "" &&
     editPost.category != "" &&
     editPost.country != "" &&
     editPost.state != "" &&
@@ -255,7 +254,7 @@ const MyPostsDetail = ({
     editPost.budget != "" &&
     editPost.skills != "" &&
     editPost.language != "" &&
-    editPost.phoneCall.length != 0 &&
+    // editPost.phoneCall.length != 0 &&
     editPost.learningMethod != "";
 
   SimpleBidRejectDialog.propTypes = {
@@ -2855,7 +2854,7 @@ const bidImageRemove = (index)=>{
                                 <h5>From <span style={{ color: 'red' }}>*</span></h5>
                                 <div style={{display:"flex", flexDirection:"row", gap: "100px"}} className='mt-3'>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                      <DatePicker onChange={handleDueDateChange} />
+                                      <DatePicker defaultValue={editPost.dueDateee} onChange={handleDueDateChange} />
                                 </LocalizationProvider>
                                     {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                                         <DemoItem>
@@ -2877,14 +2876,14 @@ const bidImageRemove = (index)=>{
 
 <LocalizationProvider dateAdapter={AdapterDayjs}>
       {/* <DemoContainer components={['TimePicker']}> */}
-        <TimePicker onChange={handleTimeChange}  label="time" />
+        <TimePicker defaultValue={editPost.dueTimmee} onChange={handleTimeChange}  label="time" />
       {/* </DemoContainer> */}
     </LocalizationProvider>
                                 </div>
                                 <h5 style={{marginTop: "15px"}}>To<span style={{ color: 'red'}}>*</span></h5>
                                 <div style={{display:"flex", flexDirection:"row", gap: "100px"}} className='mt-3'>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                      <DatePicker minDate={state.originalDueDate} onChange={handleToDateChange} />
+                                      <DatePicker defaultValue={editPost.toDateee} onChange={handleToDateChange} />
                                 </LocalizationProvider>
                                     {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                                         <DemoItem>
@@ -2906,7 +2905,7 @@ const bidImageRemove = (index)=>{
 <div>
 <LocalizationProvider dateAdapter={AdapterDayjs}>
       {/* <DemoContainer components={['TimePicker']}> */}
-        <TimePicker onChange={handleToTimeChange} label="time" />
+        <TimePicker defaultValue={editPost.totimee}  onChange={handleToTimeChange} label="time" />
       {/* </DemoContainer> */}
     </LocalizationProvider>
     </div>
