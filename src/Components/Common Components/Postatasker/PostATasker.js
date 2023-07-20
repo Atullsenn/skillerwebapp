@@ -872,7 +872,7 @@ const PostATasker = () => {
                                 <h5 style={{marginTop: "15px"}}>To<span style={{ color: 'red'}}>*</span></h5>
                                 <div style={{display:"flex", flexDirection:"row", gap: "100px"}} className='mt-3'>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                      <DatePicker onChange={handleToDateChange} value={state.originalToDate}/>
+                                      <DatePicker minDate={state.originalDueDate} onChange={handleToDateChange} value={state.originalToDate}/>
                                 </LocalizationProvider>
                                     {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                                         <DemoItem>
