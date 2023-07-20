@@ -70,6 +70,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import ClearIcon from '@mui/icons-material/Clear';
 
 //import "./checkout.css";
 
@@ -242,7 +243,6 @@ const MyPostsDetail = ({
   };
 
   const [editPost, setEditPost] = useState(editDefaultState);
-  //console.log(editPost.dueDateee, "Edit posttt")
   
   const isEnabled =
     editPost.postTitle != "" &&
@@ -287,15 +287,13 @@ const MyPostsDetail = ({
           description: description,
         };
 
-        // console.log(request, "Check request")
-        // handleBidRejectClose();
+       
         axios
           .post(baseUrl + "/on-bid-reject", request, {
             Accept: "Application",
             "Content-Type": "application/json",
           })
           .then((response) => {
-            //console.log(response, "Check Response")
             toast.success("Offer rejected successfully", {
               theme: "colored",
               autoClose: 1000,
@@ -395,16 +393,7 @@ const MyPostsDetail = ({
         "Content-Type": "application/json",
       })
       .then((response) => {
-        // toast.success("Offer accepted successfully", {
-        //   theme: "colored",
-        //   autoClose: 1000,
-        // });
         getAllPosts();
-        // setState((prevState) => ({
-        //   ...prevState,
-        //   cardDetail: false,
-        //   defaultActiveKey: "In-Progress",
-        // }));
         setTimeout(() => {
           navigate("/my-order");
         }, 500);
@@ -494,6 +483,8 @@ const MyPostsDetail = ({
         console.log(error);
       });
   };
+
+
 
   const getCityList = () => {
     axios
@@ -1128,12 +1119,6 @@ const MyPostsDetail = ({
   }
 
 
-  
-
-  //console.log(editPost, "Checking Edit Post")
-
-
-
   //payment api
   const defaultPaymentState = [{
     fullName:"",
@@ -1274,6 +1259,8 @@ const MyPostsDetail = ({
 
   }
 
+  // console.log(imagesPreview, "Images preview data")
+
   //payment validation
   function creditCardType(cc) {
     let amex = new RegExp('^3[47][0-9]{13}$');
@@ -1387,6 +1374,29 @@ const handleCloseBidModel = ()=>{
 
 
 // bid reject modal
+
+
+//Edit bid image remove api
+
+const bidImageEdit = (image_id)=>{
+  let request = {
+    post_image_id: image_id,
+    post_id:state.cardData[0].id
+  }
+
+  axios.post(`${baseUrl}/post-image-delete`, request).then((response)=>{
+  }).catch((error)=>{
+    console.log(error)
+  })
+}
+
+const bidImageRemove = (index)=>{
+  imagesPreview.splice(index,1);
+  setImagesPreview([...imagesPreview])
+}
+
+
+//Edit bid image remove api
 
 
 
@@ -2874,7 +2884,7 @@ const handleCloseBidModel = ()=>{
                                 <h5 style={{marginTop: "15px"}}>To<span style={{ color: 'red'}}>*</span></h5>
                                 <div style={{display:"flex", flexDirection:"row", gap: "100px"}} className='mt-3'>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                      <DatePicker onChange={handleToDateChange} />
+                                      <DatePicker minDate={state.originalDueDate} onChange={handleToDateChange} />
                                 </LocalizationProvider>
                                     {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                                         <DemoItem>
@@ -3002,7 +3012,7 @@ const handleCloseBidModel = ()=>{
                 >
                   <MenuItem value={1}>{"Text"}</MenuItem>
                   <MenuItem value={2}>{"Phone call"}</MenuItem>
-                  <MenuItem value={3}>{"Both"}</MenuItem>
+                  <MenuItem value={3}>{"Text And Phone Call"}</MenuItem>
                 </Select>
               </FormControl>
               {editPost.learningMethod != 0 ? (
@@ -3226,32 +3236,38 @@ const handleCloseBidModel = ()=>{
                   alignItems: "center",
                 }}
               >
-                {imagesPreview.map((file) => (
+                {imagesPreview.map((file, index) => (
                   <div className="p-2">
                     <img
+                    alt="postImage"
                       src={file}
                       style={{
-                        width: "90px",
-                        height: "85px",
+                        width: "60px",
+                        height: "75px",
                         borderRadius: "5px",
                         objectFit: "cover",
                       }}
                     />
+                    <span className="bidImageIcon" onClick={()=>{bidImageRemove(index)}} style={{color:"#3e3e22", position:"relative", bottom:'28px', right:'24px'}}>
+                        <ClearIcon />
+                      </span>
                   </div>
                 ))}
                 {state.cardData[0].post_image.map((Item, index) => {
                   return (
-                    <img
+                    <><img
                       src={`${imageBaseUrl}/public/post/${Item.image}`}
                       alt="postImage"
                       style={{
-                        width: "90px",
-                        height: "85px",
+                        width: "60px",
+                        height: "75px",
                         borderRadius: "5px",
                         objectFit: "cover",
                         marginLeft: "4px",
-                      }}
-                    />
+                      }} /><span className="bidImageIcon" onClick={()=>{bidImageEdit(Item.id)}} style={{color:"#3e3e22", position:"relative", bottom:'28px', right:'24px'}}>
+                        <ClearIcon />
+                      </span></>
+                    
                   );
                 })}
                 <label>

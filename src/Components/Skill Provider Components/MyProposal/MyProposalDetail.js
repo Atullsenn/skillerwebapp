@@ -85,7 +85,7 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
         languageList: [],
         learningMethod: `${state.cardData && state.cardData[0].bid_learning_method_type === 1 ? 1 : 2}`,
         learningMethodTab: parseInt(`${state.cardData && state.cardData[0].bid_learning_method_type === 1 ? 0 : 1}`),
-        phoneCall: [],
+        phoneCall: [state.cardData[0].bid_learning[0].call_name],
         phoneCallId: [],
         phoneCallList: [],
         skills: state.cardData && state.cardData[0].skill.split(','),
@@ -93,8 +93,6 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
 
     }
 
-    //console.log(state.cardData && state.cardData[0], "Checking Proposal detail")
-    
     const [editBid, setEditBid] = useState(editDefaultState);
     const MAX_COUNT = 5;
     const [imagesPreview, setImagesPreview] = useState([])
@@ -147,6 +145,22 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                     : theme.typography.fontWeightMedium,
         };
     }
+
+    const handlePhoneSelection = (event) => {
+        let phoneCallIdArray = [];
+        const {
+            target: { value },
+        } = event;
+        editBid.phoneCallList.map((item) => {
+            for (let i = 0; i < event.target.value.length; i++) {
+                if (event.target.value[i] === item.name) {
+                    phoneCallIdArray.push(item.id)
+                }
+            }
+        })
+        setEditBid((prevState) => ({ ...prevState, phoneCall: typeof value === 'string' ? value.split(',') : value, phoneCallId: phoneCallIdArray, }));
+    };
+
 
     function getStyles(name, personName, theme) {
         return {
@@ -312,10 +326,6 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
     }
 
 
-    //console.log(state.allProposalList, "checking allProposal list")
-    //console.log(state.cardData, "Checking Card Data For bug")
-
-
     //update bid api
 
     const EditMakeAnOffer = async () => {
@@ -342,7 +352,6 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
             Accept: "Application",
             "Content-Type": "application/json"
         }).then((response) => {
-            console.log(response, "rrrr")
             if (response.data.success === true) {
                 toast.success('Offer Updated Successfully', {
                     theme: 'colored',
@@ -400,7 +409,6 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
             console.log(error)
         })
     }
-
 
 
     //update bid api
@@ -608,7 +616,7 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                             <h5>{state.cardData && state.cardData[0].postTitle}</h5>
                         </div>
                         <FormControl fullWidth>
-                            <InputLabel htmlFor="outlined-adornment-amount">Enter Expected Budget</InputLabel>
+                            <InputLabel htmlFor="outlined-adornment-amount">Enter Expected Budgettttttt</InputLabel>
                             <OutlinedInput
                                 type='number'
                                 onWheel={(event) => event.target.blur()}
@@ -645,6 +653,7 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                             >
                                 <MenuItem value={1}>{"Text"}</MenuItem>
                                 <MenuItem value={2}>{"Phone call"}</MenuItem>
+                                <MenuItem value={3}>{"Text And Phone Call"}</MenuItem>
                             </Select>
                         </FormControl>
                         {editBid.learningMethod != 0 ?
@@ -679,7 +688,57 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                                                 id="demo-multiple-chip"
                                                 multiple
                                                 value={editBid.phoneCall}
-                                                // onChange={handlePhoneSelection}
+                                                onChange={handlePhoneSelection}
+                                                input={<OutlinedInput id="select-multiple-chip" label="Select your options" />}
+                                                renderValue={(selected) => (
+                                                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                                                        {selected.map((value) => (
+                                                            <Chip key={value} label={value} />
+                                                        ))}
+                                                    </Box>
+                                                )}
+                                                MenuProps={MenuProps}
+                                            >
+                                                {editBid.phoneCallList.map((Item) => (
+                                                    <MenuItem key={Item.id} value={Item.name} style={getPhoneSelection(Item.name, editBid.phoneCall, theme)}>{Item.name}</MenuItem>
+                                                ))}
+                                            </Select>
+                                        </FormControl>
+                                    </div>
+                                </TabPanel>
+
+
+                                <TabPanel value={editBid.learningMethodTab} index={2} style={{ overflow: 'auto', width: '100%' }}>
+                                    <h5>Get text message (email) of how to solve your problem</h5>
+                                    <div className='d-flex justify-content-around'>
+                                        <p>o Tools needed</p>
+                                        <p>o Steps</p>
+                                        <p>o Expected result</p>
+                                        <p>o Verification of expected result</p>
+                                    </div>
+                                    <div className='post-a-tasker-upload-file-section-area'>
+                                        <label style={{ width: "100%", height: "150px", border: "2px solid #188dc7", padding: "20px", borderRadius: '5px' }}>
+                                            <input type="file" multiple accept='application/pdf' style={{ display: "none" }} />
+                                            <p className="ant-upload-drag-icon p-0 m-0 d-flex justify-content-center"> <DriveFolderUploadIcon style={{ fontSize: '45px' }} /> </p>
+                                            <p className="ant-upload-text p-0 m-0 d-flex justify-content-center">Click file to this area to upload  </p>
+                                            <p className="ant-upload-hint p-0 m-0 d-flex justify-content-center">Support for a single or bulk upload. Strictly prohibit from uploading
+                                                company data or other band files
+                                            </p>
+                                        </label>
+
+                                    </div>
+                                </TabPanel>
+                                <TabPanel value={editBid.learningMethodTab} index={2} style={{ overflow: 'auto', width: '100%' }}>
+                                    <h5>Google hangout, zoom, teams, phone call, up to 1 hour or 3 calls</h5>
+                                    <div className='mt-4'>
+                                        <FormControl sx={{ width: '100%' }}>
+                                            <InputLabel id="demo-multiple-chip-label">Select your options</InputLabel>
+                                            <Select
+                                                labelId="demo-multiple-chip-label"
+                                                id="demo-multiple-chip"
+                                                multiple
+                                                value={editBid.phoneCall}
+                                                onChange={handlePhoneSelection}
                                                 input={<OutlinedInput id="select-multiple-chip" label="Select your options" />}
                                                 renderValue={(selected) => (
                                                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
