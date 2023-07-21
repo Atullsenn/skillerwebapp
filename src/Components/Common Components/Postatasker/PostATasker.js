@@ -48,6 +48,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { postTaskData } from '../../../data';
+import ClearIcon from '@mui/icons-material/Clear';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -286,6 +287,12 @@ const PostATasker = () => {
             console.log(error)
         })
     }
+
+
+    const postImageRemove = (index)=>{
+        imagesPreview.splice(index,1);
+        setImagesPreview([...imagesPreview])
+      }
 
     const getStateList = () => {
         axios.post(`${baseUrl}/get-states`, {
@@ -1120,10 +1127,15 @@ const PostATasker = () => {
                             <h4>{postTaskData.subPhotos}</h4>
                             <div style={{ border: "2px solid #188dc7", height: "230px", borderRadius: '10px' }}>
                                 <div className="uploaded-files-list" style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: "58px" }}>
-                                    {imagesPreview.map(file => (
+                                    {imagesPreview.map((file, index) => (
+                                        <>
                                         <div style={{ marginRight: "20px" }} >
                                             <img src={file} style={{ width: '100px', height: "100px", borderRadius: '5px' }} />
                                         </div>
+                                       
+                                        <ClearIcon className="postImageIconn" onClick={()=>{postImageRemove(index)}}  style={{color:"blue", position:"relative", bottom:"37px", right:"44px"}}/>
+                                        
+                                        </>
                                     ))}
                                     
                                     {!localStorage.getItem('id')?

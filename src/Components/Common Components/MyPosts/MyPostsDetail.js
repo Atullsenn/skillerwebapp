@@ -233,7 +233,7 @@ const MyPostsDetail = ({
     learning: state.cardData[0].learning[0].id
   };
 
- 
+
 
   const CLIENT_SECRET = "sk_test_51M91kVSHQvfYHLAWtC9g5Qj15lBIcaY8TTA1xpd30Lg853d05zVOooEDb84dzodKtJMy2cSE5tzTjc5vPi9cmHz300VSzWjPGE"
   
@@ -927,6 +927,8 @@ const MyPostsDetail = ({
     }
   };
   //Edit post api
+ 
+  // console.log( dayjs(state.cardData[0].dueDate_time), "Checkkk date format")
 
   //Post cancel api
   const cancelPost = () => {
@@ -1232,10 +1234,6 @@ const MyPostsDetail = ({
 
     axios.post(`${baseUrl}/payment`,request).then((response)=>{
       if(response.data.success === true){
-        // toast.success('Payment successfull',{
-        //   autoClose:1000,
-        //   theme:'colored'
-        // })
         handleCloseOpenPaymentModal()
         handleOpenSuccessPopUp()
         on_bid_accept(state.bidDetailData)
@@ -1306,7 +1304,6 @@ const MyPostsDetail = ({
   const handleCvv = (event)=>{
     const limit = 3;
     setPaymentState((prevState)=>({...prevState, cvv:event.target.value.slice(0, limit)}))
-    //console.log(paymentState.cvv, "cvvvvv")
   }
 
 
@@ -1314,7 +1311,6 @@ const MyPostsDetail = ({
   const handleCardNumber = (event)=>{
     const limit = 16;
     setPaymentState((prevState)=>({...prevState, cardNumber:event.target.value.slice(0, limit)}))
-    // console.log(paymentState.cardNumber)
   }
 
 
@@ -1351,7 +1347,7 @@ const handleDueDateChange = (newValue) => {
 const handleToTimeChange = (newValue)=>{
     const convertedTime = newValue
     let d = `${convertedTime.$H}:${convertedTime.$m}:${convertedTime.$s}`
-    setEditPost((prevState)=>({...prevState, toTimeee:d, originalToTime: newValue}))
+    setEditPost((prevState)=>({...prevState, totimee:d, originalToTime: newValue}))
 }
 
 const handleToDateChange = (newValue)=>{
@@ -1377,13 +1373,34 @@ const handleCloseBidModel = ()=>{
 
 //Edit bid image remove api
 
+const getPostDetaillll = (id) => {
+  axios.post(`${baseUrl}/show-post`, {
+      post: id
+  }).then((response) => {
+      if (response.data.success) {
+          setState((prevState) => ({ ...prevState, cardData: response.data.Data, showDetailedLoading: false }));
+          if (response.data.Data[0].status === 1) {
+              setState((prevState) => ({ ...prevState, inProgressBidDetailData: response.data.Data[0].bids[0], chatBidId: response.data.Data[0].bids[0].bid_id }))
+          }
+      }
+  }).catch((error) => {
+      setState((prevState) => ({ ...prevState, showDetailedLoading: false }));
+      console.log(error)
+  })
+
+
+}
+
 const bidImageEdit = (image_id)=>{
   let request = {
     post_image_id: image_id,
     post_id:state.cardData[0].id
   }
 
+  //console.log(request, "Requestttttt")
+
   axios.post(`${baseUrl}/post-image-delete`, request).then((response)=>{
+    getPostDetaillll(state.cardData[0].id)
   }).catch((error)=>{
     console.log(error)
   })

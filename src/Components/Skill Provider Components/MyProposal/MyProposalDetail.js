@@ -36,6 +36,7 @@ import { baseUrl, imageBaseUrl } from "../../../Url/url";
 import { toast } from "react-toastify";
 import ClearIcon from '@mui/icons-material/Clear';
 import DuoIcon from '@mui/icons-material/Duo';
+import PhotoIcon from "@mui/icons-material/Photo";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -94,7 +95,7 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
     }
 
     const [editBid, setEditBid] = useState(editDefaultState);
-    const MAX_COUNT = 5;
+    const MAX_COUNT = 4;
     const [imagesPreview, setImagesPreview] = useState([])
     const [pImage, setPImage] = useState([])
     const [filess, setFiless] = useState([])
@@ -262,6 +263,12 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
     }
 
 
+    const bidImageRemove = (index)=>{
+        imagesPreview.splice(index,1);
+        setImagesPreview([...imagesPreview])
+      }
+
+
     //upload multiple images 
     const [pdfName, setPdfName] = useState({ selectedFiles: [] })
     const handleUploadPdf = files => {
@@ -308,6 +315,7 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
 
     const uploadMultipleImage = (e) => {
         const files = Array.from(e.target.files)
+        // console.log(files, "check filesss")
         setPImage([e.target.files[0]])
         setImagesPreview([])
         files.forEach((file) => {
@@ -325,15 +333,18 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
         handleUploadFiles(chosenFiles, uploadMultipleImage(e));
     }
 
+   
 
     //update bid api
 
     const EditMakeAnOffer = async () => {
         const formData = new FormData()
+
         for (let i = 0; i < filess.length; i++) {
             formData.append(`post_image[${i}]`, filess[i])
             formData.append(`learning_image[${i}]`, images[i])
         }
+
         formData.append('user', localStorage.getItem("id"))
         formData.append(`language_id[]`, editBid.languageId)
         formData.append('bid_id', state.cardData[0].bid_id)
@@ -352,6 +363,7 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
             Accept: "Application",
             "Content-Type": "application/json"
         }).then((response) => {
+            // console.log(response, "Check responseeee")
             if (response.data.success === true) {
                 toast.success('Offer Updated Successfully', {
                     theme: 'colored',
@@ -409,6 +421,39 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
             console.log(error)
         })
     }
+
+
+
+    const getShowMyProposalPostt = (id) => {
+        axios.post(`${baseUrl}/show-my-request-post`, {
+            post: id,
+            user: localStorage.getItem('id')
+        }).then((response) => {
+            //console.log(response.data.Data, "Checking Response ")
+            if (response.data.success) {
+                setState((prevState) => ({ ...prevState, cardData: response.data.Data, showDetailedLoading: false }));
+            }
+        }).catch((error) => {
+            setState((prevState) => ({ ...prevState, showDetailedLoading: false }));
+            console.log(error)
+        })
+    }
+
+    const removeBidImage = (id)=>{
+        let request = {
+            offer_id:state.cardData[0].bid_id,
+            type:2,
+            bid_image_id:id
+        }
+
+        axios.post(`${baseUrl}/post-bid-image-delete`,request).then((response)=>{
+            // console.log(response, "responseee")
+            getShowMyProposalPostt()
+        }).catch((error)=>{
+            console.log(error)
+        })
+    }
+
 
 
     //update bid api
@@ -616,7 +661,7 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                             <h5>{state.cardData && state.cardData[0].postTitle}</h5>
                         </div>
                         <FormControl fullWidth>
-                            <InputLabel htmlFor="outlined-adornment-amount">Enter Expected Budgettttttt</InputLabel>
+                            <InputLabel htmlFor="outlined-adornment-amount">Enter Expected Budget</InputLabel>
                             <OutlinedInput
                                 type='number'
                                 onWheel={(event) => event.target.blur()}
@@ -792,19 +837,44 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                     <div className='mt-4 make-an-offer-border'>
                         <div style={{ border: "2px solid #188dc7", height: "230px", borderRadius: '5px' }}>
                             <div className="uploaded-files-list" style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: "58px" }}>
-                                {imagesPreview.map(file => (
+                                {imagesPreview.map((file,index) => (
+                                    <>
                                     <div className='p-2'>
                                         <img src={file} style={{ width: '90px', height: "85px", borderRadius: '5px', objectFit: 'cover' }} />
                                     </div>
+                                    <ClearIcon onClick={()=>{bidImageRemove(index)}} className="imageClearr" />
+                                  </>
                                 ))}
                                 {
                                     state.cardData && state.cardData[0].bid_post_image.map((Item, index) => {
+                                        // console.log(Item, "checkkk item")
                                         return (
 
-                                            <><img src={`${imageBaseUrl}/public/offers/${Item.image}`} alt='postImage' style={{ width: '90px', height: "85px", borderRadius: '5px', objectFit: 'cover', marginLeft: '4px', border: "2px solid gray" }} /><ClearIcon className="imageClear" /></>
+                                            <><img src={`${imageBaseUrl}/public/offers/${Item.image}`} alt='postImage' style={{ width: '90px', height: "85px", borderRadius: '5px', objectFit: 'cover', marginLeft: '4px' }} /><ClearIcon  className="imageClear" /></>
                                         )
                                     })
                                 }
+                                 <label>
+                  <input
+                    onChange={handleFileEvent}
+                    type="file"
+                    multiple
+                    accept="image/*"
+                    style={{ display: "none" }}
+                  />
+                  {filess.length < MAX_COUNT ? (
+                    <PhotoIcon
+                    className='photoIconnn'
+                      style={{
+                        width: "91px",
+                        height: "86px",
+                        color: "darkgray",
+                      }}
+                    />
+                  ) : (
+                    " "
+                  )}
+                </label>
                             </div>
                         </div>
                     </div>

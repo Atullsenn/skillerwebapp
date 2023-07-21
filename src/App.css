@@ -192,10 +192,22 @@ input[type=number] {
   right: 22px;
   bottom: 32px;
   font-size: 16px;
-  color: red;
+  color: rgb(88, 79, 79);
 }
 
 .imageClear:hover{
+  color: black;
+}
+
+.imageClearr{
+  position: relative;
+  right: 31px;
+  bottom: 32px;
+  font-size: 16px;
+  color: rgb(88, 79, 79);
+}
+
+.imageClearr:hover{
   color: black;
 }
 
