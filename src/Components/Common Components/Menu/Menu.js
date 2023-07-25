@@ -205,7 +205,7 @@ const Menu = (props) => {
     })
   }
 
-  console.log(notificationData, "Check Notification Data")
+  // console.log(notificationData, "Check Notification Data")
 
   
   const userTypee = localStorage.getItem('userType')
@@ -461,9 +461,11 @@ const redirectNotification = (notification_type, postId)=>{
   else if(notification_type == 7){
     navigate("/browse-requests", { state: { post_id: postId } })
   }
+  else if(notification_type == 8){
+    navigate("/my-order", {state:{post_id: postId}})
+  }
   else{
     navigate("/")
-    // console.log("hello")
   }
 
 }

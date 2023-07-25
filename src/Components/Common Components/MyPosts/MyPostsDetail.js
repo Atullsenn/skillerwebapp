@@ -65,20 +65,11 @@ import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import { makeStyles } from "@material-ui/core/styles";
 import DuoIcon from '@mui/icons-material/Duo';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-import CheckoutForm from "./CheckoutForm";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import ClearIcon from '@mui/icons-material/Clear';
 import dayjs from 'dayjs';
 
-//import "./checkout.css";
-
-// Make sure to call loadStripe outside of a component’s render to avoid
-// recreating the Stripe object on every render.
-// This is your test publishable API key.
-const stripePromise = loadStripe('pk_test_51M91kVSHQvfYHLAWyAahZV2KZT8GsSA7CRDM7cB1UazY0LC7autWLpqc7JBitHbqTUykJyr8Rm5Zt27Gj8VOGI2h00AgaKrSzJ');
 
 const useStyles = makeStyles(() => ({
   disableBtn: {

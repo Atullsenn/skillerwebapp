@@ -22,7 +22,7 @@ import PropTypes from 'prop-types';
 import CloseIcon from '@mui/icons-material/Close';
 import Tooltip from '@mui/material/Tooltip';
 import ListIcon from '@mui/icons-material/List';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import MyPostsDetail from "./MyPostsDetail";
 import PaidIcon from '@mui/icons-material/Paid';
 import Button from '@mui/material/Button';
@@ -79,6 +79,8 @@ const MyPosts = ({ state, setState, getAllPosts }) => {
         left: false,
     });
     var chatCounts=0;
+
+    let location = useLocation()
 
     function getStyles(name, language, theme) {
         return {
@@ -464,6 +466,21 @@ const changePage = ({ selected }) => {
 };
 
 //pagination
+
+//Automatic Open Post Detail
+const openPostDetail = ()=>{
+    if(location.state && location.state.post_id){
+    getPostDetail(location.state.post_id); setActiveClass(location.state.post_id); setState((prevState) => ({ ...prevState, cardDetail: true, showMap: false }))
+    } 
+}
+
+useEffect(()=>{
+    openPostDetail()
+},[location.state])
+
+
+
+//Automatic Open Post Detail
 
     
     return (

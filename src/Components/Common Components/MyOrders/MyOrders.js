@@ -152,7 +152,9 @@ const MyOrders = ({ state, setState, getMyOrderList }) => {
       //Open Automatic Post Detail
 
       const openAutoMaticPostDetail = ()=>{
+        if(location.state && location.state.post_id){
         getPostDetailll(location.state.post_id); setActiveClass(location.state.post_id); setState((prevState) => ({ ...prevState, cardDetail: true })) 
+        }
       }
 
       useEffect(()=>{
