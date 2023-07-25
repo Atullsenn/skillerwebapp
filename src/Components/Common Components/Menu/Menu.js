@@ -205,6 +205,8 @@ const Menu = (props) => {
     })
   }
 
+  console.log(notificationData, "Check Notification Data")
+
   
   const userTypee = localStorage.getItem('userType')
 
@@ -414,6 +416,7 @@ chatMessage.forEach((item)=>{
   
   // usage example:
   
+  
   var uniqueValue = chatb2.filter(onlyUniqueValue);
   const messageLength = uniqueValue.length
   
@@ -436,27 +439,27 @@ chatMessage.forEach((item)=>{
 
 
 
-const redirectNotification = (notification_type)=>{
+const redirectNotification = (notification_type, postId)=>{
   if(notification_type == 1){
-    navigate("/browse-requests")
+    navigate("/browse-requests", { state: { post_id: postId } })
   }
   else if(notification_type == 2){
-    navigate("/my-order")
+    navigate("/my-order", { state: { post_id: postId } })
   }
   else if(notification_type == 3){
-    navigate("/browse-requests")
+    navigate("/browse-requests", { state: { post_id: postId } })
   }
   else if(notification_type == 4){
-    navigate("/browse-requests")
+    navigate("/browse-requests", { state: { post_id: postId } })
   }
   else if(notification_type == 5){
-    navigate("/browse-requests")
+    navigate("/browse-requests", { state: { post_id: postId } })
   }
   else if(notification_type == 6){
-    navigate("/my-posts")
+    navigate("/my-posts", { state: { post_id: postId } })
   }
   else if(notification_type == 7){
-    navigate("/browse-requests")
+    navigate("/browse-requests", { state: { post_id: postId } })
   }
   else{
     navigate("/")
@@ -548,7 +551,7 @@ const redirectNotification = (notification_type)=>{
                             {notificationData?.length ?
                               <div className="notificationAll">
                                 {notificationData?.map((item) => (
-                                  <div onClick={()=>{redirectNotification(item.notification_type)}} className="d-flex p-2 align-items-center justify-content-center">
+                                  <div onClick={()=>{redirectNotification(item.notification_type, item.post_id)}} className="d-flex p-2 align-items-center justify-content-center">
                                     <div >
                                       {item.profile ?
                                         <Avatar alt="Remy Sharp" src={`${imageBaseUrl}/public/profile/${item.profile}`} /> :
@@ -749,7 +752,7 @@ const redirectNotification = (notification_type)=>{
                             {notificationData?.length ?
                               <div className="notificationAll">
                                 {notificationData?.map((item) => (
-                                  <div onClick={()=>{redirectNotification(item.notification_type)}} className="d-flex p-2 align-items-center justify-content-center">
+                                  <div onClick={()=>{redirectNotification(item.notification_type, item.post_id)}} className="d-flex p-2 align-items-center justify-content-center">
                                     <div>
                                       {item.profile ?
                                         <Avatar alt="Remy Sharp" src={`${imageBaseUrl}/public/profile/${item.profile}`} /> :

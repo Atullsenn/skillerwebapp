@@ -38,6 +38,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import ErrorIcon from '@mui/icons-material/Error';
 import Pagination from '../../Pagination';
 import ReactPaginate from "react-paginate";
+import { useNavigate, useLocation } from "react-router-dom";
 
 // let PageSize = 18;
 
@@ -58,6 +59,8 @@ const BrowseRequest = ({ state, setState, heading }) => {
     const [isToastMessage] = useContext(IsToastContext)
     const [search, setSearch] = useState("")
 
+    let location = useLocation();
+    //console.log(location.state.post_id, "Check Location ");
     // const currentTableData = useMemo(() => {
     //     const firstPageIndex = (currentPage - 1) * PageSize;
     //     const lastPageIndex = firstPageIndex + PageSize;
@@ -383,6 +386,17 @@ const changePage = ({ selected }) => {
   setPageNumber(selected);
 };
 
+
+const autoPostDetail = ()=>{
+    if(location.state && location.state.post_id){
+        getPostDetail(location.state.post_id); setActiveClass(location.state.post_id); setState((prevState) => ({ ...prevState, cardDetail: true })) 
+    }
+}
+
+useEffect(()=>{
+    autoPostDetail()
+},[location.state])
+
 //pagination
 
     return (
@@ -450,7 +464,7 @@ const changePage = ({ selected }) => {
                                 ).slice(pagesVisited, pagesVisited + usersPerPage).map((item, index) => {
                                     return (
                                         <div className={`${state.cardDetail ? '' : 'col-lg-4'}`}>
-                                            <div key={index} id={`browse-card-${item.id}`} className={`${state.cardDetail ? 'm-2 rounded card-main-div' : 'm-2 rounded card-main-div'}`} onClick={() => { getPostDetail(item.id); setActiveClass(item.id); setState((prevState) => ({ ...prevState, cardDetail: true })) }}>
+                                            <div key={index} id={`browse-card-${item.id}`} className={`${state.cardDetail ? 'm-2 rounded card-main-div' : 'm-2 rounded card-main-div'}`} onClick={() => { getPostDetail(item.id || location.state.post_id); setActiveClass(item.id || location.state.post_id); setState((prevState) => ({ ...prevState, cardDetail: true })) }}>
                                                 <div className='px-2 d-flex justify-content-between align-items-center'>
                                                     <h4 className='px-1 m-0 post-title-in-cardsection'>{item.postTitle}</h4>
                                                     <span className='px-1 dollerPrice'>${item.budget}</span>

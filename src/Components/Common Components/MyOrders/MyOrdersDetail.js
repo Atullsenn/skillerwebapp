@@ -37,6 +37,7 @@ import { TextareaAutosize } from "@mui/material";
 import DuoIcon from '@mui/icons-material/Duo';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 import CancelIcon from '@mui/icons-material/Cancel';
+import { MuiFileInput } from 'mui-file-input';
 
 
 const MyOrdersDetail = ({ state, setState, getMyOrderList, abc }) => {
@@ -102,6 +103,19 @@ const MyOrdersDetail = ({ state, setState, getMyOrderList, abc }) => {
       const handleClickOpenCompleteModal = () => {
         setOpenCompleteModal(true);
       };
+
+    
+      const [value, setValue] = useState([])
+
+  const handleChange = (newValue) => {
+    setValue(newValue)
+    if (newValue.length > 3){
+      alert("You are only allowed to upload a maximum of 3 files");
+      setValue("");
+   }
+   
+
+  }
 
      
       
@@ -319,6 +333,11 @@ else{
     })
   }
   }
+
+  
+  
+       
+
 
     return (
         <>
@@ -710,17 +729,20 @@ else{
                                             aria-describedby="alert-dialog-description"
                                         >
                                             <DialogTitle id="alert-dialog-title" className="text-center">
-                                                {"Why are you cancel this post give reason?"}
+                                                {"Why are you cancel this post ?"}
                                             </DialogTitle>
                                             <DialogContent className='text-center p-0 m-0'>
                                                 <DialogContentText id="alert-dialog-description">
+                                                  <div>
+                                                  <MuiFileInput className="p-2 mt-4" accept=".pdf"  style={{ width: "82%" }} value={value} onChange={handleChange} placeholder='Upload File' multiple />
+                                                  </div>
                                                     <div>
                                                     <TextareaAutosize
                                                      className="p-2 mt-4"
                                                      aria-label="minimum height"
                                                      minRows={3}
                                                      style={{ width: "80%" }}
-                                                     placeholder="Enter reason for cancel post"
+                                                     placeholder="Enter Reason For Cancel Post"
                                                      onChange={(e)=>{setReason(e.target.value)}}
                                                    />
            

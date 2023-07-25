@@ -22,7 +22,7 @@ import PropTypes from 'prop-types';
 import CloseIcon from '@mui/icons-material/Close';
 import Tooltip from '@mui/material/Tooltip';
 import ListIcon from '@mui/icons-material/List';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import MyOredrDetail from "./MyOrdersDetail";
 import PaidIcon from '@mui/icons-material/Paid';
 import Button from '@mui/material/Button';
@@ -53,10 +53,14 @@ import {
 import ChatBox from "../chat/ChatBox";
 import Modal from "react-bootstrap/Modal";
 
+
 const MyOrders = ({ state, setState, getMyOrderList }) => {
     const theme = useTheme();
     const [search, setSearch] = useState("")
     const [isChatOpen, setIsChatOpen] = useState()
+
+    let location = useLocation();
+ 
 
     const getPostDetailll = (id) => {
         setState((prevState) => ({ ...prevState, showDetailedLoading: true, chatPostId: id }));
@@ -143,6 +147,20 @@ const MyOrders = ({ state, setState, getMyOrderList }) => {
       };
 
       var abc;
+
+
+      //Open Automatic Post Detail
+
+      const openAutoMaticPostDetail = ()=>{
+        getPostDetailll(location.state.post_id); setActiveClass(location.state.post_id); setState((prevState) => ({ ...prevState, cardDetail: true })) 
+      }
+
+      useEffect(()=>{
+        openAutoMaticPostDetail()
+      },[location.state])
+
+
+      //Open Automatic Post Detail
 
     return (
         <>

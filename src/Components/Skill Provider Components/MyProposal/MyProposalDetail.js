@@ -78,6 +78,7 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
     const theme = useTheme();
     const [openWithdrawModal, setOpenWithdrawModal] = useState(false);
     const [openEditBid, setOpenEditBid] = useState(false);
+
     const editDefaultState = {
         expectedBudget: state.cardData && state.cardData[0]?.budget_of_bid,
         expectedDays: state.cardData && state.cardData[0].expected_days,
@@ -101,7 +102,10 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
     const [filess, setFiless] = useState([])
     const [fileLimit, setFileLimit] = useState(false);
     const [images, setImages] = useState([])
-    // console.log(editBid.language, "sflkj")
+
+    
+   
+    
     const handleCloseOpenWithdrawModal = (bidId) => {
         setOpenWithdrawModal(false);
         setState((prevState) => ({ ...prevState, isLoadingOpen: true }));
@@ -315,7 +319,6 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
 
     const uploadMultipleImage = (e) => {
         const files = Array.from(e.target.files)
-        // console.log(files, "check filesss")
         setPImage([e.target.files[0]])
         setImagesPreview([])
         files.forEach((file) => {
@@ -327,6 +330,9 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
             reader.readAsDataURL(file);
         })
     }
+
+
+   
 
     const handleFileEvent = (e) => {
         const chosenFiles = Array.prototype.slice.call(e.target.files)
@@ -359,11 +365,12 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
         // for (const pair of formData.entries()) {
         //     console.log(`${pair[0]}, ${pair[1]}`)
         // }
+
+
         await axios.post(`${baseUrl}/edit-make-an-offer-data`, formData, {
             Accept: "Application",
             "Content-Type": "application/json"
         }).then((response) => {
-            // console.log(response, "Check responseeee")
             if (response.data.success === true) {
                 toast.success('Offer Updated Successfully', {
                     theme: 'colored',
@@ -447,7 +454,6 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
         }
 
         axios.post(`${baseUrl}/post-bid-image-delete`,request).then((response)=>{
-            // console.log(response, "responseee")
             getShowMyProposalPostt()
         }).catch((error)=>{
             console.log(error)
@@ -593,7 +599,7 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                     <Divider className='my-1' style={{ backgroundColor: '#a9a4a4' }} />
                     <div className='p-2 d-flex align-items-center justify-content-between'>
                         <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>Learning method</h5>
-                        <p className='p-0 m-0' style={{ color: '#188dc7' }}>{state.cardData && state.cardData[0].bid_learning_method_type === 1 ? 'Text' : 'Phone Call'}</p>
+                        <p className='p-0 m-0' style={{ color: '#188dc7' }}>{state.cardData && state.cardData[0].bid_learning_method_type}</p>
                     </div>
                     <Divider className='my-1' style={{ backgroundColor: '#a9a4a4' }} />
                     <div className='p-2 d-flex align-items-center justify-content-between'>
@@ -632,7 +638,7 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                 <Divider style={{ backgroundColor: '#a9a4a4' }} />
                 <DialogContent>
                     <DialogContentText>
-                        <h4>Are you sure you want to delte this Withdraw offer</h4>
+                        <h4>Are you sure you want to Withdraw this offer</h4>
                     </DialogContentText>
                 </DialogContent>
                 <Divider style={{ backgroundColor: '#a9a4a4' }} />
@@ -850,7 +856,7 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                                         // console.log(Item, "checkkk item")
                                         return (
 
-                                            <><img src={`${imageBaseUrl}/public/offers/${Item.image}`} alt='postImage' style={{ width: '90px', height: "85px", borderRadius: '5px', objectFit: 'cover', marginLeft: '4px' }} /><ClearIcon  className="imageClear" /></>
+                                            <><img src={`${imageBaseUrl}/public/offers/${Item.image}`} alt='postImage' style={{ width: '90px', height: "85px", borderRadius: '5px', objectFit: 'cover', marginLeft: '4px' }} /><ClearIcon onClick={()=>{removeBidImage(Item.id)}}  className="imageClear" /></>
                                         )
                                     })
                                 }
