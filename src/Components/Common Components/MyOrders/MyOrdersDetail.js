@@ -48,6 +48,15 @@ const MyOrdersDetail = ({ state, setState, getMyOrderList, abc }) => {
     const [userRating, setUserRating] = useState(0)
     const [openCompleteModal, setOpenCompleteModal] = useState(false);
     const [reason, setReason] = useState('')
+    const [value, setValue] = useState([])
+    const adminUserId = localStorage.getItem('id')
+    const [cancelPost, setCancelPost] = useState(false)
+    const [cancelReson, setCancelReson] = useState(false)
+    const [approve, setApprove] = useState(false)
+    const [dispute, setDispute] = useState(false)
+    const [disputeFiles, setDisputeFiles] = useState([])
+    const [disputeReason, setDisputeReason] = useState([])
+    const [providerDispute, setProviderDispute] = useState(false)
    
 
 
@@ -106,7 +115,6 @@ const MyOrdersDetail = ({ state, setState, getMyOrderList, abc }) => {
       };
 
     
-      const [value, setValue] = useState([])
 
   const handleChange = (newValue) => {
     setValue(newValue)
@@ -271,9 +279,7 @@ else{
     
   };
 
-  const adminUserId = localStorage.getItem('id')
-  const [cancelPost, setCancelPost] = useState(false)
-  const [cancelReson, setCancelReson] = useState(false)
+  
 
   const handleOpenCancelPost = ()=>{
     setCancelPost(true)
@@ -354,9 +360,7 @@ else{
   }
 
 
-  const [approve, setApprove] = useState(false)
-  const [dispute, setDispute] = useState(false)
-  const [providerDispute, setProviderDispute] = useState(false)
+  
 
   const handleCloseApprove = ()=>{
     setApprove(false)
@@ -387,11 +391,19 @@ else{
 
   const disputeApproveProvider = ()=>{
     let request = {
-      dispute_id:""
+      dispute_id: state.cardData[0].dispute_id
     }
 
     axios.post(`${baseUrl}/dispute-post-approved-from-provider`, request).then((response)=>{
-      console.log(response, "check response")
+      //console.log(response, "check response")
+      if(response.data.success == true){
+        toast.success('Success',{
+          autoClose:1000,
+          theme:'colored'
+        })
+        handleCloseApprove()
+      }
+      
     }).catch((error)=>{
       console.log(error)
     })
@@ -401,16 +413,41 @@ else{
   const postDisputeByProvider = ()=>{
 
     const formData = new FormData()
-        for (let i = 0; i < value.length; i++) {
-            formData.append(`dispute_files[${i}]`, value[i])
+        for (let i = 0; i < disputeFiles.length; i++) {
+            formData.append(`dispute_files[${i}]`, disputeFiles[i])
         }
-        formData.append('dispute_id', state.cardData[0].user_id)
+        formData.append('dispute_id', state.cardData[0].dispute_id)
+
+        // Display the key/value pairs
+// for (const pair of formData.entries()) {
+//   console.log(`${pair[0]}, ${pair[1]}`);
+// }
 
     axios.post(`${baseUrl}/dispute-post-fileupload-provider`, formData).then((response)=>{
-      console.log(response, "Check Response")
+      // console.log(response, "Check Response")
+      if(response.data.success == true){
+        toast.success('Disputed Successfully', {
+          autoClose: 1000,
+          theme: 'colored'
+        })
+        handleCloseProviderDispute()
+      }
     }).catch((error)=>{
       console.log(error)
     })
+  }
+
+
+  
+
+  const handleChangeDispute = (newValue) => {
+    setDisputeFiles(newValue)
+    if (newValue.length > 3){
+      alert("You are only allowed to upload a maximum of 3 files");
+      setDisputeFiles("");
+   }
+   
+
   }
 
 
@@ -813,7 +850,7 @@ else{
                                                 </DialogContentText>
                                             </DialogContent>
                                             <DialogActions className="text-center d-flex align-items-center justify-content-center">
-                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={handleCloseApprove}> Yes</button>
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={disputeApproveProvider}> Yes</button>
                                                 <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleCloseApprove}> No </button>
                                             </DialogActions>
                                         </Dialog>
@@ -891,23 +928,24 @@ else{
                                             <DialogContent className='text-center p-0 m-0'>
                                                 <DialogContentText id="alert-dialog-description">
                                                   <div>
-                                                  <MuiFileInput className="p-2 mt-4" inputProps={{ accept: '.xlsx, .xls, .pdf' }}  style={{ width: "82%" }} value={value} onChange={handleChange} placeholder='Upload File' multiple />
+                                                  <MuiFileInput className="p-2 mt-4" inputProps={{ accept: '.xlsx, .xls, .pdf' }}  style={{ width: "82%" }} value={disputeFiles} onChange={handleChangeDispute} placeholder='Upload File' multiple />
                                                   </div>
                                                     <div>
                                                     <TextareaAutosize
                                                      className="p-2 mt-4"
                                                      aria-label="minimum height"
+                                                     value={disputeReason}
                                                      minRows={3}
                                                      style={{ width: "80%" }}
                                                      placeholder="Enter Reason For Cancel Post"
-                                                     onChange={(e)=>{setReason(e.target.value)}}
+                                                     onChange={(e)=>{setDisputeReason(e.target.value)}}
                                                    />
            
                                                     </div>
                                                 </DialogContentText>
                                             </DialogContent>
                                             <DialogActions className="text-center d-flex align-items-center justify-content-center">
-                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={handleCloseProviderDispute} > Submit</button>
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={postDisputeByProvider} > Submit</button>
                                                 <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleCloseProviderDispute}>Cancel</button>
                                             </DialogActions>
                                         </Dialog>

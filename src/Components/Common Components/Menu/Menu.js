@@ -877,6 +877,7 @@ const redirectNotification = (notification_type, postId)=>{
                                     <NavLink to="/my-proposals"> <MenuItem onClick={handleClose}> My Proposals </MenuItem> </NavLink>
                                     <NavLink to="/my-order"> <MenuItem onClick={handleClose}> My Order </MenuItem> </NavLink>
                                     <NavLink to="/search-posts"> <MenuItem onClick={handleClose}> Search posts </MenuItem> </NavLink>
+                                    {/* <NavLink to="/past-posts"><MenuItem onClick={handleClose}>Past Posts</MenuItem></NavLink> */}
                                     <NavLink to="/help"> <MenuItem onClick={handleClose}> Help </MenuItem> </NavLink>
                                     <Divider style={{ backgroundColor: "gray" }} />
                                     <MenuItem onClick={handleLogout}> <ListItemIcon> <Logout fontSize="small" /> </ListItemIcon> Logout </MenuItem>
