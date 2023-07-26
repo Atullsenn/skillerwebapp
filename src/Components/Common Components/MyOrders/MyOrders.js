@@ -126,9 +126,7 @@ const MyOrders = ({ state, setState, getMyOrderList }) => {
     }, [state.inProgress]);
 
 
-    // console.log(users, "userrrrrrr")
-
-    
+   
 
     const closeChatModal = () => {
         setIsChatOpen(false);
@@ -138,7 +136,6 @@ const MyOrders = ({ state, setState, getMyOrderList }) => {
         setIsChatOpen(true);
       };
 
-    //   const [chatReadStatuss, setChatReadStatus] = useState(0);
 
       const updateChat = async (id) => {
         const userDoc = doc(db, "chats", id);
@@ -152,8 +149,16 @@ const MyOrders = ({ state, setState, getMyOrderList }) => {
       //Open Automatic Post Detail
 
       const openAutoMaticPostDetail = ()=>{
-        if(location.state && location.state.post_id){
-        getPostDetailll(location.state.post_id); setActiveClass(location.state.post_id); setState((prevState) => ({ ...prevState, cardDetail: true })) 
+        if(location.state && location.state.post_id && location.state.notificationType == 2){
+        getPostDetailll(location.state.post_id);
+         setActiveClass(location.state.post_id); 
+         setState((prevState) => ({ ...prevState, cardDetail: true, defaultActiveKey: 'In-Progress' })) 
+        }
+
+        if(location.state && location.state.post_id && location.state.notificationType == 8){
+            getPostDetailll(location.state.post_id); 
+            setActiveClass(location.state.post_id);
+            setState((prevState)=>({...prevState, cardDetail: true, defaultActiveKey: 'Disputed'}))
         }
       }
 

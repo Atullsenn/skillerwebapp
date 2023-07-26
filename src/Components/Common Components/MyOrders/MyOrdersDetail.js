@@ -38,6 +38,7 @@ import DuoIcon from '@mui/icons-material/Duo';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { MuiFileInput } from 'mui-file-input';
+import CheckIcon from '@mui/icons-material/Check';
 
 
 const MyOrdersDetail = ({ state, setState, getMyOrderList, abc }) => {
@@ -293,14 +294,32 @@ else{
 
 
   const userCancelPost = ()=>{
-    let request = {
-      seeker_id: state.cardData[0].user_id,
-      post_id:state.cardData[0].post_id,
-      provider_id:state.cardData[0].bids[0].user_id,
-      description:reason,
-      amount:state.cardData[0].bids[0].budget,
-      userType:localStorage.getItem('userType')
-    }
+    // let request = {
+    //   seeker_id: state.cardData[0].user_id,
+    //   post_id:state.cardData[0].post_id,
+    //   provider_id:state.cardData[0].bids[0].user_id,
+    //   description:reason,
+    //   amount:state.cardData[0].bids[0].budget,
+    //   userType:localStorage.getItem('userType')
+      
+    // }
+
+
+    const formData = new FormData()
+        for (let i = 0; i < value.length; i++) {
+            formData.append(`dispute_files[${i}]`, value[i])
+        }
+        formData.append('seeker_id', state.cardData[0].user_id)
+        formData.append('post_id', state.cardData[0].post_id)
+        formData.append('provider_id', state.cardData[0].bids[0].user_id)
+        formData.append('description', reason)
+        formData.append('amount', state.cardData[0].bids[0].budget)
+        formData.append('userType', localStorage.getItem('userType'))
+
+        // for (const pair of formData.entries()) {
+        //   console.log(`${pair[0]}, ${pair[1]}`);
+        // }
+       
 
     if(reason == ""){
       toast.warn('Please enter reason',{
@@ -311,7 +330,7 @@ else{
 
     else{
 
-    axios.post(`${baseUrl}/post-in-dispute`,request).then((response)=>{
+    axios.post(`${baseUrl}/post-in-dispute`,formData).then((response)=>{
       
        handleCloseCancelReson()
       //  if(state.cardData[0].status === 4){
@@ -334,9 +353,65 @@ else{
   }
   }
 
-  
-  
-       
+
+  const [approve, setApprove] = useState(false)
+  const [dispute, setDispute] = useState(false)
+  const [providerDispute, setProviderDispute] = useState(false)
+
+  const handleCloseApprove = ()=>{
+    setApprove(false)
+  }
+
+  const handleOpenApprove = ()=>{
+    setApprove(true)
+  }
+
+  const handleCloseDispute = ()=>{
+     setDispute(false)
+  }
+
+  const handleOpenDispute = ()=>{
+      setDispute(true)
+  }
+
+
+  const handleCloseProviderDispute = ()=>{
+    setProviderDispute(false)
+  }
+
+  const handleOpenProviderDispute = ()=>{
+    setProviderDispute(true)
+    handleCloseDispute()
+  }
+
+
+  const disputeApproveProvider = ()=>{
+    let request = {
+      dispute_id:""
+    }
+
+    axios.post(`${baseUrl}/dispute-post-approved-from-provider`, request).then((response)=>{
+      console.log(response, "check response")
+    }).catch((error)=>{
+      console.log(error)
+    })
+  }
+
+
+  const postDisputeByProvider = ()=>{
+
+    const formData = new FormData()
+        for (let i = 0; i < value.length; i++) {
+            formData.append(`dispute_files[${i}]`, value[i])
+        }
+        formData.append('dispute_id', state.cardData[0].user_id)
+
+    axios.post(`${baseUrl}/dispute-post-fileupload-provider`, formData).then((response)=>{
+      console.log(response, "Check Response")
+    }).catch((error)=>{
+      console.log(error)
+    })
+  }
 
 
     return (
@@ -560,6 +635,7 @@ else{
                             </div>
                         </div>
                         <div className='d-flex'>
+                          
                             <div className='d-flex align-items-center post-location-data w-50'>
                                 <AddTaskIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
@@ -723,6 +799,52 @@ else{
 
                                         <Dialog
                                             fullWidth
+                                            open={approve}
+                                            onClose={handleCloseApprove}
+                                            aria-labelledby="alert-dialog-title"
+                                            aria-describedby="alert-dialog-description"
+                                        >
+                                            <DialogTitle id="alert-dialog-title" className="text-center">
+                                                {"Are you sure want to Approve ?"}
+                                            </DialogTitle>
+                                            <DialogContent className='text-center p-0 m-0'>
+                                                <DialogContentText id="alert-dialog-description">
+                                                    <DoneOutlineIcon  style={{ color: '#97bc62', fontSize: '100px' }} />
+                                                </DialogContentText>
+                                            </DialogContent>
+                                            <DialogActions className="text-center d-flex align-items-center justify-content-center">
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={handleCloseApprove}> Yes</button>
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleCloseApprove}> No </button>
+                                            </DialogActions>
+                                        </Dialog>
+
+
+                                        <Dialog
+                                            fullWidth
+                                            open={dispute}
+                                            onClose={handleCloseDispute}
+                                            aria-labelledby="alert-dialog-title"
+                                            aria-describedby="alert-dialog-description"
+                                        >
+                                            <DialogTitle id="alert-dialog-title" className="text-center">
+                                                {"Are you sure want to dispute ?"}
+                                            </DialogTitle>
+                                            <DialogContent className='text-center p-0 m-0'>
+                                                <DialogContentText id="alert-dialog-description">
+                                                    <CancelIcon  style={{ color: 'red', fontSize: '100px' }} />
+                                                </DialogContentText>
+                                            </DialogContent>
+                                            <DialogActions className="text-center d-flex align-items-center justify-content-center">
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={handleOpenProviderDispute}> Yes</button>
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleCloseDispute}> No </button>
+                                            </DialogActions>
+                                        </Dialog>
+
+
+
+
+                                        <Dialog
+                                            fullWidth
                                             open={cancelReson}
                                             // onClose={handleCloseCancelReson}
                                             aria-labelledby="alert-dialog-title"
@@ -734,7 +856,7 @@ else{
                                             <DialogContent className='text-center p-0 m-0'>
                                                 <DialogContentText id="alert-dialog-description">
                                                   <div>
-                                                  <MuiFileInput className="p-2 mt-4" accept=".pdf"  style={{ width: "82%" }} value={value} onChange={handleChange} placeholder='Upload File' multiple />
+                                                  <MuiFileInput className="p-2 mt-4" inputProps={{ accept: '.xlsx, .xls, .pdf' }}  style={{ width: "82%" }} value={value} onChange={handleChange} placeholder='Upload File' multiple />
                                                   </div>
                                                     <div>
                                                     <TextareaAutosize
@@ -754,6 +876,77 @@ else{
                                                 <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleCloseCancelReson}>Cancel</button>
                                             </DialogActions>
                                         </Dialog>
+
+
+                                        <Dialog
+                                            fullWidth
+                                            open={providerDispute}
+                                            // onClose={handleCloseCancelReson}
+                                            aria-labelledby="alert-dialog-title"
+                                            aria-describedby="alert-dialog-description"
+                                        >
+                                            <DialogTitle id="alert-dialog-title" className="text-center">
+                                                {"Why are you dispute this post ?"}
+                                            </DialogTitle>
+                                            <DialogContent className='text-center p-0 m-0'>
+                                                <DialogContentText id="alert-dialog-description">
+                                                  <div>
+                                                  <MuiFileInput className="p-2 mt-4" inputProps={{ accept: '.xlsx, .xls, .pdf' }}  style={{ width: "82%" }} value={value} onChange={handleChange} placeholder='Upload File' multiple />
+                                                  </div>
+                                                    <div>
+                                                    <TextareaAutosize
+                                                     className="p-2 mt-4"
+                                                     aria-label="minimum height"
+                                                     minRows={3}
+                                                     style={{ width: "80%" }}
+                                                     placeholder="Enter Reason For Cancel Post"
+                                                     onChange={(e)=>{setReason(e.target.value)}}
+                                                   />
+           
+                                                    </div>
+                                                </DialogContentText>
+                                            </DialogContent>
+                                            <DialogActions className="text-center d-flex align-items-center justify-content-center">
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={handleCloseProviderDispute} > Submit</button>
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleCloseProviderDispute}>Cancel</button>
+                                            </DialogActions>
+                                        </Dialog>
+
+
+
+                                        {state.cardData[0].status == 4 && localStorage.getItem('userType') == '2' ? 
+                                        <Tooltip title="Approve" placement="top-start">
+                         
+                          <div>
+                                <button onClick={handleOpenApprove} className="btn btn-primary btn-lg btn-block make-an-offer-btn me-3 d-flex justify-centent-center align-items-center">
+                                    Approve <CheckIcon className="ms-2" />
+                                </button>
+                               
+                                </div>
+
+                            </Tooltip>
+
+                            
+                            
+                            :""
+                            }
+
+{state.cardData[0].status == 4 && localStorage.getItem('userType') == '2' ? 
+                                        <Tooltip title="Dispute" placement="top-start">
+                         
+                          <div>
+                                <button onClick={handleOpenDispute} className="btn btn-primary btn-lg btn-block make-an-offer-btn me-3 d-flex justify-centent-center align-items-center">
+                                    Dispute <CancelPresentationIcon className="ms-2" />
+                                </button>
+                               
+                                </div>
+
+                            </Tooltip>
+
+                            
+                            
+                            :""
+                            }
                         {state.cardData[0].status === 1 ?
                         <><Tooltip title="Cancel" placement="top-start">
                          

@@ -269,7 +269,8 @@ const Menu = (props) => {
   //Remove notification
   const removeNotification = () => {
     let request = {
-      user: localStorage.getItem('id') || 0
+      user: localStorage.getItem('id') || 0,
+      userType:localStorage.getItem('userType')
     }
     axios.post(`${baseUrl}/clear-all-notifications`, request).then((response) => {
       getUserNotification()
@@ -441,28 +442,28 @@ chatMessage.forEach((item)=>{
 
 const redirectNotification = (notification_type, postId)=>{
   if(notification_type == 1){
-    navigate("/browse-requests", { state: { post_id: postId } })
+    navigate("/browse-requests", { state: { post_id: postId, notificationType: 1 } })
   }
   else if(notification_type == 2){
-    navigate("/my-order", { state: { post_id: postId } })
+    navigate("/my-order", { state: { post_id: postId, notificationType: 2 } })
   }
   else if(notification_type == 3){
-    navigate("/browse-requests", { state: { post_id: postId } })
+    navigate("/browse-requests", { state: { post_id: postId, notificationType: 3 } })
   }
   else if(notification_type == 4){
-    navigate("/browse-requests", { state: { post_id: postId } })
+    navigate("/browse-requests", { state: { post_id: postId, notificationType: 4 } })
   }
   else if(notification_type == 5){
-    navigate("/browse-requests", { state: { post_id: postId } })
+    navigate("/browse-requests", { state: { post_id: postId, notificationType: 5 } })
   }
   else if(notification_type == 6){
-    navigate("/my-posts", { state: { post_id: postId } })
+    navigate("/my-posts", { state: { post_id: postId, notificationType: 6 } })
   }
   else if(notification_type == 7){
-    navigate("/browse-requests", { state: { post_id: postId } })
+    navigate("/browse-requests", { state: { post_id: postId, notificationType: 7 } })
   }
   else if(notification_type == 8){
-    navigate("/my-order", {state:{post_id: postId}})
+    navigate("/my-order", {state:{post_id: postId, notificationType: 8}})
   }
   else{
     navigate("/")

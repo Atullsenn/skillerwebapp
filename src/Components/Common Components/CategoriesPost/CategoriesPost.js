@@ -338,7 +338,6 @@ const CategoriesPost = ({ state, setState }) => {
             </div>
         </Box>
     );
-
     return (
         <>
             <Menu />

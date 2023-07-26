@@ -29,6 +29,8 @@ const Notification = () => {
   const [allDeleteModel, setAllDeleteModel] = useState(false)
   const [notificationDeleteModel, setNotificatoinDeleteModel] = useState(false)
 
+  const [d, setD] = useState("")
+
   const getUserNotification = () => {
     let request = {
       user: localStorage.getItem("id"),
@@ -36,14 +38,17 @@ const Notification = () => {
     }
     axios.post(`${baseUrl}/get-notification`, request).then((response) => {
       setNotification(response.data.Data)
+      setD(response.data.message)
     }).catch((error) => {
       console.log(error)
     })
   }
 
+
   useEffect(() => {
     getUserNotification()
   }, [])
+
 
   const NotificationDelete = (th) => {
     axios
@@ -57,15 +62,14 @@ const Notification = () => {
       });
   };
 
-  
-
 
   //Delete All Notification
 
   const deleteAllNotification = ()=>{
 
     let request = {
-      user: localStorage.getItem('id')
+      user: localStorage.getItem('id'),
+      userType:localStorage.getItem('userType')
     }
 
     axios.post(`${baseUrl}/delete-all-notification`, request).then((response)=>{
@@ -112,6 +116,8 @@ const Notification = () => {
 // };
 
 
+
+
 const handleremove = (e, th) => {
   const text = "Are you sure want to delete"
   if (window.confirm(text) == true) {
@@ -134,7 +140,7 @@ const handleremove = (e, th) => {
 const [pageNumber, setPageNumber] = useState(0);
 const usersPerPage = 9;
 const pagesVisited = pageNumber * usersPerPage;
-const pageCount = Math.ceil(notification.length / usersPerPage);
+const pageCount = Math.ceil(notification && notification.length / usersPerPage);
 
 const changePage = ({ selected }) => {
   setPageNumber(selected);
@@ -192,10 +198,11 @@ const changePage = ({ selected }) => {
                 <div className="row">
                   <div className="col-lg-12">
                     <div className="faq-accordian-main-area notification-arrow-hide-parents">
+                      {d !== "No data" ?
                       <div className='text-right'>
                         <button onClick={handleOpenAllDeleteModel} className='mt-3 btn btn-primary btn-lg btn-block make-an-offer-btn'> Delete All Notifications </button>
-                      </div>
-                      {notification?.length ?
+                      </div>:""}
+                      {d !== "No data" ?
                         <div className="accordion accordion-" id="accordionFlushExample">
                           {notification?.slice(pagesVisited, pagesVisited + usersPerPage).map((item) => (
                             <div className='d-flex align-items-center justify-content-between'>
@@ -272,7 +279,7 @@ const changePage = ({ selected }) => {
                           ))}
                         </div> : <div style={{ textAlign: "center", marginTop: "100px", fontSize: "18px", fontWeight: "700" }}><p>No Notification Found</p></div>
                       }
-                       {notification.length > 9 ?
+                       {notification && notification.length > 9 ?
                        <div style={{marginTop:"20px"}}>
                                                 
                                                 <ReactPaginate

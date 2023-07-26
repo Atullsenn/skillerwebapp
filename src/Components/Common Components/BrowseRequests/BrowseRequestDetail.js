@@ -602,12 +602,7 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
                                         <a className='p-0 m-0'> {state.cardData[0].currentExp == 1 ? 'Begginer' : state.cardData[0].currentExp == 2 ? 'Intermediate' : state.cardData[0].currentExp == 3 ? 'Expert' : 'Intermediate'}</a>
                                     </div>
                                 </div>
-                            </div>
-                        
-
-                        
-                                
-                            
+                            </div>        
                     </div>
                     <div className='col-lg-4 py-2'>
                         <div className='py-3' style={{ border: '1px solid black', borderRadius: '4px' }}>
