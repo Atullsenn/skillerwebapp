@@ -390,6 +390,7 @@ else{
 
 
   const disputeApproveProvider = ()=>{
+
     let request = {
       dispute_id: state.cardData[0].dispute_id
     }
@@ -417,11 +418,6 @@ else{
             formData.append(`dispute_files[${i}]`, disputeFiles[i])
         }
         formData.append('dispute_id', state.cardData[0].dispute_id)
-
-        // Display the key/value pairs
-// for (const pair of formData.entries()) {
-//   console.log(`${pair[0]}, ${pair[1]}`);
-// }
 
     axios.post(`${baseUrl}/dispute-post-fileupload-provider`, formData).then((response)=>{
       // console.log(response, "Check Response")
@@ -985,8 +981,10 @@ else{
                             
                             :""
                             }
-                        {state.cardData[0].status === 1 ?
-                        <><Tooltip title="Cancel" placement="top-start">
+                        {state.cardData[0].status === 1?
+                        <>
+                        {localStorage.getItem('userType') == 1?
+                        <Tooltip title="Cancel" placement="top-start">
                          
                           <div>
                                 <button onClick={handleOpenCancelPost} className="btn btn-primary btn-lg btn-block make-an-offer-btn me-3 d-flex justify-centent-center align-items-center">
@@ -995,7 +993,8 @@ else{
                                
                                 </div>
 
-                            </Tooltip><Tooltip title="Complete" placement="top-start">
+                            </Tooltip>:""}
+                            <Tooltip title="Complete" placement="top-start">
                                 {localStorage.getItem('userType') == 1 ? 
                                     <div>
                                         <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-3 d-flex justify-centent-center align-items-center" onClick={handleClickOpenn}>

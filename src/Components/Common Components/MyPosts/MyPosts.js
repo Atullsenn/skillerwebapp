@@ -674,7 +674,7 @@ useEffect(()=>{
                                             </div>
                                         </div>
                                     </Tab> */}
-                                    <Tab eventKey="Cancelled" title="Cancelled">
+                                    <Tab eventKey="Cancelled" title="Cancel">
                                         <div className='row'>
                                             <div className='row left-main-Div'>
                                                 {state.cancelled.filter(

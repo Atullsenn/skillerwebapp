@@ -398,6 +398,64 @@ const MyOrders = ({ state, setState, getMyOrderList }) => {
 
 
 
+
+                                    <Tab eventKey="Cancelled" title="Cancelled">
+                                        <div className='row'>
+                                            <div className='row left-main-Div'>
+                                                {state.disputed.filter(
+                                                    (row) =>
+                                                        !search.length ||
+                                                        [row.postTitle, row.budget]
+                                                            .toString()
+                                                            .toLowerCase()
+                                                            .includes(search.toString().toLowerCase()),
+                                                ).map((item, index) => {
+                                                    
+                                                    return (
+                                                        <div className={`${state.cardDetail ? '' : 'col-lg-4'}`}>
+                                                            <div key={index} id={`browse-card-${item.post_id}`} className='rounded card-main-div' onClick={() => { getPostDetailll(item.post_id); setActiveClass(item.post_id); setState((prevState) => ({ ...prevState, cardDetail: true })) }}>
+                                                                <div className='px-2 d-flex justify-content-between align-items-center'>
+                                                                    <h4 className='px-1 m-0 post-title-in-cardsection'>{item.postTitle}</h4>
+                                                                    <span className='px-1 dollerPrice'>${item.post_budget}</span>
+                                                                </div>
+                                                                <div className='px-2 my-1 d-flex justify-content-between'>
+                                                                    <div className='d-flex flex-column'>
+                                                                        <div className='d-flex align-items-center'>
+                                                                            <LanguageIcon className='icon' /> <span className='px-2 fontServerandDate'> {'Remote'} </span>
+                                                                        </div>
+                                                                        <div className='d-flex align-items-center'>
+                                                                            <DateRangeIcon className='icon' /> <span className='px-2 fontServerandDate'> {moment(item.dueDate).utcOffset(330).format('lll')} </span>
+                                                                        </div>
+                                                                        <div className='d-flex align-items-center'>
+                                                                            <AddLocationIcon className='icon' /> <span className='px-2 fontServerandDate'> {item.country_name} {item.city_name} </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className='d-flex align-items-center'>
+                                                                        {
+                                                                            item.profile === '' || item.profile == null || item.profile === "no file upload" ? <Avatar src="/broken-image.jpg" /> : <Avatar src={`${imageBaseUrl}/public/profile/${item.profile}`} alt="user-img" className="img-circle" />
+                                                                        }
+                                                                    </div>
+                                                                </div>
+                                                                <Divider style={{ backgroundColor: 'gray' }} />
+                                                                <div className='pt-2 d-flex align-items-center justify-content-between'>
+                                                                    <div className='px-2'>
+                                                                        <span className="openColor">{item.dispute_status}</span>
+                                                                    </div>
+                                                                    <div className='px-2 d-flex align-items-center justify-content-center'>
+                                                                        <span className='ps-2' style={{ fontSize: '14px', fontWeight: 'bold' }}>{item.firstName + ' ' + item.lastName}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                })}
+                                                {state.disputed.length === 0 && state.showHeading && <h3 className='text-center w-25 no-post-available'>No Disputed Posts Available</h3>}
+                                            </div>
+                                        </div>
+                                    </Tab>
+
+
+
                                     <Tab eventKey="Disputed" title="Disputed">
                                         <div className='row'>
                                             <div className='row left-main-Div'>
