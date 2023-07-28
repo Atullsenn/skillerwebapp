@@ -52,6 +52,7 @@ import {
 } from "firebase/firestore";
 import ChatBox from "../chat/ChatBox";
 import Modal from "react-bootstrap/Modal";
+import { myOrderData } from '../../../data';
 
 
 const MyOrders = ({ state, setState, getMyOrderList }) => {
@@ -238,7 +239,7 @@ const MyOrders = ({ state, setState, getMyOrderList }) => {
                         </div>
                         <div className='col-lg-4'>
                             <div>
-                                <h3>My Order</h3>
+                                <h3>{myOrderData.myOrderTitleOne}</h3>
                             </div>
                         </div>
                         <div className='col-lg-4 pe-0 text-right'>
@@ -265,7 +266,7 @@ const MyOrders = ({ state, setState, getMyOrderList }) => {
                                     className={`mb-2 ${state.cardDetail ? 'small-layout-design' : ''}`}
                                     fill
                                 >
-                                    <Tab eventKey="In-Progress" title="In-Progress">
+                                    <Tab eventKey="In-Progress" title={myOrderData.myOrderTitleTwo}>
                                         <div className='row'>
                                             <div className='row left-main-Div'>
                                                 {state.inProgress.filter(
@@ -334,7 +335,7 @@ const MyOrders = ({ state, setState, getMyOrderList }) => {
                                                         </div>
                                                     )
                                                 })}
-                                                {state.inProgress.length === 0 && state.showHeading && <h3 className='text-center w-25 no-post-available'>No InProgress Posts Available</h3>}
+                                                {state.inProgress.length === 0 && state.showHeading && <h3 className='text-center w-25 no-post-available'>{myOrderData.myOrderTitleThree}</h3>}
                                             </div>
                                         </div>
                                     </Tab>
@@ -391,7 +392,7 @@ const MyOrders = ({ state, setState, getMyOrderList }) => {
                                                         </div>
                                                     )
                                                 })}
-                                                {state.completed.length === 0 && state.showHeading && <h3 className='text-center w-25 no-post-available'>No Completed Posts Available</h3>}
+                                                {state.completed.length === 0 && state.showHeading && <h3 className='text-center w-25 no-post-available'>{myOrderData.myOrderTitleFive}</h3>}
                                             </div>
                                         </div>
                                     </Tab>
@@ -399,7 +400,7 @@ const MyOrders = ({ state, setState, getMyOrderList }) => {
 
 
 
-                                    <Tab eventKey="Cancelled" title="Cancelled">
+                                    <Tab eventKey="Cancelled" title={myOrderData.myOrderTitleSix}>
                                         <div className='row'>
                                             <div className='row left-main-Div'>
                                                 {state.disputed.filter(
@@ -449,14 +450,14 @@ const MyOrders = ({ state, setState, getMyOrderList }) => {
                                                         </div>
                                                     )
                                                 })}
-                                                {state.disputed.length === 0 && state.showHeading && <h3 className='text-center w-25 no-post-available'>No Disputed Posts Available</h3>}
+                                                {state.disputed.length === 0 && state.showHeading && <h3 className='text-center w-25 no-post-available'>{myOrderData.myOrderTitleSeven}</h3>}
                                             </div>
                                         </div>
                                     </Tab>
 
 
 
-                                    <Tab eventKey="Disputed" title="Disputed">
+                                    <Tab eventKey="Disputed" title={myOrderData.myOrderTitleEight}>
                                         <div className='row'>
                                             <div className='row left-main-Div'>
                                                 {state.disputed.filter(
@@ -506,7 +507,7 @@ const MyOrders = ({ state, setState, getMyOrderList }) => {
                                                         </div>
                                                     )
                                                 })}
-                                                {state.disputed.length === 0 && state.showHeading && <h3 className='text-center w-25 no-post-available'>No Disputed Posts Available</h3>}
+                                                {state.disputed.length === 0 && state.showHeading && <h3 className='text-center w-25 no-post-available'>{myOrderData.myOrderTitleNine}</h3>}
                                             </div>
                                         </div>
                                     </Tab>

@@ -546,7 +546,7 @@ const redirectNotification = (notification_type, postId)=>{
                           <div className="px-2 d-flex align-items-center justify-content-between">
                             <h5 className="p-0 m-0">{menuData.menuTitleFive}</h5>
                             {notificationData?.length ?
-                              <button className="notification-clear-all-btn" onClick={removeNotification}> Clear all </button>
+                              <button className="notification-clear-all-btn" onClick={removeNotification}> {menuData.menuTitleFifteen} </button>
                               : ""}
                           </div>
                           <Divider className="my-2" style={{ backgroundColor: "gray" }} />
@@ -574,11 +574,11 @@ const redirectNotification = (notification_type, postId)=>{
                                 ))}
                                 <Divider className="my-2" style={{ backgroundColor: "gray" }} />
                               </div> :
-                              <p style={{ textAlign: "center" }}>No New Notification</p>
+                              <p style={{ textAlign: "center" }}>{menuData.menuTitleSixteen}</p>
                             }
                           </div>
                           <div className="px-2">
-                            <NavLink to="/notification" ><button className="notification-view-all-notification-btn">View all Notification</button></NavLink>
+                            <NavLink to="/notification" ><button className="notification-view-all-notification-btn">{menuData.menuTitleSeventeen}</button></NavLink>
                           </div>
                         </div>
                       </div>
@@ -676,14 +676,14 @@ const redirectNotification = (notification_type, postId)=>{
                                     aria-labelledby="composition-button"
                                     onKeyDown={handleListKeyDown}
                                   >
-                                    <NavLink to="/profile"> <MenuItem onClick={handleClose}>My Profile</MenuItem></NavLink>
-                                    <NavLink to="/my-posts"><MenuItem onClick={handleClose}>My Posts</MenuItem></NavLink>
-                                    <NavLink to="/my-order"><MenuItem onClick={handleClose}>My Order</MenuItem></NavLink>
+                                    <NavLink to="/profile"> <MenuItem onClick={handleClose}>{menuData.menuTitleSix}</MenuItem></NavLink>
+                                    <NavLink to="/my-posts"><MenuItem onClick={handleClose}>{menuData.menuTitleSeven}</MenuItem></NavLink>
+                                    <NavLink to="/my-order"><MenuItem onClick={handleClose}>{menuData.menuTitleEight}</MenuItem></NavLink>
                                     {/* <NavLink to="/past-posts"><MenuItem onClick={handleClose}>Past Posts</MenuItem></NavLink> */}
-                                    <NavLink to="/help"><MenuItem onClick={handleClose}>Help</MenuItem></NavLink>
+                                    <NavLink to="/help"><MenuItem onClick={handleClose}>{menuData.menuTitleNine}</MenuItem></NavLink>
                                     <Divider style={{ backgroundColor: "gray" }} />
                                     <MenuItem onClick={handleLogout}>
-                                      <ListItemIcon><Logout fontSize="small" /></ListItemIcon>Logout
+                                      <ListItemIcon><Logout fontSize="small" /></ListItemIcon>{menuData.menuTitleTen}
                                     </MenuItem>
                                   </MenuList>
                                 </ClickAwayListener>
@@ -745,9 +745,9 @@ const redirectNotification = (notification_type, postId)=>{
                         </div>
                         <div className="Notification-dropdown-content Notification-dropdown-massege-box-area" style={{ display: state.showHideNotificationArea }}>
                           <div className="px-2 d-flex align-items-center justify-content-between">
-                            <h5 className="p-0 m-0">Notifications</h5>
+                            <h5 className="p-0 m-0">{menuData.menuTitleFourteen}</h5>
                             {notificationData?.length ?
-                              <button className="notification-clear-all-btn" onClick={removeNotification}> Clear all </button>
+                              <button className="notification-clear-all-btn" onClick={removeNotification}> {menuData.menuTitleFifteen} </button>
                               : ""}
                           </div>
                           <Divider className="my-2" style={{ backgroundColor: "gray" }} />
@@ -775,11 +775,11 @@ const redirectNotification = (notification_type, postId)=>{
                                 ))}
                                 <Divider className="my-2" style={{ backgroundColor: "gray" }} />
                               </div> :
-                              <p style={{ textAlign: "center" }}>No New Notification</p>
+                              <p style={{ textAlign: "center" }}>{menuData.menuTitleSixteen}</p>
                             }
                           </div>
                           <div className="px-2">
-                            <NavLink to="/notification" ><button className="notification-view-all-notification-btn">View all Notification</button></NavLink>
+                            <NavLink to="/notification" ><button className="notification-view-all-notification-btn">{menuData.menuTitleSeventeen}</button></NavLink>
                           </div>
                         </div>
                       </div>
@@ -871,16 +871,16 @@ const redirectNotification = (notification_type, postId)=>{
                               <Paper>
                                 <ClickAwayListener onClickAway={handleClose}>
                                   <MenuList autoFocusItem={state.isOpen} id="composition-menu" aria-labelledby="composition-button" onKeyDown={handleListKeyDown} >
-                                    <NavLink to="/profile"> <MenuItem onClick={handleClose}> My Profile </MenuItem> </NavLink>
-                                    <NavLink to="/wallet"> <MenuItem onClick={handleClose}> My Wallet </MenuItem> </NavLink>
+                                    <NavLink to="/profile"> <MenuItem onClick={handleClose}>{menuData.menuTitleSix} </MenuItem> </NavLink>
+                                    <NavLink to="/wallet"> <MenuItem onClick={handleClose}> {menuData.menuTitleEleven} </MenuItem> </NavLink>
                                     {/* <NavLink to="/my-requests"> <MenuItem onClick={handleClose}> My Requests </MenuItem> </NavLink> */}
-                                    <NavLink to="/my-proposals"> <MenuItem onClick={handleClose}> My Proposals </MenuItem> </NavLink>
-                                    <NavLink to="/my-order"> <MenuItem onClick={handleClose}> My Order </MenuItem> </NavLink>
-                                    <NavLink to="/search-posts"> <MenuItem onClick={handleClose}> Search posts </MenuItem> </NavLink>
+                                    <NavLink to="/my-proposals"> <MenuItem onClick={handleClose}> {menuData.menuTitleTweleve} </MenuItem> </NavLink>
+                                    <NavLink to="/my-order"> <MenuItem onClick={handleClose}> {menuData.menuTitleEight} </MenuItem> </NavLink>
+                                    <NavLink to="/search-posts"> <MenuItem onClick={handleClose}> {menuData.menuTitleThirteen} </MenuItem> </NavLink>
                                     {/* <NavLink to="/past-posts"><MenuItem onClick={handleClose}>Past Posts</MenuItem></NavLink> */}
-                                    <NavLink to="/help"> <MenuItem onClick={handleClose}> Help </MenuItem> </NavLink>
+                                    <NavLink to="/help"> <MenuItem onClick={handleClose}> {menuData.menuTitleNine} </MenuItem> </NavLink>
                                     <Divider style={{ backgroundColor: "gray" }} />
-                                    <MenuItem onClick={handleLogout}> <ListItemIcon> <Logout fontSize="small" /> </ListItemIcon> Logout </MenuItem>
+                                    <MenuItem onClick={handleLogout}> <ListItemIcon> <Logout fontSize="small" /> </ListItemIcon> {menuData.menuTitleTen} </MenuItem>
                                   </MenuList>
                                 </ClickAwayListener>
                               </Paper>

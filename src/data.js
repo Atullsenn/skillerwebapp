@@ -96,6 +96,25 @@ export const landingPageData =
       menuTitleThree:"Browse requests",
       menuTitleFour:"Contact Us",
       menuTitleFive:"Notifications",
+
+      //Profile Menu DropDown
+      menuTitleSix:"My Profile",
+      menuTitleSeven:"My Posts",
+      menuTitleEight:"My Order",
+      menuTitleNine:"Help",
+      menuTitleTen:"Logout",
+      menuTitleEleven:"My Wallet",
+      menuTitleTweleve:"My Proposals",
+      menuTitleThirteen:"Search posts",
+
+      //Notification Menu Data
+      menuTitleFourteen:"Notifications",
+      menuTitleFifteen:"Clear all",
+      menuTitleSixteen:"No New Notification",
+      menuTitleSeventeen:"View all Notification",
+
+
+
     }
 
     //How its work
@@ -142,9 +161,6 @@ export const landingPageData =
       workTitleThirtyNine:"Skiller Pay is the seamless and secure way to get your tasks completed. Once you accept an offer on a task, the agreed upon amount is held secure with Skiller Pay until the task is complete.",
       workTitleFourty:"Once complete, you’ll simply need to release the payment. We’ll then transfer the task payment to the Tasker’s verified bank account.",
       workTitleFourtyOne:"Learn more",
-      workTitleFourtyTwo:""
-
-
 
     }
 
@@ -222,6 +238,42 @@ currentExperiencePlaceHolder : 'Select Your Current Experience',
 }
 
 
+//Make an offer
+
+export const makeAnOfferData = {
+  offerDataOne:"Create your offer",
+  offerDataTwo:"Enter Expected Budget",
+  offerDataThree:"Enter expected days to complete the order",
+  offerDataFour:"Select Your Learning Method",
+  offerDataFive:"Get text message (email) of how to solve your problem",
+  offerDataSix:"o Tools needed",
+  offerDataSeven:"o Steps",
+  offerDataEight:"o Expected result",
+  offerDataNine:"o Verification of expected result",
+  offerDataTen:"Click file to this area to upload",
+  offerDataEleven:"Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files",
+  offerDataTweleve:"Google hangout, zoom, teams, phone call, up to 1 hour or 3 calls",
+  offerDataThirteen:"Select your options",
+  offerDataFourteen:"Select your Language",
+  offerADataFifteen:"Skills",
+  offerDataSixteen:"Description",
+  offerDataSeventeen:"Submit",
+
+}
+
+
+//News Detail
+
+export const newsDetailData = {
+  newsDetailDataOne:"News-Detail",
+  newsDetailDataTwo:"News Detail",
+  newsDetailDataThree:"Recent Post",
+  newsDetailDataFour:"By : ",
+  newsDetailDataFive:"Admin",
+
+}
+
+
 // Contact Us Page
 
 export const contactData = {
@@ -237,13 +289,16 @@ export const contactData = {
 }
 
 
-//Browse Request
+// My Order Data
 
-export const browseRequestData = {
-  
+export const myOrderData = {
+  myOrderTitleOne:"My Order",
+  myOrderTitleTwo:"In-Progress",
+  myOrderTitleThree:"No InProgress Posts Available",
+  myOrderTitleFour:"Completed",
+  myOrderTitleFive:"No Completed Posts Available",
+  myOrderTitleSix:"Cancelled",
+  myOrderTitleSeven:"No Disputed Posts Available",
+  myOrderTitleEight:"Disputed",
+  myOrderTitleNine:"No Disputed Posts Available",
 }
-
-
-
-
-//Browse Request

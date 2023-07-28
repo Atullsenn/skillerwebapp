@@ -610,70 +610,6 @@ useEffect(()=>{
                                             </div>
                                         </div>
                                     </Tab>
-                                    {/* <Tab eventKey="In-Progress" title="In Progress">
-                                        <div className='row'>
-                                            <div className='row left-main-Div'>
-                                                {state.inProgress.filter(
-                                                    (row) =>
-                                                        !search.length ||
-                                                        [row.postTitle, row.budget]
-                                                            .toString()
-                                                            .toLowerCase()
-                                                            .includes(search.toString().toLowerCase()),
-                                                ).map((item, index) => {
-                                                    const activeIds = [item.id]
-                            const result = users.filter(({chatPostId}) => activeIds.includes(chatPostId));
-                                     chatCounts=result.length;
-
-                                                    return (
-
-                                                        <div className={`${state.cardDetail ? '' : 'col-lg-4'}`} >
-                                                            <div key={index} id={`browse-card-${item.id}`} className='rounded card-main-div' onClick={() => { getPostDetail(item.id); setActiveClass(item.id); setState((prevState) => ({ ...prevState, cardDetail: true, showMap: false })) }}>
-                                                                <div className='px-2 d-flex justify-content-between align-items-center'>
-                                                                    <h4 className='px-1 m-0 post-title-in-cardsection'>{item.postTitle}</h4>
-                                                                    <span className='px-1 dollerPrice'>${item.budget}</span>
-                                                                </div>
-                                                                <div className='px-2 my-1 d-flex justify-content-between'>
-                                                                    <div className='d-flex flex-column'>
-                                                                        <div className='d-flex align-items-center'>
-                                                                            <LanguageIcon className='icon' /> <span className='px-2 fontServerandDate'> {'Remote'} </span>
-                                                                        </div>
-                                                                        <div className='d-flex align-items-center'>
-                                                                            <DateRangeIcon className='icon' /> <span className='px-2 fontServerandDate'> {moment(item.dueDate).utcOffset(330).format('lll')} </span>
-                                                                        </div>
-                                                                        <div className='d-flex align-items-center'>
-                                                                            <AddLocationIcon className='icon' /> <span className='px-2 fontServerandDate'> {item.country_name} {item.city_name} </span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className='d-flex align-items-center'>
-                                                                        {
-                                                                            item.image === '' || item.image == null || item.image === "no file upload" ? <Avatar src="/broken-image.jpg" /> : <Avatar src={`${imageBaseUrl}/public/profile/${item.image}`} alt="user-img" className="img-circle" />
-                                                                        }
-                                                                    </div>
-                                                                </div>
-                                                                <Divider style={{ backgroundColor: 'gray' }} />
-                                                                <div className='pt-2 d-flex align-items-center justify-content-between'>
-                                                                    <div className='px-2'>
-                                                                        <span className="openColor">{'In Progress'}</span>
-                                                                    </div>
-                                                                    <div className='px-2 d-flex align-items-center justify-content-center'>
-                                                                        <div className="font-awesome-size" style={{ position: "relative", right: "5px" }}>
-                                                                            <Badge badgeContent={chatCounts} color="error" className="notification-badge">
-                                                                                <div><MarkUnreadChatAltIcon style={{ fontSize: "28px", color: "gray", cursor: "pointer" }} /></div>
-                                                                            </Badge>
-                                                                        </div>
-                                                                        <span className='ps-2' style={{ fontSize: '14px', fontWeight: 'bold' }}>{item.firstName + ' ' + item.lastName}</span>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    )
-                                                })}
-                                                {state.inProgress.length === 0 && state.showHeading && <h3 className='text-center w-25 no-post-available'>No In-Progress Posts Available</h3>}
-                                            </div>
-                                        </div>
-                                    </Tab> */}
                                     <Tab eventKey="Cancelled" title="Cancel">
                                         <div className='row'>
                                             <div className='row left-main-Div'>
@@ -740,59 +676,7 @@ useEffect(()=>{
                                             </div>
                                         </div>
                                     </Tab>
-                                    {/* <Tab eventKey="Completed" title="Completed">
-                                        <div className='row'>
-                                            <div className='row left-main-Div'>
-                                                {state.completed.filter(
-                                                    (row) =>
-                                                        !search.length ||
-                                                        [row.postTitle, row.budget]
-                                                            .toString()
-                                                            .toLowerCase()
-                                                            .includes(search.toString().toLowerCase()),
-                                                ).map((item, index) => {
-                                                    return (
-                                                        <div className={`${state.cardDetail ? '' : 'col-lg-4'}`}>
-                                                            <div key={index} id={`browse-card-${item.id}`} className='rounded card-main-div' onClick={() => { getPostDetail(item.id); setActiveClass(item.id); setState((prevState) => ({ ...prevState, cardDetail: true, showMap: false })) }}>
-                                                                <div className='px-2 d-flex justify-content-between align-items-center'>
-                                                                    <h4 className='px-1 m-0 '>{item.postTitle}</h4>
-                                                                    <span className='px-1 dollerPrice'>${item.budget}</span>
-                                                                </div>
-                                                                <div className='px-2 my-1 d-flex justify-content-between'>
-                                                                    <div className='d-flex flex-column'>
-                                                                        <div className='d-flex align-items-center'>
-                                                                            <LanguageIcon className='icon' /> <span className='px-2 fontServerandDate'> {'Remote'} </span>
-                                                                        </div>
-                                                                        <div className='d-flex align-items-center'>
-                                                                            <DateRangeIcon className='icon' /> <span className='px-2 fontServerandDate'> {moment(item.dueDate).utcOffset(330).format('lll')} </span>
-                                                                        </div>
-                                                                        <div className='d-flex align-items-center'>
-                                                                            <AddLocationIcon className='icon' /> <span className='px-2 fontServerandDate'> {item.country_name} {item.city_name} </span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className='d-flex align-items-center'>
-                                                                        {
-                                                                            item.image === '' || item.image == null || item.image === "no file upload" ? <Avatar src="/broken-image.jpg" /> : <Avatar src={`${imageBaseUrl}/public/profile/${item.image}`} alt="user-img" className="img-circle" />
-                                                                        }
-                                                                    </div>
-                                                                </div>
-                                                                <Divider style={{ backgroundColor: 'gray' }} />
-                                                                <div className='pt-2 d-flex align-items-center justify-content-between'>
-                                                                    <div className='px-2'>
-                                                                        <span className="openColor">{'Completed'}</span>
-                                                                    </div>
-                                                                    <div className='px-2 d-flex align-items-center justify-content-center'>
-                                                                        <span className='ps-2' style={{ fontSize: '14px', fontWeight: 'bold' }}>{item.firstName + ' ' + item.lastName}</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    )
-                                                })}
-                                                {state.completed.length === 0 && state.showHeading && <h3 className='text-center w-25 no-post-available'>No Completed Posts Available</h3>}
-                                            </div>
-                                        </div>
-                                    </Tab> */}
+                                   
                                 </Tabs>
                             </div>
                             {state.cardDetail &&

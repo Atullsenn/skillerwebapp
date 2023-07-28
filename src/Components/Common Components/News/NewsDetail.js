@@ -11,6 +11,7 @@ import axios from 'axios';
 import Tooltip from '@mui/material/Tooltip';
 import { baseUrl, imageBaseUrl } from '../../../Url/url';
 import moment from 'moment';
+import { newsDetailData } from '../../../data';
 
 const defaultState = {
     createdAt: '',
@@ -71,9 +72,9 @@ const NewsDetail = () => {
         <>
             <Menu />
             <section className="vh-80">
-                <Banner text="News-Detail" />
+                <Banner text={newsDetailData.newsDetailDataOne} />
                 <div class="blog-category-area mt-4">
-                    <h2>News Detail</h2>
+                    <h2>{newsDetailData.newsDetailDataTwo}</h2>
                 </div>
                 <div className='container p-2'>
                     <div className="row m-0">
@@ -96,7 +97,7 @@ const NewsDetail = () => {
                         </div>
                         <div className='col-lg-4'>
                             <div>
-                                <h2 className="text-center">Recent Post</h2>
+                                <h2 className="text-center">{newsDetailData.newsDetailDataThree}</h2>
                                 {state.newsList.map((item) => {
                                     return (
                                         <>
@@ -109,7 +110,7 @@ const NewsDetail = () => {
                                                     <Tooltip title={item.title} placement="top-start">
                                                         <h4 className='p-0 m-0'>{item.title}</h4>
                                                     </Tooltip>
-                                                    <p className="p-0 m-0"><SupervisorAccountIcon style={{ color: '#188dc7' }} /> By : <span>Admin</span></p>
+                                                    <p className="p-0 m-0"><SupervisorAccountIcon style={{ color: '#188dc7' }} /> {newsDetailData.newsDetailDataFour}<span>{newsDetailData.newsDetailDataFive}</span></p>
                                                     <p className="p-0 m-0"> <DateRangeIcon style={{ color: '#188dc7' }} />{moment(item.created_at).format('DD/MM/YYYY HH:mm')}</p>
                                                 </div>
                                             </div>

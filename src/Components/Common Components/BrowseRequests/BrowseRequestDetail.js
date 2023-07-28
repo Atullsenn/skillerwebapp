@@ -58,6 +58,7 @@ import ChatBox from '../chat/ChatBox';
 import Modal from "react-bootstrap/Modal";
 import DuoIcon from '@mui/icons-material/Duo';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
+import { makeAnOfferData } from '../../../data';
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -791,7 +792,7 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
                 onClose={handleCloseOpenMakeanofferModal}
                 aria-labelledby="responsive-dialog-title"
             >
-                <DialogTitle id="responsive-dialog-title">{"Create your offer"}</DialogTitle>
+                <DialogTitle id="responsive-dialog-title">{makeAnOfferData.offerDataOne}</DialogTitle>
                 <Divider style={{ backgroundColor: '#a9a4a4' }} />
                 <DialogContent>
                     <div>
@@ -799,14 +800,14 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
                             <h5>{state.cardData[0].postTitle}</h5>
                         </div>
                         <FormControl fullWidth>
-                            <InputLabel htmlFor="outlined-adornment-amount">Enter Expected Budget <span style={{ color: 'red' }}>*</span></InputLabel>
+                            <InputLabel htmlFor="outlined-adornment-amount">{makeAnOfferData.offerDataTwo} <span style={{ color: 'red' }}>*</span></InputLabel>
                             <OutlinedInput
                                 type='number'
                                 onWheel={(event) => event.target.blur()}
                                 id="outlined-adornment-amount"
                                 startAdornment={<InputAdornment position="start">$</InputAdornment>}
                                 value={state.budget}
-                                label={<>Enter Expected Budget <span style={{ color: 'red' }}>*</span></>}
+                                label={<>{makeAnOfferData.offerDataTwo} <span style={{ color: 'red' }}>*</span></>}
                                 onChange={(e) => { setState((prevState) => ({ ...prevState, budget: e.target.value })); }}
                             />
                         </FormControl>
@@ -820,18 +821,18 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
                             value={state.expeceted_days}
                             onWheel={(event) => event.target.blur()}
                             size='large'
-                            label={<>Enter expected days to complete the order <span style={{ color: 'red' }}>*</span></>}
+                            label={<>{makeAnOfferData.offerDataThree} <span style={{ color: 'red' }}>*</span></>}
                             onChange={(e) => { setState((prevState) => ({ ...prevState, expeceted_days: e.target.value })); }}
                         />
                     </div>
                     <div className='mt-4 p-3' style={{ backgroundColor: 'rgb(236, 236, 236)', borderRadius: '8px' }}>
                         <FormControl fullWidth>
-                            <InputLabel id="demo-simple-select-label">Select Your Learning Method <span style={{ color: 'red' }}>*</span></InputLabel>
+                            <InputLabel id="demo-simple-select-label">{makeAnOfferData.offerDataFour} <span style={{ color: 'red' }}>*</span></InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={state.learningMethod}
-                                label={<>Select Your Learning Method <span style={{ color: 'red' }}>*</span></>}
+                                label={<>{makeAnOfferData.offerDataFour} <span style={{ color: 'red' }}>*</span></>}
                                 onChange={selectLearningMethod}
                             >
                                 {state.cardData[0].learningMethod_type === "Phone Call" ?
@@ -844,20 +845,19 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
                         {state.learningMethod != 0 ?
                             <Box sx={{ width: '100%', backgroundColor: '' }} >
                                 <TabPanel value={state.learningMethodTab} index={0} style={{ overflow: 'auto', width: '100%' }}>
-                                    <h5>Get text message (email) of how to solve your problem</h5>
+                                    <h5>{makeAnOfferData.offerDataFive}</h5>
                                     <div className='d-flex justify-content-around'>
-                                        <p>o Tools needed</p>
-                                        <p>o Steps</p>
-                                        <p>o Expected result</p>
-                                        <p>o Verification of expected result</p>
+                                        <p>{makeAnOfferData.offerDataSix}</p>
+                                        <p>{makeAnOfferData.offerDataSeven}</p>
+                                        <p>{makeAnOfferData.offerDataEight}</p>
+                                        <p>{makeAnOfferData.offerDataNine}</p>
                                     </div>
                                     <div className='post-a-tasker-upload-file-section-area'>
                                         <label style={{ width: "100%", height: "150px", border: "2px solid #188dc7", padding: "20px", borderRadius: '5px' }}>
                                             <input type="file" multiple accept='application/pdf' onChange={handlePdfEvent} style={{ display: "none" }} />
                                             <p className="ant-upload-drag-icon p-0 m-0 d-flex justify-content-center"> <DriveFolderUploadIcon style={{ fontSize: '45px' }} /> </p>
                                             {pdfName.selectedFiles == "" ?
-                                                <><p className="ant-upload-text p-0 m-0 d-flex justify-content-center">Click file to this area to upload  </p><p className="ant-upload-hint p-0 m-0 d-flex justify-content-center">Support for a single or bulk upload. Strictly prohibit from uploading
-                                                    company data or other band files
+                                                <><p className="ant-upload-text p-0 m-0 d-flex justify-content-center">{makeAnOfferData.offerDataTen}  </p><p className="ant-upload-hint p-0 m-0 d-flex justify-content-center">{makeAnOfferData.offerDataEleven}
                                                 </p></> :
                                                 <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
                                                     {pdfName.selectedFiles.map((file) =>
@@ -870,17 +870,17 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
                                     </div>
                                 </TabPanel>
                                 <TabPanel value={state.learningMethodTab} index={1} style={{ overflow: 'auto', width: '100%' }}>
-                                    <h5>Google hangout, zoom, teams, phone call, up to 1 hour or 3 calls</h5>
+                                    <h5>{makeAnOfferData.offerDataTweleve}</h5>
                                     <div className='mt-4'>
                                         <FormControl sx={{ width: '100%' }}>
-                                            <InputLabel id="demo-multiple-chip-label">Select your options <span style={{ color: 'red' }}>*</span></InputLabel>
+                                            <InputLabel id="demo-multiple-chip-label">{makeAnOfferData.offerDataThirteen} <span style={{ color: 'red' }}>*</span></InputLabel>
                                             <Select
                                                 labelId="demo-multiple-chip-label"
                                                 id="demo-multiple-chip"
                                                 multiple
                                                 value={state.phoneCall}
                                                 onChange={handlePhoneSelection}
-                                                input={<OutlinedInput id="select-multiple-chip" label={<>Select your options <span style={{ color: 'red' }}>*</span></>} />}
+                                                input={<OutlinedInput id="select-multiple-chip" label={<>{makeAnOfferData.offerDataThirteen} <span style={{ color: 'red' }}>*</span></>} />}
                                                 renderValue={(selected) => (
                                                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                                                         {selected.map((value) => (
@@ -904,20 +904,19 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
 
 
                                 <TabPanel value={state.learningMethodTab} index={2} style={{ overflow: 'auto', width: '100%' }}>
-                                    <h5>Get text message (email) of how to solve your problem</h5>
+                                    <h5>{makeAnOfferData.offerDataFive}</h5>
                                     <div className='d-flex justify-content-around'>
-                                        <p>o Tools needed</p>
-                                        <p>o Steps</p>
-                                        <p>o Expected result</p>
-                                        <p>o Verification of expected result</p>
+                                        <p>{makeAnOfferData.offerDataSix}</p>
+                                        <p>{makeAnOfferData.offerDataSeven}</p>
+                                        <p>{makeAnOfferData.offerDataEight}</p>
+                                        <p>{makeAnOfferData.offerDataNine}</p>
                                     </div>
                                     <div className='post-a-tasker-upload-file-section-area'>
                                         <label style={{ width: "100%", height: "150px", border: "2px solid #188dc7", padding: "20px", borderRadius: '5px' }}>
                                             <input type="file" multiple accept='application/pdf' onChange={handlePdfEvent} style={{ display: "none" }} />
                                             <p className="ant-upload-drag-icon p-0 m-0 d-flex justify-content-center"> <DriveFolderUploadIcon style={{ fontSize: '45px' }} /> </p>
                                             {pdfName.selectedFiles == "" ?
-                                                <><p className="ant-upload-text p-0 m-0 d-flex justify-content-center">Click file to this area to upload  </p><p className="ant-upload-hint p-0 m-0 d-flex justify-content-center">Support for a single or bulk upload. Strictly prohibit from uploading
-                                                    company data or other band files
+                                                <><p className="ant-upload-text p-0 m-0 d-flex justify-content-center">{makeAnOfferData.offerDataTen}  </p><p className="ant-upload-hint p-0 m-0 d-flex justify-content-center">{makeAnOfferData.offerDataTweleve}
                                                 </p></> :
                                                 <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
                                                     {pdfName.selectedFiles.map((file) =>
@@ -930,17 +929,17 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
                                     </div>
                                 </TabPanel>
                                 <TabPanel value={state.learningMethodTab} index={2} style={{ overflow: 'auto', width: '100%' }}>
-                                    <h5>Google hangout, zoom, teams, phone call, up to 1 hour or 3 calls</h5>
+                                    <h5>{makeAnOfferData.offerDataTweleve}</h5>
                                     <div className='mt-4'>
                                         <FormControl sx={{ width: '100%' }}>
-                                            <InputLabel id="demo-multiple-chip-label">Select your options <span style={{ color: 'red' }}>*</span></InputLabel>
+                                            <InputLabel id="demo-multiple-chip-label">{makeAnOfferData.offerDataThirteen} <span style={{ color: 'red' }}>*</span></InputLabel>
                                             <Select
                                                 labelId="demo-multiple-chip-label"
                                                 id="demo-multiple-chip"
                                                 multiple
                                                 value={state.phoneCall}
                                                 onChange={handlePhoneSelection}
-                                                input={<OutlinedInput id="select-multiple-chip" label={<>Select your options <span style={{ color: 'red' }}>*</span></>} />}
+                                                input={<OutlinedInput id="select-multiple-chip" label={<>{makeAnOfferData.offerDataThirteen} <span style={{ color: 'red' }}>*</span></>} />}
                                                 renderValue={(selected) => (
                                                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                                                         {selected.map((value) => (
@@ -966,14 +965,14 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
                     </div>
                     <div className='mt-4'>
                         <FormControl sx={{ width: '100%' }}>
-                            <InputLabel id="demo-multiple-chip-label">Select your Language <span style={{ color: 'red' }}>*</span></InputLabel>
+                            <InputLabel id="demo-multiple-chip-label">{makeAnOfferData.offerDataFourteen} <span style={{ color: 'red' }}>*</span></InputLabel>
                             <Select
                                 labelId="demo-multiple-chip-label"
                                 id="demo-multiple-chip"
                                 multiple
                                 value={state.makeAnOfferLanguage}
                                 onChange={handleLanguageSelection}
-                                input={<OutlinedInput id="select-multiple-chip" label={<>Select your Language <span style={{ color: 'red' }}>*</span></>} />}
+                                input={<OutlinedInput id="select-multiple-chip" label={<>{makeAnOfferData.offerDataFourteen} <span style={{ color: 'red' }}>*</span></>} />}
                                 renderValue={(selected) => (
                                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                                         {selected.map((value) => (
@@ -994,7 +993,7 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
                         </FormControl>
                     </div>
                     <div className='mt-4'>
-                        <ChipInput className='w-100' defaultValue={state.skills} label={<>Skills <span style={{ color: 'red' }}>*</span></>} onChange={handleSkillsSelection} />
+                        <ChipInput className='w-100' defaultValue={state.skills} label={<>{makeAnOfferData.offerADataFifteen} <span style={{ color: 'red' }}>*</span></>} onChange={handleSkillsSelection} />
                     </div>
                     <div className='mt-4 make-an-offer-border'>
                         <div style={{ border: "2px solid #188dc7", height: "230px", borderRadius: '5px' }}>
@@ -1012,7 +1011,7 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
                         </div>
                     </div>
                     <div className='mt-4'>
-                        <h5 className='p-0 pb-1 m-0'>Description <span style={{ color: 'red' }}>*</span></h5>
+                        <h5 className='p-0 pb-1 m-0'>{makeAnOfferData.offerDataSixteen} <span style={{ color: 'red' }}>*</span></h5>
                         <TextareaAutosize
                             className='p-2'
                             aria-label="minimum height"
@@ -1029,7 +1028,7 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
                         Submit
                     </button> */}
                     <button className={`me-3 make-an-offer-btn`} onClick={makeAnOffer}  autoFocus>
-                        Submit
+                        {makeAnOfferData.offerDataSeventeen}
                     </button>
                 </DialogActions>
             </Dialog>
