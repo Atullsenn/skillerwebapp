@@ -119,7 +119,7 @@ export const landingPageData =
 
     //How its work
 
-    export const howItWorkData = {
+    export const howItWorkData = {                                          
       workTitleOne:"How its work",
       workTitleTwo:"Post any task you need from cleaning to web design in only two minutes – for free! There's no obligation to hire.",
       workTitleThree:"post your tasker",
@@ -290,7 +290,6 @@ export const contactData = {
 
 
 // My Order Data
-
 export const myOrderData = {
   myOrderTitleOne:"My Order",
   myOrderTitleTwo:"In-Progress",
@@ -301,4 +300,49 @@ export const myOrderData = {
   myOrderTitleSeven:"No Disputed Posts Available",
   myOrderTitleEight:"Disputed",
   myOrderTitleNine:"No Disputed Posts Available",
+}
+
+
+// My Post Data
+
+export const myPostData = {
+  myPostTitleOne:"My Posts",
+  myPostTitleTwo:"Pending",
+  myPostTitleThree:"No Pending Posts Available",
+  myPostTitleFour:"Cancel",
+  myPostTitleFive:"No Cancelled Posts Available",
+}
+
+
+// My Profile Data
+
+export const myProfileData = {
+  profileDataOne:"My profile",
+  profileDataTwo:"Edit",
+  profileDataThree:"About",
+  profileDataFour:"Website",
+  profileDataFive:"Github",
+  profileDataSix:"Twitter",
+  profileDataSeven:"Instagram",
+  profileDataEight:"Facebook",
+  profileDataNine:"First Name",
+  profileDataTen:"Last Name",
+  profileDataEleven: "Name",
+  profileDataTweleve:"Email",
+  profileDataThirteen:"Select Your Country",
+  profileDataFourteen:"Select Your State",
+  profileDataFifteen:"Select Your City",
+  profileDataSixteen:"Address",
+  profileDataSeventeen:"Save",
+  profileDataEighteen:"Edit",
+  profileDataNineteen:"Add bank Details",
+  profileDataTwenty:"Acoount Details",
+  profileDataTwentyOne:"Select Category",
+  profileDataTwentyTwo:"Account Holder Name",
+  
+  
+
+
+
+
 }

@@ -73,15 +73,20 @@ const MyOrdersLayout = () => {
             return completedElement.order_status === 1 
         })
 
+        let cancelledArray = state.myOrderList.filter(function(cancelledElement){
+            return cancelledElement.order_status === 3
+        })
+
+
         let disputedArray = state.myOrderList.filter(function(disputedElement){
             return disputedElement.order_status === 2
         })
 
-        setState((prevState) => ({ ...prevState, inProgress: inProgress, completed: completedArray, disputed: disputedArray }))
+        setState((prevState) => ({ ...prevState, inProgress: inProgress, completed: completedArray, cancelled: cancelledArray,  disputed: disputedArray }))
     }, [state.myOrderList])
 
 
-    //console.log(state.disputed, "Check myorder list")
+    console.log(state.cancelled, "Check Cancelled Order List")
 
 
     return (

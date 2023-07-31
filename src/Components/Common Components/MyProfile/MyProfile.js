@@ -26,6 +26,7 @@ import PhoneInput from "react-phone-input-2";
 import { baseUrl, imageBaseUrl } from "../../../Url/url";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import { IsToggleTypeContext } from "../../../Contexts/IsToggleContext";
+import { myProfileData } from "../../../data";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -339,7 +340,7 @@ const MyProfile = () => {
             </div>
             <Menu />
             <section className="vh-80">
-                <Banner text="My profile" />
+                <Banner text={myProfileData.profileDataOne} />
                 <div className="container mt-4 ProfileMainContainer">
                     <div className="main-body">
                         <div className="row gutters-sm">
@@ -355,7 +356,7 @@ const MyProfile = () => {
                                             {state.editable &&
                                                 <label>
                                                     <input type="file" ref={imageUploader} accept="image/*" onChange={handleImageUpload} style={{ display: "none" }} />
-                                                    <span style={{ color: "#188dc7", fontSize: "17px", fontWeight: "600" }}>Edit</span>
+                                                    <span style={{ color: "#188dc7", fontSize: "17px", fontWeight: "600" }}>{myProfileData.profileDataTwo}</span>
 
                                                 </label>
                                             }
@@ -394,14 +395,14 @@ const MyProfile = () => {
                                             style={{ width: '100%' }}
                                             value={state.about}
                                             onChange={getupdateProfileInfo}
-                                            placeholder="About"
+                                            placeholder={myProfileData.profileDataThree}
                                         />
                                     </div>
                                 </div>
                                 <div className="card mt-3">
                                     <ul className="list-group list-group-flush">
                                         <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                            <h6 className="mb-0"><LanguageIcon /> Website</h6>
+                                            <h6 className="mb-0"><LanguageIcon /> {myProfileData.profileDataFour}</h6>
                                             <span className="text-secondary">{state.website}</span>
                                             {state.editable &&
                                                 <TextField
@@ -423,12 +424,12 @@ const MyProfile = () => {
                                                     }}
                                                     size='small'
                                                     name="website"
-                                                    label={'Website'}
+                                                    label={myProfileData.profileDataFour}
                                                 />
                                             }
                                         </li>
                                         <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                            <h6 className="mb-0"><GitHubIcon /> Github</h6>
+                                            <h6 className="mb-0"><GitHubIcon /> {myProfileData.profileDataFive}</h6>
                                             <span className="text-secondary">{state.github}</span>
                                             {state.editable &&
                                                 <TextField
@@ -449,12 +450,12 @@ const MyProfile = () => {
                                                     }}
                                                     size='small'
                                                     name="github"
-                                                    label={'Github'}
+                                                    label={myProfileData.profileDataFive}
                                                 />
                                             }
                                         </li>
                                         <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                            <h6 className="mb-0"> <TwitterIcon /> Twitter</h6>
+                                            <h6 className="mb-0"> <TwitterIcon /> {myProfileData.profileDataSix}</h6>
                                             <span className="text-secondary">{state.twitter}</span>
                                             {state.editable &&
                                                 <TextField
@@ -475,12 +476,12 @@ const MyProfile = () => {
                                                     }}
                                                     size='small'
                                                     name="twitter"
-                                                    label={'Twitter'}
+                                                    label={myProfileData.profileDataSix}
                                                 />
                                             }
                                         </li>
                                         <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                            <h6 className="mb-0"><InstagramIcon /> Instagram</h6>
+                                            <h6 className="mb-0"><InstagramIcon /> {myProfileData.profileDataSeven}</h6>
                                             <span className="text-secondary">{state.instagram}</span>
                                             {state.editable &&
                                                 <TextField
@@ -501,12 +502,12 @@ const MyProfile = () => {
                                                     }}
                                                     size='small'
                                                     name="instagram"
-                                                    label={'Instagram'}
+                                                    label={myProfileData.profileDataSeven}
                                                 />
                                             }
                                         </li>
                                         <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                            <h6 className="mb-0"><FacebookIcon /> Facebook</h6>
+                                            <h6 className="mb-0"><FacebookIcon />{myProfileData.profileDataEight}</h6>
                                             <span className="text-secondary">{state.facebook}</span>
                                             {state.editable &&
                                                 <TextField
@@ -527,7 +528,7 @@ const MyProfile = () => {
                                                     }}
                                                     size='small'
                                                     name="facebook"
-                                                    label={'Facebook'}
+                                                    label={myProfileData.profileDataEight}
                                                 />
                                             }
                                         </li>
@@ -558,7 +559,7 @@ const MyProfile = () => {
                                                         disabled={state.disableField}
                                                         size='large'
                                                         name="firstName"
-                                                        label={'First Name'}
+                                                        label={myProfileData.profileDataNine}
                                                     />
                                                     <TextField
                                                         style={{ width: '48%' }}
@@ -578,7 +579,7 @@ const MyProfile = () => {
                                                         disabled={state.disableField}
                                                         size='large'
                                                         name="lastName"
-                                                        label={'Last Name'}
+                                                        label={myProfileData.profileDataTen}
                                                     />
                                                 </div>
                                                 <hr />
@@ -594,7 +595,7 @@ const MyProfile = () => {
                                                         disabled={state.disableField}
                                                         size='large'
                                                         name="name"
-                                                        label={'Name'}
+                                                        label={myProfileData.profileDataEleven}
                                                     />
                                                 </div>
                                                 <hr />
@@ -619,7 +620,7 @@ const MyProfile = () => {
                                                 value={state.email}
                                                 disabled={state.disableField}
                                                 size='large'
-                                                label={'Email'}
+                                                label={myProfileData.profileDataTweleve}
                                             />
                                             <div className="row m-0 p-0" style={{ width: "48%" }}>
                                                 <PhoneInput
@@ -646,12 +647,12 @@ const MyProfile = () => {
                                         <hr />
                                         <div className="row m-0 d-flex align-ietms-center justify-content-between">
                                             <FormControl style={{ width: '30%' }}>
-                                                <InputLabel id="demo-simple-select-label">Select Your Country</InputLabel>
+                                                <InputLabel id="demo-simple-select-label">{myProfileData.profileDataThirteen}</InputLabel>
                                                 <Select
                                                     labelId="demo-simple-select-label"
                                                     id="demo-simple-select"
                                                     value={state.country}
-                                                    label="Select Your Country"
+                                                    label= {myProfileData.profileDataThirteen}
                                                     onChange={selectCountry}
                                                     disabled={state.disableField}
                                                 >
@@ -661,12 +662,12 @@ const MyProfile = () => {
                                                 </Select>
                                             </FormControl>
                                             <FormControl style={{ width: '30%' }}>
-                                                <InputLabel id="demo-simple-select-label">Select Your State</InputLabel>
+                                                <InputLabel id="demo-simple-select-label">{myProfileData.profileDataFourteen}</InputLabel>
                                                 <Select
                                                     labelId="demo-simple-select-label"
                                                     id="demo-simple-select"
                                                     value={state.state}
-                                                    label="Select Your State"
+                                                    label={myProfileData.profileDataFourteen}
                                                     onChange={selectState}
                                                     disabled={state.disableField}
                                                 >
@@ -676,12 +677,12 @@ const MyProfile = () => {
                                                 </Select>
                                             </FormControl>
                                             <FormControl style={{ width: '30%' }}>
-                                                <InputLabel id="demo-simple-select-label">Select Your City</InputLabel>
+                                                <InputLabel id="demo-simple-select-label">{myProfileData.profileDataFifteen}</InputLabel>
                                                 <Select
                                                     labelId="demo-simple-select-label"
                                                     id="demo-simple-select"
                                                     value={state.city}
-                                                    label="Select Your City"
+                                                    label= {myProfileData.profileDataFifteen}
                                                     onChange={selectCity}
                                                     disabled={state.disableField}
                                                 >
@@ -711,7 +712,7 @@ const MyProfile = () => {
                                                 }}
                                                 name="address"
                                                 size='large'
-                                                label={'Address'}
+                                                label={myProfileData.profileDataSixteen}
                                             />
                                         </div>
                                         {isToggle === 1 &&
@@ -719,7 +720,7 @@ const MyProfile = () => {
                                                 <hr />
                                                 <div className="row">
                                                     <div>
-                                                        {state.editable ? <button disabled={!isEnabled && state.editable} className="profileMessageBtn" onClick={() => { updateMyprofile(); setState((prevState) => ({ ...prevState, editable: false, disableField: true })); }}>Save</button> : <button className="profileMessageBtn" onClick={() => { setState((prevState) => ({ ...prevState, editable: true, disableField: false })); }}>Edit</button>}
+                                                        {state.editable ? <button disabled={!isEnabled && state.editable} className="profileMessageBtn" onClick={() => { updateMyprofile(); setState((prevState) => ({ ...prevState, editable: false, disableField: true })); }}>{myProfileData.profileDataSeventeen}</button> : <button className="profileMessageBtn" onClick={() => { setState((prevState) => ({ ...prevState, editable: true, disableField: false })); }}>{myProfileData.profileDataEighteen}</button>}
                                                     </div>
                                                 </div>
                                             </>
@@ -729,8 +730,8 @@ const MyProfile = () => {
                                                 <hr />
                                                 <div className="row">
                                                     <div>
-                                                        {state.editable ? <button disabled={!isEnabled && state.editable} className="profileMessageBtn" onClick={() => { updateMyprofile(); setState((prevState) => ({ ...prevState, editable: false, disableField: true })); }}>Save</button> : <button className="profileMessageBtn" onClick={() => { setState((prevState) => ({ ...prevState, editable: true, disableField: false })); }}>Edit</button>}
-                                                        <button className="profileMessageBtn ms-2" onClick={() => { setState((prevState) => ({ ...prevState, addBankDetailsBtn: true })) }}>Add bank Detail</button>
+                                                        {state.editable ? <button disabled={!isEnabled && state.editable} className="profileMessageBtn" onClick={() => { updateMyprofile(); setState((prevState) => ({ ...prevState, editable: false, disableField: true })); }}>{myProfileData.profileDataSeventeen}</button> : <button className="profileMessageBtn" onClick={() => { setState((prevState) => ({ ...prevState, editable: true, disableField: false })); }}>{myProfileData.profileDataEighteen}</button>}
+                                                        <button className="profileMessageBtn ms-2" onClick={() => { setState((prevState) => ({ ...prevState, addBankDetailsBtn: true })) }}>{myProfileData.profileDataNineteen}</button>
                                                     </div>
                                                 </div>
                                             </>
@@ -739,14 +740,14 @@ const MyProfile = () => {
                                 </div>
                                 {isToggle === 2 && state.addBankDetailsBtn && state.showBankDetail &&
                                     <>
-                                        <h4>Acoount Details</h4>
+                                        <h4>{myProfileData.profileDataTwenty}</h4>
                                         <div>
                                             <div className="card mb-3">
                                                 <div className="card-body">
                                                     <div className="row m-0">
                                                         <FormControl size="large">
                                                             <InputLabel id="demo-multiple-checkbox-label">
-                                                                Select Category
+                                                                {myProfileData.profileDataTwentyOne}
                                                             </InputLabel>
                                                             <Select
                                                                 labelId="demo-multiple-checkbox-label"
@@ -755,7 +756,7 @@ const MyProfile = () => {
                                                                 value={state.category}
                                                                 disabled={state.disableField}
                                                                 onChange={selectCategory}
-                                                                input={<OutlinedInput label="Select Category" />}
+                                                                input={<OutlinedInput label={myProfileData.profileDataTwentyOne} />}
                                                                 renderValue={(selected) => selected.join(", ")}
                                                                 MenuProps={MenuProps}
                                                             >
@@ -778,7 +779,7 @@ const MyProfile = () => {
                                                             value={state.accountHolderName}
                                                             onChange={(e) => { setState((prevState) => ({ ...prevState, accountHolderName: e.target.value })) }}
                                                             size='large'
-                                                            label={'Account Holder Name'}
+                                                            label={myProfileData.profileDataTwentyTwo}
                                                         />
                                                         <TextField
                                                             style={{ width: '48%' }}

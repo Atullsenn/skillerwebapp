@@ -56,6 +56,7 @@ import {
     orderBy
 } from "firebase/firestore";
 import ReactPaginate from 'react-paginate';
+import { myPostData } from '../../../data';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -509,7 +510,7 @@ useEffect(()=>{
                         </div>
                         <div className='col-lg-2'>
                             <div>
-                                <h3>My Posts</h3>
+                                <h3>{myPostData.myPostTitleOne}</h3>
                             </div>
                         </div>
                         <div className='col-lg-5 pe-0 text-right'>
@@ -543,7 +544,7 @@ useEffect(()=>{
                                     className={`mb-2 ${state.cardDetail ? 'small-layout-design' : ''}`}
                                     fill
                                 >
-                                    <Tab eventKey="Pending" title="Pending">
+                                    <Tab eventKey="Pending" title={myPostData.myPostTitleTwo}>
                                         <div className='row'>
                                             <div className='row left-main-Div'>
                                                 {state.pending.filter(
@@ -593,7 +594,7 @@ useEffect(()=>{
                                                         </div>
                                                     )
                                                 })}
-                                                {state.pending.length === 0 && state.showHeading && <h3 className='text-center w-25 no-post-available'>No Pending Posts Available</h3>}
+                                                {state.pending.length === 0 && state.showHeading && <h3 className='text-center w-25 no-post-available'>{myPostData.myPostTitleThree}</h3>}
 {state.pending.length > 9 ?
                                                 <ReactPaginate
                       previousLabel={"Previous"}
@@ -610,7 +611,7 @@ useEffect(()=>{
                                             </div>
                                         </div>
                                     </Tab>
-                                    <Tab eventKey="Cancelled" title="Cancel">
+                                    <Tab eventKey="Cancelled" title={myPostData.myPostTitleFour}>
                                         <div className='row'>
                                             <div className='row left-main-Div'>
                                                 {state.cancelled.filter(
@@ -659,7 +660,7 @@ useEffect(()=>{
                                                         </div>
                                                     )
                                                 })}
-                                                {state.cancelled.length === 0 && state.showHeading && <h3 className='text-center w-25 no-post-available'>No Cancelled Posts Available</h3>}
+                                                {state.cancelled.length === 0 && state.showHeading && <h3 className='text-center w-25 no-post-available'>{myPostData.myPostTitleFive}</h3>}
                             {state.cancelled.length > 9 ?
                                                 <ReactPaginate
                       previousLabel={"Previous"}

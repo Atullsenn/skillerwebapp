@@ -524,9 +524,9 @@ const CategoriesPost = ({ state, setState }) => {
                                                         </Tooltip>
                                                     </div>
                                                 </div>
-                                                <div className='d-flex align-items-center justify-content-center requestBtnDiv'>
+                                                {/* <div className='d-flex align-items-center justify-content-center requestBtnDiv'>
                                                     <button className='RequestQuoteBtn' >Request a Quote</button>
-                                                </div>
+                                                </div> */}
                                             </div>
                                         </>
                                     )
