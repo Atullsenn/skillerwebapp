@@ -27,6 +27,7 @@ import {DialogTitle} from '@mui/material';
 import {toast} from 'react-toastify';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import { myWalletData } from '../../../data';
 
 const MyWallet = () => {
     const [state, setState] = useState([])
@@ -165,7 +166,7 @@ const MyWallet = () => {
         <>
             <Menu />
             <section className="vh-80">
-                <Banner text="My wallet" />
+                <Banner text={myWalletData.walletDataOne} />
                 <div className="container p-2 mt-4">
                 <Dialog
                               fullWidth
@@ -178,7 +179,7 @@ const MyWallet = () => {
                                 id="alert-dialog-title"
                                 className="text-center"
                               >
-                                {"Withdraw"}
+                                {myWalletData.walletDataTwo}
                               </DialogTitle>
                               <DialogContent className="text-center p-0 m-0">
                                 <DialogContentText id="alert-dialog-description">
@@ -190,13 +191,13 @@ const MyWallet = () => {
                                   /> */}
                                   <div class="card-details" style={{width: '600px', overflow:"hidden"}}>
             <div className="paymentinput">
-            <label class="col-sm-4 col-form-label" style={{paddingRight: '8px', fontWeight:'bold'}} for="cname">Account</label>
-            <input className="border-primaryy" style={{border: '2px solid #3498db'}} type="text" maxLength={50} id="cname" name="cardname" placeholder="Choose Account"/>
+            <label class="col-sm-4 col-form-label" style={{paddingRight: '8px', fontWeight:'bold'}} for="cname">{myWalletData.walletDataThree}</label>
+            <input className="border-primaryy" style={{border: '2px solid #3498db'}} type="text" maxLength={50} id="cname" name="cardname" placeholder={myWalletData.walletDataFour}/>
             </div>   
 
             <div className="paymentinput">
-            <label class="col-sm-4 col-form-label" style={{paddingRight: '8px',fontWeight:'bold'}} for="cname">Amount</label>
-            <input className="border-primaryy col-sm-6 p-2 mb-2" style={{border: '2px solid #3498db'}} value={"5000"} type="number" id="cname" name="cardname" placeholder="Amount"/>
+            <label class="col-sm-4 col-form-label" style={{paddingRight: '8px',fontWeight:'bold'}} for="cname">{myWalletData.walletDataFive}</label>
+            <input className="border-primaryy col-sm-6 p-2 mb-2" style={{border: '2px solid #3498db'}} value={"5000"} type="number" id="cname" name="cardname" placeholder={myWalletData.walletDataFive}/>
             </div>
             </div>
                                 </DialogContentText>
@@ -212,16 +213,14 @@ const MyWallet = () => {
                                   //   on_bid_accept(item);
                                   // }}
                                   onClick={handleCloseWithdrawPopup}
-                                >
-                                  {" "}
-                                  Proceed{" "}
+                                >  
+                                  {myWalletData.walletDataSix}
                                 </button>
                                 <button
                                   className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1"
                                   onClick={handleCloseWithdrawPopup}
                                 >
-                                  {" "}
-                                  Cancel{" "}
+                                  {myWalletData.walletDataSeven}
                                 </button>
                               </DialogActions>
                             </Dialog>
@@ -230,47 +229,47 @@ const MyWallet = () => {
                             <div className='main-wallet-div-area'>
                                 <div className='d-flex align-items-center my-wallet-section py-2'>
                                     <span className='ps-2'> <LibraryAddCheckIcon /> </span>
-                                    <h4 className='my-wallet-heading m-0 p-2'>My Wallet</h4>
+                                    <h4 className='my-wallet-heading m-0 p-2'>{myWalletData.walletDataEight}</h4>
                                 </div>
                                 <div className='mt-5 px-4 d-flex align-items-center justify-content-center' style={{margin: "auto", width:"50%", paddingBottom:"10px"}}>
                                     <FormControl  sx={{ width: '73%' }}>
-                                        <InputLabel htmlFor="outlined-adornment-amount">Wallet Balance</InputLabel>
+                                        <InputLabel htmlFor="outlined-adornment-amount">{myWalletData.walletDataNine}</InputLabel>
                                         <OutlinedInput
                                             type='number'
                                             size='small'
                                             value={totalWallet}
                                             id="outlined-adornment-amount"
                                             startAdornment={<InputAdornment position="start">$</InputAdornment>}
-                                            label="Your Balance"
+                                            label={myWalletData.walletDataTen}
                                         />
                                     </FormControl>
                                     
                                 </div>
                                 <div className='mt-3 px-4 d-flex align-items-center justify-content-center' style={{margin: "auto", width:"50%", paddingBottom:"10px"}}>
                                 <FormControl sx={{width:'73%'}}>
-                            <InputLabel id="demo-simple-select-label">Payment Type</InputLabel>
+                            <InputLabel id="demo-simple-select-label">{myWalletData.walletDataEleven}</InputLabel>
                            <Select
                               labelId="demo-simple-select-label"
                               id="demo-simple-select"
                               value={paymentType}
-                              label="Payment Type"
+                              label={myWalletData.walletDataEleven}
                               onChange={handleChange}
                               >
-                            <MenuItem value={0}>Bank</MenuItem>
-                            <MenuItem value={1}>Paypal</MenuItem>
+                            <MenuItem value={0}>{myWalletData.walletDataTweleve}</MenuItem>
+                            <MenuItem value={1}>{myWalletData.walletDataThirteen}</MenuItem>
                             </Select>
                        </FormControl>
                         </div>
                                 <div className='mt-3 px-4 d-flex align-items-center justify-content-center' style={{margin: "auto", width:"50%", paddingBottom:"50px"}}>
                                     <FormControl sx={{ width: '73%' }}>
-                                        <InputLabel htmlFor="outlined-adornment-amount">Withdraw Amount</InputLabel>
+                                        <InputLabel htmlFor="outlined-adornment-amount">{myWalletData.walletDataFourteen}</InputLabel>
                                         <OutlinedInput
                                             type='number'
                                             size='small'
                                             defaultValue="0.00"
                                             id="outlined-adornment-amount"
                                             startAdornment={<InputAdornment position="start">$</InputAdornment>}
-                                            label="Add Wallet Balance"
+                                            label={myWalletData.walletDataFifteen}
                                             onChange={(event)=>{setAmount(event.target.value)}}
                                         />
                                     </FormControl>
@@ -280,7 +279,7 @@ const MyWallet = () => {
                                    
                                 </div>
                                 <div className='mb-1 d-flex align-items-center justify-content-center' style={{margin: "auto", width:"50%", paddingBottom:"50px"}}>
-                                <button className="withdrawal-btn" onClick={withDrawAmount}>Proceed To Withdraw</button>
+                                <button className="withdrawal-btn" onClick={withDrawAmount}>{myWalletData.walletDataSixteen}</button>
                                     </div>
                                 {/* <button className="withdrawal-btn" style={{display:'flex',justifyContent: 'center'}} onClick={handleOpenWithdrawPopup}>Withdrawal</button> */}
                             </div>
@@ -288,7 +287,7 @@ const MyWallet = () => {
 
                         <div className='d-flex align-items-center justify-content-center '>
                             <div>
-                                <h3> My Transactions</h3>
+                                <h3> {myWalletData.walletDataSeventeen}</h3>
                             </div>
                         </div>
                        
@@ -307,7 +306,7 @@ const MyWallet = () => {
                                     className={`mb-2 ${state.cardDetail ? 'small-layout-design' : ''}`}
                                     fill
                                 >
-                                    <Tab eventKey="In-Progress" title="Transaction History">
+                                    <Tab eventKey="In-Progress" title={myWalletData.walletDataEighteen}>
                                         <div className='row'>
                                            
                                                         
@@ -316,21 +315,21 @@ const MyWallet = () => {
                                 <div className='d-flex my-wallet-section justify-content-between align-items-center'>
                                     <div className='d-flex align-items-center py-2'>
                                         <span className='ps-2'> <CurrencyExchangeIcon /> </span>
-                                        <h4 className='my-wallet-heading m-0 p-2'>My Transactions</h4>
+                                        <h4 className='my-wallet-heading m-0 p-2'>{myWalletData.walletDataNineteen}</h4>
                                     </div>
                                     <div className='pe-2'>
                                         <FormControl sx={{ width: 250 }} size="small">
-                                            <InputLabel id="demo-select-small">Transaction Type</InputLabel>
+                                            <InputLabel id="demo-select-small">{myWalletData.walletDataTwenty}</InputLabel>
                                             <Select
                                                 labelId="demo-select-small"
                                                 id="demo-select-small"
                                                 value={searchData}
-                                                label="Transaction Type"
+                                                label={myWalletData.walletDataTwenty}
                                                 onChange={(event)=>{setSearchData(event.target.value)}}
                                             >
-                                                <MenuItem value={" "}>All Transactions</MenuItem>
-                                                <MenuItem value={'Credit'}>Earning Transactions</MenuItem>
-                                                <MenuItem value={'Pending'}>Pending Transactions</MenuItem>
+                                                <MenuItem value={" "}>{myWalletData.walletDataTwentyOne}</MenuItem>
+                                                <MenuItem value={'Credit'}>{myWalletData.walletDataTwentyTwo}</MenuItem>
+                                                <MenuItem value={'Pending'}>{myWalletData.walletDataTwentyThree}</MenuItem>
                                             </Select>
                                         </FormControl>
                                     </div>
@@ -341,7 +340,7 @@ const MyWallet = () => {
                                             <>
                                                 <div>
                                                     <div className='px-5 d-flex align-items-center py-2'>
-                                                        <h5 className='p-0 m-0' style={{ width: '80px' }}>Post Title : </h5>
+                                                        <h5 className='p-0 m-0' style={{ width: '80px' }}>{myWalletData.walletDataTwentyFour} </h5>
                                                         <p className='p-0 m-0 ps-2 post-title-in-cardsection w-75' style={{ fontSize: '16px', fontWeight: '600' }}>{Item.post_title}</p>
                                                     </div>
                                                     <div className='inner-transaction-history-div d-flex justify-content-evenly align-items-center'>
@@ -350,12 +349,12 @@ const MyWallet = () => {
                                                             <p className='transaction-para mt-1'>{moment(Item.created_at).format('LLL')}</p>
                                                         </div>
                                                         <div className='text-center'>
-                                                            <p className='transaction-para p-0 m-0 blue'>Transaction-ID</p>
+                                                            <p className='transaction-para p-0 m-0 blue'>{myWalletData.walletDataTwentyFive}</p>
                                                             <p className='transaction-para mt-1'>{Item.transaction_id}</p>
                                                         </div>
                                                         <div className='text-right'>
                                                         {/* <p className='transaction-para p-0 m-0 blue'>Bid amount 6477</p> */}
-                                                            <p className='transaction-para p-0 m-0 blue'>BidAmount ($ {Item.bid_amount}) - admincharges ($ {Item.commission_amount}) = $ {Item.amount}</p>
+                                                            <p className='transaction-para p-0 m-0 blue'>{myWalletData.walletDataTwentySix} ($ {Item.bid_amount}) - {myWalletData.walletDataTwentySeven} ($ {Item.commission_amount}) = $ {Item.amount}</p>
                                                             <p className='transaction-para mt-1'>Status : <span className={`${Item.status === 'Credit' ? 'green' : Item.status === 'Debit' ? 'red' : Item.status === 'Pending' ? 'yellow' :""}`}> {Item.status === 'Credit' ? <AddIcon style={{ fontSize: '12px' }} /> : Item.status === 'Debit' ? <RemoveIcon style={{ fontSize: '12px' }} /> : ''}{Item.status}</span></p>
                                                         </div>
                                                     </div>
@@ -368,22 +367,22 @@ const MyWallet = () => {
                             </div>
                         </div>
                                                   
-                                                {state && state.length === 0 && <h3 className='text-center w-25 no-post-available'>No Transaction Available</h3>}
+                                                {state && state.length === 0 && <h3 className='text-center w-25 no-post-available'>{myWalletData.walletDataTwentyEight}</h3>}
                                         </div>
                                     </Tab>
-                                    <Tab eventKey="Completed" title="Withdraw History ">
+                                    <Tab eventKey="Completed" title={myWalletData.walletDataTwentyNine}>
                                         <div className='row'>
                                             <div className='col-lg-12'>
                             <div className='main-transaction-div-area'>
                                 <div className='d-flex my-wallet-section justify-content-between align-items-center'>
                                     <div className='d-flex align-items-center py-2'>
                                         <span className='ps-2'> <CurrencyExchangeIcon /> </span>
-                                        <h4 className='my-wallet-heading m-0 p-2'>Withdraw History</h4>
+                                        <h4 className='my-wallet-heading m-0 p-2'>{myWalletData.walletDataThirty}</h4>
                                     </div>
 
                                     <div className='pe-2'>
                                         <FormControl sx={{ width: 250 }} size="small">
-                                            <InputLabel id="demo-select-small">Transaction Type</InputLabel>
+                                            <InputLabel id="demo-select-small">{myWalletData.walletDataTwenty}</InputLabel>
                                             <Select
                                                 labelId="demo-select-small"
                                                 id="demo-select-small"
@@ -391,9 +390,9 @@ const MyWallet = () => {
                                                 label="Transaction Type"
                                                 onChange={(event)=>{setWithdrawSearch(event.target.value)}}
                                             >
-                                                <MenuItem value={" "}>All Transactions</MenuItem>
-                                                <MenuItem value={'Debit'}>Debit Transactions</MenuItem>
-                                                <MenuItem value={'Requested'}>Pending Transactions</MenuItem>
+                                                <MenuItem value={" "}>{myWalletData.walletDataTwentyOne}</MenuItem>
+                                                <MenuItem value={'Debit'}>{myWalletData.walletDataThirtyOne}</MenuItem>
+                                                <MenuItem value={'Requested'}>{myWalletData.walletDataThirtyTwo}</MenuItem>
                                             </Select>
                                         </FormControl>
                                     </div>
@@ -416,7 +415,7 @@ const MyWallet = () => {
                                             <>
                                                 <div style={{margin:'auto', width:'100%'}}>
                                                     <div className='px-5 d-flex align-items-center justify-content-center py-2'>
-                                                        <h5 className='p-0 m-0' style={{ width: '80px' }}>withdraw:</h5>
+                                                        <h5 className='p-0 m-0' style={{ width: '80px' }}>{myWalletData.walletDataThirtyThree}</h5>
                                                         <p className='p-0 m-0 ps-2 post-title-in-cardsection w-75' style={{ fontSize: '16px', fontWeight: '600' }}>$ {Item.amount}</p>
                                                     </div>
                                                     <div className='inner-transaction-history-div d-flex  justify-content-evenly  align-items-center'>
@@ -427,7 +426,7 @@ const MyWallet = () => {
                                                        
                                                         <div className='text-right'>
                                                             <p className='transaction-para p-0 m-0 blue'>$ {Item.amount}</p>
-                                                            <p className='transaction-para mt-1'>Status : <span className={`${Item.status === 'Credit' ? 'green' : Item.status === 'Debit' ? 'red' : Item.status === 'Requested' ? 'yellow' :""}`}> {Item.status === 'Credit' ? <AddIcon style={{ fontSize: '12px' }} /> : Item.status === 'Debit' ? <RemoveIcon style={{ fontSize: '12px' }} /> : ''}{statusDta()}</span></p>
+                                                            <p className='transaction-para mt-1'>{myWalletData.walletDataThirtyFour} <span className={`${Item.status === 'Credit' ? 'green' : Item.status === 'Debit' ? 'red' : Item.status === 'Requested' ? 'yellow' :""}`}> {Item.status === 'Credit' ? <AddIcon style={{ fontSize: '12px' }} /> : Item.status === 'Debit' ? <RemoveIcon style={{ fontSize: '12px' }} /> : ''}{statusDta()}</span></p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -441,7 +440,7 @@ const MyWallet = () => {
 
                         <div className='row left-main-Div'>
                                             
-                                            {withdrawHistory && withdrawHistory.length === 0 && <h3 className='text-center w-25 no-post-available'>No Withdraw History Available</h3>}
+                                            {withdrawHistory && withdrawHistory.length === 0 && <h3 className='text-center w-25 no-post-available'>{myWalletData.walletDataThirtyFive}</h3>}
                                          </div> 
                                         </div>
                                     </Tab>

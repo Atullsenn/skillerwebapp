@@ -789,7 +789,7 @@ const MyProfile = () => {
                                                             value={parseInt(state.accountNumber)}
                                                             onChange={(e) => { setState((prevState) => ({ ...prevState, accountNumber: e.target.value })) }}
                                                             size='large'
-                                                            label={'Account Number'}
+                                                            label={myProfileData.profileDataTwentyThree}
                                                         />
                                                     </div>
                                                     <hr />
@@ -802,7 +802,7 @@ const MyProfile = () => {
                                                             onChange={(e) => { setState((prevState) => ({ ...prevState, bsb: e.target.value })) }}
                                                             value={state.bsb}
                                                             size='large'
-                                                            label={'BSB'}
+                                                            label={myProfileData.profileDataTwentyFour}
                                                         />
                                                         <TextField
                                                             style={{ width: '48%' }}
@@ -811,13 +811,13 @@ const MyProfile = () => {
                                                             variant='outlined'
                                                             defaultValue="Himanshu9958"
                                                             size='large'
-                                                            label={'Paypal ID'}
+                                                            label={myProfileData.profileDataTwentyFive}
                                                         />
                                                     </div>
                                                     <hr />
                                                     <div className="row">
                                                         <div>
-                                                            {state.editable ? <button disabled={!isEnabled && state.editable} className="profileMessageBtn" onClick={() => { updateMyprofile(); setState((prevState) => ({ ...prevState, editable: false, disableField: true })); }}>Save</button> : <button className="profileMessageBtn" onClick={() => { setState((prevState) => ({ ...prevState, editable: true, disableField: false })); }}>Edit</button>}
+                                                            {state.editable ? <button disabled={!isEnabled && state.editable} className="profileMessageBtn" onClick={() => { updateMyprofile(); setState((prevState) => ({ ...prevState, editable: false, disableField: true })); }}>{myProfileData.profileDataTwentySix}</button> : <button className="profileMessageBtn" onClick={() => { setState((prevState) => ({ ...prevState, editable: true, disableField: false })); }}>{myProfileData.profileDataTwentySeven}</button>}
                                                         </div>
                                                     </div>
                                                 </div>

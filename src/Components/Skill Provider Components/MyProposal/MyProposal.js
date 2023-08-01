@@ -16,6 +16,7 @@ import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import { getUserDetail } from '../../UserDetailToken';
 import axios from 'axios';
+import { myProposalData } from '../../../data';
 
 const MyProposal = ({ state, setState, getProposalList }) => {
     const [search, setSearch] = useState("")
@@ -69,7 +70,7 @@ const MyProposal = ({ state, setState, getProposalList }) => {
                         </div>
                         <div className='col-lg-4'>
                             <div>
-                                <h3>My Proposals</h3>
+                                <h3>{myProposalData.proposalDataOne}</h3>
                             </div>
                         </div>
                         <div className='col-lg-4 pe-0 text-right'>
@@ -96,7 +97,6 @@ const MyProposal = ({ state, setState, getProposalList }) => {
                                             .toLowerCase()
                                             .includes(search.toString().toLowerCase()),
                                 ).map((item, index) => {
-                                    //console.log(item, "checkkkkkkkk dataaaaaaa")
                                     return (
                                         <div className={`${state.showMap || state.cardDetail ? '' : 'col-lg-4'}`}>
                                             <div key={index} id={`browse-card-${item.post_id}`} className={`${state.showMap || state.cardDetail ? 'm-2 rounded card-main-div' : 'm-2 rounded card-main-div'}`} onClick={() => { getShowMyProposalPost(item.post_id); setActiveClass(item.post_id); setState((prevState) => ({ ...prevState, cardDetail: true, showMap: false })) }}>
@@ -135,7 +135,7 @@ const MyProposal = ({ state, setState, getProposalList }) => {
                                         </div>
                                     )
                                 })}
-                                <h3 id="my-proposal-no-post-available" className='w-25 no-post-available' style={{ display: 'none', textAlign: 'center' }}>No Proposal Available</h3>
+                                <h3 id="my-proposal-no-post-available" className='w-25 no-post-available' style={{ display: 'none', textAlign: 'center' }}>{myProposalData.proposalDataTwo}</h3>
                             </div>
                             {state.cardDetail &&
                                 <div className='col-lg-8 right-main-div' id='Detailed-main-div'>

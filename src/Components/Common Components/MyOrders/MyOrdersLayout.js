@@ -13,6 +13,7 @@ const defaultState = {
     inProgress: [],
     completed: [],
     disputed:[],
+    cancelled:[],
     postImages:[],
     offerImages:[],
     chatPostId: null,
@@ -73,20 +74,21 @@ const MyOrdersLayout = () => {
             return completedElement.order_status === 1 
         })
 
-        let cancelledArray = state.myOrderList.filter(function(cancelledElement){
-            return cancelledElement.order_status === 3
-        })
-
-
         let disputedArray = state.myOrderList.filter(function(disputedElement){
-            return disputedElement.order_status === 2
+            return disputedElement.order_status === 4
         })
 
-        setState((prevState) => ({ ...prevState, inProgress: inProgress, completed: completedArray, cancelled: cancelledArray,  disputed: disputedArray }))
+
+        let cancellArray = state.myOrderList.filter(function(cancelElement){
+            return cancelElement.order_status === 2
+        })
+
+        setState((prevState) => ({ ...prevState, inProgress: inProgress, completed: completedArray, cancelled: cancellArray,  disputed: disputedArray }))
     }, [state.myOrderList])
 
+    // console.log(state.disputed, "Check Response")
 
-    console.log(state.cancelled, "Check Cancelled Order List")
+
 
 
     return (

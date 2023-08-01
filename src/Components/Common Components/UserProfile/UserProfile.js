@@ -21,6 +21,7 @@ import CategoryIcon from '@mui/icons-material/Category';
 import { baseUrl, imageBaseUrl } from '../../../Url/url';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import { userProfileData } from '../../../data';
 
 const defaultState = {
     about: '',
@@ -172,7 +173,7 @@ const UserProfile = () => {
             </div>
             <Menu />
             <section className="vh-80">
-                <Banner text="User Profile" />
+                <Banner text={userProfileData.userDataOne} />
                 <div className='container'>
                     <div className='row'>
                         <div className='col-lg-4 p-2'>
@@ -198,111 +199,111 @@ const UserProfile = () => {
                                             <Rating name="half-rating-read" value={state.profileTotaleRate} precision={0.5} readOnly />
                                             <p className='p-0 m-0 user-profile-font-weight'>{`(${state.profileTotaleRate})`}</p>
                                         </div>
-                                        <button className='user-profile-contect-me w-75'>Contact Me</button>
+                                        <button className='user-profile-contect-me w-75'>{userProfileData.userDataTwo}</button>
                                     </div>
                                 </div>
                                 <Divider className='my-2' style={{ backgroundColor: 'gray' }} />
                                 <div>
                                     <div className='d-flex align-items-center justify-content-between'>
-                                        <p className='w-50'> <CategoryIcon className='icon-common-class' /> Category</p>
-                                        <p className='user-profile-font-weight w-50 text-right'>Web Development App Development Software Developer Digital Marketing response</p>
+                                        <p className='w-50'> <CategoryIcon className='icon-common-class' /> {userProfileData.userDataThree}</p>
+                                        <p className='user-profile-font-weight w-50 text-right'>{userProfileData.userDataFour}</p>
                                     </div>
                                     <div className='d-flex align-items-center justify-content-between'>
-                                        <p className='w-50'> <FlagIcon className='icon-common-class' /> Country</p>
+                                        <p className='w-50'> <FlagIcon className='icon-common-class' /> {userProfileData.userDataFive}</p>
                                         <p className='user-profile-font-weight w-50 text-right'>{state.countryName}</p>
                                     </div>
                                     <div className='d-flex align-items-center justify-content-between'>
-                                        <p className='w-50'> <HolidayVillageIcon className='icon-common-class' /> State</p>
+                                        <p className='w-50'> <HolidayVillageIcon className='icon-common-class' /> {userProfileData.userDataSix}</p>
                                         <p className='user-profile-font-weight w-50 text-right'> {state.stateName}</p>
                                     </div>
                                     <div className='d-flex align-items-center justify-content-between'>
-                                        <p className='w-50'> <LocationCityIcon className='icon-common-class' /> City</p>
+                                        <p className='w-50'> <LocationCityIcon className='icon-common-class' /> {userProfileData.userDataSeven}</p>
                                         <p className='user-profile-font-weight w-50 text-right'> {state.cityName}</p>
                                     </div>
                                 </div>
                             </div>
                             <div className='p-4 my-4 main-left-user-profile-card'>
-                                <h4>Languages</h4>
-                                <p className='p-0 m-0'>English  - Native/Bilingual</p>
-                                <p className='p-0 m-0'>German (Deutsch) - Native/Bilingual</p>
-                                <p className='p-0 m-0'>Swedish (Svenska) - Basic</p>
-                                <p className='p-0 m-0'>Hindi (Hindi) - Basic</p>
-                                <p className='p-0 m-0'>	Arabic (Arabic) - Basic</p>
+                                <h4>{userProfileData.userDataEight}</h4>
+                                <p className='p-0 m-0'>{userProfileData.userDataNine}</p>
+                                <p className='p-0 m-0'>{userProfileData.userDataTen}</p>
+                                <p className='p-0 m-0'>{userProfileData.userDataEleven}</p>
+                                <p className='p-0 m-0'>{userProfileData.userDataTweleve}</p>
+                                <p className='p-0 m-0'>{userProfileData.userDataThirteen}</p>
                                 <Divider className='my-4' style={{ backgroundColor: 'gray' }} />
-                                <h4>Skills</h4>
-                                <p className='user-profile-skill'>C</p>
-                                <p className='user-profile-skill'>C++</p>
-                                <p className='user-profile-skill'>Java</p>
-                                <p className='user-profile-skill'>Javascript</p>
-                                <p className='user-profile-skill'>React.js</p>
-                                <p className='user-profile-skill'>React Native</p>
-                                <p className='user-profile-skill'>Github</p>
+                                <h4>{userProfileData.userDataFourteen}</h4>
+                                <p className='user-profile-skill'>{userProfileData.userDataFifteen}</p>
+                                <p className='user-profile-skill'>{userProfileData.userDataSixteen}</p>
+                                <p className='user-profile-skill'>{userProfileData.userDataSeventeen}</p>
+                                <p className='user-profile-skill'>{userProfileData.userDataEighteen}</p>
+                                <p className='user-profile-skill'>{userProfileData.userDataNineteen}</p>
+                                <p className='user-profile-skill'>{userProfileData.userDataTwenty}</p>
+                                <p className='user-profile-skill'>{userProfileData.userDataTwentyOne}</p>
                             </div>
                         </div>
                         <div className='col-lg-8 p-2'>
                             <div className='p-4 main-left-user-profile-card'>
                                 <div>
-                                    <h3>Personal Details....</h3>
+                                    <h3>{userProfileData.userDataTwentyTwo}</h3>
                                 </div>
                                 <div>
                                     <div className='d-flex align-items-center justify-content-between py-2'>
                                         <div className='d-flex align-items-center justify-content-between' style={{ width: '50%', paddingRight: '10px', borderRight: '1px solid #cdcdcd' }}>
-                                            <h5 className='p-0 pe-3 m-0'>First Name</h5>
+                                            <h5 className='p-0 pe-3 m-0'>{userProfileData.userDataTwentyThree}</h5>
                                             <p className='p-0 m-0 user-profile-font-weight'>{state.firstName}</p>
                                         </div>
                                         <div className='d-flex align-items-center justify-content-between' style={{ width: '50%', paddingLeft: '10px', borderLeft: '1px solid #cdcdcd' }}>
-                                            <h5 className='p-0 pe-3 m-0'>Last Name</h5>
+                                            <h5 className='p-0 pe-3 m-0'>{userProfileData.userDataTwentyFour}</h5>
                                             <p className='p-0 m-0 user-profile-font-weight'>{state.lastName}</p>
                                         </div>
                                     </div>
                                     <Divider className='my-2' style={{ backgroundColor: 'gray' }} />
                                     <div className='d-flex align-items-center justify-content-between py-2'>
                                         <div className='d-flex align-items-center justify-content-between' style={{ width: '50%', paddingRight: '10px', borderRight: '1px solid #cdcdcd' }}>
-                                            <h5 className='p-0 pe-3 m-0'>About</h5>
+                                            <h5 className='p-0 pe-3 m-0'>{userProfileData.userDataTwentyFive}</h5>
                                             <p className='p-0 m-0 user-profile-font-weight'>{`${state.about === "" ? "----------" : state.about}`}</p>
                                         </div>
                                         <div className='d-flex align-items-center justify-content-between' style={{ width: '50%', paddingLeft: '10px', borderLeft: '1px solid #cdcdcd' }}>
-                                            <h5 className='p-0 pe-3 m-0'>Email</h5>
+                                            <h5 className='p-0 pe-3 m-0'>{userProfileData.userDataTwentySix}</h5>
                                             <p className='p-0 m-0 user-profile-font-weight'>{state.email}</p>
                                         </div>
                                     </div>
                                     <Divider className='my-2' style={{ backgroundColor: 'gray' }} />
                                     <div className='d-flex align-items-center justify-content-between py-2'>
                                         <div className='d-flex align-items-center justify-content-between' style={{ width: '50%', paddingRight: '10px', borderRight: '1px solid #cdcdcd' }}>
-                                            <h5 className='p-0 pe-3 m-0'>Address</h5>
+                                            <h5 className='p-0 pe-3 m-0'>{userProfileData.userDataTwentySeven}</h5>
                                             <p className='p-0 m-0 user-profile-font-weight'>{state.address}</p>
                                         </div>
                                         <div className='d-flex align-items-center justify-content-between' style={{ width: '50%', paddingLeft: '10px', borderLeft: '1px solid #cdcdcd' }}>
-                                            <h5 className='p-0 pe-3 m-0'>Contact Number</h5>
+                                            <h5 className='p-0 pe-3 m-0'>{userProfileData.userDataTwentyEight}</h5>
                                             <p className='p-0 m-0 user-profile-font-weight'>{state.phone}</p>
                                         </div>
                                     </div>
                                     <Divider className='my-2' style={{ backgroundColor: 'gray' }} />
                                     <div className='d-flex align-items-center justify-content-between py-2'>
                                         <div className='d-flex align-items-center justify-content-between' style={{ width: '50%', paddingRight: '10px', borderRight: '1px solid #cdcdcd' }}>
-                                            <h5 className='p-0 pe-3 m-0'>Website</h5>
+                                            <h5 className='p-0 pe-3 m-0'>{userProfileData.userDataTwentyNine}</h5>
                                             <p className='p-0 m-0 user-profile-font-weight'>{`${state.website === "" ? "----------" : state.website}`}</p>
                                         </div>
                                         <div className='d-flex align-items-center justify-content-between' style={{ width: '50%', paddingLeft: '10px', borderLeft: '1px solid #cdcdcd' }}>
-                                            <h5 className='p-0 pe-3 m-0'>Github</h5>
+                                            <h5 className='p-0 pe-3 m-0'>{userProfileData.userDataThirty}</h5>
                                             <p className='p-0 m-0 user-profile-font-weight'>{`${state.github === "" ? "----------" : state.github}`}</p>
                                         </div>
                                     </div>
                                     <Divider className='my-2' style={{ backgroundColor: 'gray' }} />
                                     <div className='d-flex align-items-center justify-content-between py-2'>
                                         <div className='d-flex align-items-center justify-content-between' style={{ width: '50%', paddingRight: '10px', borderRight: '1px solid #cdcdcd' }}>
-                                            <h5 className='p-0 pe-3 m-0'>Instagram</h5>
+                                            <h5 className='p-0 pe-3 m-0'>{userProfileData.userDataThiryOne}</h5>
                                             <p className='p-0 m-0 user-profile-font-weight'>{`${state.instagram === "" ? "----------" : state.instagram}`}</p>
                                         </div>
                                         <div className='d-flex align-items-center justify-content-between' style={{ width: '50%', paddingLeft: '10px', borderLeft: '1px solid #cdcdcd' }}>
-                                            <h5 className='p-0 pe-3 m-0'>facebook</h5>
+                                            <h5 className='p-0 pe-3 m-0'>{userProfileData.userDataThirtyTwo}</h5>
                                             <p className='p-0 m-0 user-profile-font-weight'>{`${state.facebook === "" ? "----------" : state.facebook}`}</p>
                                         </div>
                                     </div>
                                     <Divider className='my-2' style={{ backgroundColor: 'gray' }} />
                                     <div className='d-flex align-items-center justify-content-between py-2'>
                                         <div className='d-flex align-items-center justify-content-between' style={{ width: '50%', paddingRight: '10px', borderRight: '2px solid #cdcdcd' }}>
-                                            <h5 className='p-0 pe-3 m-0'>Twitter</h5>
+                                            <h5 className='p-0 pe-3 m-0'>{userProfileData.userDataThirtyThree}</h5>
                                             <p className='p-0 m-0 user-profile-font-weight'>{`${state.twitter === "" ? "----------" : state.twitter}`}</p>
                                         </div>
                                     </div>
@@ -333,7 +334,7 @@ const UserProfile = () => {
                                                                 </div>
                                                                 <p className='p-0 user-review-text'>{item.review}</p>
                                                                 <div className='d-flex align-items-center helpful'>
-                                                                    <p className='p-0 m-0 pe-2'>Helpful?</p>
+                                                                    <p className='p-0 m-0 pe-2'>{userProfileData.userDataThirtyFour}</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -343,7 +344,7 @@ const UserProfile = () => {
                                         })}
                                         <div id="no-review-available" style={{ display: 'none', }}>
                                             <Divider className='my-2' style={{ backgroundColor: 'gray' }} />
-                                            <h3 className='w-50 no-post-available' style={{ textAlign: 'center' }}>No Review in this profile</h3>
+                                            <h3 className='w-50 no-post-available' style={{ textAlign: 'center' }}>{userProfileData.userDataThirtyFive}</h3>
                                         </div>
                                     </div>
                                 </div>

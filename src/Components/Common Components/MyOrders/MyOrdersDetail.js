@@ -39,6 +39,7 @@ import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { MuiFileInput } from 'mui-file-input';
 import CheckIcon from '@mui/icons-material/Check';
+import { myOrderData } from '../../../data';
 
 
 const MyOrdersDetail = ({ state, setState, getMyOrderList, abc }) => {
@@ -57,6 +58,7 @@ const MyOrdersDetail = ({ state, setState, getMyOrderList, abc }) => {
     const [disputeFiles, setDisputeFiles] = useState([])
     const [disputeReason, setDisputeReason] = useState([])
     const [providerDispute, setProviderDispute] = useState(false)
+    
    
 
 
@@ -345,9 +347,9 @@ else{
       setState((prevState) => ({
         ...prevState,
         cardDetail: false,
-        defaultActiveKey: "Disputed",
+        defaultActiveKey: "Cancelled",
       }));
-      toast.success('This post has been disputed successfully',{
+      toast.success('Cancel Request has been sent to provider successfully',{
         autoClose: 1000,
         theme: 'colored'
        })
@@ -392,11 +394,14 @@ else{
   const disputeApproveProvider = ()=>{
 
     let request = {
-      dispute_id: state.cardData[0].dispute_id
+      dispute_id:state.cardData[0].dispute_id,
+      transaction_id:state.cardData[0].transaction_id,
+      amount:state.cardData[0].bids[0].budget,
+      post_id:state.cardData[0].post_id
     }
 
+
     axios.post(`${baseUrl}/dispute-post-approved-from-provider`, request).then((response)=>{
-      //console.log(response, "check response")
       if(response.data.success == true){
         toast.success('Success',{
           autoClose:1000,
@@ -410,6 +415,9 @@ else{
     })
   }
 
+ 
+
+
 
   const postDisputeByProvider = ()=>{
 
@@ -418,9 +426,20 @@ else{
             formData.append(`dispute_files[${i}]`, disputeFiles[i])
         }
         formData.append('dispute_id', state.cardData[0].dispute_id)
+        formData.append('seeker_id', state.cardData[0].user_id)
+        formData.append('provider_id',state.cardData[0].bids[0].user_id)
+        formData.append('post_id', state.cardData[0].post_id)
+        formData.append('description', disputeReason)
+        formData.append('amount', state.cardData[0].bids[0].budget)
+        formData.append('userType', localStorage.getItem('userType'))
+
 
     axios.post(`${baseUrl}/dispute-post-fileupload-provider`, formData).then((response)=>{
-      // console.log(response, "Check Response")
+      setState((prevState) => ({
+        ...prevState,
+        cardDetail: false,
+        defaultActiveKey: "Disputed",
+      }));
       if(response.data.success == true){
         toast.success('Disputed Successfully', {
           autoClose: 1000,
@@ -550,7 +569,7 @@ else{
             aria-label="minimum height"
             minRows={2}
             style={{ width: "100%" }}
-            placeholder="Enter your review"
+            placeholder={myOrderData.myOrderTitleTen}
             onChange={(e) => { setReview(e.target.value) }}
           />
         </DialogContent>
@@ -561,14 +580,14 @@ else{
             onClick={handleCloseOpenRatingModal}
             autoFocus
           >
-            Skip
+            {myOrderData.myOrderTitleEleven}
           </button>
           <button
             className="make-an-offer-btn"
             onClick={submitRating}
             autoFocus
           >
-            Submit
+            {myOrderData.myOrderTitleTweleve}
           </button>
         </DialogActions>
       </Dialog>
@@ -579,7 +598,7 @@ else{
                                 <p className='task-status d-flex align-items-center'>{state.cardData[0].status === 1 ? 'In Progress' : state.cardData[0].status === 3 ? 'Completed': state.cardData[0].dispute_status === 'Pending' ? 'Pending' : state.cardData[0].dispute_status === 'Cancel'? 'Cancelled' : state.cardData[0].dispute_status === "Resolved" && 'Resolved'}</p>
                             </div> 
                             {state.cardData[0].status === 3 && state.cardData[0].check_rating === 0?
-                                 <button onClick={handleClickOpenRatingModal} className='btn btn-primary btn-lg btn-block make-an-offer-btn' >Rating and Review</button>
+                                 <button onClick={handleClickOpenRatingModal} className='btn btn-primary btn-lg btn-block make-an-offer-btn' >{myOrderData.myOrderTitleThirteen}</button>
                                  : ""}
                         </div>
                         <div className='p-2'>
@@ -612,8 +631,8 @@ else{
 }
                                 <div className='px-1 posted-area'>
                                     {state.cardData[0].status === 1 || state.cardData[0].status === 4?
-                                    <p className='p-0 m-0'>ASSIGNED TO</p>:
-                                    <p className='p-0 m-0'>COMPLETED BY</p>
+                                    <p className='p-0 m-0'>{myOrderData.myOrderTitleFourteen}</p>:
+                                    <p className='p-0 m-0'>{myOrderData.myOrderTitleFifteen}</p>
                                      }
                                     <a className='p-0 m-0'>{`${state.cardData[0].bids[0] && state.cardData[0].bids[0].firstName} ${state.cardData[0].bids[0] && state.cardData[0].bids[0].lastName}`}</a>
                                 </div>
@@ -623,7 +642,7 @@ else{
                             <div className='d-flex align-items-center post-location-data w-50'>
                                 <CategoryIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
-                                    <p className='p-0 m-0'>CATEGORY</p>
+                                    <p className='p-0 m-0'>{myOrderData.myOrderTitleSixteen}</p>
                                     <a className='p-0 m-0'>{state.cardData[0].category_name}</a>
                                 </div>
                             </div>
@@ -948,7 +967,7 @@ else{
 
 
 
-                                        {state.cardData[0].status == 4 && localStorage.getItem('userType') == '2' ? 
+                                        {state.cardData[0].status == 2 && localStorage.getItem('userType') == '2' ? 
                                         <Tooltip title="Approve" placement="top-start">
                          
                           <div>
@@ -965,7 +984,7 @@ else{
                             :""
                             }
 
-{state.cardData[0].status == 4 && localStorage.getItem('userType') == '2' ? 
+{state.cardData[0].status == 2 && localStorage.getItem('userType') === '2' ? 
                                         <Tooltip title="Dispute" placement="top-start">
                          
                           <div>

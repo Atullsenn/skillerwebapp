@@ -297,9 +297,23 @@ export const myOrderData = {
   myOrderTitleFour:"Completed",
   myOrderTitleFive:"No Completed Posts Available",
   myOrderTitleSix:"Cancelled",
-  myOrderTitleSeven:"No Disputed Posts Available",
+  myOrderTitleSeven:"No Cancelled Posts Available",
   myOrderTitleEight:"Disputed",
   myOrderTitleNine:"No Disputed Posts Available",
+
+  //MyOrder Detail Data
+  myOrderTitleTen:"Enter your review",
+  myOrderTitleEleven:"Skip",
+  myOrderTitleTweleve:"Submit",
+  myOrderTitleThirteen:"Rating and Review",
+  myOrderTitleFourteen:"ASSIGNED TO",
+  myOrderTitleFifteen:"COMPLETED BY",
+  myOrderTitleSixteen:"CATEGORY",
+
+
+
+
+
 }
 
 
@@ -339,10 +353,150 @@ export const myProfileData = {
   profileDataTwenty:"Acoount Details",
   profileDataTwentyOne:"Select Category",
   profileDataTwentyTwo:"Account Holder Name",
-  
-  
+  profileDataTwentyThree:"Account Number",
+  profileDataTwentyFour:"BSB",
+  profileDataTwentyFive:"Paypal ID",
+  profileDataTwentySix:"Save",
+  profileDataTwentySeven:"Edit" 
+}
 
 
 
+// User Profile Data
 
+export const userProfileData = {
+  userDataOne: 'User Profile',
+  userDataTwo:"Contact Me",
+  userDataThree:"Category",
+  userDataFour:"Web Development App Development Software Developer Digital Marketing response",
+  userDataFive:"Country",
+  userDataSix:"State",
+  userDataSeven:"City",
+  userDataEight:"Languages",
+  userDataNine:"English  - Native/Bilingual",
+  userDataTen:"German (Deutsch) - Native/Bilingual",
+  userDataEleven:"Swedish (Svenska) - Basic",
+  userDataTweleve:"Hindi (Hindi) - Basic",
+  userDataThirteen:"Arabic (Arabic) - Basic",
+  userDataFourteen:"Skills",
+  userDataFifteen:"C",
+  userDataSixteen:"C++",
+  userDataSeventeen:"Java",
+  userDataEighteen:"Javascript",
+  userDataNineteen:"React.js",
+  userDataTwenty:"React Native",
+  userDataTwentyOne:"Github",
+  userDataTwentyTwo:"Personal Details....",
+  userDataTwentyThree:"First Name",
+  userDataTwentyFour:"Last Name",
+  userDataTwentyFive:"About",
+  userDataTwentySix:"Email",
+  userDataTwentySeven:"Address",
+  userDataTwentyEight:"Contact Number",
+  userDataTwentyNine:"Website",
+  userDataThirty:"Github",
+  userDataThiryOne:"Instagram",
+  userDataThirtyTwo:"facebook",
+  userDataThirtyThree:"Twitter",
+  userDataThirtyFour:"Helpful?",
+  userDataThirtyFive:"No Review in this profile",
+}
+
+
+// My Wallet Data
+
+export const myWalletData  = {
+  walletDataOne:"My wallet",
+  walletDataTwo:"Withdraw",
+  walletDataThree:"Account",
+  walletDataFour:"Choose Account",
+  walletDataFive:"Amount",
+  walletDataSix:"Proceed",
+  walletDataSeven:"Cancel",
+  walletDataEight:"My Wallet",
+  walletDataNine:"Wallet Balance",
+  walletDataTen:"Your Balance",
+  walletDataEleven:"Payment Type",
+  walletDataTweleve:"Bank",
+  walletDataThirteen:"Paypal",
+  walletDataFourteen:"Withdraw Amount",
+  walletDataFifteen:"Add Wallet Balance",
+  walletDataSixteen:"Proceed To Withdraw",
+  walletDataSeventeen:"My Transactions",
+  walletDataEighteen:"Transaction History",
+  walletDataNineteen:"My Transactions",
+  walletDataTwenty:"Transaction Type",
+  walletDataTwentyOne:"All Transactions",
+  walletDataTwentyTwo:"Earning Transactions",
+  walletDataTwentyThree:"Pending Transactions",
+  walletDataTwentyFour:"Post Title :",
+  walletDataTwentyFive:"Transaction-ID",
+  walletDataTwentySix:"BidAmount",
+  walletDataTwentySeven:"AdminCharges",
+  walletDataTwentyEight:"No Transaction Available",
+  walletDataTwentyNine:"Withdraw History",
+  walletDataThirty:"Withdraw History",
+  walletDataThirtyOne:"Debit Transactions",
+  walletDataThirtyTwo:"Pending Transactions",
+  walletDataThirtyThree:"withdraw:",
+  walletDataThirtyFour:"Status :",
+  walletDataThirtyFive:"No Withdraw History Available",
+}
+
+
+// My Proposal Data
+
+
+export const myProposalData = {
+  proposalDataOne:"My Proposals",
+  proposalDataTwo:"No Proposal Available",
+
+  // My Proposal Detail Data
+  proposalDataThree:"Pending",
+  proposalDataFour:"POSTED BY",
+  proposalDataFive:"CATEGORY",
+  proposalDataSix:"LOCATION",
+  proposalDataSeven:"ORDER DUE DATE",
+  proposalDataEight:"LANGUAGE",
+  proposalDataNine:"SKILLS",
+  proposalDataTen:"LEARNING METHOD",
+  proposalDataEleven:"CALL OPTIONS",
+  proposalDataTweleve:"Your Offer",
+  proposalDataThirteen:"Description",
+  proposalDataFourteen:"PHOTOS",
+  proposaDataFifteen:"No Photos Uploaded",
+  proposalDataSixteen:"Bid Details...",
+  proposalDataSeventeen:"Expected days to complete the order",
+  proposalDataEighteen:"Days",
+  proposalDataNineteen:"Expected budget",
+  proposalDataTwenty:"Learning method",
+  proposalDataTwentyOne:"Skills",
+  proposalDataTwentyTwo:"Languages",
+  proposalDataTwentyThree:"Pictures",
+  proposalDataTwentyFour:"No Bid Pictures Uploaded",
+  proposalDataTwentyFive:"Description",
+  proposalDataTwentySix:"Withdraw your offer",
+  proposalDataTwentySeven:"Are you sure .. ?",
+  proposalDataTwentyEight:"Are you sure you want to Withdraw this offer",
+  proposalDataTwentyNine:"Cancel",
+  proposalDataThirty:"Withdraw",
+  proposalDataThirtyOne:"Edit Bid",
+  proposalDataThirtyTwo:"Enter Expected Budget",
+  proposalDataThirtyThree:"Enter expected days to complete the order",
+  proposalDataThiryFour:"Select Your Learning Method",
+  proposalDataThirtyFive:"Text",
+  proposalDataThirtySix:"Phone call",
+  proposalDataThirtySeven:"Text And Phone Call",
+  proposalDataThirtyEight:"Get text message (email) of how to solve your problem",
+  proposalDataThirtyNine:"o Tools needed",
+  proposalDataFourty:"o Steps",
+  proposalDataFourtyOne:"o Expected result",
+  proposalDataFourtyTwo:"o Verification of expected result",
+  proposalDataFourtyThree:"Click file to this area to upload",
+  proposalDataFourtyFour:"Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files",
+  proposalDataFourtyFive:"Google hangout, zoom, teams, phone call, up to 1 hour or 3 calls",
+  proposalDataFourtySix:"Select your options",
+  proposalDataFourtySeven:"Select your Language",
+  proposalDataFourtyEight:"Cancel",
+  proposalDataFourtyNine:"Submit"
 }

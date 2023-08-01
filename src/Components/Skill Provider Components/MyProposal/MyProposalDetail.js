@@ -37,6 +37,7 @@ import { toast } from "react-toastify";
 import ClearIcon from '@mui/icons-material/Clear';
 import DuoIcon from '@mui/icons-material/Duo';
 import PhotoIcon from "@mui/icons-material/Photo";
+import { myProposalData } from "../../../data";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -471,7 +472,7 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                     <div className='col-lg-8'>
                         <div className='d-flex align-items-center justify-content-between task-status-main-area p-2'>
                             <div className='d-flex align-items-center task-status-area'>
-                                {state.cardData && state.cardData[0].status === 0 && <p className='task-status d-flex align-items-center'>{'Pending'}</p>}
+                                {state.cardData && state.cardData[0].status === 0 && <p className='task-status d-flex align-items-center'>{myProposalData.proposalDataThree}</p>}
                             </div>
                         </div>
                         <div className='p-2'>
@@ -485,7 +486,7 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                                     }
                                 </NavLink>
                                 <div className='px-1 posted-area'>
-                                    <p className='p-0 m-0'>POSTED BY</p>
+                                    <p className='p-0 m-0'>{myProposalData.proposalDataFour}</p>
                                     <a className='p-0 m-0'>{`${state.cardData && state.cardData[0].firstName} ${state.cardData && state.cardData[0].lastName}`}</a>
                                 </div>
                             </div>
@@ -494,14 +495,14 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                             <div className='d-flex align-items-center post-location-data w-50'>
                                 <CategoryIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
-                                    <p className='p-0 m-0'>CATEGORY</p>
+                                    <p className='p-0 m-0'>{myProposalData.proposalDataFive}</p>
                                     <a className='p-0 m-0'>{state.cardData && state.cardData[0].category_name}</a>
                                 </div>
                             </div>
                             <div className='px-2 d-flex align-items-center post-location-data w-50'>
                                 <LocationOnIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
-                                    <p className='p-0 m-0'>LOCATION</p>
+                                    <p className='p-0 m-0'>{myProposalData.proposalDataSix}</p>
                                     <a className='p-0 m-0'>{`${state.cardData && state.cardData[0].country_name}, ${state.cardData && state.cardData[0].city_name}`}</a>
                                 </div>
                             </div>
@@ -510,14 +511,14 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                             <div className='d-flex align-items-center post-location-data w-50'>
                                 <EventIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
-                                    <p className='p-0 m-0'>ORDER DUE DATE</p>
+                                    <p className='p-0 m-0'>{myProposalData.proposalDataSeven}</p>
                                     <a className='p-0 m-0'>{moment(state.cardData && state.cardData[0].dueDate).utcOffset(330).format('lll')}</a>
                                 </div>
                             </div>
                             <div className='d-flex px-2 align-items-center post-location-data w-50'>
                                 <TranslateIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
-                                    <p className='p-0 m-0'>LANGUAGE</p>
+                                    <p className='p-0 m-0'>{myProposalData.proposalDataEight}</p>
                                     <a className='p-0 m-0'>{state.cardData && state.cardData[0].language_name.split(',').join(', ')}</a>
                                 </div>
                             </div>
@@ -526,14 +527,14 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                             <div className='d-flex align-items-center post-location-data w-50'>
                                 <SchoolIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
-                                    <p className='p-0 m-0'>SKILLS</p>
+                                    <p className='p-0 m-0'>{myProposalData.proposalDataNine}</p>
                                     <a className='p-0 m-0'>{state.cardData && state.cardData[0].skill.split(',').join(', ')}</a>
                                 </div>
                             </div>
                             <div className='d-flex px-2 align-items-center post-location-data w-50'>
                                 <LocalLibraryIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
-                                    <p className='p-0 m-0'>LEARNING METHOD</p>
+                                    <p className='p-0 m-0'>{myProposalData.proposalDataTen}</p>
                                     <a className='p-0 m-0'>{state.cardData && state.cardData[0].bid_learning_method_type}</a>
                                 </div>
                             </div>
@@ -556,7 +557,7 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                             <div className='d-flex align-items-center post-location-data w-50'>
                                 <DuoIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
-                                    <p className='p-0 m-0'>CALL OPTIONS</p>
+                                    <p className='p-0 m-0'>{myProposalData.proposalDataEleven}</p>
                                     <a className='p-0 m-0'>{state.cardData && state.cardData[0].learning[0].call_name}</a>
                                 </div>
                             </div> :""
@@ -565,7 +566,7 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                     </div>
                     <div className='col-lg-4 py-2'>
                         <div className='py-3' style={{ border: '1px solid black', borderRadius: '4px' }}>
-                            <h3 className='p-0 m-0 py-3 d-flex align-item-center justify-content-center heading-color'>Your Offer</h3>
+                            <h3 className='p-0 m-0 py-3 d-flex align-item-center justify-content-center heading-color'>{myProposalData.proposalDataTweleve}</h3>
                             <p className='p-0 m-0 py-1 d-flex align-item-center justify-content-center' style={{ color: '#000', fontWeight: '600', fontSize: '36px' }}>$ {state.cardData && state.cardData[0].post_budget}</p>
                         </div>
                         <div className='d-flex justify-content-end py-2'>
@@ -575,55 +576,55 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                 </div>
                 <div>
                     <div className='p-2'>
-                        <h5 className='p-0 m-0 heading-color'>Description</h5>
+                        <h5 className='p-0 m-0 heading-color'>{myProposalData.proposalDataThirteen}</h5>
                         <p className='p-0 m-0'>{state.cardData && state.cardData[0].postDescription}</p>
                     </div>
                     <div className='p-2'>
-                        <h4 className='p-0 m-0 py-2 heading-color'>PHOTOS</h4>
-                        {state.postPhotos.length === 0 && <h5 className='text-center'>No Photos Uploaded</h5>}
+                        <h4 className='p-0 m-0 py-2 heading-color'>{myProposalData.proposalDataFourteen}</h4>
+                        {state.postPhotos.length === 0 && <h5 className='text-center'>{myProposalData.proposalDataFifteen}</h5>}
                         <Gallery photos={state.postPhotos} />
                     </div>
                     <div className='p-2 d-flex align-items-center justify-content-between'>
-                        <h4 className='p-0 m-0'>Bid Details...</h4>
+                        <h4 className='p-0 m-0'>{myProposalData.proposalDataSixteen}</h4>
                         <p className='follow-user d-flex align-items-center' style={{ cursor: 'pointer' }} onClick={handleClickOpenEditBid}><EditIcon style={{ fontSize: '20px', marginRight: '5px' }} /> Edit</p>
                     </div>
                     <div className='p-2 d-flex align-items-center justify-content-between'>
-                        <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>Expected days to complete the order</h5>
-                        <p className='p-0 m-0' style={{ color: '#188dc7' }}>{state.cardData && state.cardData[0].expected_days} Days</p>
+                        <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>{myProposalData.proposalDataSeventeen}</h5>
+                        <p className='p-0 m-0' style={{ color: '#188dc7' }}>{state.cardData && state.cardData[0].expected_days} {myProposalData.proposalDataEighteen}</p>
                     </div>
                     <Divider className='my-1' style={{ backgroundColor: '#a9a4a4' }} />
                     <div className='p-2 d-flex align-items-center justify-content-between'>
-                        <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>Expected budget</h5>
+                        <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>{myProposalData.proposalDataNineteen}</h5>
                         <p className='p-0 m-0' style={{ color: '#188dc7' }}>$ {state.cardData && state.cardData[0].budget_of_bid}</p>
                     </div>
                     <Divider className='my-1' style={{ backgroundColor: '#a9a4a4' }} />
                     <div className='p-2 d-flex align-items-center justify-content-between'>
-                        <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>Learning method</h5>
+                        <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>{myProposalData.proposalDataTwenty}</h5>
                         <p className='p-0 m-0' style={{ color: '#188dc7' }}>{state.cardData && state.cardData[0].bid_learning_method_type}</p>
                     </div>
                     <Divider className='my-1' style={{ backgroundColor: '#a9a4a4' }} />
                     <div className='p-2 d-flex align-items-center justify-content-between'>
-                        <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>Skills</h5>
+                        <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>{myProposalData.proposalDataTwentyOne}</h5>
                         <p className='p-0 m-0' style={{ color: '#188dc7' }}>{state.cardData && state.cardData[0].bid_skills.split(',').join(', ')}</p>
                     </div>
                     <Divider className='my-1' style={{ backgroundColor: '#a9a4a4' }} />
                     <div className='p-2 d-flex align-items-center justify-content-between'>
-                        <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>Languages</h5>
+                        <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>{myProposalData.proposalDataTwentyTwo}</h5>
                         <p className='p-0 m-0' style={{ color: '#188dc7' }}>{state.cardData && state.cardData[0].bid_language_name.split(',').join(', ')}</p>
                     </div>
                     <Divider className='my-1' style={{ backgroundColor: '#a9a4a4' }} />
                     <div className='p-2'>
-                        <label className='p-0 m-0 view-more-detail-head'>Pictures</label>
-                        {state.bidPhotos.length === 0 && <h5 className='text-center'>No Bid Pictures Uploaded</h5>}
+                        <label className='p-0 m-0 view-more-detail-head'>{myProposalData.proposalDataTwentyThree}</label>
+                        {state.bidPhotos.length === 0 && <h5 className='text-center'>{myProposalData.proposalDataTwentyFour}</h5>}
                         <Gallery photos={state.bidPhotos} />
                     </div>
                     <div className='p-2'>
-                        <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>Description</h5>
+                        <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>{myProposalData.proposalDataTwentyFive}</h5>
                         <p className='p-0 m-0' style={{ color: '#188dc7' }}>{state.cardData && state.cardData[0].bid_description}</p>
                     </div>
                     <Divider className='my-1' style={{ backgroundColor: '#a9a4a4' }} />
                     <div className="d-flex align-items-center justify-content-center my-3">
-                        <button className='btn btn-primary btn-lg btn-block make-an-offer-btn' onClick={handleClickOpenWithdrawModal}>Withdraw your offer</button>
+                        <button className='btn btn-primary btn-lg btn-block make-an-offer-btn' onClick={handleClickOpenWithdrawModal}>{myProposalData.proposalDataTwentySix}</button>
                     </div>
                 </div>
             </div>
@@ -633,21 +634,21 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                 aria-labelledby="responsive-dialog-title"
             >
                 <DialogTitle id="responsive-dialog-title">
-                    {"Are you sure .. ?"}
+                    {myProposalData.proposalDataTwentySeven}
                 </DialogTitle>
                 <Divider style={{ backgroundColor: '#a9a4a4' }} />
                 <DialogContent>
                     <DialogContentText>
-                        <h4>Are you sure you want to Withdraw this offer</h4>
+                        <h4>{myProposalData.proposalDataTwentyEight}</h4>
                     </DialogContentText>
                 </DialogContent>
                 <Divider style={{ backgroundColor: '#a9a4a4' }} />
                 <DialogActions>
                     <button className='make-an-offer-btn' onClick={handleCloseOpenWithdrawModal} autoFocus>
-                        Cancel
+                        {myProposalData.proposalDataTwentyNine}
                     </button>
                     <button className='make-an-offer-btn' onClick={() => { handleCloseOpenWithdrawModal(state.cardData[0].bid_id) }} autoFocus>
-                        Withdraw
+                        {myProposalData.proposalDataThirty}
                     </button>
                 </DialogActions>
             </Dialog>
@@ -658,7 +659,7 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                 aria-labelledby="responsive-dialog-title"
             >
                 <DialogTitle id="responsive-dialog-title">
-                    {"Edit Bid"}
+                    {myProposalData.proposalDataThirtyOne}
                 </DialogTitle>
                 <Divider style={{ backgroundColor: '#a9a4a4' }} />
                 <DialogContent>
@@ -667,14 +668,14 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                             <h5>{state.cardData && state.cardData[0].postTitle}</h5>
                         </div>
                         <FormControl fullWidth>
-                            <InputLabel htmlFor="outlined-adornment-amount">Enter Expected Budget</InputLabel>
+                            <InputLabel htmlFor="outlined-adornment-amount">{myProposalData.proposalDataThirtyTwo}</InputLabel>
                             <OutlinedInput
                                 type='number'
                                 onWheel={(event) => event.target.blur()}
                                 id="outlined-adornment-amount"
                                 startAdornment={<InputAdornment position="start">$</InputAdornment>}
                                 value={editBid.expectedBudget}
-                                label="Enter Expected Budget"
+                                label={myProposalData.proposalDataThirtyTwo}
                                 onChange={(e) => { setEditBid((prevState) => ({ ...prevState, expectedBudget: e.target.value })); }}
                             />
                         </FormControl>
@@ -688,59 +689,58 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                             value={editBid.expectedDays}
                             onWheel={(event) => event.target.blur()}
                             size='large'
-                            label={'Enter expected days to complete the order'}
+                            label={myProposalData.proposalDataThirtyThree}
                             onChange={(e) => { setEditBid((prevState) => ({ ...prevState, expectedDays: e.target.value })); }}
                         />
                     </div>
                     <div className='mt-4 p-3' style={{ backgroundColor: 'rgb(236, 236, 236)', borderRadius: '8px' }}>
                         <FormControl fullWidth>
-                            <InputLabel id="demo-simple-select-label">Select Your Learning Method</InputLabel>
+                            <InputLabel id="demo-simple-select-label">{myProposalData.proposalDataThirtyFour}</InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={editBid.learningMethod}
-                                label="Select Your Learning Method"
+                                label= {myProposalData.proposalDataThirtyFour}
                                 onChange={selectLearningMethod}
                             >
-                                <MenuItem value={1}>{"Text"}</MenuItem>
-                                <MenuItem value={2}>{"Phone call"}</MenuItem>
-                                <MenuItem value={3}>{"Text And Phone Call"}</MenuItem>
+                                <MenuItem value={1}>{myProposalData.proposalDataThirtyFive}</MenuItem>
+                                <MenuItem value={2}>{myProposalData.proposalDataThirtySix}</MenuItem>
+                                <MenuItem value={3}>{myProposalData.proposalDataThirtySeven}</MenuItem>
                             </Select>
                         </FormControl>
                         {editBid.learningMethod != 0 ?
                             <Box sx={{ width: '100%', backgroundColor: '' }} >
                                 <TabPanel value={editBid.learningMethodTab} index={0} style={{ overflow: 'auto', width: '100%' }}>
-                                    <h5>Get text message (email) of how to solve your problem</h5>
+                                    <h5>{myProposalData.proposalDataThirtyEight}</h5>
                                     <div className='d-flex justify-content-around'>
-                                        <p>o Tools needed</p>
-                                        <p>o Steps</p>
-                                        <p>o Expected result</p>
-                                        <p>o Verification of expected result</p>
+                                        <p>{myProposalData.proposalDataThirtyNine}</p>
+                                        <p>{myProposalData.proposalDataFourty}</p>
+                                        <p>{myProposalData.proposalDataFourtyOne}</p>
+                                        <p>{myProposalData.proposalDataFourtyTwo}</p>
                                     </div>
                                     <div className='post-a-tasker-upload-file-section-area'>
                                         <label style={{ width: "100%", height: "150px", border: "2px solid #188dc7", padding: "20px", borderRadius: '5px' }}>
                                             <input type="file" multiple accept='application/pdf' style={{ display: "none" }} />
                                             <p className="ant-upload-drag-icon p-0 m-0 d-flex justify-content-center"> <DriveFolderUploadIcon style={{ fontSize: '45px' }} /> </p>
-                                            <p className="ant-upload-text p-0 m-0 d-flex justify-content-center">Click file to this area to upload  </p>
-                                            <p className="ant-upload-hint p-0 m-0 d-flex justify-content-center">Support for a single or bulk upload. Strictly prohibit from uploading
-                                                company data or other band files
+                                            <p className="ant-upload-text p-0 m-0 d-flex justify-content-center">{myProposalData.proposalDataFourtyThree}  </p>
+                                            <p className="ant-upload-hint p-0 m-0 d-flex justify-content-center">{myProposalData.proposalDataFourtyFour}
                                             </p>
                                         </label>
 
                                     </div>
                                 </TabPanel>
                                 <TabPanel value={editBid.learningMethodTab} index={1} style={{ overflow: 'auto', width: '100%' }}>
-                                    <h5>Google hangout, zoom, teams, phone call, up to 1 hour or 3 calls</h5>
+                                    <h5>{myProposalData.proposalDataFourtyFive}</h5>
                                     <div className='mt-4'>
                                         <FormControl sx={{ width: '100%' }}>
-                                            <InputLabel id="demo-multiple-chip-label">Select your options</InputLabel>
+                                            <InputLabel id="demo-multiple-chip-label">{myProposalData.proposalDataFourtySix}</InputLabel>
                                             <Select
                                                 labelId="demo-multiple-chip-label"
                                                 id="demo-multiple-chip"
                                                 multiple
                                                 value={editBid.phoneCall}
                                                 onChange={handlePhoneSelection}
-                                                input={<OutlinedInput id="select-multiple-chip" label="Select your options" />}
+                                                input={<OutlinedInput id="select-multiple-chip" label={myProposalData.proposalDataFourtySix} />}
                                                 renderValue={(selected) => (
                                                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                                                         {selected.map((value) => (
@@ -760,37 +760,36 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
 
 
                                 <TabPanel value={editBid.learningMethodTab} index={2} style={{ overflow: 'auto', width: '100%' }}>
-                                    <h5>Get text message (email) of how to solve your problem</h5>
+                                    <h5>{myProposalData.proposalDataThirtyEight}</h5>
                                     <div className='d-flex justify-content-around'>
-                                        <p>o Tools needed</p>
-                                        <p>o Steps</p>
-                                        <p>o Expected result</p>
-                                        <p>o Verification of expected result</p>
+                                        <p>{myProposalData.proposalDataThirtyNine}</p>
+                                        <p>{myProposalData.proposalDataFourty}</p>
+                                        <p>{myProposalData.proposalDataFourtyOne}</p>
+                                        <p>{myProposalData.proposalDataFourtyTwo}</p>
                                     </div>
                                     <div className='post-a-tasker-upload-file-section-area'>
                                         <label style={{ width: "100%", height: "150px", border: "2px solid #188dc7", padding: "20px", borderRadius: '5px' }}>
                                             <input type="file" multiple accept='application/pdf' style={{ display: "none" }} />
                                             <p className="ant-upload-drag-icon p-0 m-0 d-flex justify-content-center"> <DriveFolderUploadIcon style={{ fontSize: '45px' }} /> </p>
-                                            <p className="ant-upload-text p-0 m-0 d-flex justify-content-center">Click file to this area to upload  </p>
-                                            <p className="ant-upload-hint p-0 m-0 d-flex justify-content-center">Support for a single or bulk upload. Strictly prohibit from uploading
-                                                company data or other band files
+                                            <p className="ant-upload-text p-0 m-0 d-flex justify-content-center">{myProposalData.proposalDataFourtyThree}  </p>
+                                            <p className="ant-upload-hint p-0 m-0 d-flex justify-content-center">{myProposalData.proposalDataFourtyFour}
                                             </p>
                                         </label>
 
                                     </div>
                                 </TabPanel>
                                 <TabPanel value={editBid.learningMethodTab} index={2} style={{ overflow: 'auto', width: '100%' }}>
-                                    <h5>Google hangout, zoom, teams, phone call, up to 1 hour or 3 calls</h5>
+                                    <h5>{myProposalData.proposalDataFourtyFive}</h5>
                                     <div className='mt-4'>
                                         <FormControl sx={{ width: '100%' }}>
-                                            <InputLabel id="demo-multiple-chip-label">Select your options</InputLabel>
+                                            <InputLabel id="demo-multiple-chip-label">{myProposalData.proposalDataFourtySix}</InputLabel>
                                             <Select
                                                 labelId="demo-multiple-chip-label"
                                                 id="demo-multiple-chip"
                                                 multiple
                                                 value={editBid.phoneCall}
                                                 onChange={handlePhoneSelection}
-                                                input={<OutlinedInput id="select-multiple-chip" label="Select your options" />}
+                                                input={<OutlinedInput id="select-multiple-chip" label={myProposalData.proposalDataFourtySix} />}
                                                 renderValue={(selected) => (
                                                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                                                         {selected.map((value) => (
@@ -812,14 +811,14 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                     </div>
                     <div className='mt-4'>
                         <FormControl sx={{ width: '100%' }}>
-                            <InputLabel id="demo-multiple-chip-label">Select your Language</InputLabel>
+                            <InputLabel id="demo-multiple-chip-label">{myProposalData.proposalDataFourtySeven}</InputLabel>
                             <Select
                                 labelId="demo-multiple-chip-label"
                                 id="demo-multiple-chip"
                                 multiple
                                 value={editBid.language}
                                 onChange={handleLanguageSelection}
-                                input={<OutlinedInput id="select-multiple-chip" label="Select your Language" />}
+                                input={<OutlinedInput id="select-multiple-chip" label={myProposalData.proposalDataFourtySeven} />}
                                 renderValue={(selected) => (
                                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                                         {selected.map((value) => (
@@ -899,10 +898,10 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                 <Divider style={{ backgroundColor: '#a9a4a4' }} />
                 <DialogActions>
                     <button className='make-an-offer-btn' onClick={handleCloseOpenEditBid} autoFocus>
-                        Cancel
+                     {myProposalData.proposalDataFourtyEight}
                     </button>
                     <button className='make-an-offer-btn' onClick={EditMakeAnOffer} autoFocus>
-                        Submit
+                        {myProposalData.proposalDataFourtyNine}
                     </button>
                 </DialogActions>
             </Dialog>

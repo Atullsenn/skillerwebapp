@@ -403,10 +403,10 @@ const MyOrders = ({ state, setState, getMyOrderList }) => {
                                     <Tab eventKey="Cancelled" title={myOrderData.myOrderTitleSix}>
                                         <div className='row'>
                                             <div className='row left-main-Div'>
-                                                {state.disputed.filter(
+                                                {state && state.cancelled.filter(
                                                     (row) =>
                                                         !search.length ||
-                                                        [row.postTitle, row.budget]
+                                                        [row.postTitle, row.post_budget]
                                                             .toString()
                                                             .toLowerCase()
                                                             .includes(search.toString().toLowerCase()),
@@ -450,10 +450,10 @@ const MyOrders = ({ state, setState, getMyOrderList }) => {
                                                         </div>
                                                     )
                                                 })}
-                                                {state.disputed.length === 0 && state.showHeading && <h3 className='text-center w-25 no-post-available'>{myOrderData.myOrderTitleSeven}</h3>}
+                                                {state.cancelled.length === 0 && state.showHeading && <h3 className='text-center w-25 no-post-available'>{myOrderData.myOrderTitleSeven}</h3>}
                                             </div>
                                         </div>
-                                    </Tab>
+                                    </Tab> 
 
 
 
