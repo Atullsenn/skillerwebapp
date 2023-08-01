@@ -612,7 +612,7 @@ else{
                                     }
                                 </NavLink>
                                 <div className='px-1 posted-area'>
-                                    <p className='p-0 m-0'>POSTED BY</p>
+                                    <p className='p-0 m-0'>{myOrderData.myOrderTitleSeventeen}</p>
                                     <a className='p-0 m-0'>{`${state.cardData[0].firstName} ${state.cardData[0].lastName}`}</a>
                                 </div>
                             </div>
@@ -649,7 +649,7 @@ else{
                             <div className='d-flex align-items-center post-location-data w-50'>
                                 <LocationOnIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
-                                    <p className='p-0 m-0'>LOCATION</p>
+                                    <p className='p-0 m-0'>{myOrderData.myOrderTitleEighteen}</p>
                                     <a className='p-0 m-0'>{`${state.cardData[0].country_name}, ${state.cardData[0].city_name}`}</a>
                                 </div>
                             </div>
@@ -658,14 +658,14 @@ else{
                             <div className='d-flex align-items-center post-location-data w-50'>
                                 <EventIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
-                                    <p className='p-0 m-0'>ORDER POSTED DATE</p>
+                                    <p className='p-0 m-0'>{myOrderData.myOrderTitleNineteen}</p>
                                     <a className='p-0 m-0'>{moment(state.cardData[0].created_at).utcOffset(330).format('lll')}</a>
                                 </div>
                             </div>
                             <div className='d-flex align-items-center post-location-data w-50'>
                                 <WorkHistoryIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
-                                    <p className='p-0 m-0'>CURRENT EXPERIENCE</p>
+                                    <p className='p-0 m-0'>{myOrderData.myOrderTitleTwenty}</p>
                                     <a className='p-0 m-0'>{state.cardData[0].currentExp == 1 ? 'Begginer' : state.cardData[0].currentExp == 2 ? 'Intermediate' : state.cardData[0].currentExp == 3 ? 'Expert' : 'Intermediate'}</a>
                                 </div>
                             </div>
@@ -674,14 +674,14 @@ else{
                             <div className='d-flex align-items-center post-location-data w-50'>
                                 <SchoolIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
-                                    <p className='p-0 m-0'>SKILLS</p>
+                                    <p className='p-0 m-0'>{myOrderData.myOrderTitleTwentyOne}</p>
                                     <a className='p-0 m-0'>{state.cardData[0].skill.split(',').join(', ')}</a>
                                 </div>
                             </div>
                             <div className='d-flex px-2 align-items-center post-location-data w-50'>
                                 <TranslateIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
-                                    <p className='p-0 m-0'>LANGUAGE</p>
+                                    <p className='p-0 m-0'>{myOrderData.myOrderTitleTwentyTwo}</p>
                                     <a className='p-0 m-0'>{state.cardData[0].language_name.split(',').join(', ')}</a>
                                 </div>
                             </div>
@@ -691,14 +691,14 @@ else{
                             <div className='d-flex align-items-center post-location-data w-50'>
                                 <AddTaskIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
-                                    <p className='p-0 m-0'>COMPLETION DATE & TIME</p>
+                                    <p className='p-0 m-0'>{myOrderData.myOrderTitleTwentyThree}</p>
                                     <a className='p-0 m-0'>Sat,25th Nov 2022 7:45 PM</a>
                                 </div>
                             </div>
                             <div className='d-flex px-2 align-items-center post-location-data w-50'>
                                 <LocalLibraryIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
-                                    <p className='p-0 m-0'>LEARNING METHOD</p>
+                                    <p className='p-0 m-0'>{myOrderData.myOrderTitleTwentyFour}</p>
                                     <a className='p-0 m-0'>{state.cardData[0].learningMethod_type}</a>
                                 </div>
                             </div>
@@ -714,14 +714,14 @@ else{
                             <div className='d-flex align-items-center post-location-data w-50'>
                                 <HourglassEmptyIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
-                                    <p className='p-0 m-0'>URGENCY</p>
+                                    <p className='p-0 m-0'>{myOrderData.myOrderTitleTwentyFive}</p>
                                     <a className='p-0 m-0'>{state.cardData[0].urgency}</a>
                                 </div>
                             </div>
                             <div className='d-flex align-items-center post-location-data w-50'>
                                 <LocalAtmIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
-                                    <p className='p-0 m-0'>PAYMENT STATUS</p>
+                                    <p className='p-0 m-0'>{myOrderData.myOrderTitleTwentySix}</p>
                                     <a className='p-0 m-0'>{state.cardData[0].payment_status}</a>
                                 </div>
                             </div>
@@ -738,7 +738,7 @@ else{
                             <div className='d-flex align-items-center post-location-data w-50'>
                                 <DuoIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
-                                    <p className='p-0 m-0'>CALL OPTIONS</p>
+                                    <p className='p-0 m-0'>{myOrderData.myOrderTitleTwentySeven}</p>
                                     <a className='p-0 m-0'>{state.cardData[0].learning[0].call_name}</a>
                                 </div>
                             </div> :''
@@ -748,14 +748,14 @@ else{
                              <div className='d-flex align-items-center post-location-data w-50'>
                                 <EventIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
-                                    <p className='p-0 m-0'>ORDER(FROM DATE)</p>
+                                    <p className='p-0 m-0'>{myOrderData.myOrderTitleTwentyEight}</p>
                                     <a className='p-0 m-0'>{moment(state.cardData[0].dueDate).utcOffset(330).format('lll')}</a>
                                 </div>
                             </div>
                             <div className='d-flex align-items-center post-location-data w-50'>
                                 <EventIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
-                                    <p className='p-0 m-0'>ORDER(TO DATE)</p>
+                                    <p className='p-0 m-0'>{myOrderData.myOrderTitleTwentyNine}</p>
                                     <a className='p-0 m-0'>{moment(state.cardData[0].todate).utcOffset(330).format('lll')}</a>
                                 </div>
                             </div>
@@ -763,7 +763,7 @@ else{
                     </div>
                     <div className='col-lg-4 py-2'>
                         <div className='py-3' style={{ border: '1px solid black', borderRadius: '4px' }}>
-                            <h3 className='p-0 m-0 py-3 d-flex align-item-center justify-content-center heading-color'>Task Budget</h3>
+                            <h3 className='p-0 m-0 py-3 d-flex align-item-center justify-content-center heading-color'>{myOrderData.myOrderTitleThirty}</h3>
                             <p className='p-0 m-0 py-1 d-flex align-item-center justify-content-center' style={{ color: '#000', fontWeight: '600', fontSize: '36px' }}>$ {state.cardData[0].budget}</p>
                         </div>
                         <div className='d-flex justify-content-end py-2'>
@@ -773,56 +773,56 @@ else{
                 </div>
                 <div>
                     <div className='p-2'>
-                        <h5 className='p-0 m-0 heading-color'>Description</h5>
+                        <h5 className='p-0 m-0 heading-color'>{myOrderData.myOrderTitleThirtyOne}</h5>
                         <p className='p-0 m-0'>{state.cardData[0].postDescription}</p>
                     </div>
                     <div className='p-2'>
-                        <h4 className='p-0 m-0 py-2 heading-color'>PHOTOS</h4>
-                        {state.postImages.length === 0 && <h5 className='text-center'>No Photos Uploaded</h5>}
+                        <h4 className='p-0 m-0 py-2 heading-color'>{myOrderData.myOrderTitleThirtyTwo}</h4>
+                        {state.postImages.length === 0 && <h5 className='text-center'>{myOrderData.myOrderTitleThirtyThree}</h5>}
                         <Gallery photos={state.postImages} />
                     </div>
                     <div>
                         <div className='p-2 d-flex align-items-center justify-content-between'>
-                            <h4 className='p-0 m-0'>Bid Details...</h4>
+                            <h4 className='p-0 m-0'>{myOrderData.myOrderTitleThirtyFour}</h4>
                         </div>
                         <div className='p-2 d-flex align-items-center justify-content-between'>
-                            <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>Name</h5>
+                            <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>{myOrderData.myOrderTitleThirtyFive}</h5>
                             <p className='p-0 m-0' style={{ color: '#188dc7' }}>{`${state.cardData[0].bids[0] && state.cardData[0].bids[0].firstName} ${state.cardData[0].bids[0] && state.cardData[0].bids[0].lastName}`}</p>
                         </div>
                         <Divider className='my-1' style={{ backgroundColor: '#a9a4a4' }} />
                         <div className='p-2 d-flex align-items-center justify-content-between'>
-                            <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>Expected days to complete the order</h5>
+                            <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>{myOrderData.myOrderTitleThirtySix}</h5>
                             <p className='p-0 m-0' style={{ color: '#188dc7' }}>{state.cardData[0].bids[0] && state.cardData[0].bids[0].expected_days}</p>
                         </div>
                         <Divider className='my-1' style={{ backgroundColor: '#a9a4a4' }} />
                         <div className='p-2 d-flex align-items-center justify-content-between'>
-                            <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>Expected budget</h5>
+                            <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>{myOrderData.myOrderTitleThirtySeven}</h5>
                             <p className='p-0 m-0' style={{ color: '#188dc7' }}>$ {state.cardData[0].bids[0] && state.cardData[0].bids[0].budget}</p>
                         </div>
                         <Divider className='my-1' style={{ backgroundColor: '#a9a4a4' }} />
                         <div className='p-2 d-flex align-items-center justify-content-between'>
-                            <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>Learning method</h5>
+                            <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>{myOrderData.myOrderTitleThirtyEight}</h5>
                             <p className='p-0 m-0' style={{ color: '#188dc7' }}>{state.cardData[0].bids[0] && state.cardData[0].bids[0].learning_method_type}</p>
                         </div>
                         <Divider className='my-1' style={{ backgroundColor: '#a9a4a4' }} />
                         <div className='p-2 d-flex align-items-center justify-content-between'>
-                            <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>Skills</h5>
+                            <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>{myOrderData.myOrderTitleThirtyNine}</h5>
                             <p className='p-0 m-0' style={{ color: '#188dc7' }}>{state.cardData[0].bids[0] && state.cardData[0].bids[0].skills}</p>
                         </div>
                         <Divider className='my-1' style={{ backgroundColor: '#a9a4a4' }} />
                         <div className='p-2 d-flex align-items-center justify-content-between'>
-                            <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>Languages</h5>
+                            <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>{myOrderData.myOrderTitleFourty}</h5>
                             <p className='p-0 m-0' style={{ color: '#188dc7' }}>{state.cardData[0].bids[0] && state.cardData[0].bids[0].language_name}</p>
                         </div>
                         <Divider className='my-1' style={{ backgroundColor: '#a9a4a4' }} />
                         <div className='p-2'>
-                            <label className='p-0 m-0 view-more-detail-head'>Pictures</label>
-                            {state.offerImages.length === 0 && <h5 className='text-center'>No Bid Pictures Uploaded</h5>}
+                            <label className='p-0 m-0 view-more-detail-head'>{myOrderData.myOrderTitleFourtyOne}</label>
+                            {state.offerImages.length === 0 && <h5 className='text-center'>{myOrderData.myOrderTitleFourtyTwo}</h5>}
                             <Gallery photos={state.offerImages} />
                         </div>
                         <Divider className='my-1' style={{ backgroundColor: '#a9a4a4' }} />
                         <div className='p-2 mb-3'>
-                            <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>Description</h5>
+                            <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>{myOrderData.myOrderTitleFourtyThree}</h5>
                             <p className='p-0 m-0' style={{ color: '#188dc7' }}>{state.cardData[0].bids[0] && state.cardData[0].bids[0].description}</p>
                         </div>
                     </div>
@@ -835,7 +835,7 @@ else{
                                             aria-describedby="alert-dialog-description"
                                         >
                                             <DialogTitle id="alert-dialog-title" className="text-center">
-                                                {"Are you sure want to cancel this post ?"}
+                                                {myOrderData.myOrderTitleFourtyFour}
                                             </DialogTitle>
                                             <DialogContent className='text-center p-0 m-0'>
                                                 <DialogContentText id="alert-dialog-description">
@@ -843,8 +843,8 @@ else{
                                                 </DialogContentText>
                                             </DialogContent>
                                             <DialogActions className="text-center d-flex align-items-center justify-content-center">
-                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={handleOpenCancelReson}> Yes </button>
-                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleCloseCancelPost}> No </button>
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={handleOpenCancelReson}> {myOrderData.myOrderTitleFourtyFive} </button>
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleCloseCancelPost}> {myOrderData.myOrderTitleFourtySix} </button>
                                             </DialogActions>
                                         </Dialog>
 
@@ -857,7 +857,7 @@ else{
                                             aria-describedby="alert-dialog-description"
                                         >
                                             <DialogTitle id="alert-dialog-title" className="text-center">
-                                                {"Are you sure want to Approve ?"}
+                                                {myOrderData.myOrderTitleFourtySeven}
                                             </DialogTitle>
                                             <DialogContent className='text-center p-0 m-0'>
                                                 <DialogContentText id="alert-dialog-description">
@@ -865,8 +865,8 @@ else{
                                                 </DialogContentText>
                                             </DialogContent>
                                             <DialogActions className="text-center d-flex align-items-center justify-content-center">
-                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={disputeApproveProvider}> Yes</button>
-                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleCloseApprove}> No </button>
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={disputeApproveProvider}> {myOrderData.myOrderTitleFourtyEight}</button>
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleCloseApprove}> {myOrderData.myOrderTitleFourtyNine} </button>
                                             </DialogActions>
                                         </Dialog>
 
@@ -879,7 +879,7 @@ else{
                                             aria-describedby="alert-dialog-description"
                                         >
                                             <DialogTitle id="alert-dialog-title" className="text-center">
-                                                {"Are you sure want to dispute ?"}
+                                                {myOrderData.myOrderTitleFifty}
                                             </DialogTitle>
                                             <DialogContent className='text-center p-0 m-0'>
                                                 <DialogContentText id="alert-dialog-description">
@@ -887,8 +887,8 @@ else{
                                                 </DialogContentText>
                                             </DialogContent>
                                             <DialogActions className="text-center d-flex align-items-center justify-content-center">
-                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={handleOpenProviderDispute}> Yes</button>
-                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleCloseDispute}> No </button>
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={handleOpenProviderDispute}>{myOrderData.myOrderTitleFiftyOne}</button>
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleCloseDispute}> {myOrderData.myOrderTitleFiftyOne} </button>
                                             </DialogActions>
                                         </Dialog>
 
@@ -903,7 +903,7 @@ else{
                                             aria-describedby="alert-dialog-description"
                                         >
                                             <DialogTitle id="alert-dialog-title" className="text-center">
-                                                {"Why are you cancel this post ?"}
+                                                {myOrderData.myOrderTitleFiftyThree}
                                             </DialogTitle>
                                             <DialogContent className='text-center p-0 m-0'>
                                                 <DialogContentText id="alert-dialog-description">
@@ -916,7 +916,7 @@ else{
                                                      aria-label="minimum height"
                                                      minRows={3}
                                                      style={{ width: "80%" }}
-                                                     placeholder="Enter Reason For Cancel Post"
+                                                     placeholder={myOrderData.myOrderTitleFiftyFour}
                                                      onChange={(e)=>{setReason(e.target.value)}}
                                                    />
            
@@ -924,8 +924,8 @@ else{
                                                 </DialogContentText>
                                             </DialogContent>
                                             <DialogActions className="text-center d-flex align-items-center justify-content-center">
-                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={userCancelPost} > Submit</button>
-                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleCloseCancelReson}>Cancel</button>
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={userCancelPost} > {myOrderData.myOrderTitleFiftyFive}</button>
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleCloseCancelReson}>{myOrderData.myOrderTitleFiftySix}</button>
                                             </DialogActions>
                                         </Dialog>
 
@@ -938,7 +938,7 @@ else{
                                             aria-describedby="alert-dialog-description"
                                         >
                                             <DialogTitle id="alert-dialog-title" className="text-center">
-                                                {"Why are you dispute this post ?"}
+                                                {myOrderData.myOrderTitleFiftySeven}
                                             </DialogTitle>
                                             <DialogContent className='text-center p-0 m-0'>
                                                 <DialogContentText id="alert-dialog-description">
@@ -952,7 +952,7 @@ else{
                                                      value={disputeReason}
                                                      minRows={3}
                                                      style={{ width: "80%" }}
-                                                     placeholder="Enter Reason For Cancel Post"
+                                                     placeholder={myOrderData.myOrderTitleFiftyEight}
                                                      onChange={(e)=>{setDisputeReason(e.target.value)}}
                                                    />
            
@@ -960,19 +960,19 @@ else{
                                                 </DialogContentText>
                                             </DialogContent>
                                             <DialogActions className="text-center d-flex align-items-center justify-content-center">
-                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={postDisputeByProvider} > Submit</button>
-                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleCloseProviderDispute}>Cancel</button>
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={postDisputeByProvider} > {myOrderData.myOrderTitleFiftyNine} </button>
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleCloseProviderDispute}>{myOrderData.myOrderTitleSixty}</button>
                                             </DialogActions>
                                         </Dialog>
 
 
 
                                         {state.cardData[0].status == 2 && localStorage.getItem('userType') == '2' ? 
-                                        <Tooltip title="Approve" placement="top-start">
+                                        <Tooltip title={myOrderData.myOrderTitleSixtyOne} placement="top-start">
                          
                           <div>
                                 <button onClick={handleOpenApprove} className="btn btn-primary btn-lg btn-block make-an-offer-btn me-3 d-flex justify-centent-center align-items-center">
-                                    Approve <CheckIcon className="ms-2" />
+                                    {myOrderData.myOrderTitleSixtyOne} <CheckIcon className="ms-2" />
                                 </button>
                                
                                 </div>
@@ -985,11 +985,11 @@ else{
                             }
 
 {state.cardData[0].status == 2 && localStorage.getItem('userType') === '2' ? 
-                                        <Tooltip title="Dispute" placement="top-start">
+                                        <Tooltip title={myOrderData.myOrderTitleSixtyTwo} placement="top-start">
                          
                           <div>
                                 <button onClick={handleOpenDispute} className="btn btn-primary btn-lg btn-block make-an-offer-btn me-3 d-flex justify-centent-center align-items-center">
-                                    Dispute <CancelPresentationIcon className="ms-2" />
+                                    {myOrderData.myOrderTitleSixtyTwo} <CancelPresentationIcon className="ms-2" />
                                 </button>
                                
                                 </div>
@@ -1003,21 +1003,21 @@ else{
                         {state.cardData[0].status === 1?
                         <>
                         {localStorage.getItem('userType') == 1?
-                        <Tooltip title="Cancel" placement="top-start">
+                        <Tooltip title={myOrderData.myOrderTitleSixtyThree} placement="top-start">
                          
                           <div>
                                 <button onClick={handleOpenCancelPost} className="btn btn-primary btn-lg btn-block make-an-offer-btn me-3 d-flex justify-centent-center align-items-center">
-                                    Cancel <CancelPresentationIcon className="ms-2" />
+                                    {myOrderData.myOrderTitleSixtyThree} <CancelPresentationIcon className="ms-2" />
                                 </button>
                                
                                 </div>
 
                             </Tooltip>:""}
-                            <Tooltip title="Complete" placement="top-start">
+                            <Tooltip title={myOrderData.myOrderTitleSixtyFour} placement="top-start">
                                 {localStorage.getItem('userType') == 1 ? 
                                     <div>
                                         <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-3 d-flex justify-centent-center align-items-center" onClick={handleClickOpenn}>
-                                            Complete <LibraryAddCheckIcon className="ms-2" />
+                                            {myOrderData.myOrderTitleSixtyFour} <LibraryAddCheckIcon className="ms-2" />
                                         </button>
                                         <Dialog
                                             fullWidth
@@ -1027,7 +1027,7 @@ else{
                                             aria-describedby="alert-dialog-description"
                                         >
                                             <DialogTitle id="alert-dialog-title" className="text-center">
-                                                {"Are you sure want to complete this post ?"}
+                                                {myOrderData.myOrderTitleSixtyFive}
                                             </DialogTitle>
                                             <DialogContent className='text-center p-0 m-0'>
                                                 <DialogContentText id="alert-dialog-description">
@@ -1035,8 +1035,8 @@ else{
                                                 </DialogContentText>
                                             </DialogContent>
                                             <DialogActions className="text-center d-flex align-items-center justify-content-center">
-                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={taskCompleted}> Yes </button>
-                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleClose}> No </button>
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={taskCompleted}> {myOrderData.myOrderTitleSixtySix} </button>
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleClose}> {myOrderData.myOrderTitleSixtySeven} </button>
                                             </DialogActions>
                                         </Dialog>
                                     </div>
@@ -1044,7 +1044,7 @@ else{
 
                                     <div>
                                         <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-3 d-flex justify-centent-center align-items-center" onClick={handleClickOpenn}>
-                                            Complete<LibraryAddCheckIcon className="ms-2" />
+                                            {myOrderData.myOrderTitleSixtyEight}<LibraryAddCheckIcon className="ms-2" />
                                         </button>
                                         <Dialog
                                             fullWidth
@@ -1054,7 +1054,7 @@ else{
                                             aria-describedby="alert-dialog-description"
                                         >
                                             <DialogTitle id="alert-dialog-title" className="text-center">
-                                                {"Are you sure you want to complete this job?"}
+                                                {myOrderData.myOrderTitleSixtyNine}
                                             </DialogTitle>
                                             <DialogContent className='text-center p-0 m-0'>
                                                 <DialogContentText id="alert-dialog-description">
@@ -1062,15 +1062,16 @@ else{
                                                 </DialogContentText>
                                             </DialogContent>
                                             <DialogActions className="text-center d-flex align-items-center justify-content-center">
-                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={taskCompletedProvider}> Yes </button>
-                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleClose}> No </button>
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={taskCompletedProvider}> {myOrderData.myOrderTitleSeventy} </button>
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleClose}> {myOrderData.myOrderTitleSeventyOne} </button>
                                             </DialogActions>
                                         </Dialog>
                                     </div>
+                                  
 }
-                                </Tooltip><Tooltip title="Chat" placement="top-start">
+                                </Tooltip><Tooltip title={myOrderData.myOrderTitleSeventyTwo} placement="top-start">
                                     <button onClick={abc} className="btn btn-primary btn-lg btn-block make-an-offer-btn me-3 d-flex justify-centent-center align-items-center">
-                                        Chat <MarkUnreadChatAltIcon className="ms-2" />
+                                        {myOrderData.myOrderTitleSeventyTwo} <MarkUnreadChatAltIcon className="ms-2" />
                                     </button>
                                 </Tooltip></>
                         : ""}
@@ -1098,7 +1099,7 @@ else{
                                    {state.cardData[0].review_Rating[0] && state.cardData[0].review_Rating[0].review}
                                 </p>
                                 <div className="d-flex align-items-center helpful">
-                                    <p className="p-0 m-0 pe-2">Helpful?</p>
+                                    <p className="p-0 m-0 pe-2">{myOrderData.myOrderTitleSeventyThree}</p>
                                 </div>
                             </div>
                         </div>
