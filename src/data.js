@@ -552,3 +552,15 @@ export const myProposalData = {
   proposalDataFourtyEight:"Cancel",
   proposalDataFourtyNine:"Submit"
 }
+
+
+
+// Browse Request Data
+
+export const browseRequestData = {
+  browseDataOne:"Filter",
+  browseDataTwo:"Search",
+  browseDataThree:"List",
+  browseDataFour:"Remote",
+  brwoseDataFive:"No Post Available",
+}

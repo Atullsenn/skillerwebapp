@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react'
-import "./BrowseRequestDetail.css";
+import React, { useState, useEffect, useContext } from 'react';
+import "../BrowseRequests/BrowseRequestDetail.css";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Avatar from '@mui/material/Avatar';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -58,7 +58,8 @@ import ChatBox from '../chat/ChatBox';
 import Modal from "react-bootstrap/Modal";
 import DuoIcon from '@mui/icons-material/Duo';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
-import { makeAnOfferData, browseRequestData } from '../../../data';
+import UnarchiveIcon from '@mui/icons-material/Unarchive';
+
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -132,7 +133,7 @@ TabPanel.propTypes = {
     value: PropTypes.number.isRequired,
 };
 
-const BrowseRequestDetail = ({ state, setState, Map, props }) => {
+const ArchivePostDetail = ({ state, setState, Map, props, getAllPosts }) => {
     const theme = useTheme();
     const navigate = useNavigate();
     const [openBidReject, setOpenBidReject] = useState(false);
@@ -140,7 +141,6 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
     const [isToggle, setIsToggle] = useContext(IsToggleTypeContext)
     const [images, setImages] = useState([]);
     const [openCancelModal, setOpenCancelModal] = useState(false);
-    const [openMakeanofferModal, setOpenMakeanofferModal] = useState(false);
     const [openCompleteModal, setOpenCompleteModal] = useState(false);
     const [fileList, setFileList] = useState([]);
     const MAX_COUNT = 5;
@@ -148,6 +148,17 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
     const [pImage, setPImage] = useState([])
     const [filess, setFiless] = useState([])
     const [fileLimit, setFileLimit] = useState(false);
+    const [unArchivePost, setUnArchivePost] =  useState(false)
+
+
+
+    const handleOpenUnArchivePost = ()=>{
+        setUnArchivePost(true)
+    }
+
+    const handleCloseUnArchivePost = ()=>{
+        setUnArchivePost(false)
+    }
 
     const handleBidRejectClose = (value) => {
         setOpenBidReject(false);
@@ -162,13 +173,6 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
         setOpenCancelModal(false);
     };
 
-    const handleClickOpenMakeanofferModal = () => {
-        setOpenMakeanofferModal(true);
-    };
-
-    const handleCloseOpenMakeanofferModal = () => {
-        setOpenMakeanofferModal(false);
-    };
 
     const handleClickOpenCompleteModal = () => {
         setOpenCompleteModal(true);
@@ -178,59 +182,6 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
         setOpenCompleteModal(false);
     };
 
-    function getStyles(name, personName, theme) {
-        return {
-            fontWeight:
-                personName.indexOf(name) === -1
-                    ? theme.typography.fontWeightRegular
-                    : theme.typography.fontWeightMedium,
-        };
-    }
-
-    const handleLanguageSelection = (event) => {
-        let lanuageIdArray = [];
-        const {
-            target: { value },
-        } = event;
-        state.languageList.map((item) => {
-            for (let i = 0; i < event.target.value.length; i++) {
-                if (event.target.value[i] === item.name) {
-                    lanuageIdArray.push(item.id)
-                }
-            }
-        })
-        setState((prevState) => ({ ...prevState, makeAnOfferLanguage: typeof value === 'string' ? value.split(',') : value, makeAnOfferLanguageId: lanuageIdArray, }));
-    };
-
-    const selectLearningMethod = (event) => {
-        setState((prevState) => ({ ...prevState, learningMethod: event.target.value, learningMethodTab: event.target.value - 1 }));
-    };
-
-    const handlePhoneSelection = (event) => {
-        let phoneCallIdArray = [];
-        const {
-            target: { value },
-        } = event;
-        state.phoneCallList.map((item) => {
-            for (let i = 0; i < event.target.value.length; i++) {
-                if (event.target.value[i] === item.name) {
-                    phoneCallIdArray.push(item.id)
-                }
-            }
-        })
-        setState((prevState) => ({ ...prevState, phoneCall: typeof value === 'string' ? value.split(',') : value, phoneCallId: phoneCallIdArray, }));
-    };
-
-    
-
-    function getPhoneSelection(name, phoneCall, theme) {
-        return {
-            fontWeight:
-                phoneCall.indexOf(name) === -1
-                    ? theme.typography.fontWeightRegular
-                    : theme.typography.fontWeightMedium,
-        };
-    }
 
     const getPhoneCallList = () => {
         axios.get(`${baseUrl}/get-phone-call`, {
@@ -269,9 +220,6 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
         setState((prevState) => ({ ...prevState, photos: dynamicPhotosArray }))
     }, [])
 
-    const handleSkillsSelection = (event) => {
-        setState((prevState) => ({ ...prevState, skills: event }));
-    }
 
 
     const checkPostTime = (createdDate) => {
@@ -290,151 +238,6 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
         }
     }
 
-    //make an offer api
-    const makeAnOffer = async () => {
-        const formData = new FormData()
-        for (let i = 0; i < filess.length; i++) {
-            formData.append(`post_image[${i}]`, filess[i])
-            formData.append(`learning_image[${i}]`, images[i])
-        }
-        formData.append(`language_id[]`, state.makeAnOfferLanguageId)
-        formData.append('user_id', parseInt(getUserDetail().id))
-        formData.append('post_id', state.postId)
-        formData.append('description', state.postDescription)
-        formData.append('expected_days', state.expeceted_days)
-        formData.append('budget', parseInt(state.budget))
-        formData.append('skill', state.skills)
-        formData.append('learningMethod_type', state.learningMethod)
-        formData.append('call_options[]', state.phoneCallId)
-
-        if(state.budget == ""){
-            toast.warn('Please Enter Budget',{
-                autoClose: 1000,
-                theme: 'colored'
-            })
-        }
-
-        if(state.expeceted_days == ""){
-            toast.warn('Please Enter Expected Days',{
-                autoClose: 1000,
-                theme: 'colored'
-            })
-        }
-
-        if(state.learningMethod == ""){
-            toast.warn('Please Choose Learning Method',{
-                autoClose: 1000,
-                theme: 'colored'
-            })
-        }
-
-        if(state.makeAnOfferLanguageId == ""){
-            toast.warn('Please Choose Language',{
-                autoClose:1000,
-                theme:'colored'
-            })
-        }
-
-        if(state.skills == ""){
-            toast.warn('Please Enter Skills',{
-                autoClose: 1000,
-                theme: 'colored'
-            })
-        }
-
-        if(state.postDescription == ""){
-            toast.warn('Please Enter Description',{
-                autoClose: 1000,
-                theme: 'colored'
-            })
-        }
-
-        else{
-        await axios.post(`${baseUrl}/make-an-offer`, formData, {
-            Accept: "Application",
-            "Content-Type": "application/json"
-        }).then((response) => {
-            if (response.data.success === true) {
-                toast.success('Offer Created Successfully', {
-                    theme: 'colored',
-                    autoClose: 1000
-                })
-                setTimeout(() => {
-                    navigate('/my-proposals')
-                }, 500);
-            }  
-             
-           // handleCloseOpenMakeanofferModal()
-        }).catch((error) => {
-            console.log(error)
-        })
-    }
-    }
-    //make an offer api
-
-    //upload multiple images 
-    const [pdfName, setPdfName] = useState({ selectedFiles: [] })
-    const handleUploadPdf = files => {
-        const uploaded = [...images];
-        setPdfName({ selectedFiles: uploaded })
-        let limitExceeded = false;
-        files.some((file) => {
-            if (uploaded.findIndex((f) => f.name === file.name) === -1) {
-                uploaded.push(file);
-                if (uploaded.length === MAX_COUNT) setFileLimit(true);
-                if (uploaded.length > MAX_COUNT) {
-                    alert(`You can only add a maximum of ${MAX_COUNT} files`);
-                    setFileLimit(false);
-                    limitExceeded = true;
-                    return true;
-                }
-            }
-        })
-        if (!limitExceeded) setImages(uploaded)
-    }
-
-    const handlePdfEvent = (e) => {
-        const chosenFiles = Array.prototype.slice.call(e.target.files)
-        handleUploadPdf(chosenFiles);
-    }
-
-    const handleUploadFiles = files => {
-        const uploaded = [...filess];
-        let limitExceeded = false;
-        files.some((file) => {
-            if (uploaded.findIndex((f) => f.name === file.name) === -1) {
-                uploaded.push(file);
-                if (uploaded.length === MAX_COUNT) setFileLimit(true);
-                if (uploaded.length > MAX_COUNT) {
-                    alert(`You can only add a maximum of ${MAX_COUNT} files`);
-                    setFileLimit(false);
-                    limitExceeded = true;
-                    return true;
-                }
-            }
-        })
-        if (!limitExceeded) setFiless(uploaded)
-    }
-
-    const uploadMultipleImage = (e) => {
-        const files = Array.from(e.target.files)
-        setPImage([e.target.files[0]])
-        setImagesPreview([])
-        files.forEach((file) => {
-            const reader = new FileReader();
-            reader.onload = () => {
-                setImagesPreview([...imagesPreview, reader.result])
-
-            }
-            reader.readAsDataURL(file);
-        })
-    }
-
-    const handleFileEvent = (e) => {
-        const chosenFiles = Array.prototype.slice.call(e.target.files)
-        handleUploadFiles(chosenFiles, uploadMultipleImage(e));
-    }
-
     //upload multiple images 
     const [isOpen, setIsOpen] = useState(false);
     const closeModal = () => {
@@ -444,6 +247,28 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
     const openAddApplicationModal = () => {
         setIsOpen(true);
     };
+
+
+    //UnArchive Post Api
+    const unArchivePosts = ()=>{
+        let request = {
+          post_id:state.cardData[0].id,
+          status: 0
+        }
+
+      axios.post(`${baseUrl}/post-in-archive-unarchive`,request).then((response)=>{
+        toast.success('Post Has Been Moved Into UnArchive Successfully',{
+            autoClose: 1000,
+            theme: 'colored'
+        })
+        handleCloseUnArchivePost()
+        setState((prevState)=>({...prevState, cardDetail: false}))
+        getAllPosts()
+      }).catch((error)=>{
+        console.log(error)
+      })
+  }
+
 
 
 
@@ -481,6 +306,7 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
                             <div className='d-flex align-items-center task-status-area'>
                                 <p className='task-status d-flex align-items-center'>{state.cardData[0].status === 0 ? 'Pending' : state.cardData[0].status === 1 ? 'In Progress' : state.cardData[0].status === 2 ? 'Cancelled' : state.cardData[0].status === 3 && 'Completed'}</p>
                             </div>
+                            <button onClick={handleOpenUnArchivePost}  className='btn btn-primary btn-lg btn-block make-an-offer-btn' >UnArchive<span><UnarchiveIcon/></span></button>
                         </div>
                         <div className='p-2'>
                             <h4 className='task-status-heading text-uppercase heading-color'>{state.cardData[0].postTitle}</h4>
@@ -609,14 +435,6 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
                         <div className='py-3' style={{ border: '1px solid black', borderRadius: '4px' }}>
                             <h3 className='p-0 m-0 py-3 d-flex align-item-center justify-content-center heading-color'>Task Budget</h3>
                             <p className='p-0 m-0 py-1 d-flex align-item-center justify-content-center' style={{ color: '#000', fontWeight: '600', fontSize: '36px' }}>${state.cardData[0].budget}</p>
-                            {state.cardData[0].status === 0 &&
-                                <div className="d-flex justify-content-center py-2">
-                                    {
-                                        isToggle === 2 && parseInt(state.cardData[0].user_id) != parseInt(getUserDetail().id) &&
-                                        <button className='btn btn-primary btn-lg btn-block make-an-offer-btn' onClick={handleClickOpenMakeanofferModal}>Make an offer</button>
-                                    }
-                                </div>
-                            }
                         </div>
                         <div className='d-flex justify-content-end py-2'>
                             <p className='p-0 m-0 px-1' style={{ fontWeight: '700' }}>{checkPostTime(state.cardData[0].created_at)}</p>
@@ -785,255 +603,29 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
                     </div>
                 </DialogActions>
             </Dialog>
+
             <Dialog
-                className='mt-4 create-your-offer-dailogue'
-                open={openMakeanofferModal}
-                fullWidth
-                onClose={handleCloseOpenMakeanofferModal}
-                aria-labelledby="responsive-dialog-title"
+            fullWidth
+            open={unArchivePost}
+            onClose={handleCloseUnArchivePost}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="responsive-dialog-title">{makeAnOfferData.offerDataOne}</DialogTitle>
-                <Divider style={{ backgroundColor: '#a9a4a4' }} />
-                <DialogContent>
-                    <div>
-                        <div className='mb-4'>
-                            <h5>{state.cardData[0].postTitle}</h5>
-                        </div>
-                        <FormControl fullWidth>
-                            <InputLabel htmlFor="outlined-adornment-amount">{makeAnOfferData.offerDataTwo} <span style={{ color: 'red' }}>*</span></InputLabel>
-                            <OutlinedInput
-                                type='number'
-                                onWheel={(event) => event.target.blur()}
-                                id="outlined-adornment-amount"
-                                startAdornment={<InputAdornment position="start">$</InputAdornment>}
-                                value={state.budget}
-                                label={<>{makeAnOfferData.offerDataTwo} <span style={{ color: 'red' }}>*</span></>}
-                                onChange={(e) => { setState((prevState) => ({ ...prevState, budget: e.target.value })); }}
-                            />
-                        </FormControl>
-                    </div>
-                    <div className='mt-4'>
-                        <TextField
-                            fullWidth
-                            variant='outlined'
-                            name="expected_days"
-                            type="number"
-                            value={state.expeceted_days}
-                            onWheel={(event) => event.target.blur()}
-                            size='large'
-                            label={<>{makeAnOfferData.offerDataThree} <span style={{ color: 'red' }}>*</span></>}
-                            onChange={(e) => { setState((prevState) => ({ ...prevState, expeceted_days: e.target.value })); }}
-                        />
-                    </div>
-                    <div className='mt-4 p-3' style={{ backgroundColor: 'rgb(236, 236, 236)', borderRadius: '8px' }}>
-                        <FormControl fullWidth>
-                            <InputLabel id="demo-simple-select-label">{makeAnOfferData.offerDataFour} <span style={{ color: 'red' }}>*</span></InputLabel>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={state.learningMethod}
-                                label={<>{makeAnOfferData.offerDataFour} <span style={{ color: 'red' }}>*</span></>}
-                                onChange={selectLearningMethod}
-                            >
-                                {state.cardData[0].learningMethod_type === "Phone Call" ?
-                                    <MenuItem value={2}>{"Phone call"}</MenuItem> : state.cardData[0].learningMethod_type === "Text" ? <MenuItem value={1}>{"Text"}</MenuItem> : state.cardData[0].learningMethod_type === "Text and Phone Call" ? <MenuItem value={3}>{"Text and Phone Call"}</MenuItem>:""
-                        
-                                }
-                               
-                            </Select>
-                        </FormControl>
-                        {state.learningMethod != 0 ?
-                            <Box sx={{ width: '100%', backgroundColor: '' }} >
-                                <TabPanel value={state.learningMethodTab} index={0} style={{ overflow: 'auto', width: '100%' }}>
-                                    <h5>{makeAnOfferData.offerDataFive}</h5>
-                                    <div className='d-flex justify-content-around'>
-                                        <p>{makeAnOfferData.offerDataSix}</p>
-                                        <p>{makeAnOfferData.offerDataSeven}</p>
-                                        <p>{makeAnOfferData.offerDataEight}</p>
-                                        <p>{makeAnOfferData.offerDataNine}</p>
-                                    </div>
-                                    <div className='post-a-tasker-upload-file-section-area'>
-                                        <label style={{ width: "100%", height: "150px", border: "2px solid #188dc7", padding: "20px", borderRadius: '5px' }}>
-                                            <input type="file" multiple accept='application/pdf' onChange={handlePdfEvent} style={{ display: "none" }} />
-                                            <p className="ant-upload-drag-icon p-0 m-0 d-flex justify-content-center"> <DriveFolderUploadIcon style={{ fontSize: '45px' }} /> </p>
-                                            {pdfName.selectedFiles == "" ?
-                                                <><p className="ant-upload-text p-0 m-0 d-flex justify-content-center">{makeAnOfferData.offerDataTen}  </p><p className="ant-upload-hint p-0 m-0 d-flex justify-content-center">{makeAnOfferData.offerDataEleven}
-                                                </p></> :
-                                                <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
-                                                    {pdfName.selectedFiles.map((file) =>
-                                                        <p key={file.name} style={{ marginTop: "10px" }}>
-                                                            {file.name}</p>
-                                                    )}
-                                                </div>
-                                            }
-                                        </label>
-                                    </div>
-                                </TabPanel>
-                                <TabPanel value={state.learningMethodTab} index={1} style={{ overflow: 'auto', width: '100%' }}>
-                                    <h5>{makeAnOfferData.offerDataTweleve}</h5>
-                                    <div className='mt-4'>
-                                        <FormControl sx={{ width: '100%' }}>
-                                            <InputLabel id="demo-multiple-chip-label">{makeAnOfferData.offerDataThirteen} <span style={{ color: 'red' }}>*</span></InputLabel>
-                                            <Select
-                                                labelId="demo-multiple-chip-label"
-                                                id="demo-multiple-chip"
-                                                multiple
-                                                value={state.phoneCall}
-                                                onChange={handlePhoneSelection}
-                                                input={<OutlinedInput id="select-multiple-chip" label={<>{makeAnOfferData.offerDataThirteen} <span style={{ color: 'red' }}>*</span></>} />}
-                                                renderValue={(selected) => (
-                                                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                                                        {selected.map((value) => (
-                                                            <Chip key={value} label={value} />
-                                                        ))}
-                                                    </Box>
-                                                )}
-                                                MenuProps={MenuProps}
-                                            >
-                                                {state.phoneCallList.map((Item) => (
-                                                    state.cardData[0]?.learning[0]?.call_option && state.cardData[0].learning[0].call_option.split(',').map((item) => {
-                                                        if (parseInt(item) === Item.id) {
-                                                            return <MenuItem key={Item.id} value={Item.name} style={getPhoneSelection(Item.name, state.phoneCall, theme)}>{Item.name}</MenuItem>
-                                                        }
-                                                    })
-                                                ))}
-                                            </Select>
-                                        </FormControl>
-                                    </div>
-                                </TabPanel>
-
-
-                                <TabPanel value={state.learningMethodTab} index={2} style={{ overflow: 'auto', width: '100%' }}>
-                                    <h5>{makeAnOfferData.offerDataFive}</h5>
-                                    <div className='d-flex justify-content-around'>
-                                        <p>{makeAnOfferData.offerDataSix}</p>
-                                        <p>{makeAnOfferData.offerDataSeven}</p>
-                                        <p>{makeAnOfferData.offerDataEight}</p>
-                                        <p>{makeAnOfferData.offerDataNine}</p>
-                                    </div>
-                                    <div className='post-a-tasker-upload-file-section-area'>
-                                        <label style={{ width: "100%", height: "150px", border: "2px solid #188dc7", padding: "20px", borderRadius: '5px' }}>
-                                            <input type="file" multiple accept='application/pdf' onChange={handlePdfEvent} style={{ display: "none" }} />
-                                            <p className="ant-upload-drag-icon p-0 m-0 d-flex justify-content-center"> <DriveFolderUploadIcon style={{ fontSize: '45px' }} /> </p>
-                                            {pdfName.selectedFiles == "" ?
-                                                <><p className="ant-upload-text p-0 m-0 d-flex justify-content-center">{makeAnOfferData.offerDataTen}  </p><p className="ant-upload-hint p-0 m-0 d-flex justify-content-center">{makeAnOfferData.offerDataTweleve}
-                                                </p></> :
-                                                <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
-                                                    {pdfName.selectedFiles.map((file) =>
-                                                        <p key={file.name} style={{ marginTop: "10px" }}>
-                                                            {file.name}</p>
-                                                    )}
-                                                </div>
-                                            }
-                                        </label>
-                                    </div>
-                                </TabPanel>
-                                <TabPanel value={state.learningMethodTab} index={2} style={{ overflow: 'auto', width: '100%' }}>
-                                    <h5>{makeAnOfferData.offerDataTweleve}</h5>
-                                    <div className='mt-4'>
-                                        <FormControl sx={{ width: '100%' }}>
-                                            <InputLabel id="demo-multiple-chip-label">{makeAnOfferData.offerDataThirteen} <span style={{ color: 'red' }}>*</span></InputLabel>
-                                            <Select
-                                                labelId="demo-multiple-chip-label"
-                                                id="demo-multiple-chip"
-                                                multiple
-                                                value={state.phoneCall}
-                                                onChange={handlePhoneSelection}
-                                                input={<OutlinedInput id="select-multiple-chip" label={<>{makeAnOfferData.offerDataThirteen} <span style={{ color: 'red' }}>*</span></>} />}
-                                                renderValue={(selected) => (
-                                                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                                                        {selected.map((value) => (
-                                                            <Chip key={value} label={value} />
-                                                        ))}
-                                                    </Box>
-                                                )}
-                                                MenuProps={MenuProps}
-                                            >
-                                                {state.phoneCallList.map((Item) => (
-                                                    state.cardData[0].learning[0].call_option && state.cardData[0].learning[0].call_option.split(',').map((item) => {
-                                                        if (parseInt(item) === Item.id) {
-                                                            return <MenuItem key={Item.id} value={Item.name} style={getPhoneSelection(Item.name, state.phoneCall, theme)}>{Item.name}</MenuItem>
-                                                        }
-                                                    })
-                                                ))}
-                                            </Select>
-                                        </FormControl>
-                                    </div>
-                                </TabPanel>
-                            </Box>
-                            : ''}
-                    </div>
-                    <div className='mt-4'>
-                        <FormControl sx={{ width: '100%' }}>
-                            <InputLabel id="demo-multiple-chip-label">{makeAnOfferData.offerDataFourteen} <span style={{ color: 'red' }}>*</span></InputLabel>
-                            <Select
-                                labelId="demo-multiple-chip-label"
-                                id="demo-multiple-chip"
-                                multiple
-                                value={state.makeAnOfferLanguage}
-                                onChange={handleLanguageSelection}
-                                input={<OutlinedInput id="select-multiple-chip" label={<>{makeAnOfferData.offerDataFourteen} <span style={{ color: 'red' }}>*</span></>} />}
-                                renderValue={(selected) => (
-                                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                                        {selected.map((value) => (
-                                            <Chip key={value} label={value} />
-                                        ))}
-                                    </Box>
-                                )}
-                                MenuProps={MenuProps}
-                            >
-                                {state.languageList.map((Item) => (
-                                    state.cardData[0].language_name.split(',').map((item) => {
-                                        if (Item.name === item) {
-                                            return <MenuItem key={Item.id} value={Item.name} style={getStyles(Item.name, state.language, theme)}>{Item.name}</MenuItem>
-                                        }
-                                    })
-                                ))}
-                            </Select>
-                        </FormControl>
-                    </div>
-                    <div className='mt-4'>
-                        <ChipInput className='w-100' defaultValue={state.skills} label={<>{makeAnOfferData.offerADataFifteen} <span style={{ color: 'red' }}>*</span></>} onChange={handleSkillsSelection} />
-                    </div>
-                    <div className='mt-4 make-an-offer-border'>
-                        <div style={{ border: "2px solid #188dc7", height: "230px", borderRadius: '5px' }}>
-                            <div className="uploaded-files-list" style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: "58px" }}>
-                                {imagesPreview.map(file => (
-                                    <div style={{ marginRight: "20px" }} >
-                                        <img src={file} style={{ width: '100px', height: "100px", borderRadius: '5px' }} />
-                                    </div>
-                                ))}
-                                <label>
-                                    <input onChange={handleFileEvent} type='file' multiple accept="image/*" style={{ display: "none" }} />
-                                    {filess.length < MAX_COUNT ? <PhotoIcon className='photoIconnn' style={{ width: "91px", height: "86px", color: "darkgray" }} /> : ' '}
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='mt-4'>
-                        <h5 className='p-0 pb-1 m-0'>{makeAnOfferData.offerDataSixteen} <span style={{ color: 'red' }}>*</span></h5>
-                        <TextareaAutosize
-                            className='p-2'
-                            aria-label="minimum height"
-                            minRows={2}
-                            style={{ width: '100%' }}
-                            value={state.postDescription}
-                            onChange={(e) => { setState((prevState) => ({ ...prevState, postDescription: e.target.value })); }}
-                        />
-                    </div>
-                </DialogContent>
-                <Divider style={{ backgroundColor: '#a9a4a4' }} />
-                <DialogActions>
-                    {/* <button className={`me-3 ${parseInt(getUserDetail().id) === null || state.postId === null || state.budget == "" || state.expeceted_days == "" || state.learningMethod == "" || state.makeAnOfferLanguageId.length === 0 || state.skills.length === 0 || state.postDescription == "" || filess.length === 0 ? 'disableMakeAnOfferBrowseRequestBtn' : 'make-an-offer-btn'}`} onClick={makeAnOffer} disabled={parseInt(getUserDetail().id) === null || state.postId === null || state.budget == "" || state.expeceted_days == "" || state.learningMethod == "" || state.makeAnOfferLanguageId.length === 0 || state.skills.length === 0 || state.postDescription == "" || filess.length === 0 ? true : false} autoFocus>
-                        Submit
-                    </button> */}
-                    <button className={`me-3 make-an-offer-btn`} onClick={makeAnOffer}  autoFocus>
-                        {makeAnOfferData.offerDataSeventeen}
-                    </button>
-                </DialogActions>
+                <DialogTitle id="alert-dialog-title" className="text-center">
+                    {"Are you sure want to UnArchive this post ?"}
+                </DialogTitle>
+            <DialogContent className='text-center p-0 m-0'>
+            <DialogContentText id="alert-dialog-description">
+            <UnarchiveIcon style={{ color: '#0F52BA', fontSize: '100px' }} />
+            </DialogContentText>
+            </DialogContent>
+            <DialogActions className="text-center d-flex gap-4 align-items-center justify-content-center">
+            <button onClick={unArchivePosts}  className="btn btn-primary btn-lg btn-block make-an-offer-btn"> Yes </button>
+            <button onClick={handleCloseUnArchivePost} className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" > No </button>
+            </DialogActions>
             </Dialog>
         </>
     )
 }
 
-export default BrowseRequestDetail;
+export default ArchivePostDetail;

@@ -680,6 +680,7 @@ const redirectNotification = (notification_type, postId)=>{
                                     <NavLink to="/my-posts"><MenuItem onClick={handleClose}>{menuData.menuTitleSeven}</MenuItem></NavLink>
                                     <NavLink to="/my-order"><MenuItem onClick={handleClose}>{menuData.menuTitleEight}</MenuItem></NavLink>
                                     {/* <NavLink to="/past-posts"><MenuItem onClick={handleClose}>Past Posts</MenuItem></NavLink> */}
+                                    <NavLink to="/archive-posts"><MenuItem onClick={handleClose}>Archived Posts</MenuItem></NavLink>
                                     <NavLink to="/help"><MenuItem onClick={handleClose}>{menuData.menuTitleNine}</MenuItem></NavLink>
                                     <Divider style={{ backgroundColor: "gray" }} />
                                     <MenuItem onClick={handleLogout}>
@@ -878,6 +879,7 @@ const redirectNotification = (notification_type, postId)=>{
                                     <NavLink to="/my-order"> <MenuItem onClick={handleClose}> {menuData.menuTitleEight} </MenuItem> </NavLink>
                                     <NavLink to="/search-posts"> <MenuItem onClick={handleClose}> {menuData.menuTitleThirteen} </MenuItem> </NavLink>
                                     {/* <NavLink to="/past-posts"><MenuItem onClick={handleClose}>Past Posts</MenuItem></NavLink> */}
+                                    <NavLink to="/archive-posts"><MenuItem onClick={handleClose}>Archived Posts</MenuItem></NavLink>
                                     <NavLink to="/help"> <MenuItem onClick={handleClose}> {menuData.menuTitleNine} </MenuItem> </NavLink>
                                     <Divider style={{ backgroundColor: "gray" }} />
                                     <MenuItem onClick={handleLogout}> <ListItemIcon> <Logout fontSize="small" /> </ListItemIcon> {menuData.menuTitleTen} </MenuItem>

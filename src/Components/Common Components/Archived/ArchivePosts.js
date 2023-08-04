@@ -4,7 +4,7 @@ import LanguageIcon from '@mui/icons-material/Language';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import Avatar from '@mui/material/Avatar';
 import AddLocationIcon from '@mui/icons-material/AddLocation';
-import BrowseRequestDetail from "./BrowseRequestDetail";
+import ArchivePostDetail from './ArchivePostDetail';
 import TextField from "@material-ui/core/TextField";
 import SearchIcon from "@material-ui/icons/Search";
 import Box from '@mui/material/Box';
@@ -20,7 +20,7 @@ import Select from "@mui/material/Select";
 import Tooltip from '@mui/material/Tooltip';
 import ListIcon from '@mui/icons-material/List';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
-import "./BrowseRequest.css";
+import "../BrowseRequests/BrowseRequest.css"
 import axios from 'axios';
 import { IsToastContext } from "../../../Contexts/ToastContext";
 import Chip from '@mui/material/Chip';
@@ -54,7 +54,7 @@ const MenuProps = {
     }
 };
 
-const BrowseRequest = ({ state, setState, heading }) => {
+const ArchivePosts = ({ state, setState, heading, getAllPosts }) => {
     const theme = useTheme();
     // const [currentPage, setCurrentPage] = useState(1);
     const [isToastMessage] = useContext(IsToastContext)
@@ -214,168 +214,6 @@ const BrowseRequest = ({ state, setState, heading }) => {
         setState((prevState) => ({ ...prevState, minMaxFilterSelectionPopUp: false }));
     };
 
-    const list = (anchor) => (
-        <Box
-            sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 270, padding: '0px 15px', paddingBottom: '68px' }}
-            role="presentation"
-        >
-            <div className='d-flex justify-content-between align-items-center py-2 mt-2'>
-                <KeyboardBackspaceIcon className='filter-cross-back-icon' style={{ fontSize: '30px' }} onClick={toggleDrawer(anchor, false)} />
-                <CloseIcon className='filter-cross-back-icon' style={{ fontSize: '30px' }} onClick={toggleDrawer(anchor, false)} />
-            </div>
-            <Divider style={{ backgroundColor: '#a9a4a4' }} />
-            <div className='my-2'>
-                <h4 className='p-0 m-0 pb-1 filter-heading'>Category</h4>
-                <div className='d-flex justify-content-center align-items-center'>
-                    <FormControl fullWidth size="small">
-                        <InputLabel id="demo-simple-select-label">Select Your Category</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={state.category}
-                            label="Select Your Category"
-                            onChange={selectCategory}
-                        >
-                            <MenuItem value={" "} onClick={() => { setState((prevState) => ({ ...prevState, categoryId: null })) }}><em>None</em></MenuItem>
-                            {state.categoryList.map((Item) => {
-                                return <MenuItem onClick={() => { setState((prevState) => ({ ...prevState, categoryId: Item.id })) }} value={Item.name}>{Item.name}</MenuItem>
-                            })}
-                        </Select>
-                    </FormControl>
-                </div>
-            </div>
-            <Divider className='my-3' style={{ backgroundColor: '#a9a4a4' }} />
-            <div className='my-2'>
-                <h4 className='p-0 m-0 pb-1 filter-heading'>Languages</h4>
-                <div className='d-flex justify-content-center align-items-center'>
-                    <FormControl fullWidth size="small">
-                        <InputLabel id="demo-multiple-chip-label">Select your Language</InputLabel>
-                        <Select
-                            labelId="demo-multiple-chip-label"
-                            id="demo-multiple-chip"
-                            multiple
-                            value={state.language}
-                            onChange={handleLanguageSelection}
-                            input={<OutlinedInput id="select-multiple-chip" label="Select your Language" />}
-                            renderValue={(selected) => (
-                                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                                    {selected.map((value) => (
-                                        <Chip key={value} label={value} />
-                                    ))}
-                                </Box>
-                            )}
-                            MenuProps={MenuProps}
-                        >
-                            {state.languageList.map((Item) => (
-                                <MenuItem
-                                    key={Item.id}
-                                    value={Item.name}
-                                    style={getStyles(Item.name, state.language, theme)}
-                                >
-                                    {Item.name}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                </div>
-            </div>
-            <Divider className='my-3' style={{ backgroundColor: '#a9a4a4' }} />
-            <div className='my-2'>
-                <h4 className='p-0 m-0 pb-1 filter-heading'>State</h4>
-                <div className='d-flex justify-content-center align-items-center'>
-                    <FormControl fullWidth size="small">
-                        <InputLabel id="demo-simple-select-label">Select Your State</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={state.state}
-                            label="Select Your State"
-                            onChange={selectState}
-                        >
-                            <MenuItem value={" "} onClick={() => { setState((prevState) => ({ ...prevState, stateId: null, city: '', cityId: null, })) }}><em>None</em></MenuItem>
-                            {state.stateList.map((Item) => {
-                                return <MenuItem onClick={() => { setState((prevState) => ({ ...prevState, stateId: Item.id, city: '', cityId: null, })) }} value={Item.state_name}>{Item.state_name}</MenuItem>
-                            })}
-                        </Select>
-                    </FormControl>
-                </div>
-            </div>
-            <Divider className='my-3' style={{ backgroundColor: '#a9a4a4' }} />
-            <div className='my-2'>
-                <h4 className='p-0 m-0 pb-1 filter-heading'>City</h4>
-                <div className='d-flex justify-content-center align-items-center'>
-                    <FormControl fullWidth size="small">
-                        <InputLabel id="demo-simple-select-label">Select Your City</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={state.city}
-                            label="Select Your City"
-                            onChange={selectCity}
-                        >
-                            {state.cityList.map((Item) => {
-                                return <MenuItem onClick={() => { setState((prevState) => ({ ...prevState, cityId: Item.id })) }} value={Item.name}>{Item.name}</MenuItem>
-                            })}
-                        </Select>
-                    </FormControl>
-                </div>
-            </div>
-            <Divider className='my-3' style={{ backgroundColor: '#a9a4a4' }} />
-            <div className='my-2'>
-                <h4 className='p-0 m-0 pb-1 filter-heading'>Task Budget</h4>
-                <div className='d-flex justify-content-around align-items-center'>
-                    <FormControl sx={{ minWidth: 115 }} size="small">
-                        <InputLabel id="demo-select-small">Min amount</InputLabel>
-                        <Select
-                            labelId="demo-select-small"
-                            id="demo-select-small"
-                            value={state.taskBudgetMinRangeValue}
-                            label="Min amount"
-                            onChange={handleTaskBudgetMinimumRange}
-                        >
-                            <MenuItem value={" "}><em>None</em></MenuItem>
-                            <MenuItem value={5}>$ 5</MenuItem>
-                            <MenuItem value={10}>$ 10</MenuItem>
-                            <MenuItem value={50}>$ 50</MenuItem>
-                            <MenuItem value={100}>$ 100</MenuItem>
-                            <MenuItem value={200}>$ 200</MenuItem>
-                            <MenuItem value={500}>$ 500</MenuItem>
-                            <MenuItem value={1000}>$ 1000</MenuItem>
-                            <MenuItem value={1500}>$ 1500</MenuItem>
-                            <MenuItem value={2000}>$ 2000</MenuItem>
-                            <MenuItem value={5000}>$ 5000</MenuItem>
-                            <MenuItem value={90000}>$ 9999</MenuItem>
-                        </Select>
-                    </FormControl>
-                    <span className='d-flex justify-content-center align-items-center'>-</span>
-                    <FormControl sx={{ minWidth: 115 }} size="small">
-                        <InputLabel id="demo-select-small">Max amount</InputLabel>
-                        <Select
-                            labelId="demo-select-small"
-                            id="demo-select-small"
-                            value={state.taskBudgetMaxRangeValue}
-                            label="Max amount"
-                            onChange={handleTaskBudgetMaximumRange}
-                        >
-                            <MenuItem value={" "}><em>None</em></MenuItem>
-                            <MenuItem value={5}>$ 5</MenuItem>
-                            <MenuItem value={10}>$ 10</MenuItem>
-                            <MenuItem value={50}>$ 50</MenuItem>
-                            <MenuItem value={100}>$ 100</MenuItem>
-                            <MenuItem value={200}>$ 200</MenuItem>
-                            <MenuItem value={500}>$ 500</MenuItem>
-                            <MenuItem value={1000}>$ 1000</MenuItem>
-                            <MenuItem value={1500}>$ 1500</MenuItem>
-                            <MenuItem value={2000}>$ 2000</MenuItem>
-                            <MenuItem value={5000}>$ 5000</MenuItem>
-                            <MenuItem value={90000}>$ 9999</MenuItem>
-                        </Select>
-                    </FormControl>
-                </div>
-            </div>
-        </Box>
-    );
-
 //pagination 
 
 const [pageNumber, setPageNumber] = useState(0);
@@ -406,27 +244,10 @@ useEffect(()=>{
             <section style={{ marginTop: '70px' }}>
                 <Divider className='my-2' style={{ backgroundColor: '#a9a4a4' }} />
                 <div className='container'>
-                    <div className='row text-center'>
-                        <div className='col-lg-4 ps-0 text-start'>
+                    <div className='row '>
+                        <div className='col-lg-8'>
                             <div>
-                                <React.Fragment key={'left'}>
-                                    <FilterListIcon onClick={toggleDrawer('left', true)} style={{ cursor: 'pointer' }} />
-                                    <Button onClick={toggleDrawer('left', true)}>{browseRequestData.browseDataOne}</Button>
-                                    <SwipeableDrawer
-                                        className='filter-scroller-bar'
-                                        anchor={'left'}
-                                        open={toggleShow['left']}
-                                        onOpen={toggleDrawer('left', true)}
-                                        onClose={toggleDrawer('left', false)}
-                                    >
-                                        {list('left')}
-                                    </SwipeableDrawer>
-                                </React.Fragment>
-                            </div>
-                        </div>
-                        <div className='col-lg-4'>
-                            <div>
-                                <h3>{heading}</h3>
+                                <h3>{"Archived Post"}</h3>
                             </div>
                         </div>
                         <div className='col-lg-4 pe-0 text-right'>
@@ -491,7 +312,7 @@ useEffect(()=>{
                                                 <Divider style={{ backgroundColor: 'gray' }} />
                                                 <div className='pt-2 d-flex align-items-center justify-content-between'>
                                                     <div className='px-2'>
-                                                        <span className="openColor">{item.status === 0 ? 'Pending' : item.status === 1 ? 'In Progress' : item.status === 2 ? 'Cancelled' : item.status === 3 && 'Completed'}</span>
+                                                        <span className="openColor">{item.status === 0 ? 'Archived' : item.status === 1 ? 'In Progress' : item.status === 2 ? 'Cancelled' : item.status === 3 && 'Completed'}</span>
                                                     </div>
                                                     <div className='px-2 d-flex align-items-center justify-content-center'>
                                                         <span className='ps-2' style={{ fontSize: '14px', fontWeight: 'bold' }}>{item.firstName + ' ' + item.lastName}</span>
@@ -501,14 +322,8 @@ useEffect(()=>{
                                         </div>
                                     )
                                 })}
-                                <h3 id="no-post-available" className='w-25 no-post-available' style={{ display: 'none', textAlign: 'center' }}>{browseRequestData.brwoseDataFive}</h3>
-                                {/* <Pagination
-                                    className="pagination-bar mb-3"
-                                    currentPage={currentPage}
-                                    totalCount={state.allTaskList.length}
-                                    pageSize={PageSize}
-                                    onPageChange={page => setCurrentPage(page)}
-                                /> */}
+                                <h3 id="no-post-available" className='w-25 no-post-available' style={{ display: 'none', textAlign: 'center' }}>{"No Archived Post Available"}</h3>
+                                {state.allTaskList.length > 9 ?
                                  <ReactPaginate
                       previousLabel={"Previous"}
                       nextLabel={"Next"}
@@ -520,6 +335,7 @@ useEffect(()=>{
                       disabledClassName={"paginationDisabled"}
                       activeClassName={"paginationActive"}
                     />
+                    : ""}
                             </div>
                             {state.cardDetail &&
                                 <div className='col-lg-8 right-main-div pe-0' id='Detailed-main-div'>
@@ -529,7 +345,7 @@ useEffect(()=>{
                                                 <CircularProgress />
                                             </Box>
                                         </div> :
-                                        <BrowseRequestDetail state={state} Map={true} setState={setState} />
+                                        <ArchivePostDetail state={state} Map={true} setState={setState} getAllPosts={getAllPosts} />
                                     }
                                 </div>
                             }
@@ -559,4 +375,4 @@ useEffect(()=>{
     )
 }
 
-export default BrowseRequest;
+export default ArchivePosts;

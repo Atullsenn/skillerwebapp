@@ -23,6 +23,7 @@ import TermsAndConditions from "./Components/Common Components/Terms & Condition
 import PrivacyPolicy from "./Components/Common Components/PrivacyPolicy/PrivacyPolicy";
 import MyOrderLayout from "./Components/Common Components/MyOrders/MyOrdersLayout"
 import ForgotPasswordNew from './Components/Common Components/ForgetPassword/ForgotPasswordNew';
+import ArchivePostsLayout from './Components/Common Components/Archived/ArchivePostLayout';
 import PrivateRoute from './PrivateRoute';
 import { IsLoginAuthenticateContext } from "./Contexts/LoginContext";
 import { ToastContainer } from 'react-toastify';
@@ -31,7 +32,7 @@ import './Responsive.css';
 
 
 const App = () => {
-  console.log('Build 08/1/2023 4:23 PM')
+  console.log('Build 08/3/2023 3:13 PM')
   const [isAuthenticate] = useContext(IsLoginAuthenticateContext)
 
   return (
@@ -66,6 +67,7 @@ const App = () => {
           <Route path="/my-requests/*" element={<MyRequestLayout />} />
           <Route path="/user-profile/:id" element={<UserProfile />} />
           <Route path="/search-posts/*" element={<BrowseRequestLayout heading={'Search-Posts'} />} />
+          <Route path="/archive-posts" element={<ArchivePostsLayout/>}/>
           <Route path="*" element={<Navigate to="/" />} />
         </Route>
       </Routes>

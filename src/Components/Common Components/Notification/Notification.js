@@ -116,6 +116,14 @@ const Notification = () => {
 // };
 
 
+const [expanded, setExpanded] = useState('')
+
+const handleChange = (panel) => (event, newExpanded) => {
+  setExpanded(newExpanded ? panel : false);
+  console.log(expanded, "Checkkk")
+};
+
+
 
 
 const handleremove = (e, th) => {
@@ -206,7 +214,7 @@ const changePage = ({ selected }) => {
                         <div className="accordion accordion-" id="accordionFlushExample">
                           {notification?.slice(pagesVisited, pagesVisited + usersPerPage).map((item) => (
                             <div className='d-flex align-items-center justify-content-between'>
-                              <Accordion style={{ width: '98%' }}>
+                              <Accordion style={{ width: '98%' }} expanded={expanded === `panel${item.id}`} onClick={(event)=>handleChange(event,`panel${item.id}`)}>
                                 <Accordion.Item eventKey="0">
                                   <Accordion.Header>
                                     <h2 className="accordion-header w-100" id="flush-headingOne">

@@ -40,6 +40,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import { MuiFileInput } from 'mui-file-input';
 import CheckIcon from '@mui/icons-material/Check';
 import { myOrderData } from '../../../data';
+import ArchiveIcon from '@mui/icons-material/Archive';
 
 
 const MyOrdersDetail = ({ state, setState, getMyOrderList, abc }) => {
@@ -58,6 +59,7 @@ const MyOrdersDetail = ({ state, setState, getMyOrderList, abc }) => {
     const [disputeFiles, setDisputeFiles] = useState([])
     const [disputeReason, setDisputeReason] = useState([])
     const [providerDispute, setProviderDispute] = useState(false)
+    const [archivePost, setArchivePost] =  useState(false);
     
    
 
@@ -302,17 +304,6 @@ else{
 
 
   const userCancelPost = ()=>{
-    // let request = {
-    //   seeker_id: state.cardData[0].user_id,
-    //   post_id:state.cardData[0].post_id,
-    //   provider_id:state.cardData[0].bids[0].user_id,
-    //   description:reason,
-    //   amount:state.cardData[0].bids[0].budget,
-    //   userType:localStorage.getItem('userType')
-      
-    // }
-
-
     const formData = new FormData()
         for (let i = 0; i < value.length; i++) {
             formData.append(`dispute_files[${i}]`, value[i])
@@ -360,6 +351,16 @@ else{
     })
   }
   }
+
+
+const handleOpenArchivePost = ()=>{
+  setArchivePost(true)
+}
+
+
+const handleCloseArchivePost = ()=>{
+  setArchivePost(false)
+}
 
 
   
@@ -463,6 +464,29 @@ else{
    }
    
 
+  }
+
+
+
+
+  // Archive api
+  const archivePosts = ()=>{
+        let request = {
+          post_id:state.cardData[0].post_id,
+          status: 1
+        }
+
+      axios.post(`${baseUrl}/post-in-archive-unarchive`,request).then((response)=>{
+        toast.success('Post Has Been Moved Into Archive Successfully',{
+          autoClose: 1000,
+          theme: 'colored'
+        })
+        handleCloseArchivePost()
+        setState((prevState)=>({...prevState, cardDetail:false}))
+        getMyOrderList()
+      }).catch((error)=>{
+        console.log(error)
+      })
   }
 
 
@@ -599,6 +623,14 @@ else{
                             </div> 
                             {state.cardData[0].status === 3 && state.cardData[0].check_rating === 0?
                                  <button onClick={handleClickOpenRatingModal} className='btn btn-primary btn-lg btn-block make-an-offer-btn' >{myOrderData.myOrderTitleThirteen}</button>
+                                 : ""}
+
+{state.cardData[0].status === 3 ?
+                                 <button onClick={handleOpenArchivePost}  className='btn btn-primary btn-lg btn-block make-an-offer-btn' >Archive<span><ArchiveIcon/></span></button>
+                                 : ""}
+
+{state.cardData[0].status === 4?
+                                 <button onClick={handleOpenArchivePost}  className='btn btn-primary btn-lg btn-block make-an-offer-btn' >Archive<span><ArchiveIcon/></span></button>
                                  : ""}
                         </div>
                         <div className='p-2'>
@@ -962,6 +994,28 @@ else{
                                             <DialogActions className="text-center d-flex align-items-center justify-content-center">
                                                 <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={postDisputeByProvider} > {myOrderData.myOrderTitleFiftyNine} </button>
                                                 <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleCloseProviderDispute}>{myOrderData.myOrderTitleSixty}</button>
+                                            </DialogActions>
+                                        </Dialog>
+
+
+                                        <Dialog
+                                            fullWidth
+                                            open={archivePost}
+                                            onClose={handleCloseArchivePost}
+                                            aria-labelledby="alert-dialog-title"
+                                            aria-describedby="alert-dialog-description"
+                                        >
+                                            <DialogTitle id="alert-dialog-title" className="text-center">
+                                                {"Are you sure want to Archive this post ?"}
+                                            </DialogTitle>
+                                            <DialogContent className='text-center p-0 m-0'>
+                                                <DialogContentText id="alert-dialog-description">
+                                                    <ArchiveIcon style={{ color: '#0F52BA', fontSize: '100px' }} />
+                                                </DialogContentText>
+                                            </DialogContent>
+                                            <DialogActions className="text-center d-flex gap-4 align-items-center justify-content-center">
+                                                <button onClick={archivePosts} className="btn btn-primary btn-lg btn-block make-an-offer-btn"> {myOrderData.myOrderTitleFourtyFive} </button>
+                                                <button onClick={handleCloseArchivePost} className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" > {myOrderData.myOrderTitleFourtySix} </button>
                                             </DialogActions>
                                         </Dialog>
 
