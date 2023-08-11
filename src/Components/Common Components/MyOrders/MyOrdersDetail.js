@@ -1021,7 +1021,7 @@ const handleCloseArchivePost = ()=>{
 
 
 
-                                        {state.cardData[0].status == 2 && localStorage.getItem('userType') == '2' ? 
+                                        {state.cardData[0].status == 2 && localStorage.getItem('userType') == '2' && state.cardData[0].dispute_status === 'Cancel' ? 
                                         <Tooltip title={myOrderData.myOrderTitleSixtyOne} placement="top-start">
                          
                           <div>
@@ -1038,7 +1038,7 @@ const handleCloseArchivePost = ()=>{
                             :""
                             }
 
-{state.cardData[0].status == 2 && localStorage.getItem('userType') === '2' ? 
+{state.cardData[0].status == 2 && localStorage.getItem('userType') === '2' && state.cardData[0].dispute_status === 'Cancel' ? 
                                         <Tooltip title={myOrderData.myOrderTitleSixtyTwo} placement="top-start">
                          
                           <div>

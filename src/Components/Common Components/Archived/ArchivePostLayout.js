@@ -105,8 +105,11 @@ const ArchivePostLayout = ({ heading }) => {
 
     const getAllPosts = () => {
         setState((prevState) => ({ ...prevState, isLoadingOpen: true }));
-        axios.get(`${baseUrl}/get-archive-post`, {
-        }).then((response) => {
+        let request ={ 
+            user_id: localStorage.getItem('id'),
+            userType:localStorage.getItem('userType')
+        }
+        axios.post(`${baseUrl}/get-archive-post`, request).then((response) => {
             if (response.data.success) {
                 setState((prevState) => ({ ...prevState, allTaskList: response.data.Data, isLoadingOpen: false }));
                 if (response.data.Data.length === 0) {

@@ -71,11 +71,11 @@ const MyOrdersLayout = () => {
         })
 
         let completedArray = state.myOrderList.filter(function (completedElement) {
-            return completedElement.order_status === 1 
+            return completedElement.post_status === 3
         })
 
         let disputedArray = state.myOrderList.filter(function(disputedElement){
-            return disputedElement.order_status === 4
+            return disputedElement.post_status === 4
         })
 
 

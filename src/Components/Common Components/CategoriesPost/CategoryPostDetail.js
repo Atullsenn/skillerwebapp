@@ -433,10 +433,10 @@ const CategoryPostDetail = ({ state, setState, Map }) => {
                                 <p className='task-status d-flex align-items-center'>{state.cardData[0].status === 0 ? 'Pending' : state.cardData[0].status === 1 ? 'In Progress' : state.cardData[0].status === 2 ? 'Cancelled' : state.cardData[0].status === 3 && 'Completed'}</p>
                             </div>
                         </div>
-                        <div className='p-2'>
+                        {/* <div className='p-2'>
                             <h4 className='task-status-heading text-uppercase heading-color'>{state.cardData[0].postTitle}</h4>
                             {Map && <p className='p-0 m-0 d-flex returntomap align-items-center' onClick={() => { setState((prevState) => ({ ...prevState, showMap: true, cardDetail: false })); }}><ArrowBackIcon className="follow-icon" /> Return to map</p>}
-                        </div>
+                        </div> */}
                         <div className='d-flex'>
                             <div className='d-flex align-items-center post-location-data w-50'>
                                 <NavLink to={`user-profile/${state.cardData[0].user_id}`}>

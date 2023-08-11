@@ -291,7 +291,9 @@ const PostATasker = () => {
 
     const postImageRemove = (index)=>{
         imagesPreview.splice(index,1);
+        filess.splice(index,1)
         setImagesPreview([...imagesPreview])
+        setFiless([...filess])
       }
 
     const getStateList = () => {
