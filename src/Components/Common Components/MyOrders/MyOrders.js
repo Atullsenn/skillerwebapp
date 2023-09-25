@@ -70,6 +70,7 @@ const MyOrders = ({ state, setState, getMyOrderList }) => {
             user: localStorage.getItem('id'),
             userType: localStorage.getItem('userType')
         }).then((response) => {
+            // console.log(response, "check responseeeeeeeeeeee")
             if (response.data.success) {
                 setState((prevState) => ({ ...prevState, cardData: response.data.Data, showDetailedLoading: false }));
                 if (response.data.Data[0].status === 1) {
@@ -440,7 +441,7 @@ const MyOrders = ({ state, setState, getMyOrderList }) => {
                                                                 <Divider style={{ backgroundColor: 'gray' }} />
                                                                 <div className='pt-2 d-flex align-items-center justify-content-between'>
                                                                     <div className='px-2'>
-                                                                        <span className="openColor">{item.dispute_status}</span>
+                                                                        <span className="openColor">{item.order_status == 4 ? "Pending" : item.order_status == 2 ? "Cancelled" :""}</span>
                                                                     </div>
                                                                     <div className='px-2 d-flex align-items-center justify-content-center'>
                                                                         <span className='ps-2' style={{ fontSize: '14px', fontWeight: 'bold' }}>{item.firstName + ' ' + item.lastName}</span>

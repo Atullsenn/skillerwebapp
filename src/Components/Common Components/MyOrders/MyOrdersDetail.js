@@ -463,10 +463,10 @@ const handleCloseArchivePost = ()=>{
       setDisputeFiles("");
    }
    
-
   }
 
 
+  
 
 
   // Archive api
@@ -488,6 +488,8 @@ const handleCloseArchivePost = ()=>{
         console.log(error)
       })
   }
+
+  
 
 
     return (
@@ -619,7 +621,7 @@ const handleCloseArchivePost = ()=>{
                     <div className='col-lg-8'>
                         <div className='d-flex align-items-center justify-content-between task-status-main-area p-2'>
                             <div className='d-flex align-items-center task-status-area'>
-                                <p className='task-status d-flex align-items-center'>{state.cardData[0].status === 1 ? 'In Progress' : state.cardData[0].status === 3 ? 'Completed': state.cardData[0].dispute_status === 'Pending' ? 'Pending' : state.cardData[0].dispute_status === 'Cancel'? 'Cancelled' : state.cardData[0].dispute_status === "Resolved" && 'Resolved'}</p>
+                                <p className='task-status d-flex align-items-center'>{state.cardData[0].status === 1 ? 'In Progress' : state.cardData[0].status === 3 ? 'Completed': state.cardData[0].dispute_status === 'Pending' ? 'Pending' : state.cardData[0].order_status === 'Cancel'? 'Cancelled' : state.cardData[0].dispute_status === "Resolved" && 'Resolved'}</p>
                             </div> 
                             {state.cardData[0].status === 3 && state.cardData[0].check_rating === 0?
                                  <button onClick={handleClickOpenRatingModal} className='btn btn-primary btn-lg btn-block make-an-offer-btn' >{myOrderData.myOrderTitleThirteen}</button>
@@ -629,7 +631,7 @@ const handleCloseArchivePost = ()=>{
                                  <button onClick={handleOpenArchivePost}  className='btn btn-primary btn-lg btn-block make-an-offer-btn' >Archive<span><ArchiveIcon/></span></button>
                                  : ""}
 
-{state.cardData[0].status === 4?
+{state.cardData[0].status === 2 && state.cardData[0].dispute_status === 'Cancel'?
                                  <button onClick={handleOpenArchivePost}  className='btn btn-primary btn-lg btn-block make-an-offer-btn' >Archive<span><ArchiveIcon/></span></button>
                                  : ""}
                         </div>
@@ -920,7 +922,7 @@ const handleCloseArchivePost = ()=>{
                                             </DialogContent>
                                             <DialogActions className="text-center d-flex align-items-center justify-content-center">
                                                 <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={handleOpenProviderDispute}>{myOrderData.myOrderTitleFiftyOne}</button>
-                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleCloseDispute}> {myOrderData.myOrderTitleFiftyOne} </button>
+                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleCloseDispute}> {myOrderData.myOrderTitleFiftyTwo} </button>
                                             </DialogActions>
                                         </Dialog>
 
@@ -1021,7 +1023,7 @@ const handleCloseArchivePost = ()=>{
 
 
 
-                                        {state.cardData[0].status == 2 && localStorage.getItem('userType') == '2' && state.cardData[0].dispute_status === 'Cancel' ? 
+                                        {state.cardData[0].order_status == 4 && localStorage.getItem('userType') == 2 ? 
                                         <Tooltip title={myOrderData.myOrderTitleSixtyOne} placement="top-start">
                          
                           <div>
@@ -1038,7 +1040,7 @@ const handleCloseArchivePost = ()=>{
                             :""
                             }
 
-{state.cardData[0].status == 2 && localStorage.getItem('userType') === '2' && state.cardData[0].dispute_status === 'Cancel' ? 
+{state.cardData[0].order_status == 4 && localStorage.getItem('userType') == 2 ? 
                                         <Tooltip title={myOrderData.myOrderTitleSixtyTwo} placement="top-start">
                          
                           <div>
@@ -1054,7 +1056,7 @@ const handleCloseArchivePost = ()=>{
                             
                             :""
                             }
-                        {state.cardData[0].status === 1?
+                        {state.cardData[0].order_status === 0?
                         <>
                         {localStorage.getItem('userType') == 1?
                         <Tooltip title={myOrderData.myOrderTitleSixtyThree} placement="top-start">

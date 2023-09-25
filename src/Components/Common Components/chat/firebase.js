@@ -32,6 +32,15 @@ const firebaseConfigg = {
     storageBucket: "react-chat-d709b.appspot.com",
     messagingSenderId: "630687946313",
     appId: "1:630687946313:web:d27ec33346923854cc1198"
+
+
+    // apiKey: "AIzaSyBk4ikzpBvcXHARCzBvC4nCZseWzFuehxI",
+    // authDomain: "skiller-261b6.firebaseapp.com",
+    // projectId: "skiller-261b6",
+    // storageBucket: "skiller-261b6.appspot.com",
+    // messagingSenderId: "463552141536",
+    // appId: "1:463552141536:web:de48608a9797674ddad885",
+    // measurementId: "G-ZDDWPJSMR4"
 };
 
 // Initialize Firebase

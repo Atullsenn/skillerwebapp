@@ -54,21 +54,25 @@ const RegisterType = ({ state, setState }) => {
         setOpenCancelModal(true);
     };
 
+    
+
     const handleSocialMediaLogin = () => {
         handleLoadingToggle()
+        const req = {
+            firstName: state.faceBookDetailRespose && state.faceBookDetailRespose._tokenResponse.firstName,
+            lastName: state.faceBookDetailRespose && state.faceBookDetailRespose._tokenResponse.lastName,
+            emailAddress: state.faceBookDetailRespose && state.faceBookDetailRespose._tokenResponse.email,
+            contact: state.faceBookDetailRespose && state.faceBookDetailRespose.user.phoneNumber,
+            userType: state.userType,
+            facebook_id: state.faceBookDetailRespose && state.faceBookDetailRespose._tokenResponse.localId,
+            category_id: state.categoryId,
+            account_holder_name: state.accountHolderName,
+            account_number: state.accountNumber,
+            bsb: state.bsb,
+        }
+        
         if (state.isSocialType === 1) {
-            axios.post(`${baseUrl}/userRegisterWithFacebook`, {
-                firstName: state.faceBookDetailRespose && state.faceBookDetailRespose._tokenResponse.firstName,
-                lastName: state.faceBookDetailRespose && state.faceBookDetailRespose._tokenResponse.lastName,
-                emailAddress: state.faceBookDetailRespose && state.faceBookDetailRespose._tokenResponse.email,
-                contact: state.faceBookDetailRespose && state.faceBookDetailRespose.user.phoneNumber,
-                userType: state.userType,
-                facebook_id: state.faceBookDetailRespose && state.faceBookDetailRespose._tokenResponse.localId,
-                category_id: state.categoryId,
-                account_holder_name: state.accountHolderName,
-                account_number: state.accountNumber,
-                bsb: state.bsb,
-            }).then((response) => {
+            axios.post(`${baseUrl}/userRegisterWithFacebook`,req ).then((response) => {
                 if (response.data.success) {
                     handleLoadingClose()
                     handleClickOpenCancelModal()
@@ -115,7 +119,7 @@ const RegisterType = ({ state, setState }) => {
 
     const handleSignUpUser = () => {
         handleLoadingToggle()
-        axios.post(`${baseUrl}/user-register`, {
+        const request =  {
             fname: state.firstName,
             lname: state.lastName,
             email: state.email,
@@ -130,7 +134,9 @@ const RegisterType = ({ state, setState }) => {
             account_holder: state.accountHolderName,
             account_number: state.accountNumber,
             bsb: state.bsb,
-        }).then((response) => {
+        }
+       
+        axios.post(`${baseUrl}/new_user_register`, request).then((response) => {
             if (response.data.success) {
                 handleLoadingClose()
                 handleClickOpenCancelModal()
