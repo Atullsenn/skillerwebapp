@@ -75,6 +75,7 @@ const Menu = (props) => {
   const anchorRef = useRef(null);
   const userDetail = getUserDetail()
 
+
   const handleToggle = () => {
     setState(prevState => ({ ...prevState, isOpen: !state.isOpen, showHideNotificationArea: 'none', showHideChatNotification: 'none' }));
   };
@@ -460,7 +461,7 @@ const redirectNotification = (notification_type, postId)=>{
     navigate("/my-posts", { state: { post_id: postId, notificationType: 6 } })
   }
   else if(notification_type == 7){
-    navigate("/browse-requests", { state: { post_id: postId, notificationType: 7 } })
+    navigate("/my-order", { state: { post_id: postId, notificationType: 7 } })
   }
   else if(notification_type == 8){
     navigate("/my-order", {state:{post_id: postId, notificationType: 8}})

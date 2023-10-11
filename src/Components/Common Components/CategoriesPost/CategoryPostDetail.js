@@ -469,7 +469,7 @@ const CategoryPostDetail = ({ state, setState, Map }) => {
                                         <Avatar src={Images.two} sx={{ width: 45, height: 45 }} />
                                     </NavLink>
                                     <div className='px-1 posted-area'>
-                                        <p className='p-0 m-0'>ASSIGNED BY</p>
+                                        <p className='p-0 m-0'>ASSIGNED TO</p>
                                         <a className='p-0 m-0'>Dein Markash</a>
                                     </div>
                                 </div>

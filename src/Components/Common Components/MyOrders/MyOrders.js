@@ -59,9 +59,7 @@ const MyOrders = ({ state, setState, getMyOrderList }) => {
     const theme = useTheme();
     const [search, setSearch] = useState("")
     const [isChatOpen, setIsChatOpen] = useState()
-
     let location = useLocation();
- 
 
     const getPostDetailll = (id) => {
         setState((prevState) => ({ ...prevState, showDetailedLoading: true, chatPostId: id }));
@@ -156,6 +154,12 @@ const MyOrders = ({ state, setState, getMyOrderList }) => {
          setActiveClass(location.state.post_id); 
          setState((prevState) => ({ ...prevState, cardDetail: true, defaultActiveKey: 'In-Progress' })) 
         }
+
+        if(location.state && location.state.post_id && location.state.notificationType == 7){
+            getPostDetailll(location.state.post_id);
+             setActiveClass(location.state.post_id); 
+             setState((prevState) => ({ ...prevState, cardDetail: true, defaultActiveKey: 'Completed' })) 
+            }
 
         if(location.state && location.state.post_id && location.state.notificationType == 8){
             getPostDetailll(location.state.post_id); 

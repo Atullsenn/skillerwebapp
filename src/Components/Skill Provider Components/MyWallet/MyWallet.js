@@ -45,7 +45,7 @@ const MyWallet = () => {
             user:localStorage.getItem('id')
         }
         axios.post(`${baseUrl}/get-user-wallet`,request).then((response)=>{
-            // console.log(response, "responseeee")
+            // console.log(response, "Checking Response For Wallet")
             setState(response.data.Data.record)
             setTotalWallet(response.data.Data.total_wallet)
 
@@ -67,13 +67,49 @@ const MyWallet = () => {
         setPaymentType(event.target.value);
     };
 
+    // const withDrawAmount = ()=>{
+    //     let request = {
+    //         user: localStorage.getItem('id'),
+    //         amount: amount,
+    //         payment_type:paymentType
+    //     }
+
+
+    //     if(amount == ""){
+    //     toast.warn('Please Enter Amount',{
+    //         autoClose: 1000,
+    //         theme:'colored'
+    //     })
+    //     }
+    //     if(paymentType === ""){
+    //         toast.warn('Please Select Payment Type',{
+    //             autoClose: 1000,
+    //             theme:'colored'
+    //         })
+    //         }
+
+    //         else{
+
+    //     axios.post(`${baseUrl}/withdraw-wallet-amount`, request).then((response)=>{
+    //         if(response.data.success){
+    //             toast.success('Success',{
+    //                autoClose:1000,
+    //                theme:'colored'
+    //             })
+    //         }
+            
+    //     }).catch((error)=>{
+    //         console.log(error)
+    //     })
+    // }
+    // }
+
+
     const withDrawAmount = ()=>{
         let request = {
-            user: localStorage.getItem('id'),
-            amount: amount,
-            payment_type:paymentType
+            provider_id: localStorage.getItem('id'),
+            amount: amount
         }
-
 
         if(amount == ""){
         toast.warn('Please Enter Amount',{
@@ -81,27 +117,19 @@ const MyWallet = () => {
             theme:'colored'
         })
         }
-        if(paymentType === ""){
-            toast.warn('Please Select Payment Type',{
-                autoClose: 1000,
-                theme:'colored'
-            })
-            }
 
-            else{
-
-        axios.post(`${baseUrl}/withdraw-wallet-amount`, request).then((response)=>{
+        axios.post(`${baseUrl}/create-external-bank`, request).then((response)=>{
+            // console.log(response, "Check response")
             if(response.data.success){
                 toast.success('Success',{
-                   autoClose:1000,
-                   theme:'colored'
+                    theme:'colored',
+                    autoClose: 1000
                 })
+                return;
             }
-            
         }).catch((error)=>{
-            console.log(error)
+            console.log(Error)
         })
-    }
     }
 
 
@@ -245,7 +273,7 @@ const MyWallet = () => {
                                     </FormControl>
                                     
                                 </div>
-                                <div className='mt-3 px-4 d-flex align-items-center justify-content-center' style={{margin: "auto", width:"50%", paddingBottom:"10px"}}>
+                                {/* <div className='mt-3 px-4 d-flex align-items-center justify-content-center' style={{margin: "auto", width:"50%", paddingBottom:"10px"}}>
                                 <FormControl sx={{width:'73%'}}>
                             <InputLabel id="demo-simple-select-label">{myWalletData.walletDataEleven}</InputLabel>
                            <Select
@@ -259,7 +287,7 @@ const MyWallet = () => {
                             <MenuItem value={1}>{myWalletData.walletDataThirteen}</MenuItem>
                             </Select>
                        </FormControl>
-                        </div>
+                        </div> */}
                                 <div className='mt-3 px-4 d-flex align-items-center justify-content-center' style={{margin: "auto", width:"50%", paddingBottom:"50px"}}>
                                     <FormControl sx={{ width: '73%' }}>
                                         <InputLabel htmlFor="outlined-adornment-amount">{myWalletData.walletDataFourteen}</InputLabel>
@@ -354,7 +382,19 @@ const MyWallet = () => {
                                                         </div>
                                                         <div className='text-right'>
                                                         {/* <p className='transaction-para p-0 m-0 blue'>Bid amount 6477</p> */}
-                                                            <p className='transaction-para p-0 m-0 blue'>{myWalletData.walletDataTwentySix} ($ {Item.bid_amount}) - {myWalletData.walletDataTwentySeven} ($ {Item.commission_amount}) = $ {Item.amount}</p>
+                                                            {/* <p className='transaction-para p-0 m-0 blue'>{myWalletData.walletDataTwentySix} ($ {Item.bid_amount}) - {myWalletData.walletDataTwentySeven} ($ {Item.commission_amount}) = $ {Item.amount}</p> */}
+                                                            {Item.refundToSeeker ?
+                                                            <p className='transaction-para p-0 m-0 blue'>Bid Amount = $ {Item.bid_amount}</p>:""
+                                    }
+                                     {Item.refundToSeeker ?
+                                                            <p className='transaction-para p-0 m-0 blue'>Refund To Seeker = <span style={{color:"red", fontSize:'18px'}}>-</span> $ {Item.refundToSeeker}</p>:  <p className='transaction-para p-0 m-0 blue'>{myWalletData.walletDataTwentySix} ($ {Item.bid_amount}) - {myWalletData.walletDataTwentySeven} ($ {Item.commission_amount}) = $ {Item.amount}</p>
+                                    }
+                                    {Item.refundToSeeker ?
+                                                            <p className='transaction-para p-0 m-0 blue'>Admin Charges = <span style={{color:"red", fontSize:'18px'}}>-</span> $ {Item.commission_amount}</p>:""
+                                    }
+                                     {Item.refundToSeeker ?
+                                                            <p className='transaction-para p-0 m-0 blue'>Total Amount = $ {Item.amount}</p>:""
+                                    }
                                                             <p className='transaction-para mt-1'>Status : <span className={`${Item.status === 'Credit' ? 'green' : Item.status === 'Debit' ? 'red' : Item.status === 'Pending' ? 'yellow' :""}`}> {Item.status === 'Credit' ? <AddIcon style={{ fontSize: '12px' }} /> : Item.status === 'Debit' ? <RemoveIcon style={{ fontSize: '12px' }} /> : ''}{Item.status}</span></p>
                                                         </div>
                                                     </div>
