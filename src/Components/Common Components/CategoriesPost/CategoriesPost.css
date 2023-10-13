@@ -1,0 +1,69 @@
+.one-box-card-area {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.main-category-profile-card {
+    border: 1px solid #cdcdcd87;
+    box-shadow: rgb(17 17 26 / 5%) 0px 1px 0px, rgb(17 17 26 / 10%) 0px 0px 8px;
+    border-radius: 10px;
+    width: 345px;
+    margin: 10px;
+    height: 435px;
+    position: relative;
+}
+
+.main-category-profile-card:hover {
+    box-shadow: rgb(17 17 26 / 10%) 0px 1px 0px, rgb(17 17 26 / 10%) 0px 8px 24px, rgb(17 17 26 / 10%) 0px 16px 48px;
+    border: 1px solid #188dc7;
+}
+
+.ratingFont {
+    font-size: 18px !important;
+}
+
+.ratingNumberFont {
+    font-size: 14px;
+}
+
+.latestReviewsPara {
+    font-size: 15px;
+    line-height: initial;
+}
+
+.requestBtnDiv {
+    position: absolute;
+    bottom: 25px;
+    width: 86%;
+}
+
+.RequestQuoteBtn {
+    color: #ffffff;
+    border: 2px solid #188dc7;
+    padding: 4px 20px;
+    background: #188dc7;
+    transition: .5s;
+    border-radius: 20px;
+    font-size: 16px;
+}
+
+.RequestQuoteBtn:hover {
+    color: black;
+    border: 2px solid #188dc7;
+    background: #8fc1e2;
+}
+
+.category-verified-badges {
+    color: #188dc7;
+}
+
+.filter-scroller-bar .MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation16.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.css-4t3x6l-MuiPaper-root-MuiDrawer-paper {
+    top: 68px;
+    border-radius: 5px;
+}
+
+.filter-scroller-bar .MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation16.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.css-wf16b5 {
+    top: 68px;
+    border-radius: 5px;
+}

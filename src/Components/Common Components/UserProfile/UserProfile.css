@@ -1,0 +1,105 @@
+.user-profile-online-btn {
+    color: #1dbf73;
+    border: 1px solid #1dbf73;
+    padding: 1px 20px;
+    background: #fff;
+    transition: .5s;
+    border-radius: 20px;
+    font-size: 10px;
+}
+
+.user-profile-online-btn:hover {
+    color: #ffffff;
+    border: 1px solid #188dc7;
+    background: #1dbf73;
+}
+
+.user-profile-contect-me {
+    color: #ffffff;
+    border: 2px solid #188dc7;
+    padding: 4px 20px;
+    background: #188dc7;
+    transition: .5s;
+    border-radius: 20px;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.user-profile-contect-me:hover {
+    color: black;
+    border: 2px solid #188dc7;
+    background: #8fc1e2;
+}
+
+.user-profile-skill {
+    display: inline-block;
+    border-radius: 10px;
+    min-width: 40px;
+    text-align: center;
+    padding: 5px 12px;
+    margin: 0 10px 10px 0;
+    border: 1px solid #e4e5e7;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.user-profile-skill:hover {
+    border-radius: 25px;
+    border: 1px solid #188dc7;
+    cursor: pointer;
+}
+
+.main-left-user-profile-card {
+    border: 1px solid #cdcdcd87;
+    box-shadow: rgb(17 17 26 / 5%) 0px 1px 0px, rgb(17 17 26 / 10%) 0px 0px 8px;
+    border-radius: 10px;
+}
+
+.user-profile-font-weight {
+    font-weight: 600;
+}
+
+.user-profile-flag-text-area {
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.rating-icon-star .css-ryrseu-MuiRating-root {
+    font-size: 16px;
+}
+
+.status-day-review {
+    font-size: 12px;
+    color: #188dc7;
+    font-weight: 700;
+}
+
+.helpful {
+    margin-top: 10px;
+}
+
+.helpful p {
+    font-size: 14px;
+}
+
+.user-review-text {
+    margin-top: 5px;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.description-text {
+    font-size: 16px;
+    line-height: 22px;
+}
+
+.review-heading-seller {
+    margin-top: 12px;
+}
+
+.icon-common-class {
+    font-size: 18px !important;
+    margin-right: 3px;
+    color: #188dc7;
+}

@@ -1,0 +1,81 @@
+.main-wallet-div-area {
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.my-wallet-section {
+    border-bottom: 1px solid gray;
+}
+
+.my-wallet-heading {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.withdrawal-btn {
+    color: #ffffff;
+    border: 2px solid #188dc7;
+    padding: 2px 20px;
+    font-size: 16px;
+    background: #188dc7;
+    transition: .5s;
+    border-radius: 20px;
+    margin-left: 20px;
+}
+
+.withdrawal-btn:hover {
+    color: black;
+    border: 2px solid #188dc7;
+    background: #8fc1e2;
+}
+
+.main-transaction-div-area {
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.transaction-para {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.main-transaction-history-div {
+    max-height: 450px;
+    overflow-y: scroll;
+}
+
+.inner-transaction-history-div {
+    background-color: #ffffff;
+}
+
+.main-transaction-history-div::-webkit-scrollbar {
+    width: 10px;
+}
+
+.main-transaction-history-div::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgb(195, 195, 195);
+    border-radius: 20px;
+}
+
+.main-transaction-history-div::-webkit-scrollbar-thumb {
+    background: #8fc1e2;
+    border-radius: 10px;
+}
+
+.green {
+    color: #86c225;
+}
+
+.red {
+    color: red;
+}
+
+.yellow{
+    color: goldenrod;
+}
+
+.main-card-payment-method {
+    cursor: pointer;
+}
+
+

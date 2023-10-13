@@ -1,0 +1,116 @@
+.contact3 {
+    font-family: "Montserrat", sans-serif;
+    color: #8d97ad;
+    font-weight: 300;
+}
+
+.contact3 h1,
+.contact3 h2,
+.contact3 h3,
+.contact3 h4,
+.contact3 h5,
+.contact3 h6 {
+    color: #3e4555;
+}
+
+.main-contact-us-card-div {
+    flex-wrap: wrap;
+}
+
+.contact3 .font-weight-medium {
+    font-weight: 500;
+}
+
+.contact3 .card-shadow {
+    -webkit-box-shadow: 0px 0px 30px rgba(115, 128, 157, 0.1);
+    box-shadow: 0px 0px 30px rgba(115, 128, 157, 0.1);
+}
+
+.card-main-box {
+    padding: 40px 20px;
+    border-radius: 10px;
+    width: 30%;
+    background-color: #fff;
+    box-shadow: 0px 0px 40px #d2e4ed;
+    margin-bottom: 25px;
+}
+
+.card-icon-box {
+    height: 45px;
+    width: 100%;
+}
+
+.card-icon-box .card-main-icon {
+    height: 100%;
+    width: 100%;
+    color: #188dc7;
+}
+
+.card-main-label {
+    align-items: center;
+    font-size: 20px;
+    color: #000;
+    font-weight: 600;
+    line-height: 36px;
+}
+
+.card-main-text {
+    color: #188dc7;
+    line-height: 25px;
+    font-size: 15px;
+}
+
+.contact-us-btn {
+    color: #ffffff;
+    border: 2px solid #188dc7;
+    padding: 4px 20px;
+    background: #188dc7;
+    transition: .5s;
+    border-radius: 20px;
+    font-size: 16px;
+    margin-top: 18px;
+}
+
+.contact-us-btn:hover {
+    color: black;
+    border: 2px solid #188dc7;
+    background: #8fc1e2;
+}
+
+.contact-us-submit-btn {
+    color: #ffffff;
+    border: 2px solid #188dc7;
+    padding: 4px 20px;
+    background: #188dc7;
+    transition: .5s;
+    border-radius: 20px;
+    font-size: 16px;
+    margin-top: 6px;
+}
+
+.contact-us-submit-btn:hover {
+    color: black;
+    border: 2px solid #188dc7;
+    background: #8fc1e2;
+}
+
+.contact-us-img {
+    height: 100%;
+}
+
+.contact-us-img img {
+    border-radius: 8px;
+    height: 100%;
+    object-fit: cover;
+}
+
+.disableBtn {
+    margin-top: 6px;
+    color: #000;
+    background-color: #b9b9b996;
+    padding: 4px 20px;
+    font-size: 16px;
+    transition: .5s;
+    border-radius: 20px;
+    border: 2px solid #b9b9b996;
+}

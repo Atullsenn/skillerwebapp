@@ -1,0 +1,71 @@
+.post-a-tasker-upload-file-section-area span .ant-upload-drag {
+    border: 2px solid #c4c4c4;
+    border-radius: 35px;
+    padding: 10px 30px 10px 30px;
+}
+
+.upload-files-btn {
+    color: #ffffff;
+    border: 2px solid #188dc7;
+    padding: 4px 20px;
+    background: #188dc7;
+    transition: .5s;
+    border-radius: 20px;
+    font-size: 16px;
+    margin-top: 18px;
+}
+
+.upload-files-btn:hover {
+    color: black;
+    border: 2px solid #188dc7;
+    background: #8fc1e2;
+}
+
+.post-a-tasker-upload-file-section-area span .ant-upload-list-item-info span {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0px;
+}
+
+.post-a-tasker-upload-file-section-area span .ant-upload-list-item-info .picture {
+    margin: 0px !important;
+}
+
+.post-a-tasker-upload-file-section-area span .ant-upload-list-item-info .picture button {
+    width: 40px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    border: none;
+    color: #ffffff;
+    border: 2px solid #188dc7;
+    padding: 0px 16px;
+    background: #188dc7;
+    transition: .5s;
+    border-radius: 12px;
+    font-size: 15px;
+}
+
+.post-a-tasker-upload-file-section-area span .ant-upload-list-item-info .picture button:hover {
+    color: black;
+    border: 2px solid #188dc7;
+    background: #8fc1e2;
+}
+
+.image-tab-panel .MuiBox-root .MuiTypography-root .sc-AxiKw {
+    border-radius: 8px;
+    border: 2px solid #c4c4c4 !important;
+}
+
+.fix-side-remove-padding {
+    padding: 12px 16px !important;
+}
+
+.photoIconnn:hover{
+    color: #666666 !important;
+}
+
+.postImageIconn:hover{
+    color: #000000 !important;
+}

@@ -1,0 +1,42 @@
+.Loginanimation {
+    animation: Loginanimation 2s ease-in-out infinite alternate-reverse both;
+}
+
+@keyframes Loginanimation {
+    0% {
+        transform: translateY(20px);
+    }
+
+    100% {
+        transform: translateY(-20px);
+    }
+}
+
+.Otpanimation {
+    animation: Otpanimation 5s ease-in-out infinite alternate-reverse both;
+}
+
+@keyframes Otpanimation {
+    0% {
+        transform: translateX(50px);
+    }
+
+    100% {
+        transform: translateX(-50px);
+    }
+}
+
+
+.Signupanimation {
+    animation: Signupanimation 2s ease-in-out infinite alternate-reverse both;
+}
+
+@keyframes Signupanimation {
+    0% {
+        transform: translateY(20px);
+    }
+
+    100% {
+        transform: translateY(-20px);
+    }
+}

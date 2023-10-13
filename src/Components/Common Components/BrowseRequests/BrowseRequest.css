@@ -1,0 +1,296 @@
+.card-main-div {
+    padding-top: 3px;
+    background-color: #fff;
+    box-shadow: 0 1px rgb(187 194 220 / 60%);
+    border-left: 2px solid #188dc7;
+    border-top: 1px solid #cfcbcb;
+    margin: 0px 0px 20px 0px !important;
+    padding: 10px 0px 10px 0px;
+    border-right: 1px solid #cfcbcb;
+    cursor: pointer;
+}
+
+.card-main-div:hover {
+    box-shadow: 3px 5px 8px rgb(187 194 220 / 60%);
+    opacity: 1;
+    text-decoration: none;
+}
+
+.dollerPrice {
+    color: black;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.openColor {
+    color: #188dc7;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.fontServerandDate {
+    font-size: 14px;
+}
+
+.left-main-Div {
+    max-height: 585px;
+    overflow: auto;
+    overflow-x: hidden;
+    font-family: 'Mulish', sans-serif !important;
+}
+
+.left-main-Div::-webkit-scrollbar {
+    width: 10px;
+}
+
+.left-main-Div::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgb(195, 195, 195);
+    border-radius: 20px;
+}
+
+.left-main-Div::-webkit-scrollbar-thumb {
+    background: #8fc1e2;
+    border-radius: 10px;
+}
+
+.right-main-div {
+    height: 585px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.card-main-div h4 {
+    margin: 0px 0px 10px 0px !important;
+    color: #000;
+}
+
+.icon {
+    font-size: 18px !important;
+}
+
+.main-filter-area {
+    padding: 0px 110px 0px 110px;
+}
+
+.main-filter-area .MuiFormControl-root {
+    height: 34px;
+}
+
+.backBtn {
+    color: #ffffff;
+    border: 2px solid #188dc7;
+    padding: 4px 20px;
+    background: #188dc7;
+    transition: .5s;
+    margin-left: 11px;
+    border-radius: 20px;
+}
+
+.backBtn:hover {
+    color: black;
+    border: 2px solid #188dc7;
+    background: #8fc1e2;
+}
+
+.browser-request-range-slider .css-eg0mwd-MuiSlider-thumb {
+    width: 14px;
+    height: 14px;
+}
+
+.filter-heading {
+    margin-bottom: 10px !important;
+    color: #000;
+    font-size: 20px;
+}
+
+.filter-cross-back-icon {
+    cursor: pointer;
+    color: #188dc7;
+}
+
+.filter-cross-back-icon:hover {
+    color: #fff;
+    background: #8fc1e2;
+    border: 0.5px solid #fff;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.my-task-main-tabs-area .MuiTabs-flexContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.my-task-tab-panel .MuiBox-root {
+    padding: 10px 0px;
+}
+
+.my-task-re-post-btn {
+    color: #ffffff;
+    border: 2px solid #188dc7;
+    padding: 1px 10px;
+    background: #188dc7;
+    transition: .5s;
+    border-radius: 20px;
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+.my-task-re-post-btn:hover {
+    color: black;
+    border: 2px solid #188dc7;
+    background: #8fc1e2;
+}
+
+.please-confirm-my-task-re-post-btn {
+    color: #ffffff;
+    border: 2px solid #188dc7;
+    padding: 4px 15px;
+    background: #188dc7;
+    transition: .5s;
+    border-radius: 20px;
+    margin-top: 15px;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.please-confirm-my-task-re-post-btn:hover {
+    color: black;
+    border: 2px solid #188dc7;
+    background: #8fc1e2;
+}
+
+.my-task-right-main-div {
+    height: 645px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.my-task-right-main-div::-webkit-scrollbar {
+    width: 10px;
+}
+
+.my-task-right-main-div::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgb(195, 195, 195);
+    border-radius: 20px;
+}
+
+.my-task-right-main-div::-webkit-scrollbar-thumb {
+    background: #8fc1e2;
+    border-radius: 10px;
+}
+
+.no-post-available {
+    background-color: rgb(143, 193, 226);
+    height: fit-content;
+    text-align: center;
+    margin: 2% auto;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#fill-tab-example-tab-Pending.active,
+#fill-tab-example-tab-In-Progress.active,
+#fill-tab-example-tab-Cancelled.active,
+#fill-tab-example-tab-Disputed.active,
+#fill-tab-example-tab-Completed.active {
+    border: 1px solid #188dc7;
+    border-bottom: 3px solid #188dc7;
+    color: #188dc7;
+    background-color: rgb(236, 236, 236);
+}
+
+#fill-tab-example-tab-Pending,
+#fill-tab-example-tab-In-Progress,
+#fill-tab-example-tab-Cancelled,
+#fill-tab-example-tab-Disputed,
+#fill-tab-example-tab-Completed {
+    color: gray;
+}
+
+.small-layout-design li button {
+    padding: 5px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.filter-scroller-bar .MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation16.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.css-wf16b5::-webkit-scrollbar,
+.filter-scroller-bar .MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation16.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.css-4t3x6l-MuiPaper-root-MuiDrawer-paper::-webkit-scrollbar {
+    width: 10px;
+}
+
+.filter-scroller-bar .MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation16.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.css-wf16b5::-webkit-scrollbar-track,
+.filter-scroller-bar .MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation16.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.css-4t3x6l-MuiPaper-root-MuiDrawer-paper::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgb(195, 195, 195);
+    border-radius: 20px;
+}
+
+.filter-scroller-bar .MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation16.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.css-wf16b5::-webkit-scrollbar-thumb,
+.filter-scroller-bar .MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation16.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.css-4t3x6l-MuiPaper-root-MuiDrawer-paper::-webkit-scrollbar-thumb {
+    background: #8fc1e2;
+    border-radius: 10px;
+}
+
+.post-title-in-cardsection {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.filter-scroller-bar .MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation16.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.css-4t3x6l-MuiPaper-root-MuiDrawer-paper {
+    top: 68px;
+    border-radius: 5px;
+}
+
+.filter-scroller-bar .MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation16.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.css-wf16b5 {
+    top: 68px;
+    border-radius: 5px;
+}
+
+.skills-input .WAMuiChipInput-inputRoot-7.WAMuiChipInput-outlined-10 {
+    padding-top: 4px !important;
+}
+
+.skills-input .jss7.jss10 {
+    padding-top: 4px !important;
+}
+
+
+.paginationBttns {
+    width: 95%;
+    /* height: 40px; */
+    list-style: none;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+  }
+  
+  .paginationBttns a {
+    padding: 0px;
+    margin: 10px;
+    border-radius: 20px;
+    /* border: 1px solid #2b2eff; */
+    color: #188dc7;
+    cursor: pointer;
+  }
+  
+  /* .paginationBttns a:hover {
+    color: white;
+    background-color: var(--bs-pink);
+  } */
+  
+  .paginationActive a {
+    color: #fff !important;
+    background-color: transparent;
+  }
+  
+  .paginationActive {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #188dc7;
+    line-height: 30px;
+    text-align: center;
+  }
+  
