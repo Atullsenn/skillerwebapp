@@ -212,6 +212,8 @@ function addZero(i) {
     if (i < 10) {i = "0" + i}
     return i;
   }
+
+
   
   
 
@@ -719,7 +721,7 @@ const PostATasker = () => {
 
      const blockInvalidChar = e => ['e', 'E', '+', '-'].includes(e.key) && e.preventDefault();
 
-
+    
 
     return (
         <>
@@ -855,7 +857,7 @@ const PostATasker = () => {
                                 <h5>From <span style={{ color: 'red' }}>*</span></h5>
                                 <div style={{display:"flex", flexDirection:"row", gap: "100px"}} className='mt-3'>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                      <DatePicker onChange={handleDateChange}  value={state.originalDueDate}/>
+                                      <DatePicker disablePast onChange={handleDateChange}  value={state.originalDueDate}/>
                                 </LocalizationProvider>
                                     {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                                         <DemoItem>
@@ -1129,9 +1131,11 @@ const PostATasker = () => {
                                         <>
                                         <div style={{ marginRight: "20px" }} >
                                             <img src={file} style={{ width: '100px', height: "100px", borderRadius: '5px' }} />
+                                            <p>{filess[index].name}</p>
+                                            <ClearIcon className="postImageIconn" onClick={()=>{postImageRemove(index)}}  style={{color:"blue", position:'relative' , bottom:'142px', left: '76px'}}/>
                                         </div>
                                        
-                                        <ClearIcon className="postImageIconn" onClick={()=>{postImageRemove(index)}}  style={{color:"blue", position:"relative", bottom:"37px", right:"44px"}}/>
+                                        
                                         
                                         </>
                                     ))}
@@ -1144,7 +1148,7 @@ const PostATasker = () => {
                                 <div>
                                 <label>
                                 <input onChange={handleFileEvent} type='file' multiple accept="image/*" style={{ display: "none" }} />
-                                {filess.length < MAX_COUNT ? <PhotoIcon className='photoIconnn' style={{ width: "91px", height: "86px", color: "darkgray", cursor:"pointer" }} /> : ' '}
+                                {filess.length < MAX_COUNT ? <PhotoIcon className='photoIconnn' style={{ width: "91px", height: "86px", color: "darkgray", cursor:"pointer"}} /> : ' '}
                             </label>
                             </div>
                                     }

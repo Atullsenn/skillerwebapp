@@ -15,6 +15,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
 import { NavLink } from 'react-router-dom';
+import FormHelperText from '@mui/material/FormHelperText';
 import "./MyWallet.css";
 import axios from 'axios';
 import { baseUrl } from '../../../Url/url';
@@ -38,6 +39,7 @@ const MyWallet = () => {
     const [paymentType, setPaymentType] = useState([])
     const [withdrawPopup, setWithdrawPoppup] = useState(false)
     const [withdrawSearch, setWithdrawSearch] = useState(" ")
+    const [withdrawError, setWithdrawError] = useState();
 
   
     const getTransactionData = ()=>{
@@ -105,6 +107,8 @@ const MyWallet = () => {
     // }
 
 
+
+
     const withDrawAmount = ()=>{
         let request = {
             provider_id: localStorage.getItem('id'),
@@ -116,12 +120,19 @@ const MyWallet = () => {
             autoClose: 1000,
             theme:'colored'
         })
+
+        if(totalWallet.length > 0){
+            toast.warn('You Does Not Have Transferable Amount',{
+                autoClose: 1000,
+                theme: 'colored'
+            })
+        }
         }
 
         axios.post(`${baseUrl}/create-external-bank`, request).then((response)=>{
             // console.log(response, "Check response")
-            if(response.data.success){
-                toast.success('Success',{
+            if(response.data.success == true){
+                toast.success('Amount transfer to the provider bank account within 2-3 days',{
                     theme:'colored',
                     autoClose: 1000
                 })
@@ -290,24 +301,31 @@ const MyWallet = () => {
                         </div> */}
                                 <div className='mt-3 px-4 d-flex align-items-center justify-content-center' style={{margin: "auto", width:"50%", paddingBottom:"50px"}}>
                                     <FormControl sx={{ width: '73%' }}>
-                                        <InputLabel htmlFor="outlined-adornment-amount">{myWalletData.walletDataFourteen}</InputLabel>
+                                        <InputLabel htmlFor="outlined-adornment-amount" error={withdrawError}>{myWalletData.walletDataFourteen}</InputLabel>
                                         <OutlinedInput
                                             type='number'
                                             size='small'
+                                            error={withdrawError}
                                             defaultValue="0.00"
                                             id="outlined-adornment-amount"
                                             startAdornment={<InputAdornment position="start">$</InputAdornment>}
                                             label={myWalletData.walletDataFifteen}
-                                            onChange={(event)=>{setAmount(event.target.value)}}
+                                            onChange={(event)=>{
+                                                setAmount(event.target.value)
+                                                setWithdrawError(event.target.value > totalWallet)
+                                            }}
                                         />
+                        
+                                        {!!withdrawError && (<FormHelperText error>{withdrawError ? 'Please Enter Valid Amount' : ' '}</FormHelperText>)}
                                     </FormControl>
                                     {/* <NavLink to="payment-method">
                                         <button className="withdrawal-btn">Proceed To Add Money</button>
                                     </NavLink> */}
+                                    
                                    
                                 </div>
                                 <div className='mb-1 d-flex align-items-center justify-content-center' style={{margin: "auto", width:"50%", paddingBottom:"50px"}}>
-                                <button className="withdrawal-btn" onClick={withDrawAmount}>{myWalletData.walletDataSixteen}</button>
+                                <button disabled={totalWallet === 0 || withdrawError ? true : false} className="withdrawal-btn" onClick={withDrawAmount}>{myWalletData.walletDataSixteen}</button>
                                     </div>
                                 {/* <button className="withdrawal-btn" style={{display:'flex',justifyContent: 'center'}} onClick={handleOpenWithdrawPopup}>Withdrawal</button> */}
                             </div>
@@ -448,6 +466,9 @@ const MyWallet = () => {
                                             if(Item.status === "Requested"){
                                                 return 'Pending'
                                             }
+                                            if(Item.status === 'Processing'){
+                                                return 'Processing'
+                                            }
                                             else{
                                                 return " "
                                             }
@@ -467,7 +488,7 @@ const MyWallet = () => {
                                                        
                                                         <div className='text-right'>
                                                             <p className='transaction-para p-0 m-0 blue'>$ {Item.amount}</p>
-                                                            <p className='transaction-para mt-1'>{myWalletData.walletDataThirtyFour} <span className={`${Item.status === 'Credit' ? 'green' : Item.status === 'Debit' ? 'red' : Item.status === 'Requested' ? 'yellow' :""}`}> {Item.status === 'Credit' ? <AddIcon style={{ fontSize: '12px' }} /> : Item.status === 'Debit' ? <RemoveIcon style={{ fontSize: '12px' }} /> : ''}{statusDta()}</span></p>
+                                                            <p className='transaction-para mt-1'>{myWalletData.walletDataThirtyFour} <span className={`${Item.status === 'Credit' ? 'green' : Item.status === 'Debit' ? 'red' : Item.status === 'Requested' ? 'yellow' :Item.status === 'Processing' ? 'yellow':""}`}> {Item.status === 'Credit' ? <AddIcon style={{ fontSize: '12px' }} /> : Item.status === 'Debit' ? <RemoveIcon style={{ fontSize: '12px' }} /> : ''}{statusDta()}</span></p>
                                                         </div>
                                                     </div>
                                                 </div>

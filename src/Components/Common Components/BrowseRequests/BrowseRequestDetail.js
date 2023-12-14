@@ -446,6 +446,24 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
     };
 
 
+const [myProposalData, setMyProposalData] = useState([])
+
+    const checkMyProposal = ()=>{
+        axios.post(`${baseUrl}/my-proposals-post`, {
+            user: parseInt(getUserDetail().id),
+        }).then((response)=>{
+           
+            setMyProposalData(response.data.Data)
+        }).catch((error)=>{
+            console.log(error)
+        })
+    }
+
+    useEffect(()=>{
+        checkMyProposal()
+    },[])
+
+
 
     return (
         <>
@@ -609,13 +627,18 @@ const BrowseRequestDetail = ({ state, setState, Map, props }) => {
                         <div className='py-3' style={{ border: '1px solid black', borderRadius: '4px' }}>
                             <h3 className='p-0 m-0 py-3 d-flex align-item-center justify-content-center heading-color'>Task Budget</h3>
                             <p className='p-0 m-0 py-1 d-flex align-item-center justify-content-center' style={{ color: '#000', fontWeight: '600', fontSize: '36px' }}>${state.cardData[0].budget}</p>
-                            {state.cardData[0].status === 0 &&
+                            {state.cardData[0].status === 0 && state.cardData[0].check_user_bid != "1" &&
+                           
                                 <div className="d-flex justify-content-center py-2">
                                     {
-                                        isToggle === 2 && parseInt(state.cardData[0].user_id) != parseInt(getUserDetail().id) &&
+                                        isToggle === 2 && parseInt(state.cardData[0].user_id) != parseInt(getUserDetail().id) && 
                                         <button className='btn btn-primary btn-lg btn-block make-an-offer-btn' onClick={handleClickOpenMakeanofferModal}>Make an offer</button>
                                     }
                                 </div>
+
+
+                                
+                           
                             }
                         </div>
                         <div className='d-flex justify-content-end py-2'>

@@ -166,7 +166,6 @@ input[type=number] {
   color: #242443;
   border: 1px solid #7cc5d9;
   background-color: #7cc5d9;
-
   font-weight: 600;
 }
 
@@ -215,6 +214,7 @@ input[type=number] {
   min-height: 100px;
   max-height: 250px;
   overflow: auto;
+  cursor: pointer;
 }
 
 
@@ -238,7 +238,6 @@ input[type=number] {
   width: 50%;
   margin-bottom: 20px;
   padding: 8px;
-  /* border: 1px solid #ccc; */
   border-radius: 3px;
   box-sizing: border-box;
 }
@@ -247,7 +246,6 @@ input[type=number] {
   width: 50%;
   margin-bottom: 20px;
   padding: 8px;
-  /* border: 1px solid #ccc; */
   border-radius: 3px;
   box-sizing: border-box;
 }
@@ -255,4 +253,10 @@ input[type=number] {
 
 .bidImageIcon:hover{
   color: black !important;
+}
+
+
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }

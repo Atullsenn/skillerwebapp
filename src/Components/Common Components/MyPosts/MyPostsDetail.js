@@ -69,6 +69,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import ClearIcon from '@mui/icons-material/Clear';
 import dayjs from 'dayjs';
+import StripeCheckout from "react-stripe-checkout";
+
 
 
 const useStyles = makeStyles(() => ({
@@ -190,10 +192,10 @@ const MyPostsDetail = ({
     budget: state.cardData[0].budget,
     skills: state.cardData[0].skill.split(","),
     currentExp:state.cardData[0].currentExp,
-    dueDateee: dayjs(state.cardData[0].dueDate_date),
-    dueTimmee: dayjs(state.cardData[0].dueDate_time),
-    toDateee: dayjs(state.cardData[0].todate_date),
-    totimee: dayjs(state.cardData[0].todate_time),
+    dueDateee: state.cardData[0].dueDate_date,
+    dueTimmee: state.cardData[0].dueDate_time,
+    toDateee: state.cardData[0].todate_date,
+    totimee: state.cardData[0].todate_time,
     originalDueTime:"",
     originalDueDate:"",
     originalToTime:"",
@@ -223,6 +225,9 @@ const MyPostsDetail = ({
     selectedYear: null,
     learning: state.cardData[0].learning[0].id
   };
+
+
+
 
 
 
@@ -304,6 +309,8 @@ const MyPostsDetail = ({
           });
       }
     };
+
+   
 
     return (
       <Dialog
@@ -897,6 +904,7 @@ const MyPostsDetail = ({
       formData.append("learningMethod_type", editPost.learningMethod);
       formData.append('learning_id', editPost.learning);
 
+
       axios
         .post(`${baseUrl}/edit-post-data`, formData)
         .then((res) => {
@@ -1165,6 +1173,7 @@ const MyPostsDetail = ({
   }
 
   const [successPopup, setSuccessPopup] = useState(false)
+  var totalImgLen = '';
 
   const handleCloseSuccessPopup = ()=>{
     setSuccessPopup(false)
@@ -1176,52 +1185,16 @@ const MyPostsDetail = ({
   }
 
 
-  const userPay = ()=>{
+  const handleToken = (token)=>{
+    // console.log(token.id, "checkkkkkkk")
     let request={
-      fullName:paymentState.fullName,
-      cardNumber:paymentState.cardNumber,
-      month:convertMonth(paymentState.month),
-      year:paymentState.year,
-      cvv:paymentState.cvv,
+      stripe_token: token.id,
       amount:state.bidDetailData.budget, 
       provider_id:state.cardData[0].bids[0].user_id, 
       seeker_id:localStorage.getItem('id'),
       post_id:state.cardData[0].id
     }
     // console.log(request, "resuessss")
-
-    if(paymentState.fullName == ""){
-      toast.warn('Please Enter Your FullName',{
-        autoClose: 1000,
-        theme: 'colored'
-      })
-    }
-    if(paymentState.cardNumber == ""){
-      toast.warn('Please Enter Your Card Number',{
-        autoClose: 1000,
-        theme: 'colored'
-      })
-    }
-    if(convertMonth(paymentState.month) == " " ){
-      toast.warn('Please Enter Expiry Month',{
-        autoClose: 1000,
-        theme: 'colored'
-      })
-    }
-    if(paymentState.year == ""){
-      toast.warn('Please Enter Expiry Year',{
-        autoClose: 1000,
-        theme: 'colored'
-      })
-    }
-    if(paymentState.cvv == ""){
-      toast.warn('Please Enter Cvv',{
-        autoClose: 1000,
-        theme: 'colored'
-      })
-    }
-    
-    else{
 
     axios.post(`${baseUrl}/payment`,request).then((response)=>{
       if(response.data.success === true){
@@ -1234,7 +1207,7 @@ const MyPostsDetail = ({
       }
       if(response.data.success === false){
         toast.error(response.data.message,{
-          autoClose: 1000,
+          autoClose: 2000,
           theme: 'colored'
         })
       }
@@ -1243,7 +1216,7 @@ const MyPostsDetail = ({
       console.log(error)
     })
 
-  }
+  
 
   }
 
@@ -1382,15 +1355,17 @@ const getPostDetaillll = (id) => {
 
 }
 
+
+
+
 const bidImageEdit = (image_id)=>{
   let request = {
     post_image_id: image_id,
     post_id:state.cardData[0].id
   }
 
-  //console.log(request, "Requestttttt")
-
   axios.post(`${baseUrl}/post-image-delete`, request).then((response)=>{
+    // getPostDetail()
     getPostDetaillll(state.cardData[0].id)
   }).catch((error)=>{
     console.log(error)
@@ -1400,10 +1375,9 @@ const bidImageEdit = (image_id)=>{
 const bidImageRemove = (index)=>{
   imagesPreview.splice(index,1);
   setImagesPreview([...imagesPreview])
+  
 }
 
-
-//Edit bid image remove api
 
 
 
@@ -1839,7 +1813,7 @@ const bidImageRemove = (index)=>{
                           <div className="px-4">
                             <h4 className="p-0 m-0 heading-color">{`${item.firstName} ${item.lastName}`}</h4>
                             <p className="m-0 new-comment">New !</p>
-                            <p
+                            {/* <p
                               className="m-0"
                               style={{
                                 border: "1px solid gray",
@@ -1848,7 +1822,7 @@ const bidImageRemove = (index)=>{
                               }}
                             >
                               AfterPay available
-                            </p>
+                            </p> */}
                           </div>
                         </div>
                         <div className="my-2">
@@ -1961,7 +1935,8 @@ const bidImageRemove = (index)=>{
                               </DialogContent>
                               <DialogActions className="text-center d-flex align-items-center justify-content-center">
                                 <button
-                                  className="btn btn-primary btn-lg btn-block make-an-offer-btn"
+                                style={{border: 'none'}}
+                                  // className="btn btn-primary btn-lg btn-block make-an-offer-btn"
                                   // onClick={() => {
                                   //   setState((prevState) => ({
                                   //     ...prevState,
@@ -1969,17 +1944,30 @@ const bidImageRemove = (index)=>{
                                   //   }));
                                   //   on_bid_accept(item);
                                   // }}
-                                  onClick={handleOpenPaymetModal}
+                                  // onClick={handleOpenPaymetModal}
+                                  onClick={handleClickCloseAccept}
                                 >
-                                  {" "}
-                                  Yes{" "}
+                                  {/* {" "}
+                                  Yes{" "} */}
+                                  <StripeCheckout
+        // onClick={()=>userPay()}                          
+        stripeKey="pk_live_51NfNC2ErEgOK2CPvdlekNe8djD65AvXtZNpujI1VA2xdw3GT13ORegNXCKvUCGuGyjwD2zg6tUf5JBiES6YNqtTS00D7t2LolS"
+        token={handleToken}
+        name={`${item.firstName} ${item.lastName}`}
+        panelLabel="Send Money" 
+        //description="SDE" // the pop-in header subtitle
+        image={`${imageBaseUrl}/public/profile/${item.profile}`} // the pop-in header image (default none)
+        amount={item.budget * 100}
+        currency="USD"
+        
+      />
                                 </button>
                                 <button
                                   className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1"
                                   onClick={handleClickCloseAccept}
                                 >
                                   {" "}
-                                  No{" "}
+                                  Cancel{" "}
                                 </button>
                               </DialogActions>
                             </Dialog>
@@ -2117,7 +2105,7 @@ const bidImageRemove = (index)=>{
                                   //   }));
                                   //   on_bid_accept(item);
                                   // }}
-                                  onClick={userPay}
+                                  // onClick={userPay}
                                 >
                                   
                                   Pay Now
@@ -2152,8 +2140,8 @@ const bidImageRemove = (index)=>{
                             setState((prevState) => ({
                               ...prevState,
                               bidDetailData: item,
-                              bidCallOptions: item.learning[0].call_option
-                                .split(",")
+                              bidCallOptions: item.learning[0]?.call_option
+                                ?.split(",") || []
                                 .map((item) => {
                                   return parseInt(item);
                                 }),
@@ -2862,7 +2850,7 @@ const bidImageRemove = (index)=>{
                                 <h5>From <span style={{ color: 'red' }}>*</span></h5>
                                 <div style={{display:"flex", flexDirection:"row", gap: "100px"}} className='mt-3'>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                      <DatePicker defaultValue={editPost.dueDateee} onChange={handleDueDateChange} />
+                                      <DatePicker defaultValue={dayjs(new Date(editPost.dueDateee))} onChange={handleDueDateChange} />
                                 </LocalizationProvider>
                                     {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                                         <DemoItem>
@@ -2884,14 +2872,14 @@ const bidImageRemove = (index)=>{
 
 <LocalizationProvider dateAdapter={AdapterDayjs}>
       {/* <DemoContainer components={['TimePicker']}> */}
-        <TimePicker defaultValue={editPost.dueTimmee} onChange={handleTimeChange}  label="time" />
+        <TimePicker defaultValue={dayjs(editPost.dueDateee+'T'+editPost.dueTimmee)} onChange={handleTimeChange}  label="time" />
       {/* </DemoContainer> */}
     </LocalizationProvider>
                                 </div>
                                 <h5 style={{marginTop: "15px"}}>To<span style={{ color: 'red'}}>*</span></h5>
                                 <div style={{display:"flex", flexDirection:"row", gap: "100px"}} className='mt-3'>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                      <DatePicker defaultValue={editPost.toDateee} onChange={handleToDateChange} />
+                                      <DatePicker defaultValue={dayjs(new Date(editPost.toDateee))} onChange={handleToDateChange} />
                                 </LocalizationProvider>
                                     {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                                         <DemoItem>
@@ -2913,7 +2901,7 @@ const bidImageRemove = (index)=>{
 <div>
 <LocalizationProvider dateAdapter={AdapterDayjs}>
       {/* <DemoContainer components={['TimePicker']}> */}
-        <TimePicker defaultValue={editPost.totimee}  onChange={handleToTimeChange} label="time" />
+        <TimePicker defaultValue={dayjs(editPost.toDateee+'T'+editPost.totimee)}  onChange={handleToTimeChange} label="time" />
       {/* </DemoContainer> */}
     </LocalizationProvider>
     </div>
@@ -3261,6 +3249,7 @@ const bidImageRemove = (index)=>{
                   </div>
                 ))}
                 {state.cardData[0].post_image.map((Item, index) => {
+               totalImgLen = state.cardData[0].post_image.length + filess.length
                   return (
                     <><img
                       src={`${imageBaseUrl}/public/post/${Item.image}`}
@@ -3285,7 +3274,7 @@ const bidImageRemove = (index)=>{
                     accept="image/*"
                     style={{ display: "none" }}
                   />
-                  {filess.length < MAX_COUNT ? (
+                  {totalImgLen < MAX_COUNT ? (
                     <PhotoIcon
                     className='photoIconnn'
                       style={{
@@ -3327,4 +3316,3 @@ const bidImageRemove = (index)=>{
   );
 };
 export default MyPostsDetail;
-//7503359688

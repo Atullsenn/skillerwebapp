@@ -51,6 +51,7 @@
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.1",
+    "react-stripe-checkout": "^2.6.3",
     "react-swiper": "^0.1.5",
     "react-toastify": "^9.1.1",
     "reactjs-social-login": "^2.6.2",

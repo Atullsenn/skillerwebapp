@@ -466,6 +466,12 @@ const redirectNotification = (notification_type, postId)=>{
   else if(notification_type == 8){
     navigate("/my-order", {state:{post_id: postId, notificationType: 8}})
   }
+  else if(notification_type == 10){
+    navigate("/my-order", {state:{post_id: postId, notificationType: 10}})
+  }
+  else if(notification_type == 9){
+    navigate("/my-order", {state:{post_id: postId, notificationType: 9}})
+  }
   else{
     navigate("/")
   }
@@ -551,7 +557,7 @@ const redirectNotification = (notification_type, postId)=>{
                               : ""}
                           </div>
                           <Divider className="my-2" style={{ backgroundColor: "gray" }} />
-                          <div>
+                          <div >
                             {notificationData?.length ?
                               <div className="notificationAll">
                                 {notificationData?.map((item) => (

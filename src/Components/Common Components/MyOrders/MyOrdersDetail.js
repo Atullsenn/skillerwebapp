@@ -63,7 +63,6 @@ const MyOrdersDetail = ({ state, setState, getMyOrderList, abc }) => {
     
    
 
-
     const checkPostTime = (createdDate) => {
       var today = new Date();
       var postCreatedDate = new Date(createdDate);
@@ -127,7 +126,6 @@ const MyOrdersDetail = ({ state, setState, getMyOrderList, abc }) => {
       setValue("");
    }
    
-
   }
 
      
@@ -206,7 +204,7 @@ var userIdd = state.cardData[0] && state.cardData[0].user_id
       rating: userRating,
       userType: localStorage.getItem('userType')
     }
-    // console.log(request, "Request one")
+  
 }
 else{
     request = {
@@ -487,6 +485,32 @@ const handleCloseArchivePost = ()=>{
       }).catch((error)=>{
         console.log(error)
       })
+  }
+
+
+
+
+
+  const RejectProviderRequest = ()=>{
+    let request = {
+      seeker_id: state.cardData[0].user_id,
+      provider_id: state.cardData[0].bids[0].user_id,
+      post_id:state.cardData[0].post_id
+    }
+
+    axios.post(`${baseUrl}/seeker-reject-post`,request).then((response)=>{
+     
+      if(response.data.success == true){
+        toast.success('Provider Request Rejected Succcessfully',{
+          autoClose: 1000,
+          theme: 'colored'
+        })
+        getMyOrderList()
+        return;
+      }
+    }).catch((error)=>{
+      console.log(error)
+    })
   }
 
   
@@ -860,6 +884,21 @@ const handleCloseArchivePost = ()=>{
                             <p className='p-0 m-0' style={{ color: '#188dc7' }}>{state.cardData[0].bids[0] && state.cardData[0].bids[0].description}</p>
                         </div>
                     </div>
+
+                    {state.cardData[0].order_status == 0 && localStorage.getItem('userType') == 1 && state.cardData[0].post_completion_status == 1 ? 
+                    <><Divider className='my-4' style={{ background: 'gray' }} /><div style={{ display: 'flex', flexDirection: 'row', gap: '20px', width: '100%' }}>
+                <p>Task Complete Request From Provider</p>
+                <Tooltip title="Confirm" placement="top-start">
+                  <button type='button' onClick={handleClickOpenn} className="btn btn-primary btn-lg btn-block make-an-offer-btn me-3 d-flex justify-centent-center align-items-center">Confirm</button>
+                </Tooltip>
+
+                <Tooltip title="Reject" placement='top-start'>
+                  <button onClick={RejectProviderRequest} type='button' className="btn btn-primary btn-lg btn-block make-an-offer-btn me-3 d-flex justify-centent-center align-items-center">Reject</button>
+                </Tooltip>
+              </div><Divider className='my-4' style={{ background: 'gray' }} /></>:""}
+
+
+
                     <div className="py-3 pt-0 d-flex justify-content-evenly align-items-center">
                     <Dialog
                                             fullWidth
@@ -962,8 +1001,7 @@ const handleCloseArchivePost = ()=>{
                                                 <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleCloseCancelReson}>{myOrderData.myOrderTitleFiftySix}</button>
                                             </DialogActions>
                                         </Dialog>
-
-
+                                     
                                         <Dialog
                                             fullWidth
                                             open={providerDispute}
@@ -1021,6 +1059,7 @@ const handleCloseArchivePost = ()=>{
                                             </DialogActions>
                                         </Dialog>
 
+                                     
 
 
                                         {state.cardData[0].order_status == 4 && localStorage.getItem('userType') == 2 ? 
@@ -1039,6 +1078,9 @@ const handleCloseArchivePost = ()=>{
                             
                             :""
                             }
+                            
+  
+                           
 
 {state.cardData[0].order_status == 4 && localStorage.getItem('userType') == 2 ? 
                                         <Tooltip title={myOrderData.myOrderTitleSixtyTwo} placement="top-start">
@@ -1099,7 +1141,7 @@ const handleCloseArchivePost = ()=>{
                                     :
 
                                     <div>
-                                        <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-3 d-flex justify-centent-center align-items-center" onClick={handleClickOpenn}>
+                                        <button className={state.cardData[0].post_completion_status == 1 ? 'btn btn-primary btn-lg btn-block make-an-offer-btn me-3 d-flex justify-centent-center align-items-center disabled': 'btn btn-primary btn-lg btn-block make-an-offer-btn me-3 d-flex justify-centent-center align-items-center'}  onClick={handleClickOpenn}>
                                             {myOrderData.myOrderTitleSixtyEight}<LibraryAddCheckIcon className="ms-2" />
                                         </button>
                                         <Dialog
@@ -1118,7 +1160,7 @@ const handleCloseArchivePost = ()=>{
                                                 </DialogContentText>
                                             </DialogContent>
                                             <DialogActions className="text-center d-flex align-items-center justify-content-center">
-                                                <button className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={taskCompletedProvider}> {myOrderData.myOrderTitleSeventy} </button>
+                                                <button  className="btn btn-primary btn-lg btn-block make-an-offer-btn" onClick={taskCompletedProvider}> {myOrderData.myOrderTitleSeventy} </button>
                                                 <button className="btn btn-primary btn-lg btn-block make-an-offer-btn me-1" onClick={handleClose}> {myOrderData.myOrderTitleSeventyOne} </button>
                                             </DialogActions>
                                         </Dialog>
@@ -1132,6 +1174,7 @@ const handleCloseArchivePost = ()=>{
                                 </Tooltip></>
                         : ""}
                     </div>
+                    
                     <Divider className="my-2" style={{ backgroundColor: "gray" }} />
                     {state.cardData[0].status === 3 && state.cardData[0].review_Rating != ""? 
                      <div className="px-2">

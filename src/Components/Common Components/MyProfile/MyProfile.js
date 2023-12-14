@@ -199,16 +199,13 @@ const MyProfile = () => {
         formData.append('account_number', state.accountNumber)
         formData.append('bsb', state.bsb)
         await axios.post(`${baseUrl}/update-profile`, formData).then((response) => {
-            if (response.data.success) {
+            if (response.data.success === true) {
                 getMyProfile()
                 isToastMessage.updateProfileSuccessfully()
-            } else {
-                getMyProfile()
-                isToastMessage.somethingWentWrong()
             }
         }).catch((error) => {
             getMyProfile()
-            isToastMessage.somethingWentWrong()
+            // isToastMessage.somethingWentWrong()
             console.log(error)
         })
     }
@@ -601,6 +598,30 @@ const MyProfile = () => {
                                                 <hr />
                                             </>
                                         }
+
+                                          <FormControl style={{width:"100%", marginBottom:"20px"}} size="large">
+                                                            <InputLabel id="demo-multiple-checkbox-label">
+                                                                {myProfileData.profileDataTwentyOne}
+                                                            </InputLabel>
+                                                            <Select
+                                                                labelId="demo-multiple-checkbox-label"
+                                                                id="demo-multiple-checkbox"
+                                                                multiple
+                                                                value={state.category}
+                                                                disabled={state.disableField}
+                                                                onChange={selectCategory}
+                                                                input={<OutlinedInput label={myProfileData.profileDataTwentyOne} />}
+                                                                renderValue={(selected) => selected.join(", ")}
+                                                                MenuProps={MenuProps}
+                                                            >
+                                                                {state.categoryList.map((Item) => (
+                                                                    <MenuItem key={Item.id} value={Item.name}>
+                                                                        <Checkbox checked={state.category.indexOf(Item.name) > -1} />
+                                                                        <ListItemText primary={Item.name} />
+                                                                    </MenuItem>
+                                                                ))}
+                                                            </Select>
+                                                        </FormControl>
                                         <div className="row m-0 d-flex align-ietms-center justify-content-between">
                                             <TextField
                                                 style={{ width: '48%' }}
@@ -745,7 +766,7 @@ const MyProfile = () => {
                                             <div className="card mb-3">
                                                 <div className="card-body">
                                                     <div className="row m-0">
-                                                        <FormControl size="large">
+                                                        {/* <FormControl size="large">
                                                             <InputLabel id="demo-multiple-checkbox-label">
                                                                 {myProfileData.profileDataTwentyOne}
                                                             </InputLabel>
@@ -767,7 +788,7 @@ const MyProfile = () => {
                                                                     </MenuItem>
                                                                 ))}
                                                             </Select>
-                                                        </FormControl>
+                                                        </FormControl> */}
                                                     </div>
                                                     <hr />
                                                     <div className="row m-0 d-flex align-ietms-center justify-content-between">
@@ -809,7 +830,7 @@ const MyProfile = () => {
                                                             disabled={state.disableField}
                                                             type="text"
                                                             variant='outlined'
-                                                            defaultValue="Himanshu9958"
+                                                            defaultValue="paypal@y12"
                                                             size='large'
                                                             label={myProfileData.profileDataTwentyFive}
                                                         />

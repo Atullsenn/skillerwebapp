@@ -142,7 +142,8 @@ const BrowseRequest = ({ state, setState, heading }) => {
     const getPostDetail = (id) => {
         setState((prevState) => ({ ...prevState, showDetailedLoading: true, postId: id }));
         axios.post(`${baseUrl}/show-post`, {
-            post: id
+            post: id,
+            user_id: localStorage.getItem('id')
         }).then((response) => {
             if (response.data.success) {
                 setState((prevState) => ({ ...prevState, cardData: response.data.Data, showDetailedLoading: false }));
@@ -502,13 +503,7 @@ useEffect(()=>{
                                     )
                                 })}
                                 <h3 id="no-post-available" className='w-25 no-post-available' style={{ display: 'none', textAlign: 'center' }}>{browseRequestData.brwoseDataFive}</h3>
-                                {/* <Pagination
-                                    className="pagination-bar mb-3"
-                                    currentPage={currentPage}
-                                    totalCount={state.allTaskList.length}
-                                    pageSize={PageSize}
-                                    onPageChange={page => setCurrentPage(page)}
-                                /> */}
+                                
                                  <ReactPaginate
                       previousLabel={"Previous"}
                       nextLabel={"Next"}

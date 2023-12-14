@@ -158,8 +158,20 @@ const MyOrders = ({ state, setState, getMyOrderList }) => {
         if(location.state && location.state.post_id && location.state.notificationType == 7){
             getPostDetailll(location.state.post_id);
              setActiveClass(location.state.post_id); 
-             setState((prevState) => ({ ...prevState, cardDetail: true, defaultActiveKey: 'Completed' })) 
+             setState((prevState) => ({ ...prevState, cardDetail: true, defaultActiveKey: 'In-Progress' })) 
             }
+
+        if(location.state && location.state.post_id && location.state.notificationType == 10){
+            getPostDetailll(location.state.post_id);
+            setActiveClass(location.state.post_id); 
+            setState((prevState) => ({ ...prevState, cardDetail: true, defaultActiveKey: 'In-Progress' })) 
+            }
+
+        if(location.state && location.state.post_id && location.state.notificationType == 9){
+            getPostDetailll(location.state.post_id);
+            setActiveClass(location.state.post_id); 
+            setState((prevState) => ({ ...prevState, cardDetail: true, defaultActiveKey: 'Completed' })) 
+        }
 
         if(location.state && location.state.post_id && location.state.notificationType == 8){
             getPostDetailll(location.state.post_id); 

@@ -83,7 +83,7 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
     const editDefaultState = {
         expectedBudget: state.cardData && state.cardData[0]?.budget_of_bid,
         expectedDays: state.cardData && state.cardData[0].expected_days,
-        language: state.cardData && state.cardData[0].language_name.split(','),
+        language: state.cardData && state.cardData[0]?.bid_language_name.split(','),
         languageId: [],
         languageList: [],
         learningMethod: `${state.cardData && state.cardData[0].bid_learning_method_type === 1 ? 1 : 2}`,
@@ -104,7 +104,9 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
     const [fileLimit, setFileLimit] = useState(false);
     const [images, setImages] = useState([])
 
-    
+    // console.log(state.cardData[0].bid_language_name, "Editttt bidddddddddd languageeeeeee")
+    // console.log(editBid, "Edit Bid Languageeee")
+
    
     
     const handleCloseOpenWithdrawModal = (bidId) => {
@@ -339,7 +341,6 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
         const chosenFiles = Array.prototype.slice.call(e.target.files)
         handleUploadFiles(chosenFiles, uploadMultipleImage(e));
     }
-
    
 
     //update bid api
@@ -363,9 +364,9 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
         formData.append('learningMethod_type', editBid.learningMethod)
         formData.append('call_options[]', editBid.phoneCallId)
 
-        // for (const pair of formData.entries()) {
-        //     console.log(`${pair[0]}, ${pair[1]}`)
-        // }
+        for (const pair of formData.entries()) {
+            console.log(`${pair[0]}, ${pair[1]}`)
+        }
 
 
         await axios.post(`${baseUrl}/edit-make-an-offer-data`, formData, {
@@ -377,8 +378,12 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                     theme: 'colored',
                     autoClose: 1000
                 })
-                handleCloseOpenEditBid()
                 getProposalList()
+                handleCloseOpenEditBid()
+                // setEditBid((prevState) => ({ ...prevState, language: state.cardData && state.cardData[0]?.bid_language_name.split(','), }));
+               
+                
+            
                 // setTimeout(() => {
                 //     navigate('/my-proposals')
                 // }, 500);
@@ -428,6 +433,7 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
         }).catch((error) => {
             console.log(error)
         })
+       
     }
 
 
@@ -465,6 +471,7 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
 
     //update bid api
 
+    
     return (
         <>
             <div className='main-top-container container'>
@@ -586,7 +593,7 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                     </div>
                     <div className='p-2 d-flex align-items-center justify-content-between'>
                         <h4 className='p-0 m-0'>{myProposalData.proposalDataSixteen}</h4>
-                        <p className='follow-user d-flex align-items-center' style={{ cursor: 'pointer' }} onClick={handleClickOpenEditBid}><EditIcon style={{ fontSize: '20px', marginRight: '5px' }} /> Edit</p>
+                        {/* <p className='follow-user d-flex align-items-center' style={{ cursor: 'pointer' }} onClick={handleClickOpenEditBid}><EditIcon style={{ fontSize: '20px', marginRight: '5px' }} /> Edit</p> */}
                     </div>
                     <div className='p-2 d-flex align-items-center justify-content-between'>
                         <h5 className='p-0 m-0 heading-color' style={{ fontWeight: '600', textDecoration: 'underline' }}>{myProposalData.proposalDataSeventeen}</h5>
@@ -829,7 +836,7 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
                                 MenuProps={MenuProps}
                             >
                                 {editBid && editBid.languageList.map((Item) => (
-                                    //console.log(Item, "Itemmm")
+                                    
                                     
                                     <MenuItem key={Item.id} value={Item.name} style={getStyles(Item.name, editBid.language, theme)}>{Item.name}</MenuItem>
                                 ))}
