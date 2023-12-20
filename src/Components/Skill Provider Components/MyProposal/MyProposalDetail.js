@@ -121,10 +121,10 @@ const MyProposalDetail = ({ state, setState, getProposalList }) => {
             }
         }).catch((error) => {
             console.log(error)
-            if (!error.response.data.success) {
+            // if (!error.response.data.success) {
                 setState((prevState) => ({ ...prevState, showHeading: true, isLoadingOpen: false }))
-                document.getElementById('no-request-available').style.display = "block";
-            }
+            //     document.getElementById('no-request-available').style.display = "block";
+            // }
         })
     };
 

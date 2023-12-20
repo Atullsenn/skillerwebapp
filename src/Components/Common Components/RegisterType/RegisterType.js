@@ -100,6 +100,7 @@ const RegisterType = ({ state, setState }) => {
                 account_number: state.accountNumber,
                 bsb: state.bsb,
             }).then((response) => {
+                // console.log(response, "Checkk Responseeeeeeeee")
                 if (response.data.success) {
                     handleLoadingClose()
                     handleClickOpenCancelModal()

@@ -472,7 +472,7 @@ const changePage = ({ selected }) => {
 //Automatic Open Post Detail
 const openPostDetail = ()=>{
     if(location.state && location.state.post_id){
-    getPostDetail(location.state.post_id); setActiveClass(location.state.post_id); setState((prevState) => ({ ...prevState, cardDetail: true, showMap: false }))
+    getPostDetail(location.state.post_id); setActiveClass(location.state.post_id); setState((prevState) => ({ ...prevState, cardDetail: true, showMap: false,}))
     } 
 }
 

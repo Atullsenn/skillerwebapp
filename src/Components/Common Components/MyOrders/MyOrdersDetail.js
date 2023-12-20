@@ -43,7 +43,7 @@ import { myOrderData } from '../../../data';
 import ArchiveIcon from '@mui/icons-material/Archive';
 
 
-const MyOrdersDetail = ({ state, setState, getMyOrderList, abc }) => {
+const MyOrdersDetail = ({ state, setState, getMyOrderList, abc, getPostDetailll }) => {
     const [open, setOpen] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [review, setReview] = useState("")
@@ -105,13 +105,6 @@ const MyOrdersDetail = ({ state, setState, getMyOrderList, abc }) => {
         setOpen(false);
     };
 
-    // const closeModal = () => {
-    //     setIsOpen(false);
-    //   };
-    
-    //   const openAddApplicationModal = () => {
-    //     setIsOpen(true);
-    //   };
 
       const handleClickOpenCompleteModal = () => {
         setOpenCompleteModal(true);
@@ -175,6 +168,7 @@ const MyOrdersDetail = ({ state, setState, getMyOrderList, abc }) => {
           autoClose: 1000,
           theme: 'colored'
       })
+      getPostDetailll(state.cardData[0].post_id)
       handleClose()
 
       }
@@ -214,11 +208,11 @@ else{
         rating: userRating,
         userType: localStorage.getItem('userType')
       } 
-      // console.log(request, "Request Two")
+ 
 }
 
     axios.post(`${baseUrl}/seeker-provider-task-complete`, request).then((response) => {
-      // console.log(response, "responseeeeeee")
+     
       toast.success('Thanks for rating', {
         autoClose: 1000,
         theme: "colored"
@@ -313,11 +307,7 @@ else{
         formData.append('amount', state.cardData[0].bids[0].budget)
         formData.append('userType', localStorage.getItem('userType'))
 
-        // for (const pair of formData.entries()) {
-        //   console.log(`${pair[0]}, ${pair[1]}`);
-        // }
-       
-
+      
     if(reason == ""){
       toast.warn('Please enter reason',{
         autoClose: 1000,
@@ -490,7 +480,6 @@ const handleCloseArchivePost = ()=>{
 
 
 
-
   const RejectProviderRequest = ()=>{
     let request = {
       seeker_id: state.cardData[0].user_id,
@@ -505,7 +494,7 @@ const handleCloseArchivePost = ()=>{
           autoClose: 1000,
           theme: 'colored'
         })
-        getMyOrderList()
+        getPostDetailll(state.cardData[0].post_id)
         return;
       }
     }).catch((error)=>{
@@ -513,65 +502,10 @@ const handleCloseArchivePost = ()=>{
     })
   }
 
-  
-
 
     return (
         <>
             <div className='main-top-container container'>
-            {/* <Modal
-          show={isOpen}
-          style={{
-            marginTop: "170px",
-            width: "500px",
-            height: "600px",
-            position: "absolute",
-            left: "847px",
-          }}
-        >
-          <Modal.Header>
-            <div
-              style={{
-                backgroundColor: "#69a4dbfd",
-                width: "100%",
-                height: "40px",
-              }}
-            >
-              <p
-                style={{
-                  color: "white",
-                  padding: "5px",
-                  marginLeft: "25px",
-                  textAlign: "left",
-                  fontWeight: "700",
-                  fontFamily: "cursive",
-                }}
-              >
-                ChatBot
-              </p>
-              <button
-                style={{
-                  position: "relative",
-                  bottom: "42px",
-                  right: "-400px",
-                  fontWeight: "700",
-                }}
-                type="button"
-                onClick={closeModal}
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-          </Modal.Header>
-          <Modal.Body>
-            <div className="">
-              <ChatBox state={state} setState={setState} />
-            </div>
-          </Modal.Body>
-        </Modal> */}
-
-
         <Dialog
         fullWidth
         open={openCompleteModal}
@@ -762,13 +696,7 @@ const handleCloseArchivePost = ()=>{
                             </div>
                         </div>
                         <div className='d-flex'>
-                            {/* <div className='d-flex align-items-center post-location-data w-50'>
-                                <LocalAtmIcon className='icon-size' />
-                                <div className='px-1 posted-area'>
-                                    <p className='p-0 m-0'>PAYMENT</p>
-                                    <a className='p-0 m-0'>{state.cardData[0].payment}</a>
-                                </div>
-                            </div> */}
+                           
                             <div className='d-flex align-items-center post-location-data w-50'>
                                 <HourglassEmptyIcon className='icon-size' />
                                 <div className='px-1 posted-area'>
@@ -785,13 +713,7 @@ const handleCloseArchivePost = ()=>{
                             </div>
                         </div>
                         <div className='d-flex'>
-                            {/* <div className='d-flex align-items-center post-location-data w-50'>
-                                <HourglassEmptyIcon className='icon-size' />
-                                <div className='px-1 posted-area'>
-                                    <p className='p-0 m-0'>URGENCY</p>
-                                    <a className='p-0 m-0'>{state.cardData[0].urgency}</a>
-                                </div>
-                            </div> */}
+                           
                            {state.cardData[0].learningMethod_type === 'Phone Call' || state.cardData[0].learningMethod_type === 'Text and Phone Call' ?
                             <div className='d-flex align-items-center post-location-data w-50'>
                                 <DuoIcon className='icon-size' />
@@ -1167,7 +1089,8 @@ const handleCloseArchivePost = ()=>{
                                     </div>
                                   
 }
-                                </Tooltip><Tooltip title={myOrderData.myOrderTitleSeventyTwo} placement="top-start">
+                                </Tooltip>
+                                <Tooltip title={myOrderData.myOrderTitleSeventyTwo} placement="top-start">
                                     <button onClick={abc} className="btn btn-primary btn-lg btn-block make-an-offer-btn me-3 d-flex justify-centent-center align-items-center">
                                         {myOrderData.myOrderTitleSeventyTwo} <MarkUnreadChatAltIcon className="ms-2" />
                                     </button>
@@ -1180,7 +1103,7 @@ const handleCloseArchivePost = ()=>{
                      <div className="px-2">
                         <div className="d-flex">
                             <div className="py-2 pe-2">
-                                {/* <Avatar alt="Remy Sharp" src={Images.one} sx={{ width: 50, height: 50 }} /> */}
+                               
                                 {
                                         state.cardData[0].review_Rating[0]?.profile === '' || state.cardData[0].review_Rating[0]?.profile == null || state.cardData[0].review_Rating[0]?.profile === "no file upload" ? <Avatar src="/broken-image.jpg" /> : <Avatar src={`${imageBaseUrl}/public/profile/${state.cardData[0].review_Rating[0]?.profile}`} alt="user-img" className="img-circle" />
                                     }

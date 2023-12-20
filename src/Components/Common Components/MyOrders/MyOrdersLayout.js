@@ -82,6 +82,25 @@ const MyOrdersLayout = () => {
             return cancelElement.order_status === 3 || cancelElement.order_status === 4
         })
 
+
+        if(state.cardData && state.cardData[0]?.order_status == 0){
+            setState((prevState)=>({...prevState, defaultActiveKey: 'In-Progress'}))
+        }
+
+
+        if(state.cardData && state.cardData[0]?.order_status == 1){
+            setState((prevState)=>({...prevState, defaultActiveKey: 'Completed'}))
+        }
+
+        if(state.cardData && state.cardData[0]?.order_status == 2){
+            setState((prevState)=>({...prevState,  defaultActiveKey: 'Disputed'}))
+        }
+
+
+        if(state.cardData && state.cardData[0]?.order_status == 3){
+            setState((prevState)=>({...prevState, defaultActiveKey: 'Cancelled'}))
+        }
+
         setState((prevState) => ({ ...prevState, inProgress: inProgress, completed: completedArray, cancelled: cancellArray,  disputed: disputedArray }))
     }, [state.myOrderList])
 
@@ -99,7 +118,7 @@ const MyOrdersLayout = () => {
                 </Backdrop> 
 
             </div>
-            <Outlet />
+            <Outlet/>
             <Routes>
                 <Route path="/" element={<MyOrder state={state} setState={setState} getMyOrderList={getMyOrderList} />} />
                 <Route path="user-profile" element={<UserProfile />} />

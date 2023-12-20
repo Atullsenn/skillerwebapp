@@ -47,7 +47,6 @@ const MyWallet = () => {
             user:localStorage.getItem('id')
         }
         axios.post(`${baseUrl}/get-user-wallet`,request).then((response)=>{
-            // console.log(response, "Checking Response For Wallet")
             setState(response.data.Data.record)
             setTotalWallet(response.data.Data.total_wallet)
 
@@ -105,8 +104,6 @@ const MyWallet = () => {
     //     })
     // }
     // }
-
-
 
 
     const withDrawAmount = ()=>{
@@ -318,16 +315,14 @@ const MyWallet = () => {
                         
                                         {!!withdrawError && (<FormHelperText error>{withdrawError ? 'Please Enter Valid Amount' : ' '}</FormHelperText>)}
                                     </FormControl>
-                                    {/* <NavLink to="payment-method">
-                                        <button className="withdrawal-btn">Proceed To Add Money</button>
-                                    </NavLink> */}
+                                    
                                     
                                    
                                 </div>
                                 <div className='mb-1 d-flex align-items-center justify-content-center' style={{margin: "auto", width:"50%", paddingBottom:"50px"}}>
-                                <button disabled={totalWallet === 0 || withdrawError ? true : false} className="withdrawal-btn" onClick={withDrawAmount}>{myWalletData.walletDataSixteen}</button>
+                                <button disabled={totalWallet === 0 || withdrawError || amount == 0 ? true : false} className="withdrawal-btn" onClick={withDrawAmount}>{myWalletData.walletDataSixteen}</button>
                                     </div>
-                                {/* <button className="withdrawal-btn" style={{display:'flex',justifyContent: 'center'}} onClick={handleOpenWithdrawPopup}>Withdrawal</button> */}
+                               
                             </div>
                         </div>
 

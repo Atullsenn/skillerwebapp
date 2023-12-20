@@ -138,7 +138,8 @@ const CategoriesPost = ({ state, setState }) => {
     const getPostDetail = (id) => {
         setState((prevState) => ({ ...prevState, showDetailedLoading: true, postId: id }));
         axios.post(`${baseUrl}/show-post`, {
-            post: id
+            post: id,
+            user_id: localStorage.getItem('id')
         }).then((response) => {
             if (response.data.success) {
                 setState((prevState) => ({ ...prevState, cardData: response.data.Data, showDetailedLoading: false }));
@@ -379,7 +380,7 @@ const CategoriesPost = ({ state, setState }) => {
                                             InputProps={{ endAdornment: <SearchIcon /> }}
                                             onChange={(e) => { setSearch(e.target.value) }}
                                         />
-                                        <div>
+                                        {/* <div>
                                             {state.showMap || state.cardDetail ?
                                                 <Tooltip title="List">
                                                     <ListIcon onClick={() => { setState((prevState) => ({ ...prevState, showMap: false, cardDetail: false })); setState((prevState) => ({ ...prevState, cardDetail: false })) }} style={{ fontSize: '40px' }} />
@@ -387,7 +388,7 @@ const CategoriesPost = ({ state, setState }) => {
                                                     <TravelExploreIcon onClick={() => { setState((prevState) => ({ ...prevState, showMap: !state.showMap })); }} style={{ fontSize: '40px' }} />
                                                 </Tooltip>
                                             }
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>

@@ -142,7 +142,8 @@ const ArchivePosts = ({ state, setState, heading, getAllPosts }) => {
     const getPostDetail = (id) => {
         setState((prevState) => ({ ...prevState, showDetailedLoading: true, postId: id }));
         axios.post(`${baseUrl}/show-post`, {
-            post: id
+            post: id,
+            user_id: localStorage.getItem('id')
         }).then((response) => {
             if (response.data.success) {
                 setState((prevState) => ({ ...prevState, cardData: response.data.Data, showDetailedLoading: false }));

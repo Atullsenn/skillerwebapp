@@ -145,39 +145,40 @@ const MyOrders = ({ state, setState, getMyOrderList }) => {
 
       var abc;
 
-
-      //Open Automatic Post Detail
-
       const openAutoMaticPostDetail = ()=>{
+
+       
         if(location.state && location.state.post_id && location.state.notificationType == 2){
         getPostDetailll(location.state.post_id);
          setActiveClass(location.state.post_id); 
-         setState((prevState) => ({ ...prevState, cardDetail: true, defaultActiveKey: 'In-Progress' })) 
+         setState((prevState) => ({ ...prevState, cardDetail: true })) 
         }
 
         if(location.state && location.state.post_id && location.state.notificationType == 7){
             getPostDetailll(location.state.post_id);
              setActiveClass(location.state.post_id); 
-             setState((prevState) => ({ ...prevState, cardDetail: true, defaultActiveKey: 'In-Progress' })) 
+             setState((prevState) => ({ ...prevState, cardDetail: true })) 
             }
 
         if(location.state && location.state.post_id && location.state.notificationType == 10){
             getPostDetailll(location.state.post_id);
             setActiveClass(location.state.post_id); 
-            setState((prevState) => ({ ...prevState, cardDetail: true, defaultActiveKey: 'In-Progress' })) 
+            setState((prevState) => ({ ...prevState, cardDetail: true })) 
             }
 
         if(location.state && location.state.post_id && location.state.notificationType == 9){
             getPostDetailll(location.state.post_id);
             setActiveClass(location.state.post_id); 
-            setState((prevState) => ({ ...prevState, cardDetail: true, defaultActiveKey: 'Completed' })) 
+            setState((prevState) => ({ ...prevState, cardDetail: true })) 
         }
 
         if(location.state && location.state.post_id && location.state.notificationType == 8){
             getPostDetailll(location.state.post_id); 
             setActiveClass(location.state.post_id);
-            setState((prevState)=>({...prevState, cardDetail: true, defaultActiveKey: 'Disputed'}))
+            setState((prevState)=>({...prevState, cardDetail: true}))
         }
+
+ 
       }
 
       useEffect(()=>{
@@ -185,7 +186,6 @@ const MyOrders = ({ state, setState, getMyOrderList }) => {
       },[location.state])
 
 
-      //Open Automatic Post Detail
 
     return (
         <>
@@ -540,7 +540,7 @@ const MyOrders = ({ state, setState, getMyOrderList }) => {
                                                 <CircularProgress />
                                             </Box>
                                         </div> :
-                                        <MyOredrDetail state={state} setState={setState} Map={false} getMyOrderList={getMyOrderList} abc={abc} />
+                                        <MyOredrDetail state={state} setState={setState} Map={false} getMyOrderList={getMyOrderList} abc={abc} getPostDetailll={getPostDetailll} />
                                     }
                                 </div>
                             }

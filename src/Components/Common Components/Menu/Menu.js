@@ -49,6 +49,7 @@ import { alpha, styled } from '@mui/material/styles';
 import { pink } from '@mui/material/colors';
 import Toggle from 'react-bootstrap-toggle';
 import { menuData } from "../../../data";
+import Form from 'react-bootstrap/Form';
 
 const defaultState = {
   categories: '',
@@ -322,7 +323,7 @@ const chatb = []
   const unsubscribe = onSnapshot(q, (QuerySnapshot) => {
     let messages = [];
     QuerySnapshot.forEach((doc) => {
-      for (const i in bidAccept.user) {
+      for (const i in bidAccept?.user) {
         if (doc.data().uid != localStorage.getItem('id') && doc.data().chatMenuStatus == 1 && doc.data().chatBidId == bidAccept.bid[i] ) { messages.push({ ...doc.data(), id: doc.id }); }
       }
       // if (doc.data().chatBidId == bidAccept.offers[0] && doc.data().chatReadStatus == 0 && doc.data().uid != localStorage.getItem('id')) { messages.push({ ...doc.data(), id: doc.id }); }
@@ -388,7 +389,7 @@ useEffect(() => {
 const providerChat = onSnapshot(qe, (QuerySnapshot) => {
   let messages = [];
   QuerySnapshot.forEach((doc) => {
-    for (const i in bidAccept.user) {
+    for (const i in bidAccept?.user) {
       if (doc.data().uid != localStorage.getItem('id') && doc.data().chatMenuStatus == 1 && doc.data().chatBidId == bidAccept.bid[i] ) { messages.push({ ...doc.data(), id: doc.id }); }
     }
     // if (doc.data().chatBidId == bidAccept.offers[0] && doc.data().chatReadStatus == 0 && doc.data().uid != localStorage.getItem('id')) { messages.push({ ...doc.data(), id: doc.id }); }
@@ -479,23 +480,9 @@ const redirectNotification = (notification_type, postId)=>{
 }
 
 
-
-// const PinkSwitch = styled(Switch)(({ theme }) => ({
-//   '& .MuiSwitch-switchBase.Mui-checked': {
-//     color: pink[600],
-//     '&:hover': {
-//       backgroundColor: alpha(pink[600], theme.palette.action.hoverOpacity),
-//     },
-//   },
-//   '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-//     backgroundColor: pink[600],
-//   },
-// }));
-
-
-  
   return (
     <>
+  
       <header className="header">
         {isAuthenticate === true && isToggle === 1 && (
           <nav style={{ backgroundColor: `${props.color}` }} className={`navbar navbar-expand-md ${state.navColorFix ? 'navbarFixColor' : ''}`} id="navArea"
@@ -539,7 +526,7 @@ const redirectNotification = (notification_type, postId)=>{
                    
                   <FormControlLabel className="skillSekkerProvider-text-size" sx={{ color: "#fff" }} control={<></>} label="SkillSeeker" onClick={handleSkillSeekerClick} />
                   <FormControlLabel sx={{ color: "#fff" }} control={<Switch color="default" checked={isToggle === 2 ? true : isToggle === 1 && false} onChange={handleSkillSeekerProviderStatus} />} />
-        
+                 
                   <FormControlLabel className="skillSekkerProvider-text-size" sx={{ color: "#fff" }} control={<></>} label="SkillProvider" onClick={handleSkillProviderClick} />
                   <div className="ms-2 d-flex justify-content-center align-items-center Notification-dropdown" >
                     <div className="d-flex user-detail-main-area" >

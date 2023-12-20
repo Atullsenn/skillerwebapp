@@ -313,6 +313,8 @@ const MyProfile = () => {
         }
     };
 
+
+
     useEffect(() => {
         let categoryNameArray = [];
         state.categoryList.map((item) => {
@@ -335,7 +337,7 @@ const MyProfile = () => {
                     <CircularProgress color="inherit" style={{ height: '65px', width: '65px' }} />
                 </Backdrop>
             </div>
-            <Menu />
+            <Menu/>
             <section className="vh-80">
                 <Banner text={myProfileData.profileDataOne} />
                 <div className="container mt-4 ProfileMainContainer">

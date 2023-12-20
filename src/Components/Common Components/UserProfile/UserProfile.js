@@ -199,7 +199,7 @@ const UserProfile = () => {
                                             <Rating name="half-rating-read" value={state.profileTotaleRate} precision={0.5} readOnly />
                                             <p className='p-0 m-0 user-profile-font-weight'>{`(${state.profileTotaleRate})`}</p>
                                         </div>
-                                        <button className='user-profile-contect-me w-75'>{userProfileData.userDataTwo}</button>
+                                        {/* <button className='user-profile-contect-me w-75'>{userProfileData.userDataTwo}</button> */}
                                     </div>
                                 </div>
                                 <Divider className='my-2' style={{ backgroundColor: 'gray' }} />
@@ -222,7 +222,7 @@ const UserProfile = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className='p-4 my-4 main-left-user-profile-card'>
+                            {/* <div className='p-4 my-4 main-left-user-profile-card'>
                                 <h4>{userProfileData.userDataEight}</h4>
                                 <p className='p-0 m-0'>{userProfileData.userDataNine}</p>
                                 <p className='p-0 m-0'>{userProfileData.userDataTen}</p>
@@ -238,7 +238,7 @@ const UserProfile = () => {
                                 <p className='user-profile-skill'>{userProfileData.userDataNineteen}</p>
                                 <p className='user-profile-skill'>{userProfileData.userDataTwenty}</p>
                                 <p className='user-profile-skill'>{userProfileData.userDataTwentyOne}</p>
-                            </div>
+                            </div> */}
                         </div>
                         <div className='col-lg-8 p-2'>
                             <div className='p-4 main-left-user-profile-card'>
